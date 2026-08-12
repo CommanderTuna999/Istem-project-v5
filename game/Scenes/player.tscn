@@ -87,6 +87,7 @@ scale = Vector2(1.3200011, 1.2000004)
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_area" unique_id=1919571177]
+scale = Vector2(1.7600012, 1.5200005)
 shape = SubResource("RectangleShape2D_fs7ks")
 
 [node name="damage_number_template" type="Node2D" parent="." unique_id=2107003186]
