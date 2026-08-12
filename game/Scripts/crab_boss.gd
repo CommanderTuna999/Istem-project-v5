@@ -19,10 +19,12 @@ var kbtime = 0.0
 var kbvelocity = Vector2.ZERO
 @onready var damage_number_template: damage_number_template = $damage_number_template
 @onready var attack_timer: Timer = $"attack timer"
+@onready var sweep_collision_shape_2d: CollisionShape2D = $SweepCollisionShape2D
 
 	
 func _ready() -> void:
 		animated_sprite_2d.play("idle")
+		sweep_collision_shape_2d.disabled = true
 func _process(_delta): #x axis flipping for now
 	
 	
@@ -45,6 +47,7 @@ func _physics_process(_delta):
 	if chase_subject and attack_timer.is_stopped():
 		attack_number = randi_range(1, 4)
 		currently_attacking = true
+		sweep_collision_shape_2d.disabled = false
 		choose_attack(attack_number)
 		print("returning")
 		attack_timer.start()
@@ -69,7 +72,10 @@ func choose_attack(number):
 
 func sweep():
 	print("sweep")
-
+	look_at(chase_subject.global_position)
+	sweep_collision_shape_2d.disabled = false
+	await get_tree().create_timer(1).timeout
+	currently_attacking = false
 
 func jump():
 	print("jump")
