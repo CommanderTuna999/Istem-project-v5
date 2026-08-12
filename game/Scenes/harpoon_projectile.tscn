@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bhk0tr1pyxfv"]
+
+[ext_resource type="Script" uid="uid://dohgm7eiknuek" path="res://Scripts/harpoon_projectile.gd" id="1_koium"]
+[ext_resource type="Texture2D" uid="uid://cx8ryh2n30tvl" path="res://Assets/harpoon tip.png" id="2_jdtvw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_koium"]
+radius = 1.0
+
+[node name="HarpoonProjectile" type="Area2D" unique_id=1927090531]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_koium")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=538369976]
+visible = false
+offset_left = -4.0000005
+offset_top = 1.9999962
+offset_right = 10.687357
+offset_bottom = 6.545454
+rotation = -1.5707964
+scale = Vector2(1.77023, 1.7599989)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2104116827]
+scale = Vector2(1.9999989, 1.9999989)
+shape = SubResource("CircleShape2D_koium")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1754470661]
+collision_mask = 2
+
+[node name="HarpoonTip" type="Sprite2D" parent="." unique_id=1372876190]
+position = Vector2(4.7683716e-07, -11.999999)
+rotation = 1.5707964
+scale = Vector2(0.07999847, 0.07999847)
+texture = ExtResource("2_jdtvw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

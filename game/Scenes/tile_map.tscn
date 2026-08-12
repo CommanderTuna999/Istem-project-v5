@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b7brt10lbkmsj"]
+
+[ext_resource type="Texture2D" uid="uid://csx5bdo3bv6yi" path="res://Assets/BRICK.jpeg" id="1_7yhko"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1n30v"]
+texture = ExtResource("1_7yhko")
+0:0/size_in_atlas = Vector2i(10, 10)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
+
+[sub_resource type="TileSet" id="TileSet_35kre"]
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 4
+sources/1 = SubResource("TileSetAtlasSource_1n30v")
+
+[node name="TileMap" type="TileMap" unique_id=610993365]
+tile_set = SubResource("TileSet_35kre")
+format = 2

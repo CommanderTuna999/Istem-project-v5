@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bd1vdwjk4jeb2"]
+
+[ext_resource type="Script" uid="uid://yug8up3fncm5" path="res://Scripts/seahorse_projectile.gd" id="1_qh253"]
+[ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="2_6b4ms"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqj8x"]
+atlas = ExtResource("2_6b4ms")
+region = Rect2(768, 256, 384, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kvis1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqj8x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qh253"]
+size = Vector2(18, 12)
+
+[node name="seahorse_projectile" type="CharacterBody2D" unique_id=524211509 groups=["seahorse_projectile"]]
+scale = Vector2(3.64, 4.28)
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_qh253")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=359251092]
+position = Vector2(0, 1.1920929e-07)
+scale = Vector2(0.048177082, 0.048177086)
+sprite_frames = SubResource("SpriteFrames_kvis1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=253376344]
+shape = SubResource("RectangleShape2D_qh253")

@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bdqbpmxw31kbp"]
+
+[ext_resource type="Script" uid="uid://cn64o6ycguwvc" path="res://Scripts/player.gd" id="1_v0iea"]
+[ext_resource type="PackedScene" uid="uid://bhk0tr1pyxfv" path="res://Scenes/harpoon_projectile.tscn" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://bjddxyp8stb25" path="res://Assets/mc idle spritesheet.png" id="4_fkybt"]
+[ext_resource type="Script" uid="uid://bxuajbif0gs0l" path="res://damage_number_template.gd" id="4_vgqql"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
+atlas = ExtResource("4_fkybt")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
+atlas = ExtResource("4_fkybt")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
+atlas = ExtResource("4_fkybt")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
+atlas = ExtResource("4_fkybt")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_igrcy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkybt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3wgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3smsa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sh265"]
+size = Vector2(25.55062, 48.71257)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fs7ks"]
+size = Vector2(14.626535, 28.75)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vgqql"]
+font_size = 8
+font_color = Color(1, 1, 0, 1)
+outline_size = 1
+shadow_size = 0
+
+[node name="Player" type="CharacterBody2D" unique_id=982439447 groups=["player"]]
+collision_mask = 2
+script = ExtResource("1_v0iea")
+harpoonprojectilescene = ExtResource("2_cvnsp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2065512983]
+position = Vector2(1.1920929e-07, -2.9802322e-08)
+sprite_frames = SubResource("SpriteFrames_igrcy")
+autoplay = "default"
+frame_progress = 0.949041
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1047626844]
+position = Vector2(0.39228663, 4.7683716e-07)
+scale = Vector2(0.6569145, 0.65691453)
+shape = SubResource("RectangleShape2D_sh265")
+
+[node name="HarpoonRaycast" type="RayCast2D" parent="." unique_id=791540821]
+scale = Vector2(2, 2)
+target_position = Vector2(0, 0)
+collision_mask = 12
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=199357329]
+zoom = Vector2(1.5, 1.5)
+
+[node name="HarpoonLine" type="Line2D" parent="." unique_id=284341442]
+visible = false
+width = 1.0
+default_color = Color(0.98997515, 0.7299793, 0.17306665, 1)
+
+[node name="hurt_area" type="Area2D" parent="." unique_id=472346282]
+collision_mask = 40
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_area" unique_id=1919571177]
+shape = SubResource("RectangleShape2D_fs7ks")
+
+[node name="damage_number_template" type="Node2D" parent="." unique_id=2107003186]
+script = ExtResource("4_vgqql")
+label_settings = SubResource("LabelSettings_vgqql")
+metadata/_custom_type_script = "uid://bxuajbif0gs0l"
+
+[connection signal="body_entered" from="hurt_area" to="." method="_on_hurt_area_body_entered"]
+[connection signal="body_exited" from="hurt_area" to="." method="_on_hurt_area_body_exited"]

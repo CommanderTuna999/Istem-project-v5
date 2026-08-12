@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d1ur1edkugqec"]
+
+[node name="Anemone" type="ColorRect" unique_id=531414050]
+modulate = Color(0.47058824, 1, 1, 0.5921569)
+offset_left = 4688.0
+offset_top = 576.0
+offset_right = 4752.0
+offset_bottom = 640.0
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=522010518]
+position = Vector2(32, 32)
