@@ -83,6 +83,7 @@ width = 1.0
 default_color = Color(0.98997515, 0.7299793, 0.17306665, 1)
 
 [node name="hurt_area" type="Area2D" parent="." unique_id=472346282]
+scale = Vector2(1.3200011, 1.2000004)
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_area" unique_id=1919571177]

@@ -83,9 +83,12 @@ func _physics_process(_delta):
 				velocity = Vector2.ZERO
 			else:
 				var directiontowander = wandertarget - global_position
-
 				if directiontowander.length() > 10:
 					velocity = directiontowander.normalized() * wanderspeed
+					if velocity.x > 0:
+						animated_sprite_2d.flip_h = true
+					elif velocity.x <= 0:
+						animated_sprite_2d.flip_h = false
 				else:
 					wanderwaittimer = randf_range(0.5, 2.0)
 					picknewwandertarget()

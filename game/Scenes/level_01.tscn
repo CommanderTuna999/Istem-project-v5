@@ -856,6 +856,24 @@ offset_top = 1104.0
 offset_right = 8509.0
 offset_bottom = 1168.0
 
+[node name="clownfish" parent="." unique_id=263998729 instance=ExtResource("10_pw4n1")]
+position = Vector2(8365, 1170)
+
+[node name="clownfish2" parent="." unique_id=1442686198 instance=ExtResource("10_pw4n1")]
+position = Vector2(8438, 1224)
+
+[node name="clownfish3" parent="." unique_id=1617742417 instance=ExtResource("10_pw4n1")]
+position = Vector2(8549, 1196)
+
+[node name="clownfish4" parent="." unique_id=2123932259 instance=ExtResource("10_pw4n1")]
+position = Vector2(8870, 1582)
+
+[node name="clownfish5" parent="." unique_id=1494747769 instance=ExtResource("10_pw4n1")]
+position = Vector2(8949, 1520)
+
+[node name="clownfish6" parent="." unique_id=49279502 instance=ExtResource("10_pw4n1")]
+position = Vector2(9039, 1566)
+
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="Player/ShieldRechargeDelay" to="Player" method="_on_shield_recharge_delay_timeout"]
