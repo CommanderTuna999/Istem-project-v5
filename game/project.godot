@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="istem project v4"
+config/name="istem project v5"
 run/main_scene="uid://bgqp8w4nt7h7l"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
