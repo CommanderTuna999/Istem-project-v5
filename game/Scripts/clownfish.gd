@@ -32,6 +32,8 @@ func _ready() -> void:
 		homeposition = homemarker.global_position
 		picknewwandertarget()
 func _process(_delta): #x axis flipping for now
+	if TimeStop.time_stop_active == true:
+		return
 	
 	if not chase_subject == null and chase_subject.position.x > position.x:
 		animated_sprite_2d.flip_h = true
@@ -40,10 +42,14 @@ func _process(_delta): #x axis flipping for now
 	
 	
 	if current_health <= 0:
+		if TimeStop.time_stop_active == true:
+			return
 		queue_free()
 		
 		
 func _on_aggro_area_body_entered(body):
+	if TimeStop.time_stop_active == true:
+		return
 	chase_subject = body
 	aggro = true
 	animated_sprite_2d.play("aggro")
@@ -52,6 +58,8 @@ func _on_aggro_area_body_entered(body):
 	
 	
 func _on_aggro_area_body_exited(_body: Node2D) -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	chase_subject = null
 	aggro = false
 	animated_sprite_2d.play("idle")
@@ -60,6 +68,8 @@ func _on_aggro_area_body_exited(_body: Node2D) -> void:
 
 
 func _physics_process(_delta):
+	if TimeStop.time_stop_active == true:
+		return
 	if kbtime > 0:
 		kbtime 	-= _delta
 		velocity = kbvelocity

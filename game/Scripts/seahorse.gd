@@ -33,6 +33,8 @@ func _process(_delta): #x axis flipping for now
 	
 	
 	if current_health <= 0:
+		if TimeStop.time_stop_active == true:
+			return
 		queue_free()
 		
 	if kbtime > 0:
@@ -43,6 +45,8 @@ func _process(_delta): #x axis flipping for now
 	
 		
 func _on_aggro_area_body_entered(body):
+	if TimeStop.time_stop_active == true:
+		return
 	chase_subject = body
 	aggro = true
 	print('entered')
@@ -50,12 +54,16 @@ func _on_aggro_area_body_entered(body):
 	
 	
 func _on_aggro_area_body_exited(_body: Node2D) -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	chase_subject = null
 	aggro = false
 	animated_sprite_2d.play("idle")
 	print("exited")
 	
 func _physics_process(_delta):
+	if TimeStop.time_stop_active == true:
+		return
 	if aggro and chase_subject:
 		if global_position.distance_to(chase_subject.global_position) > 400:
 			velocity = (chase_subject.global_position - global_position).normalized() * speed
@@ -97,6 +105,8 @@ func take_kb(source_position: Vector2):
 	#kbvelocity = kbdirection * 600
 	#kbtime = 0.12
 func _shoot():
+	if TimeStop.time_stop_active == true:
+		return
 	var main = get_tree().current_scene #identifies the main game scene for projectiles, ik its already done on ready but it must be declared again to be used in this function so yeah
 	var instance = projectile.instantiate()
 	instance.dir = (chase_subject.global_position - global_position).normalized()

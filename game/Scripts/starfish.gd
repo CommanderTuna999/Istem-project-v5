@@ -20,6 +20,8 @@ func _process(_delta):
 
 
 	if current_health <= 0:
+		if TimeStop.time_stop_active == true:
+			return
 		queue_free()
 	
 
@@ -28,6 +30,8 @@ func _process(_delta):
 
 
 func _physics_process(_delta):
+	if TimeStop.time_stop_active == true:
+		return
 	if ray_cast_left.is_colliding():
 		direction = 1
 	if ray_cast_right.is_colliding():

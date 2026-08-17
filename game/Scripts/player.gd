@@ -572,7 +572,7 @@ var defence:
 		return 10 * total_defence_increase
 var total_defence_increase = 1.0
 
-var current_health = 1000
+var current_health = 100
 var damage_occuring = false
 var iframe_duration = 0.9
 var starsaveused = false

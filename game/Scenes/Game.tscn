@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://dt5cs6dqupia1" path="res://Assets/Cobblestone.png" id="14_wxwew"]
 [ext_resource type="Script" uid="uid://b3173ry3n47c5" path="res://Scripts/level_01.gd" id="17_4q8tf"]
 [ext_resource type="PackedScene" uid="uid://dx5181rkqvp8" path="res://Scenes/Enemies/starfish.tscn" id="18_x3xnh"]
+[ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="19_tfod6"]
+[ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="20_rajel"]
 [ext_resource type="PackedScene" uid="uid://djkcscyv2ayrs" path="res://Scenes/Enemies/crab boss.tscn" id="20_tfod6"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
@@ -484,6 +486,9 @@ sources/4 = SubResource("TileSetAtlasSource_pti6k")
 
 [sub_resource type="TileSet" id="TileSet_rajel"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vvhu1"]
+shader = ExtResource("20_rajel")
+
 [node name="Game" type="Node2D" unique_id=1539891490]
 
 [node name="Player" parent="." unique_id=982439447 instance=ExtResource("1_gl6un")]
@@ -817,7 +822,23 @@ color = Color(0.6392157, 0, 0, 1)
 tile_set = SubResource("TileSet_rajel")
 
 [node name="clownfish" parent="." unique_id=2025178942 instance=ExtResource("20_tfod6")]
-position = Vector2(914, -1340)
+position = Vector2(1018, -1352)
+
+[node name="AbilityFolder" type="Node" parent="." unique_id=363169500]
+
+[node name="TimeStop" type="Node" parent="AbilityFolder" unique_id=1383738787]
+script = ExtResource("19_tfod6")
+
+[node name="TimeStopFilter" type="CanvasLayer" parent="." unique_id=510772542]
+
+[node name="ColorRect" type="ColorRect" parent="TimeStopFilter" unique_id=1787049588]
+visible = false
+material = SubResource("ShaderMaterial_vvhu1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
