@@ -817,6 +817,9 @@ func _on_heal_delay_timer_timeout() -> void:
 
 
 func _on_heal_timer_timeout() -> void:
+	if TimeStop.time_stop_active == true:
+		$HealDelayTimer.start()
+		return
 	if can_heal and current_health < max_health:
 		current_health += heal_per_second
 		current_health = min(current_health, max_health)
