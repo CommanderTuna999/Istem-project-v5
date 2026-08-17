@@ -1,11 +1,12 @@
 extends Node
+@export var hard_hit_active = false
+@export var hard_hit_cooldown = false
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("Ability"):
+		if AbilityFolder.ability == "hardhit":
+			if not hard_hit_active and not hard_hit_cooldown:
+				activate_hard_hit()
+
+func activate_hard_hit() -> void:
+	return

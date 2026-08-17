@@ -570,7 +570,7 @@ var heal_per_second:
 var defence:
 	get:
 		return 10 * total_defence_increase
-var total_defence_increase = 1.0
+@export var total_defence_increase = 1.0
 
 var current_health = 100
 var damage_occuring = false

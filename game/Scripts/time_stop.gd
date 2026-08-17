@@ -3,10 +3,9 @@ extends Node
 @onready var player = get_tree().get_first_node_in_group("player")
 @export var time_stop_active = false
 var time_stop_cooldown = false
-var ability = "timestop"
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Ability"):
-		if ability == "timestop":
+		if AbilityFolder.ability == "timestop":
 			if not time_stop_active and not time_stop_cooldown:
 				activate_time_stop()
 
