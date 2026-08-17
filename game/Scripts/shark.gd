@@ -64,7 +64,7 @@ func _physics_process(_delta):
 	
 	
 #damage script below
-func take_damage(amount: int):
+func take_damage(amount: float):
 	current_health -= amount
 	animation_player.play("damaged")
 	await get_tree().create_timer(0.1).timeout

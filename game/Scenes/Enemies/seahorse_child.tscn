@@ -91,7 +91,7 @@ _data = {
 &"damaged": SubResource("Animation_ldcme")
 }
 
-[node name="seahorse_child" type="CharacterBody2D" unique_id=1111911240 groups=["clownfish"]]
+[node name="seahorse_child" type="CharacterBody2D" unique_id=1111911240 groups=["clownfish", "enemy"]]
 scale = Vector2(0.48201895, 0.4836929)
 collision_layer = 8
 collision_mask = 10

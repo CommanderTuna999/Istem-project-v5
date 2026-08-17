@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 TimeStop="*uid://c1ihhgq4xig3a"
 AbilityFolder="*uid://c8n16i5rg5b64"
+PetalStats="*res://Scripts/petal_stats.gd"
 
 [display]
 

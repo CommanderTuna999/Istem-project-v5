@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="19_tfod6"]
 [ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="20_rajel"]
 [ext_resource type="PackedScene" uid="uid://djkcscyv2ayrs" path="res://Scenes/Enemies/crab boss.tscn" id="20_tfod6"]
+[ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="21_petals"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -828,6 +829,9 @@ position = Vector2(1018, -1352)
 
 [node name="TimeStop" type="Node" parent="AbilityFolder" unique_id=1383738787]
 script = ExtResource("19_tfod6")
+
+[node name="PetalAbility" type="Node" parent="AbilityFolder" unique_id=2040170037]
+script = ExtResource("21_petals")
 
 [node name="TimeStopFilter" type="CanvasLayer" parent="." unique_id=510772542]
 

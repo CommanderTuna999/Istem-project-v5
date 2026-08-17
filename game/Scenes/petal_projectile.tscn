@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bcnr1on7obqst"]
+
+[ext_resource type="Script" uid="uid://14uqvwesqpx7" path="res://Scripts/petal_projectile.gd" id="1_1fjlv"]
+[ext_resource type="Texture2D" uid="uid://bf8ob3fq62ltb" path="res://Assets/download.png" id="2_hfklo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1fjlv"]
+radius = 8.0
+
+[node name="PetalProjectile" type="Area2D" unique_id=331749444]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_1fjlv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1367518134]
+position = Vector2(1, 1.1444092e-05)
+scale = Vector2(0.029142385, 0.029142383)
+texture = ExtResource("2_hfklo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1605211227]
+shape = SubResource("CircleShape2D_1fjlv")

@@ -169,6 +169,8 @@ func _on_harpoon_attached(hitposition, hitbody):
 	harpoonlaunchtimer = 0.0
 	
 func _physics_process(delta: float) -> void:
+	PetalStats.update_missing_health_bonus(current_health, max_health)
+
 	if velocity.length() > 500:
 		$MovementBubbles.rotation = velocity.angle() + PI
 		$MovementBubbles.emitting = true

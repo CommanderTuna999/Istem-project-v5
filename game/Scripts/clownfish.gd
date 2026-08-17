@@ -108,7 +108,7 @@ func _physics_process(_delta):
 	
 	
 #damage script below
-func take_damage(amount: int):
+func take_damage(amount: float):
 	current_health -= amount
 	animation_player.play("damaged")
 	damage_number_template.spawn_label(amount, false)

@@ -198,7 +198,7 @@ _data = {
 &"damaged": SubResource("Animation_ldcme")
 }
 
-[node name="crab" type="CharacterBody2D" unique_id=1111911240 groups=["crab"]]
+[node name="crab" type="CharacterBody2D" unique_id=1111911240 groups=["crab", "enemy"]]
 scale = Vector2(3.9620187, 3.975778)
 collision_layer = 8
 collision_mask = 10
