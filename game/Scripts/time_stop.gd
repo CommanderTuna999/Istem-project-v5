@@ -5,7 +5,7 @@ extends Node
 var time_stop_cooldown = false
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Ability"):
-		if AbilityFolder.ability == "timestop":
+		if AbilityFolder.ability == "Time_Stop":
 			if not time_stop_active and not time_stop_cooldown:
 				activate_time_stop()
 

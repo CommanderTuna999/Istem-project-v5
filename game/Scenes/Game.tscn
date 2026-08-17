@@ -18,9 +18,12 @@
 [ext_resource type="Script" uid="uid://b3173ry3n47c5" path="res://Scripts/level_01.gd" id="17_4q8tf"]
 [ext_resource type="PackedScene" uid="uid://dx5181rkqvp8" path="res://Scenes/Enemies/starfish.tscn" id="18_x3xnh"]
 [ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="19_tfod6"]
+[ext_resource type="Script" uid="uid://c8n16i5rg5b64" path="res://Scripts/ability_folder.gd" id="19_vvhu1"]
 [ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="20_rajel"]
 [ext_resource type="PackedScene" uid="uid://djkcscyv2ayrs" path="res://Scenes/Enemies/crab boss.tscn" id="20_tfod6"]
 [ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="21_petals"]
+[ext_resource type="Script" uid="uid://e5f1vnkckbm6" path="res://Scenes/heal.gd" id="22_lbihj"]
+[ext_resource type="Script" uid="uid://bsai75bhb1o3a" path="res://Scenes/cookie.gd" id="23_raj38"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -826,12 +829,19 @@ tile_set = SubResource("TileSet_rajel")
 position = Vector2(1018, -1352)
 
 [node name="AbilityFolder" type="Node" parent="." unique_id=363169500]
+script = ExtResource("19_vvhu1")
 
 [node name="TimeStop" type="Node" parent="AbilityFolder" unique_id=1383738787]
 script = ExtResource("19_tfod6")
 
-[node name="PetalAbility" type="Node" parent="AbilityFolder" unique_id=2040170037]
+[node name="Petal" type="Node" parent="AbilityFolder" unique_id=2040170037]
 script = ExtResource("21_petals")
+
+[node name="Heal" type="Node" parent="AbilityFolder" unique_id=443403185]
+script = ExtResource("22_lbihj")
+
+[node name="Cookie" type="Node" parent="AbilityFolder" unique_id=745596389]
+script = ExtResource("23_raj38")
 
 [node name="TimeStopFilter" type="CanvasLayer" parent="." unique_id=510772542]
 

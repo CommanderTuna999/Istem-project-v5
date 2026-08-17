@@ -41,6 +41,7 @@ var highmodedrag = 150
 
 var total_speed_increase = 1.0
 var total_HP_increase = 1.0
+var total_damage_increase = 1.0
 var harpoon_target: Node2D = null
 var harpoon_local_point = Vector2.ZERO
 
@@ -559,6 +560,12 @@ var regen_per_second = 0
 var time_since_damage = 0.0
 var displayed_health = 100
 var total_heal_increase = 0.1
+var passive_heal: float = 0.0
+var passive_heal_increase: float = 0.01
+var cookie_speed_bonus: float = 0.0
+var cookie_damage_bonus: float = 0.0
+var cookie_passive_heal_bonus: float = 0.01
+var cookie_boost_active: bool = false
 var max_health:
 	get:
 		return 100 
@@ -611,13 +618,42 @@ func _process(delta):
 func handle_health_regen(delta: float) -> void:
 	if current_health >= max_health:
 		current_health = max_health
+		time_since_damage = 0.0
 		return
 
 	time_since_damage += delta
 
+	if passive_heal > 0.0 and current_health < max_health:
+		current_health += (max_health * passive_heal) * delta
+		current_health = min(current_health, max_health)
+
+	if not can_heal:
+		return
+
 	if time_since_damage >= regen_delay:
 		current_health += regen_per_second * delta
 		current_health = min(current_health, max_health)
+
+
+func apply_cookie_boost(speed_bonus: float, damage_bonus: float, passive_heal_bonus: float, duration: float) -> void:
+	cookie_speed_bonus = speed_bonus
+	cookie_damage_bonus = damage_bonus
+	cookie_passive_heal_bonus = passive_heal_bonus
+	total_speed_increase += cookie_speed_bonus
+	accel *= 1.2
+	total_damage_increase += cookie_damage_bonus
+	passive_heal += cookie_passive_heal_bonus
+
+	if cookie_boost_active:
+		return
+
+	cookie_boost_active = true
+	await get_tree().create_timer(duration).timeout
+	total_speed_increase = max(1.0, total_speed_increase - cookie_speed_bonus)
+	accel /= 1.2
+	total_damage_increase = max(1.0, total_damage_increase - cookie_damage_bonus)
+	passive_heal = max(0.0, passive_heal - cookie_passive_heal_bonus)
+	cookie_boost_active = false
 
 func update_health_ui(delta: float) -> void:
 	displayed_health = current_health
@@ -673,6 +709,8 @@ func take_player_damage(amount: float) -> void:
 		update_shield_bar()
 		current_health = max(current_health, 0)
 		can_heal = false
+		time_since_damage = 0.0
+		$HealDelayTimer.stop()
 		if not TimeStop.time_stop_active == true:
 			$HealDelayTimer.start()
 	if healthanim:

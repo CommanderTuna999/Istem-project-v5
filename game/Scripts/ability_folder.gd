@@ -1,3 +1,3 @@
 extends Node
 
-@export var ability = "Petals"
+@export var ability = "Cookie"

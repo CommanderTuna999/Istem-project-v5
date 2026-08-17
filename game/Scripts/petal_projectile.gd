@@ -20,7 +20,12 @@ var travel_distance: float = 0.0
 
 var damage: float:
 	get:
-		return (base_damage + bonus_flat_damage) * damage_multiplier * (1.0 + PetalStats.bonus_damage)
+		var player_damage_multiplier := 1.0
+		if is_instance_valid(caster):
+			var caster_multiplier = caster.get("total_damage_increase")
+			if caster_multiplier != null:
+				player_damage_multiplier = float(caster_multiplier)
+		return (base_damage + bonus_flat_damage) * damage_multiplier * player_damage_multiplier * (1.0 + PetalStats.bonus_damage)
 
 
 func _ready() -> void:
