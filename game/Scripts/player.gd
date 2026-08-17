@@ -564,7 +564,7 @@ var passive_heal: float = 0.0
 var passive_heal_increase: float = 0.01
 var cookie_speed_bonus: float = 0.0
 var cookie_damage_bonus: float = 0.0
-var cookie_passive_heal_bonus: float = 0.01
+var cookie_passive_heal_bonus: float = 0.01 
 var cookie_boost_active: bool = false
 var max_health:
 	get:
