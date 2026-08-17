@@ -671,7 +671,8 @@ func take_player_damage(amount: float) -> void:
 		update_shield_bar()
 		current_health = max(current_health, 0)
 		can_heal = false
-		$HealDelayTimer.start()
+		if not TimeStop.time_stop_active == true:
+			$HealDelayTimer.start()
 	if healthanim:
 		healthanim.stop()
 		healthanim.play("damageflash")
@@ -812,14 +813,10 @@ func play_parry_effect(effect_position: Vector2, effect_normal: Vector2) -> void
 	$ParrySparks.emitting = true
 	
 func _on_heal_delay_timer_timeout() -> void:
-	if TimeStop.time_stop_active == true:
-		return
 	can_heal = true
 
 
 func _on_heal_timer_timeout() -> void:
-	if TimeStop.time_stop_active == true:
-		return
 	if can_heal and current_health < max_health:
 		current_health += heal_per_second
 		current_health = min(current_health, max_health)
