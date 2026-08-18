@@ -15,6 +15,8 @@ var chase_subject = null
 var current_health = 1
 var kbtime = 0.0
 var kbvelocity = Vector2.ZERO
+var rooted: bool = false
+var root_timer: float = 0.0
 	
 func _ready() -> void:
 	collision_shape_2d.set_deferred("disabled", true)
@@ -33,6 +35,9 @@ func _process(_delta): #x axis flipping for now
 	
 	if current_health <= 0:
 		queue_free()
+
+	if rooted:
+		return
 		
 	if kbtime > 0:
 		kbtime 	-= _delta
@@ -57,6 +62,13 @@ func _on_aggro_area_body_exited(_body: Node2D) -> void:
 
 
 func _physics_process(_delta):
+	if rooted:
+		root_timer -= _delta
+		velocity = Vector2.ZERO
+		move_and_slide()
+		if root_timer <= 0.0:
+			rooted = false
+		return
 	if aggro and chase_subject:
 		velocity = (chase_subject.global_position - global_position).normalized() * speed
 	else: 
@@ -76,6 +88,10 @@ func take_kb(source_position: Vector2):
 	var kbdirection = (global_position - source_position).normalized()
 	kbvelocity = kbdirection * 600
 	kbtime = 0.12
+
+func set_rooted(duration: float) -> void:
+	rooted = true
+	root_timer = max(root_timer, duration)
 #func _on_template_hurtbox_area_entered(area: Area2D) -> void:
 	#var kbdirection = (global_position - area.global_position).normalized()
 	#kbvelocity = kbdirection * 600

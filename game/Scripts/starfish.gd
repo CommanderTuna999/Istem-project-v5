@@ -13,6 +13,8 @@ var current_health = 6
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 @onready var ray_cast_right: RayCast2D = $RayCastRight
 var direction = 1
+var rooted: bool = false
+var root_timer: float = 0.0
 
 
 
@@ -23,6 +25,9 @@ func _process(_delta):
 		if TimeStop.time_stop_active == true:
 			return
 		queue_free()
+
+	if rooted:
+		return
 	
 
 
@@ -31,6 +36,13 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	if TimeStop.time_stop_active == true:
+		return
+	if rooted:
+		root_timer -= _delta
+		velocity = Vector2.ZERO
+		move_and_slide()
+		if root_timer <= 0.0:
+			rooted = false
 		return
 	if ray_cast_left.is_colliding():
 		direction = 1
@@ -45,6 +57,10 @@ func take_damage(amount: float):
 	current_health -= amount
 	animation_player.play("damaged")
 	await get_tree().create_timer(0.1).timeout
+
+func set_rooted(duration: float) -> void:
+	rooted = true
+	root_timer = max(root_timer, duration)
 	
 
 	

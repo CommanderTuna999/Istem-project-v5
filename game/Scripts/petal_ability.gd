@@ -4,13 +4,15 @@ extends Node
 @export var startup_delay: float = 0.1
 @export var shot_count: int = 3
 @export var shot_interval: float = 0.35
+@export var cooldown: float = 1.0
 
 var is_casting: bool = false
+var on_cooldown: bool = false
 
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Ability"):
-		if AbilityFolder.ability == "Petals" and not is_casting:
+		if AbilityFolder.ability == "Petals" and not is_casting and not on_cooldown:
 			cast_petals()
 
 
@@ -26,6 +28,9 @@ func cast_petals() -> void:
 			await get_tree().create_timer(shot_interval).timeout
 
 	is_casting = false
+	on_cooldown = true
+	await get_tree().create_timer(cooldown).timeout
+	on_cooldown = false
 
 
 func fire_petal(shot_index: int) -> void:

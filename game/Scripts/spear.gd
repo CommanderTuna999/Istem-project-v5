@@ -1,8 +1,5 @@
 extends Node2D
-
 @onready var animated_sprite_2d: AnimatedSprite2D = $AttackPivot/AnimatedSprite2D
-
-
 var direction = "right"
 var restside = "right"
 var attacking:= false
@@ -40,7 +37,6 @@ func _process(delta: float) -> void:
 				#direction = "up"
 		attack()
 		
-
 func attack():
 	attacking = true
 	get_parent().facinglocked = true
@@ -85,7 +81,6 @@ func setrestside(newside: String):
 	
 	restside = newside
 	returntorest()
-
 func successful_hit(hurtbox: TemplateHurtbox) -> void:
 	get_parent().on_spear_hit(hurtbox)
 	
@@ -95,3 +90,26 @@ func _on_body_entered(body):
 	
 func _on_body_exited(body):
 	get_parent().setcanbounce(false)
+
+
+# --- ShadowFury ability support -------------------------------------------
+# Points the spear at an arbitrary world position (instead of the mouse) and
+# plays the thrust animation. Does NOT toggle the hitbox collision shape,
+# since ShadowFury applies damage directly and enabling the real hitbox here
+# could cause double-hits via _on_body_entered.
+func ability_point_and_thrust(target_position: Vector2) -> void:
+	attacking = true
+	get_parent().facinglocked = true
+	direction_to_mouse = (target_position - global_position).normalized()
+	$AttackPivot.position = direction_to_mouse * spearoffset
+	$AttackPivot.rotation = direction_to_mouse.angle()
+	$AttackPivot/AnimatedSprite2D.play("thrust")
+
+
+# Called once after the whole ShadowFury chain is finished (not after every
+# single enemy) to return the spear to its resting pose and release the
+# attack lock.
+func ability_finish() -> void:
+	returntorest()
+	get_parent().facinglocked = false
+	attacking = false

@@ -17,6 +17,8 @@ var current_health = 6
 var kbtime = 0.0
 var kbvelocity = Vector2.ZERO
 var projectile_cooldown = 2
+var rooted: bool = false
+var root_timer: float = 0.0
 	
 	
 
@@ -36,6 +38,9 @@ func _process(_delta): #x axis flipping for now
 		if TimeStop.time_stop_active == true:
 			return
 		queue_free()
+
+	if rooted:
+		return
 		
 	if kbtime > 0:
 		kbtime 	-= _delta
@@ -63,6 +68,13 @@ func _on_aggro_area_body_exited(_body: Node2D) -> void:
 	
 func _physics_process(_delta):
 	if TimeStop.time_stop_active == true:
+		return
+	if rooted:
+		root_timer -= _delta
+		velocity = Vector2.ZERO
+		move_and_slide()
+		if root_timer <= 0.0:
+			rooted = false
 		return
 	if aggro and chase_subject:
 		if global_position.distance_to(chase_subject.global_position) > 400:
@@ -107,6 +119,8 @@ func take_kb(source_position: Vector2):
 func _shoot():
 	if TimeStop.time_stop_active == true:
 		return
+	if rooted:
+		return
 	var main = get_tree().current_scene #identifies the main game scene for projectiles, ik its already done on ready but it must be declared again to be used in this function so yeah
 	var instance = projectile.instantiate()
 	instance.dir = (chase_subject.global_position - global_position).normalized()
@@ -114,6 +128,10 @@ func _shoot():
 	instance.SpawnRot = rotation
 	main.call_deferred("add_child", instance)
 	#instance.look_at(chase_subject.global_position)
+
+func set_rooted(duration: float) -> void:
+	rooted = true
+	root_timer = max(root_timer, duration)
 
 	
 

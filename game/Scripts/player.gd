@@ -255,7 +255,7 @@ func _physics_process(delta: float) -> void:
 		]
 	else:
 		$HarpoonLine.visible = false
-
+		
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
 	handle_dash(delta, direction)
 	#if not is_on_floor():
