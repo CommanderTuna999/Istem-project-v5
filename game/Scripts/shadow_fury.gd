@@ -1,12 +1,19 @@
 extends Node
 
-@export var search_radius: float = 1000.0
+@export var search_radius: float = 250.0
 @export var behind_distance: float = 22.0
 @export var teleport_delay: float = 0.5  # time before teleporting to the next enemy
 @export var slash_gap: float = 0.08      # time after the hit, before the next teleport starts
 @export var cooldown: float = 1.0
 @export var root_duration_buffer: float = 0.35
 @export var damage_multiplier: float = 1.25
+
+# --- Afterimage / clone settings -------------------------------------------
+@export var leave_afterimages: bool = true
+@export var afterimage_lifetime: float = 0.6
+@export var afterimage_start_alpha: float = 0.6
+@export var afterimage_color: Color = Color(0, 0, 0, 1)  # pure black tint
+@export var player_sprite_path: NodePath = ""  # optional manual override
 
 var on_cooldown: bool = false
 var executing: bool = false
@@ -62,7 +69,7 @@ func execute_chain() -> void:
 		if not is_instance_valid(target):
 			continue
 
-		player.global_position = get_behind_position(player.global_position, target)
+		teleport_player(player, get_behind_position(player.global_position, target))
 
 		if spear != null and spear.has_method("ability_point_and_thrust"):
 			spear.ability_point_and_thrust(target.global_position)
@@ -81,13 +88,70 @@ func execute_chain() -> void:
 	if spear != null and spear.has_method("ability_finish"):
 		spear.ability_finish()
 
-	player.global_position = origin_position
+	teleport_player(player, origin_position)
 	player.velocity = origin_velocity
 	player.invincible = original_invincible
 	executing = false
 
 	await get_tree().create_timer(cooldown).timeout
 	on_cooldown = false
+
+
+func teleport_player(player: CharacterBody2D, new_position: Vector2) -> void:
+	if leave_afterimages:
+		spawn_afterimage(player)
+	player.global_position = new_position
+
+
+func spawn_afterimage(player: CharacterBody2D) -> void:
+	var visual := find_player_visual(player)
+	if visual == null:
+		return
+
+	var clone := visual.duplicate() as CanvasItem
+	if clone == null:
+		return
+
+	clone.set_script(null)
+
+	if clone is AnimatedSprite2D:
+		(clone as AnimatedSprite2D).stop()
+	if clone is Sprite2D:
+		(clone as Sprite2D).stop() if (clone as Sprite2D).has_method("stop") else null
+
+	clone.modulate = afterimage_color
+	clone.modulate.a = afterimage_start_alpha
+
+	var parent_node := player.get_parent()
+	if parent_node == null:
+		parent_node = get_tree().current_scene
+
+	parent_node.add_child(clone)
+	clone.global_position = player.global_position
+	clone.global_rotation = player.global_rotation
+	if clone is Node2D:
+		(clone as Node2D).z_index = -1
+
+	var tween := create_tween()
+	tween.tween_property(clone, "modulate:a", 0.0, afterimage_lifetime)
+	tween.tween_callback(clone.queue_free)
+
+
+func find_player_visual(player: CharacterBody2D) -> CanvasItem:
+	if player_sprite_path != NodePath(""):
+		var manual := player.get_node_or_null(player_sprite_path)
+		if manual is CanvasItem:
+			return manual as CanvasItem
+
+	var found := player.find_child("AnimatedSprite2D", true, false)
+	if found is CanvasItem:
+		return found as CanvasItem
+
+	found = player.find_child("Sprite2D", true, false)
+	if found is CanvasItem:
+		return found as CanvasItem
+
+	return null
 
 
 func get_targets_in_range(from_position: Vector2) -> Array[Node2D]:
