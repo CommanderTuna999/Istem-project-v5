@@ -1,6 +1,6 @@
 extends Node
 
-@export var search_radius: float = 250.0
+@export var search_radius: float = 350.0
 @export var behind_distance: float = 22.0
 @export var teleport_delay: float = 0.5  # time before teleporting to the next enemy
 @export var slash_gap: float = 0.08      # time after the hit, before the next teleport starts
@@ -10,7 +10,7 @@ extends Node
 
 # --- Afterimage / clone settings -------------------------------------------
 @export var leave_afterimages: bool = true
-@export var afterimage_lifetime: float = 0.6
+@export var afterimage_lifetime: float = 0.75
 @export var afterimage_start_alpha: float = 0.6
 @export var afterimage_color: Color = Color(0, 0, 0, 1)  # pure black tint
 @export var player_sprite_path: NodePath = ""  # optional manual override
