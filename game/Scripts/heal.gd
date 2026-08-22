@@ -15,7 +15,7 @@ func heal() -> void:
 	heal_cooldown = true
 	var lost_health = player.max_health - player.current_health
 	player.current_health += lost_health * 0.5
-	heal_audio_player.pitch_scale = 1.65
+	heal_audio_player.pitch_scale = 1.5
 	heal_audio_player.play()
 	await get_tree().create_timer(1.0).timeout
 	heal_cooldown = false
