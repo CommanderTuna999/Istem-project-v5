@@ -8,6 +8,22 @@ wet = 0.12
 [sub_resource type="AudioEffectEQ10" id="AudioEffectEQ10_j3pel"]
 resource_name = "EQ10"
 
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]
+resource_name = "Delay"
+tap1_delay_ms = 0.0
+tap1_level_db = 0.0
+tap2_active = false
+feedback_active = true
+feedback_delay_ms = 145.0
+feedback_level_db = -3.3
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_g28q7"]
+resource_name = "Reverb"
+predelay_msec = 20.0
+damping = 0.16
+dry = 0.18
+wet = 0.0
+
 [resource]
 bus/0/bypass_fx = true
 bus/1/name = &"Petal(fire)"
@@ -30,3 +46,13 @@ bus/2/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
 bus/2/effect/0/enabled = true
 bus/2/effect/1/effect = SubResource("AudioEffectEQ10_j3pel")
 bus/2/effect/1/enabled = false
+bus/3/name = &"Heal"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -2.7102394
+bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectDelay_j3pel")
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource("AudioEffectReverb_g28q7")
+bus/3/effect/1/enabled = true

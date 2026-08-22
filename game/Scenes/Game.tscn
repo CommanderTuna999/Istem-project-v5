@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://bsai75bhb1o3a" path="res://Scripts/cookie.gd" id="23_raj38"]
 [ext_resource type="Script" uid="uid://cdyg2msh6uppt" path="res://Scripts/shadow_fury.gd" id="24_8e0uq"]
 [ext_resource type="AudioStream" uid="uid://cmtmo11w24jcs" path="res://sfx/nom-nom-nom_gPJiWn4.mp3" id="24_356ba"]
+[ext_resource type="AudioStream" uid="uid://dpvo8eortnl8e" path="res://sfx/heal-skill-ro.mp3" id="24_iyesh"]
 [ext_resource type="AudioStream" uid="uid://d35o65uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="25_3jf1l"]
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="25_i0vto"]
 
@@ -852,6 +853,10 @@ bus = &"Petal(bounce)"
 
 [node name="Heal" type="Node" parent="AbilityFolder" unique_id=443403185]
 script = ExtResource("22_lbihj")
+
+[node name="heal_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Heal" unique_id=801660082]
+stream = ExtResource("24_iyesh")
+bus = &"Heal"
 
 [node name="Cookie" type="Node" parent="AbilityFolder" unique_id=745596389]
 script = ExtResource("23_raj38")

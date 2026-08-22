@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed: float = 100.0
+@export var speed: float = 1150.0
 @export var base_damage: float = 0.5
 @export var damage_multiplier: float = 1.0
 @export var bonus_flat_damage: float = 0.0
@@ -8,7 +8,7 @@ extends Area2D
 @export var hit_distance: float = 12.0
 @export var retarget_delay: float = 0.08
 @export var lifetime: float = 6.0
-@export var fade_duration: float = 1.0
+@export var fade_duration: float = 0.65
 @export var max_travel_distance: float = 1200.0
 @export var spin_speed: float = 48.0
 
