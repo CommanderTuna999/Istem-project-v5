@@ -4,6 +4,9 @@ signal cookie_boost_requested(speed_bonus: float, damage_bonus: float, passive_h
 
 var cookie_on_cooldown: bool = false
 
+@export var cookie_eat_sound: AudioStream
+@onready var cookie_audio_player: AudioStreamPlayer = $cookie_audio_player
+
 func _ready() -> void:
 	var player := get_tree().get_first_node_in_group("player")
 	if player and player.has_method("apply_cookie_boost"):
@@ -19,6 +22,9 @@ func _process(_delta: float) -> void:
 func trigger_cookie_boost() -> void:
 	if cookie_on_cooldown:
 		return
+	if cookie_eat_sound != null:
+		cookie_audio_player.stream = cookie_eat_sound
+		cookie_audio_player.play()
 
 	cookie_on_cooldown = true
 	cookie_boost_requested.emit(0.2, 0.2, 0.03, 10.0)

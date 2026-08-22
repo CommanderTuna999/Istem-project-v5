@@ -1,8 +1,8 @@
 extends Node
 
-@export var search_radius: float = 350.0
-@export var behind_distance: float = 22.0
-@export var teleport_delay: float = 0.5  # time before teleporting to the next enemy
+@export var search_radius: float = 417.5
+@export var behind_distance: float = 30.0
+@export var teleport_delay: float = 0.65  # time before teleporting to the next enemy
 @export var slash_gap: float = 0.08      # time after the hit, before the next teleport starts
 @export var cooldown: float = 1.0
 @export var root_duration_buffer: float = 0.35
@@ -15,13 +15,16 @@ extends Node
 @export var afterimage_color: Color = Color(0, 0, 0, 1)  # pure black tint
 @export var player_sprite_path: NodePath = ""  # optional manual override
 
+@export var teleport_sound: AudioStream
+@onready var teleport_audio_player: AudioStreamPlayer = $teleport_audio_player
+
 var on_cooldown: bool = false
 var executing: bool = false
 
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Ability"):
-		if AbilityFolder.ability == "ShadowFury":
+		if AbilityFolder.ability == "Shadow_Fury":
 			execute_chain()
 
 
@@ -100,6 +103,9 @@ func execute_chain() -> void:
 func teleport_player(player: CharacterBody2D, new_position: Vector2) -> void:
 	if leave_afterimages:
 		spawn_afterimage(player)
+	if teleport_sound != null:
+		teleport_audio_player.stream = teleport_sound
+		teleport_audio_player.play()
 	player.global_position = new_position
 
 

@@ -1,3 +1,3 @@
 extends Node
 
-@onready var ability = "ShadowFury"
+@onready var ability = "Shadow_Fury"

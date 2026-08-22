@@ -25,7 +25,9 @@
 [ext_resource type="Script" uid="uid://e5f1vnkckbm6" path="res://Scripts/heal.gd" id="22_lbihj"]
 [ext_resource type="Script" uid="uid://bsai75bhb1o3a" path="res://Scripts/cookie.gd" id="23_raj38"]
 [ext_resource type="Script" uid="uid://cdyg2msh6uppt" path="res://Scripts/shadow_fury.gd" id="24_8e0uq"]
+
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="25_i0vto"]
+[ext_resource type="AudioStream" uid="uid://d35065uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="25_3jf1l"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -845,8 +847,13 @@ script = ExtResource("22_lbihj")
 [node name="Cookie" type="Node" parent="AbilityFolder" unique_id=745596389]
 script = ExtResource("23_raj38")
 
+[node name="cookie_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Cookie" unique_id=1936830156]
+
 [node name="ShadowFury" type="Node" parent="AbilityFolder" unique_id=227714529]
 script = ExtResource("24_8e0uq")
+teleport_sound = ExtResource("25_3jf1l")
+
+[node name="teleport_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/ShadowFury" unique_id=385698162]
 
 [node name="ShadowFurySupportScript" type="Node" parent="AbilityFolder" unique_id=725315113]
 script = ExtResource("25_i0vto")
