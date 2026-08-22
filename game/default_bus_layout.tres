@@ -24,6 +24,27 @@ damping = 0.16
 dry = 0.18
 wet = 0.0
 
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_n8wo2"]
+resource_name = "Reverb"
+wet = 0.0
+
+[sub_resource type="AudioEffectEQ10" id="AudioEffectEQ10_g28q7"]
+resource_name = "EQ10"
+band_db/31_hz = -24.0
+band_db/62_hz = -18.0
+band_db/125_hz = -12.0
+band_db/250_hz = -10.0
+band_db/500_hz = -6.0
+band_db/2000_hz = 3.0
+band_db/4000_hz = 5.0
+band_db/8000_hz = 4.0
+band_db/16000_hz = 2.0
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_g28q7"]
+resource_name = "Delay"
+tap1_delay_ms = 100.0
+tap2_delay_ms = 200.0
+
 [resource]
 bus/0/bypass_fx = true
 bus/1/name = &"Petal(fire)"
@@ -56,3 +77,15 @@ bus/3/effect/0/effect = SubResource("AudioEffectDelay_j3pel")
 bus/3/effect/0/enabled = true
 bus/3/effect/1/effect = SubResource("AudioEffectReverb_g28q7")
 bus/3/effect/1/enabled = true
+bus/4/name = &"Spear attack"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = -6.089478
+bus/4/send = &"Master"
+bus/4/effect/0/effect = SubResource("AudioEffectReverb_n8wo2")
+bus/4/effect/0/enabled = true
+bus/4/effect/1/effect = SubResource("AudioEffectEQ10_g28q7")
+bus/4/effect/1/enabled = true
+bus/4/effect/2/effect = SubResource("AudioEffectDelay_g28q7")
+bus/4/effect/2/enabled = true

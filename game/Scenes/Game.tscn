@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bdqbpmxw31kbp" path="res://Scenes/player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://bj7ldtrm577dp" path="res://Scenes/spear.tscn" id="2_71axn"]
+[ext_resource type="AudioStream" uid="uid://cf683y6d2h27h" path="res://sfx/slashed.mp3" id="3_4f4ik"]
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="3_bf53h"]
 [ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="4_71axn"]
 [ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="4_alh3a"]
@@ -30,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://dpvo8eortnl8e" path="res://sfx/heal-skill-ro.mp3" id="24_iyesh"]
 [ext_resource type="AudioStream" uid="uid://d35o65uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="25_3jf1l"]
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="25_i0vto"]
+[ext_resource type="AudioStream" uid="uid://bvyxt7w82f6u0" path="res://sfx/Beyond Ocean Waters.mp3" id="31_i1pr2"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -507,6 +509,12 @@ position = Vector2(895, -1867)
 [node name="Spear" parent="Player" unique_id=1804206196 instance=ExtResource("2_71axn")]
 position = Vector2(-0.21830654, 0.45456308)
 
+[node name="slash_sound_player" type="AudioStreamPlayer" parent="Player/Spear" unique_id=717879808]
+stream = ExtResource("3_4f4ik")
+volume_db = -20.0
+pitch_scale = 1.5
+bus = &"Spear attack"
+
 [node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=17055866]
 
 [node name="HealDelayTimer" type="Timer" parent="Player" unique_id=400888046]
@@ -883,6 +891,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1638872217]
+stream = ExtResource("31_i1pr2")
+volume_db = -10.035
+autoplay = true
+parameters/looping = true
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

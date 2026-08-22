@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bvyxt7w82f6u0"
+path="res://.godot/imported/Beyond Ocean Waters.mp3-c4f8a6a92a222a4dfae5b31521f0cc80.mp3str"
+
+[deps]
+
+source_file="res://sfx/Beyond Ocean Waters.mp3"
+dest_files=["res://.godot/imported/Beyond Ocean Waters.mp3-c4f8a6a92a222a4dfae5b31521f0cc80.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
