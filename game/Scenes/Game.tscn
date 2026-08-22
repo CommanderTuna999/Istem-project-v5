@@ -22,12 +22,13 @@
 [ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="20_rajel"]
 [ext_resource type="PackedScene" uid="uid://djkcscyv2ayrs" path="res://Scenes/Enemies/crab boss.tscn" id="20_tfod6"]
 [ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="21_petals"]
+[ext_resource type="AudioStream" uid="uid://kakrcthx40tf" path="res://sfx/bow_shoot.mp3" id="22_i4lct"]
 [ext_resource type="Script" uid="uid://e5f1vnkckbm6" path="res://Scripts/heal.gd" id="22_lbihj"]
 [ext_resource type="Script" uid="uid://bsai75bhb1o3a" path="res://Scripts/cookie.gd" id="23_raj38"]
 [ext_resource type="Script" uid="uid://cdyg2msh6uppt" path="res://Scripts/shadow_fury.gd" id="24_8e0uq"]
-
+[ext_resource type="AudioStream" uid="uid://cmtmo11w24jcs" path="res://sfx/nom-nom-nom_gPJiWn4.mp3" id="24_356ba"]
+[ext_resource type="AudioStream" uid="uid://d35o65uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="25_3jf1l"]
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="25_i0vto"]
-[ext_resource type="AudioStream" uid="uid://d35065uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="25_3jf1l"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -838,8 +839,16 @@ script = ExtResource("19_vvhu1")
 [node name="TimeStop" type="Node" parent="AbilityFolder" unique_id=1383738787]
 script = ExtResource("19_tfod6")
 
-[node name="Petal" type="Node" parent="AbilityFolder" unique_id=2040170037]
+[node name="Petals" type="Node" parent="AbilityFolder" unique_id=2040170037]
 script = ExtResource("21_petals")
+
+[node name="petal_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Petals" unique_id=1676015694]
+stream = ExtResource("22_i4lct")
+bus = &"Petal(fire)"
+
+[node name="petalbounce_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Petals" unique_id=1248639867]
+stream = ExtResource("22_i4lct")
+bus = &"Petal(bounce)"
 
 [node name="Heal" type="Node" parent="AbilityFolder" unique_id=443403185]
 script = ExtResource("22_lbihj")
@@ -848,6 +857,7 @@ script = ExtResource("22_lbihj")
 script = ExtResource("23_raj38")
 
 [node name="cookie_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Cookie" unique_id=1936830156]
+stream = ExtResource("24_356ba")
 
 [node name="ShadowFury" type="Node" parent="AbilityFolder" unique_id=227714529]
 script = ExtResource("24_8e0uq")

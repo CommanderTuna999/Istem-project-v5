@@ -4,8 +4,8 @@ signal cookie_boost_requested(speed_bonus: float, damage_bonus: float, passive_h
 
 var cookie_on_cooldown: bool = false
 
-@export var cookie_eat_sound: AudioStream
-@onready var cookie_audio_player: AudioStreamPlayer = $cookie_audio_player
+#@export var cookie_eat_sound: AudioStream
+@onready var cookie_audio_player: AudioStreamPlayer = $"/root/Game/AbilityFolder/Cookie/cookie_audio_player"
 
 func _ready() -> void:
 	var player := get_tree().get_first_node_in_group("player")
@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("Ability"):
+	if Input.is_action_just_pressed("Ability") and not cookie_on_cooldown:
 		if AbilityFolder.ability == "Cookie":
 			trigger_cookie_boost()
 
@@ -22,8 +22,7 @@ func _process(_delta: float) -> void:
 func trigger_cookie_boost() -> void:
 	if cookie_on_cooldown:
 		return
-	if cookie_eat_sound != null:
-		cookie_audio_player.stream = cookie_eat_sound
+	if cookie_audio_player != null:
 		cookie_audio_player.play()
 
 	cookie_on_cooldown = true
