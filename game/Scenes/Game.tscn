@@ -31,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://dpvo8eortnl8e" path="res://sfx/heal-skill-ro.mp3" id="24_iyesh"]
 [ext_resource type="AudioStream" uid="uid://d35o65uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="25_3jf1l"]
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="25_i0vto"]
+[ext_resource type="AudioStream" uid="uid://clklxrgjbhver" path="res://sfx/clock-tick.mp3" id="26_dctr5"]
 [ext_resource type="Script" uid="uid://j8cqe2er2s8a" path="res://hard_hit.gd" id="26_hardhit"]
 [ext_resource type="Script" uid="uid://bk3ngxqppw15h" path="res://Scripts/icy_shot.gd" id="27_icyshot"]
 [ext_resource type="Script" uid="uid://chymha3bnjeuw" path="res://Scripts/tsunami_impact.gd" id="28_tsunami"]
@@ -905,6 +906,12 @@ script = ExtResource("19_vvhu1")
 
 [node name="TimeStop" type="Node" parent="AbilityFolder" unique_id=1383738787]
 script = ExtResource("19_tfod6")
+
+[node name="timestop_initiate" type="AudioStreamPlayer" parent="AbilityFolder/TimeStop" unique_id=1360087804]
+
+[node name="clock_ticking" type="AudioStreamPlayer" parent="AbilityFolder/TimeStop" unique_id=446403598]
+stream = ExtResource("26_dctr5")
+volume_db = -1.85
 
 [node name="Petals" type="Node" parent="AbilityFolder" unique_id=2040170037]
 script = ExtResource("21_petals")

@@ -1,7 +1,7 @@
 extends Node
 
 @export var search_radius: float = 600.0
-@export var teleport_distance: float = 40.0
+@export var teleport_distance: float = 50.0
 @export var explosion_radius: float = 90.0
 @export var base_damage: float = 0.5
 @export var knockback_strength: float = 1200.0
