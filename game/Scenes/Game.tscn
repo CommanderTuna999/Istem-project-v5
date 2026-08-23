@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://qanfhvpgpvi1" path="res://Assets/shield_bar_over.png" id="32_shield_over"]
 [ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="33_shield_icon"]
 [ext_resource type="AudioStream" uid="uid://b2qjnu0vwgjvk" path="res://sfx/5f569f554286fe2cda904c330392f6cf781aa63f.ogg" id="37_lmarx"]
+[ext_resource type="AudioStream" uid="uid://b6v7oy4yptpx" path="res://sfx/9b50f8b4ace51d032fdb0dfe37b5edd9591cb41e.mp3" id="40_7av8l"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -953,6 +954,11 @@ bus = &"Icy shot"
 [node name="TsunamiImpact" type="Node" parent="AbilityFolder" unique_id=118034739]
 script = ExtResource("28_tsunami")
 teleport_symbol_texture = ExtResource("29_tsunami_symbol")
+
+[node name="explosion_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/TsunamiImpact" unique_id=1834551913]
+stream = ExtResource("40_7av8l")
+volume_db = -4.0
+bus = &"Lightning"
 
 [node name="TimeStopFilter" type="CanvasLayer" parent="." unique_id=510772542]
 

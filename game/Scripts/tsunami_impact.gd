@@ -22,7 +22,7 @@ extends Node
 @export var teleport_symbol_spin_turns: float = 1.5
 
 @onready var mana_bar = %ManaBar
-
+@onready var explosion_audio_player: AudioStreamPlayer = $explosion_audio_player
 var on_cooldown: bool = false
 var teleport_symbol_active: bool = false
 
@@ -51,7 +51,7 @@ func activate_tsunami_impact() -> void:
 	var target := find_nearest_enemy(player.global_position)
 	if target == null:
 		return
-
+	explosion_audio_player.play()
 	on_cooldown = true
 	var departure_position := player.global_position
 	var approach_direction := player.global_position.direction_to(target.global_position)
