@@ -3,6 +3,8 @@ extends Node
 @export var projectile_scene: PackedScene = preload("res://Scenes/icy_projectile.tscn")
 @export var cooldown: float = 1.0
 
+@onready var icyshot_audio_player: AudioStreamPlayer = $"/root/Game/AbilityFolder/IcyShot/icyshot_audio_player"
+
 var on_cooldown: bool = false
 
 
@@ -13,6 +15,9 @@ func _process(_delta: float) -> void:
 
 func fire_icy_shot() -> void:
 	var player := get_tree().get_first_node_in_group("player") as Node2D
+	var pitch_offset := randf_range(-0.1, -0.05) if randf() < 0.5 else randf_range(0.05, 0.1)
+	icyshot_audio_player.pitch_scale = 1.15 + pitch_offset
+	icyshot_audio_player.play()
 	if player == null or projectile_scene == null:
 		return
 

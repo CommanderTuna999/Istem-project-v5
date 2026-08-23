@@ -40,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://k2f0fhtg6f8f" path="res://Assets/shield_bar_progress.png" id="31_shield_progress"]
 [ext_resource type="Texture2D" uid="uid://qanfhvpgpvi1" path="res://Assets/shield_bar_over.png" id="32_shield_over"]
 [ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="33_shield_icon"]
+[ext_resource type="AudioStream" uid="uid://b2qjnu0vwgjvk" path="res://sfx/5f569f554286fe2cda904c330392f6cf781aa63f.ogg" id="37_lmarx"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -398,6 +399,17 @@ _data = {
 &"damageflash": SubResource("Animation_3so38")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmarx"]
+bg_color = Color(0.09239707, 0.09239706, 0.09239706, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7av8l"]
+bg_color = Color(0, 0.8586935, 0.99825805, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2irst"]
 size = Vector2(75, 73)
 
@@ -622,26 +634,26 @@ offset_bottom = 40.0
 [node name="EmptyBeams" type="TextureRect" parent="UI/CanvasLayer/HealthHUD" unique_id=1105062498]
 modulate = Color(0, 0, 0.2784314, 1)
 layout_mode = 0
-offset_left = 60.0
-offset_top = -20.0
-offset_right = 1371.0
-offset_bottom = 746.0
+offset_left = 24.0
+offset_top = -26.0
+offset_right = 1335.0
+offset_bottom = 740.0
 scale = Vector2(0.32, 0.314)
 texture = ExtResource("4_dahhg")
 
 [node name="HealthBeams" type="TextureProgressBar" parent="UI/CanvasLayer/HealthHUD" unique_id=772302586]
 layout_mode = 0
-offset_left = 60.0
-offset_top = -20.000002
-offset_right = 1371.0
-offset_bottom = 746.0
+offset_left = 24.0
+offset_top = -26.0
+offset_right = 1335.0
+offset_bottom = 740.0
 scale = Vector2(0.31999847, 0.31376988)
 value = 50.0
 texture_progress = ExtResource("4_dahhg")
 
 [node name="HitParticlesA" type="GPUParticles2D" parent="UI/CanvasLayer/HealthHUD" unique_id=1605783747]
 modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
-position = Vector2(474, 100)
+position = Vector2(438, 94)
 emitting = false
 amount = 10
 texture = ExtResource("5_3so38")
@@ -652,7 +664,7 @@ process_material = SubResource("ParticleProcessMaterial_3cx6b")
 
 [node name="HitParticlesB" type="GPUParticles2D" parent="UI/CanvasLayer/HealthHUD" unique_id=2037204531]
 modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
-position = Vector2(474, 100)
+position = Vector2(438, 94)
 emitting = false
 amount = 10
 texture = ExtResource("5_3so38")
@@ -678,10 +690,10 @@ offset_right = 424.0
 offset_bottom = 1781.0
 
 [node name="dashbar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=2025877455]
-offset_left = 85.0
-offset_top = 230.0
-offset_right = 180.0
-offset_bottom = 435.0
+offset_left = 49.0
+offset_top = 224.0
+offset_right = 144.0
+offset_bottom = 429.0
 fill_mode = 3
 
 [node name="Panel" type="Panel" parent="UI/CanvasLayer" unique_id=855191754]
@@ -734,21 +746,42 @@ script = ExtResource("4_71axn")
 
 [node name="ShieldBar" type="TextureProgressBar" parent="UI/CanvasLayer" unique_id=1227095526]
 texture_filter = 1
-offset_left = 99.0
-offset_top = 180.0
-offset_right = 429.0
-offset_bottom = 212.0
+offset_left = 63.0
+offset_top = 174.0
+offset_right = 393.0
+offset_bottom = 206.0
 texture_under = ExtResource("30_shield_under")
 texture_over = ExtResource("32_shield_over")
 texture_progress = ExtResource("31_shield_progress")
 
 [node name="ShieldIcon" type="TextureRect" parent="UI/CanvasLayer" unique_id=583903118]
 texture_filter = 1
-offset_left = 68.0
-offset_top = 168.0
-offset_right = 122.0
-offset_bottom = 224.8421
+offset_left = 32.0
+offset_top = 162.0
+offset_right = 86.0
+offset_bottom = 218.8421
 texture = ExtResource("33_shield_icon")
+
+[node name="Panel2" type="Panel" parent="UI/CanvasLayer" unique_id=751726702]
+clip_children = 2
+offset_left = 56.0
+offset_top = 513.0
+offset_right = 332.0
+offset_bottom = 536.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lmarx")
+
+[node name="ManaBar" type="ProgressBar" parent="UI/CanvasLayer/Panel2" unique_id=713346589]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -8.945001
+anchor_right = 1.9820001
+anchor_bottom = 1.0
+offset_top = 205.73502
+offset_right = -270.03204
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_7av8l")
 
 [node name="TileMap" parent="." unique_id=610993365 instance=ExtResource("5_fgofq")]
 position = Vector2(-2912, 2018)
@@ -864,7 +897,7 @@ color = Color(0.6392157, 0, 0, 1)
 tile_set = SubResource("TileSet_rajel")
 
 [node name="clownfish" parent="." unique_id=2025178942 instance=ExtResource("20_tfod6")]
-position = Vector2(3890, -474.00006)
+position = Vector2(3895, -478.00003)
 
 [node name="AbilityFolder" type="Node" parent="." unique_id=363169500]
 script = ExtResource("19_vvhu1")
@@ -911,6 +944,12 @@ script = ExtResource("26_hardhit")
 [node name="IcyShot" type="Node" parent="AbilityFolder" unique_id=178318764]
 script = ExtResource("27_icyshot")
 
+[node name="icyshot_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/IcyShot" unique_id=1485086645]
+stream = ExtResource("37_lmarx")
+volume_db = -4.5
+pitch_scale = 1.15
+bus = &"Icy shot"
+
 [node name="TsunamiImpact" type="Node" parent="AbilityFolder" unique_id=118034739]
 script = ExtResource("28_tsunami")
 teleport_symbol_texture = ExtResource("29_tsunami_symbol")
@@ -928,7 +967,7 @@ grow_vertical = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1638872217]
 stream = ExtResource("31_i1pr2")
-volume_db = -10.035
+volume_db = -12.035
 autoplay = true
 parameters/looping = true
 
