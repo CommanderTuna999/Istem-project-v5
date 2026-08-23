@@ -8,6 +8,7 @@ var restside = "right"
 var attacking:= false
 var mouse_pos := Vector2.ZERO
 var direction_to_mouse := Vector2.ZERO
+var hard_hit_damage_multiplier: float = 1.0
 const winduptime = 0.05
 const attacktime := 0.1
 const attackcooldown := 0.25
@@ -43,6 +44,10 @@ func _process(delta: float) -> void:
 func attack():
 	attacking = true
 	get_parent().facinglocked = true
+	var hard_hit := get_node_or_null("/root/Game/AbilityFolder/HardHit")
+	if hard_hit != null and hard_hit.has_method("consume_hard_hit"):
+		hard_hit_damage_multiplier = hard_hit.consume_hard_hit()
+		$AttackPivot/TemplateHitbox.damage *= hard_hit_damage_multiplier
 	var random_pitch = randf_range(1.313, 1.687)
 	slash_sound_player.pitch_scale = random_pitch
 	slash_sound_player.play()
@@ -67,6 +72,8 @@ func attack():
 	$AttackPivot/TemplateHitbox/CollisionShape2D.disabled = false
 	await get_tree().create_timer(attacktime).timeout
 	hitboxshape.disabled = true
+	$AttackPivot/TemplateHitbox.damage /= hard_hit_damage_multiplier
+	hard_hit_damage_multiplier = 1.0
 	await get_tree().create_timer(attackcooldown).timeout
 	returntorest()
 	get_parent().facinglocked = false
@@ -89,6 +96,10 @@ func setrestside(newside: String):
 	returntorest()
 func successful_hit(hurtbox: TemplateHurtbox) -> void:
 	get_parent().on_spear_hit(hurtbox)
+	if hard_hit_damage_multiplier > 1.0:
+		var hard_hit := get_node_or_null("/root/Game/AbilityFolder/HardHit")
+		if hard_hit != null and hard_hit.has_method("freeze_enemy_after_knockback"):
+			hard_hit.freeze_enemy_after_knockback(hurtbox.owner as Node2D)
 	
 func _on_body_entered(body):
 	print("entered")

@@ -16,6 +16,7 @@ var kbtime = 0.0
 var kbvelocity = Vector2.ZERO
 var rooted: bool = false
 var root_timer: float = 0.0
+var slow_active: bool = false
 	
 func _ready() -> void:
 		animated_sprite_2d.play("idle")
@@ -87,6 +88,15 @@ func take_kb(source_position: Vector2):
 func set_rooted(duration: float) -> void:
 	rooted = true
 	root_timer = max(root_timer, duration)
+
+func set_slowed(duration: float, multiplier: float) -> void:
+	if slow_active:
+		return
+	slow_active = true
+	speed *= multiplier
+	await get_tree().create_timer(duration).timeout
+	speed /= multiplier
+	slow_active = false
 #func _on_template_hurtbox_area_entered(area: Area2D) -> void:
 	#var kbdirection = (global_position - area.global_position).normalized()
 	#kbvelocity = kbdirection * 600

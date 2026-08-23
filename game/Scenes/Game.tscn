@@ -31,7 +31,15 @@
 [ext_resource type="AudioStream" uid="uid://dpvo8eortnl8e" path="res://sfx/heal-skill-ro.mp3" id="24_iyesh"]
 [ext_resource type="AudioStream" uid="uid://d35o65uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="25_3jf1l"]
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="25_i0vto"]
+[ext_resource type="Script" uid="uid://j8cqe2er2s8a" path="res://hard_hit.gd" id="26_hardhit"]
+[ext_resource type="Script" uid="uid://bk3ngxqppw15h" path="res://Scripts/icy_shot.gd" id="27_icyshot"]
+[ext_resource type="Script" uid="uid://chymha3bnjeuw" path="res://Scripts/tsunami_impact.gd" id="28_tsunami"]
+[ext_resource type="Texture2D" uid="uid://bvya2681j5nfo" path="res://Assets/tsunami_impact_symbol.png" id="29_tsunami_symbol"]
+[ext_resource type="Texture2D" uid="uid://cfrt5seuqiidd" path="res://Assets/shield_bar_under.png" id="30_shield_under"]
 [ext_resource type="AudioStream" uid="uid://bvyxt7w82f6u0" path="res://sfx/Beyond Ocean Waters.mp3" id="31_i1pr2"]
+[ext_resource type="Texture2D" uid="uid://k2f0fhtg6f8f" path="res://Assets/shield_bar_progress.png" id="31_shield_progress"]
+[ext_resource type="Texture2D" uid="uid://qanfhvpgpvi1" path="res://Assets/shield_bar_over.png" id="32_shield_over"]
+[ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="33_shield_icon"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -390,9 +398,6 @@ _data = {
 &"damageflash": SubResource("Animation_3so38")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_alh3a"]
-bg_color = Color(0.056951813, 0.44398353, 0.7298303, 1)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2irst"]
 size = Vector2(75, 73)
 
@@ -673,9 +678,9 @@ offset_right = 424.0
 offset_bottom = 1781.0
 
 [node name="dashbar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=2025877455]
-offset_left = 90.0
+offset_left = 85.0
 offset_top = 230.0
-offset_right = 185.0
+offset_right = 180.0
 offset_bottom = 435.0
 fill_mode = 3
 
@@ -727,13 +732,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_71axn")
 
-[node name="ShieldBar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=1227095526]
-offset_left = 86.0
-offset_top = 170.0
-offset_right = 460.0
-offset_bottom = 197.0
-scale = Vector2(1, 1.0400048)
-theme_override_styles/fill = SubResource("StyleBoxFlat_alh3a")
+[node name="ShieldBar" type="TextureProgressBar" parent="UI/CanvasLayer" unique_id=1227095526]
+texture_filter = 1
+offset_left = 99.0
+offset_top = 180.0
+offset_right = 429.0
+offset_bottom = 212.0
+texture_under = ExtResource("30_shield_under")
+texture_over = ExtResource("32_shield_over")
+texture_progress = ExtResource("31_shield_progress")
+
+[node name="ShieldIcon" type="TextureRect" parent="UI/CanvasLayer" unique_id=583903118]
+texture_filter = 1
+offset_left = 68.0
+offset_top = 168.0
+offset_right = 122.0
+offset_bottom = 224.8421
+texture = ExtResource("33_shield_icon")
 
 [node name="TileMap" parent="." unique_id=610993365 instance=ExtResource("5_fgofq")]
 position = Vector2(-2912, 2018)
@@ -798,7 +813,16 @@ position = Vector2(-2154.0002, 50)
 position = Vector2(-1884.0001, 5)
 
 [node name="clownfish8" parent="Enemies/clownfish_folder" unique_id=1932719547 instance=ExtResource("4_kldst")]
-position = Vector2(-1904.0001, 112)
+position = Vector2(-281, -1154)
+
+[node name="clownfish9" parent="Enemies/clownfish_folder" unique_id=1832031630 instance=ExtResource("4_kldst")]
+position = Vector2(198.99988, -837)
+
+[node name="clownfish10" parent="Enemies/clownfish_folder" unique_id=412523269 instance=ExtResource("4_kldst")]
+position = Vector2(486.99988, -544)
+
+[node name="clownfish11" parent="Enemies/clownfish_folder" unique_id=495342366 instance=ExtResource("4_kldst")]
+position = Vector2(-132, -714)
 
 [node name="seahorse_folder" type="Node" parent="Enemies" unique_id=1487093843]
 
@@ -840,7 +864,7 @@ color = Color(0.6392157, 0, 0, 1)
 tile_set = SubResource("TileSet_rajel")
 
 [node name="clownfish" parent="." unique_id=2025178942 instance=ExtResource("20_tfod6")]
-position = Vector2(1018, -1352)
+position = Vector2(3890, -474.00006)
 
 [node name="AbilityFolder" type="Node" parent="." unique_id=363169500]
 script = ExtResource("19_vvhu1")
@@ -880,6 +904,16 @@ teleport_sound = ExtResource("25_3jf1l")
 
 [node name="ShadowFurySupportScript" type="Node" parent="AbilityFolder" unique_id=725315113]
 script = ExtResource("25_i0vto")
+
+[node name="HardHit" type="Node" parent="AbilityFolder" unique_id=2005999913]
+script = ExtResource("26_hardhit")
+
+[node name="IcyShot" type="Node" parent="AbilityFolder" unique_id=178318764]
+script = ExtResource("27_icyshot")
+
+[node name="TsunamiImpact" type="Node" parent="AbilityFolder" unique_id=118034739]
+script = ExtResource("28_tsunami")
+teleport_symbol_texture = ExtResource("29_tsunami_symbol")
 
 [node name="TimeStopFilter" type="CanvasLayer" parent="." unique_id=510772542]
 

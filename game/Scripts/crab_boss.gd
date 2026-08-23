@@ -17,6 +17,9 @@ var attack_number = null
 var current_health = 200
 var kbtime = 0.0
 var kbvelocity = Vector2.ZERO
+var slow_active: bool = false
+var rooted: bool = false
+var root_timer: float = 0.0
 @onready var damage_number_template: damage_number_template = $damage_number_template
 @onready var attack_timer: Timer = $"attack timer"
 @onready var sweep_collision_shape_2d: CollisionShape2D = $SweepCollisionShape2D
@@ -44,6 +47,12 @@ func _on_aggro_area_body_entered(body):
 
 
 func _physics_process(_delta):
+	if rooted:
+		root_timer -= _delta
+		velocity = Vector2.ZERO
+		if root_timer <= 0.0:
+			rooted = false
+		return
 	if chase_subject and attack_timer.is_stopped():
 		attack_number = randi_range(1, 4)
 		currently_attacking = true
@@ -105,6 +114,19 @@ func take_damage(amount: float):
 	animation_player.play("damaged")
 	damage_number_template.spawn_label(amount, false)
 	await get_tree().create_timer(0.1).timeout
+
+func set_slowed(duration: float, multiplier: float) -> void:
+	if slow_active:
+		return
+	slow_active = true
+	dash_speed *= multiplier
+	await get_tree().create_timer(duration).timeout
+	dash_speed /= multiplier
+	slow_active = false
+
+func set_rooted(duration: float) -> void:
+	rooted = true
+	root_timer = max(root_timer, duration)
 	
 
 # knockback script below

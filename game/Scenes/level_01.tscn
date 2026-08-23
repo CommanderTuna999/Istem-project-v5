@@ -8,10 +8,27 @@
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="5_g8eo0"]
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="6_nnuef"]
 [ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="7_fcb2x"]
+[ext_resource type="Texture2D" uid="uid://cfrt5seuqiidd" path="res://Assets/shield_bar_under.png" id="9_ywwm3"]
+[ext_resource type="Texture2D" uid="uid://qanfhvpgpvi1" path="res://Assets/shield_bar_over.png" id="10_b4ywe"]
 [ext_resource type="PackedScene" uid="uid://ony1pqjkvd1j" path="res://Scenes/Enemies/clownfish.tscn" id="10_pw4n1"]
+[ext_resource type="Texture2D" uid="uid://k2f0fhtg6f8f" path="res://Assets/shield_bar_progress.png" id="11_c2pji"]
 [ext_resource type="PackedScene" uid="uid://d1ur1edkugqec" path="res://Scenes/anemone.tscn" id="11_cs32c"]
+[ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="12_khfxu"]
 [ext_resource type="Script" uid="uid://c2dfxpxy1bxcx" path="res://Scenes/level_02.gd" id="12_rmyfx"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="13_osdef"]
+[ext_resource type="Script" uid="uid://c8n16i5rg5b64" path="res://Scripts/ability_folder.gd" id="13_vh3c3"]
+[ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="14_osdef"]
+[ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="15_eqa25"]
+[ext_resource type="AudioStream" uid="uid://kakrcthx40tf" path="res://sfx/bow_shoot.mp3" id="16_wejbp"]
+[ext_resource type="Script" uid="uid://e5f1vnkckbm6" path="res://Scripts/heal.gd" id="17_ywwm3"]
+[ext_resource type="AudioStream" uid="uid://dpvo8eortnl8e" path="res://sfx/heal-skill-ro.mp3" id="18_b4ywe"]
+[ext_resource type="Script" uid="uid://bsai75bhb1o3a" path="res://Scripts/cookie.gd" id="19_c2pji"]
+[ext_resource type="AudioStream" uid="uid://cmtmo11w24jcs" path="res://sfx/nom-nom-nom_gPJiWn4.mp3" id="20_khfxu"]
+[ext_resource type="Script" uid="uid://cdyg2msh6uppt" path="res://Scripts/shadow_fury.gd" id="21_jsdcw"]
+[ext_resource type="AudioStream" uid="uid://d35o65uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="22_jybdu"]
+[ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="23_xe54j"]
+[ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="24_4m6hl"]
+[ext_resource type="AudioStream" uid="uid://bvyxt7w82f6u0" path="res://sfx/Beyond Ocean Waters.mp3" id="25_0fel4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_0h1yu")
@@ -534,9 +551,6 @@ _data = {
 &"damageflash": SubResource("Animation_3so38")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ue7jx"]
-bg_color = Color(0.056951813, 0.44398353, 0.7298303, 1)
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f8buc"]
 particle_flag_disable_z = true
 emission_shape = 3
@@ -549,6 +563,9 @@ scale_min = 0.03
 scale_max = 0.03
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5yiq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dmyo7"]
+shader = ExtResource("24_4m6hl")
 
 [node name="Level01" type="Node2D" unique_id=1228467427]
 
@@ -800,13 +817,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("7_fcb2x")
 
-[node name="ShieldBar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=177239078]
-offset_left = 93.0
-offset_top = 179.0
-offset_right = 467.0
-offset_bottom = 206.0
-scale = Vector2(1, 1.0400048)
-theme_override_styles/fill = SubResource("StyleBoxFlat_ue7jx")
+[node name="ShieldBar" type="TextureProgressBar" parent="UI/CanvasLayer" unique_id=1823998990]
+texture_filter = 1
+offset_left = 99.0
+offset_top = 180.0
+offset_right = 429.0
+offset_bottom = 212.0
+texture_under = ExtResource("9_ywwm3")
+texture_over = ExtResource("10_b4ywe")
+texture_progress = ExtResource("11_c2pji")
+
+[node name="ShieldIcon" type="TextureRect" parent="UI/CanvasLayer" unique_id=1649499499]
+texture_filter = 1
+offset_left = 68.0
+offset_top = 168.0
+offset_right = 122.0
+offset_bottom = 224.8421
+texture = ExtResource("12_khfxu")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=120829579]
 color = Color(0.8327273, 0.86699224, 0.9217689, 1)
@@ -898,6 +925,62 @@ offset_right = 10.0
 offset_bottom = 10.0
 color = Color(0.6392157, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="AbilityFolder" type="Node" parent="." unique_id=843139034]
+script = ExtResource("13_vh3c3")
+
+[node name="TimeStop" type="Node" parent="AbilityFolder" unique_id=1378596841]
+script = ExtResource("14_osdef")
+
+[node name="Petals" type="Node" parent="AbilityFolder" unique_id=1013672869]
+script = ExtResource("15_eqa25")
+
+[node name="petal_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Petals" unique_id=2077083290]
+stream = ExtResource("16_wejbp")
+bus = &"Petal(fire)"
+
+[node name="petalbounce_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Petals" unique_id=1183755752]
+stream = ExtResource("16_wejbp")
+bus = &"Petal(bounce)"
+
+[node name="Heal" type="Node" parent="AbilityFolder" unique_id=432231374]
+script = ExtResource("17_ywwm3")
+
+[node name="heal_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Heal" unique_id=745746958]
+stream = ExtResource("18_b4ywe")
+bus = &"Heal"
+
+[node name="Cookie" type="Node" parent="AbilityFolder" unique_id=1536479225]
+script = ExtResource("19_c2pji")
+
+[node name="cookie_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Cookie" unique_id=651049973]
+stream = ExtResource("20_khfxu")
+
+[node name="ShadowFury" type="Node" parent="AbilityFolder" unique_id=546395246]
+script = ExtResource("21_jsdcw")
+teleport_sound = ExtResource("22_jybdu")
+
+[node name="teleport_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/ShadowFury" unique_id=515220103]
+
+[node name="ShadowFurySupportScript" type="Node" parent="AbilityFolder" unique_id=998739467]
+script = ExtResource("23_xe54j")
+
+[node name="TimeStopFilter" type="CanvasLayer" parent="." unique_id=1513060584]
+
+[node name="ColorRect" type="ColorRect" parent="TimeStopFilter" unique_id=579116740]
+visible = false
+material = SubResource("ShaderMaterial_dmyo7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=33751702]
+stream = ExtResource("25_0fel4")
+volume_db = -10.035
+autoplay = true
+parameters/looping = true
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

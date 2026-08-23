@@ -19,6 +19,7 @@ var kbvelocity = Vector2.ZERO
 var projectile_cooldown = 2
 var rooted: bool = false
 var root_timer: float = 0.0
+var slow_active: bool = false
 	
 	
 
@@ -132,6 +133,15 @@ func _shoot():
 func set_rooted(duration: float) -> void:
 	rooted = true
 	root_timer = max(root_timer, duration)
+
+func set_slowed(duration: float, multiplier: float) -> void:
+	if slow_active:
+		return
+	slow_active = true
+	speed *= multiplier
+	await get_tree().create_timer(duration).timeout
+	speed /= multiplier
+	slow_active = false
 
 	
 

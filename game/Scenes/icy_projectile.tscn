@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/icy_projectile.gd" id="1_icy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_icy"]
+radius = 10.0
+
+[node name="IcyProjectile" type="Node2D"]
+script = ExtResource("1_icy")
