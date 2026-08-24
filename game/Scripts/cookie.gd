@@ -16,7 +16,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Ability") and not cookie_on_cooldown:
 		if AbilityFolder.ability == "Cookie":
-			trigger_cookie_boost()
+			if not AbilityFolder.is_typing:
+				trigger_cookie_boost()
 
 
 func trigger_cookie_boost() -> void:

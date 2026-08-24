@@ -4,7 +4,7 @@ extends Node
 @export var behind_distance: float = 30.0
 @export var teleport_delay: float = 0.65  # time before teleporting to the next enemy
 @export var slash_gap: float = 0.08      # time after the hit, before the next teleport starts
-@export var cooldown: float = 10.0
+@export var cooldown: float = 1.0
 @export var root_duration_buffer: float = 0.35
 @export var damage_multiplier: float = 1.25
 
@@ -24,7 +24,7 @@ var executing: bool = false
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Ability") and not on_cooldown and not executing:
-		if AbilityFolder.ability == "Shadow_Fury":
+		if AbilityFolder.ability == "Shadow_Fury" and not AbilityFolder.is_typing:
 			execute_chain()
 
 

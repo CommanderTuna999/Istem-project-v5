@@ -9,7 +9,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Ability"):
 		if AbilityFolder.ability == "Heal":
 			if not heal_cooldown:
-				heal()
+				if not AbilityFolder.is_typing:
+					heal()
 
 func heal() -> void:
 	heal_cooldown = true

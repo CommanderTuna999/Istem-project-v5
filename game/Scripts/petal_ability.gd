@@ -14,7 +14,8 @@ var on_cooldown: bool = false
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Ability"):
 		if AbilityFolder.ability == "Petals" and not is_casting and not on_cooldown:
-			cast_petals()
+			if not AbilityFolder.is_typing:
+				cast_petals()
 
 
 func cast_petals() -> void:

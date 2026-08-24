@@ -9,5 +9,5 @@ func on_LEVELONE_body_entered(body: Node2D) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("Restart"):
+	if Input.is_action_just_pressed("Restart") and not AbilityFolder.is_typing:
 		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Game.tscn")

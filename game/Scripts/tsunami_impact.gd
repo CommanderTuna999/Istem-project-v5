@@ -35,7 +35,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Ability") and AbilityFolder.ability == "Tsunami_Impact" and not on_cooldown:
-		if current_mana > 9.99:
+		if current_mana > 9.99 and not AbilityFolder.is_typing:
 			activate_tsunami_impact()
 	if current_mana < max_mana:
 		current_mana += mana_regeneration * delta

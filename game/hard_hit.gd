@@ -10,7 +10,8 @@ var hard_hit_cooldown: bool = false
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Ability") and AbilityFolder.ability == "Hard_Hit":
 		if not hard_hit_active and not hard_hit_cooldown:
-			activate_hard_hit()
+			if not AbilityFolder.is_typing:
+				activate_hard_hit()
 
 func activate_hard_hit() -> void:
 	hard_hit_active = true

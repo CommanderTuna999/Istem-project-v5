@@ -422,8 +422,9 @@ func _physics_process(delta: float) -> void:
 	var crashed = false
 	
 	if Input.is_action_just_pressed("Restart"):
-		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Game.tscn")
-		get_tree().call_deferred("reload_current_scene")
+		if not AbilityFolder.is_typing:
+			get_tree().call_deferred("change_scene_to_file", "res://Scenes/Game.tscn")
+			get_tree().call_deferred("reload_current_scene")
 	#for bounce
 	if bouncegracetimer > 0.0:
 		bouncegracetimer -= delta

@@ -14,7 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://b402fgvpvj5jx" path="res://icon.svg" id="7_bf53h"]
 [ext_resource type="Script" uid="uid://by4l5aip8ooh3" path="res://Scripts/sprite_2d(test_armour).gd" id="8_71axn"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="13_3cx6b"]
+[ext_resource type="Script" uid="uid://f8giy3vrs6bh" path="res://Scenes/ability_input.gd" id="13_mi7vx"]
 [ext_resource type="PackedScene" uid="uid://blb2pf33p5wbr" path="res://Scenes/Enemies/seahorse.tscn" id="13_wxwew"]
+[ext_resource type="Script" uid="uid://hmovf1c68vo2" path="res://Scenes/guide_input.gd" id="14_t2joc"]
 [ext_resource type="Texture2D" uid="uid://dt5cs6dqupia1" path="res://Assets/Cobblestone.png" id="14_wxwew"]
 [ext_resource type="Script" uid="uid://b3173ry3n47c5" path="res://Scripts/level_01.gd" id="17_4q8tf"]
 [ext_resource type="PackedScene" uid="uid://dx5181rkqvp8" path="res://Scenes/Enemies/starfish.tscn" id="18_x3xnh"]
@@ -412,6 +414,11 @@ corner_detail = 20
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7av8l"]
 bg_color = Color(0, 0.8586935, 0.99825805, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mi7vx"]
+bg_color = Color(0.5714107, 0.6092862, 0.6100922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2joc"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2irst"]
 size = Vector2(75, 73)
 
@@ -756,14 +763,6 @@ texture_under = ExtResource("30_shield_under")
 texture_over = ExtResource("32_shield_over")
 texture_progress = ExtResource("31_shield_progress")
 
-[node name="ShieldIcon" type="TextureRect" parent="UI/CanvasLayer" unique_id=583903118]
-texture_filter = 1
-offset_left = 32.0
-offset_top = 162.0
-offset_right = 86.0
-offset_bottom = 218.8421
-texture = ExtResource("33_shield_icon")
-
 [node name="Panel2" type="Panel" parent="UI/CanvasLayer" unique_id=751726702]
 clip_children = 2
 offset_left = 49.0
@@ -784,6 +783,79 @@ offset_right = -270.03204
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_7av8l")
+
+[node name="ShieldIcon" type="TextureRect" parent="UI/CanvasLayer" unique_id=583903118]
+texture_filter = 1
+offset_left = 32.0
+offset_top = 162.0
+offset_right = 86.0
+offset_bottom = 218.8421
+texture = ExtResource("33_shield_icon")
+
+[node name="AbilityInput" type="Control" parent="UI/CanvasLayer" unique_id=1509775247]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_mi7vx")
+
+[node name="Button" type="Button" parent="UI/CanvasLayer/AbilityInput" unique_id=545394340]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 198.0
+offset_top = 272.0
+offset_right = 326.0
+offset_bottom = 280.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_mi7vx")
+action_mode = 0
+
+[node name="LineEdit" type="LineEdit" parent="UI/CanvasLayer/AbilityInput" unique_id=569223855]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 226.0
+offset_top = 291.0
+offset_right = 294.5
+offset_bottom = 322.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_t2joc")
+
+[node name="GuideInput" type="Control" parent="UI/CanvasLayer" unique_id=620232588]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_t2joc")
+
+[node name="GuideButton" type="Button" parent="UI/CanvasLayer/GuideInput" unique_id=486031683]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 331.0
+offset_right = 366.0
+offset_bottom = 345.0
+theme_override_font_sizes/font_size = 6
+text = "click me for ability changing guide"
+
+[node name="GuideLabel" type="Label" parent="UI/CanvasLayer/GuideInput" unique_id=624003929]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 349.0
+offset_right = 310.0
+offset_bottom = 500.0
+theme_override_font_sizes/font_size = 7
+text = "Ability Guide: C to close
+Hyperion: Tsunami_Impact
+Ice shot thing: Icy_Shot
+Petal bouncing thing: Petals
+Cookie: Cookie
+Heal: Heal
+Hard hit (ig bro): Hard_Hit
+Teleport ability: Shadow_Fury
+Timestop: Time_Stop
+make sure to type it exactly, use the 
+above gui (cick the thin button then type
+into the thick one).
+"
 
 [node name="TileMap" parent="." unique_id=610993365 instance=ExtResource("5_fgofq")]
 position = Vector2(-2912, 2018)
@@ -862,7 +934,19 @@ position = Vector2(-132, -714)
 [node name="seahorse_folder" type="Node" parent="Enemies" unique_id=1487093843]
 
 [node name="seahorse" parent="Enemies/seahorse_folder" unique_id=829669778 instance=ExtResource("13_wxwew")]
-position = Vector2(-3228.0002, -894.99994)
+position = Vector2(-3040.9995, -812.99994)
+
+[node name="seahorse2" parent="Enemies/seahorse_folder" unique_id=1736424733 instance=ExtResource("13_wxwew")]
+position = Vector2(849.00024, -787)
+
+[node name="seahorse3" parent="Enemies/seahorse_folder" unique_id=2085543103 instance=ExtResource("13_wxwew")]
+position = Vector2(306.00098, -1277)
+
+[node name="seahorse4" parent="Enemies/seahorse_folder" unique_id=634758625 instance=ExtResource("13_wxwew")]
+position = Vector2(838.001, -1359)
+
+[node name="seahorse5" parent="Enemies/seahorse_folder" unique_id=998693175 instance=ExtResource("13_wxwew")]
+position = Vector2(1531.0005, -1179.9999)
 
 [node name="crab_folder" type="Node" parent="Enemies" unique_id=577862657]
 
@@ -988,4 +1072,6 @@ parameters/looping = true
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="Player/ShieldRechargeDelay" to="Player" method="_on_shield_recharge_delay_timeout"]
 [connection signal="timeout" from="Player/ShieldRechargeTimer" to="Player" method="_on_shield_recharge_timer_timeout"]
+[connection signal="pressed" from="UI/CanvasLayer/AbilityInput/Button" to="UI/CanvasLayer/AbilityInput" method="_on_button_pressed"]
+[connection signal="text_submitted" from="UI/CanvasLayer/AbilityInput/LineEdit" to="UI/CanvasLayer/AbilityInput" method="_on_line_edit_text_submitted"]
 [connection signal="body_entered" from="Level01" to="Level01" method="on_LEVELONE_body_entered"]

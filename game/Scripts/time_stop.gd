@@ -6,7 +6,7 @@ extends Node
 var time_stop_cooldown = false
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Ability"):
-		if AbilityFolder.ability == "Time_Stop":
+		if AbilityFolder.ability == "Time_Stop" and not AbilityFolder.is_typing:
 			if not time_stop_active and not time_stop_cooldown:
 				activate_time_stop()
 

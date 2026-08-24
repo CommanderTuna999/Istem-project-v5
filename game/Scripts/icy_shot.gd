@@ -10,7 +10,8 @@ var on_cooldown: bool = false
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Ability") and AbilityFolder.ability == "Icy_Shot" and not on_cooldown:
-		fire_icy_shot()
+		if not AbilityFolder.is_typing:
+			fire_icy_shot()
 
 
 func fire_icy_shot() -> void:
