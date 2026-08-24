@@ -2,7 +2,7 @@ extends Node
 
 @export var search_radius: float = 417.5
 @export var behind_distance: float = 30.0
-@export var teleport_delay: float = 0.65  # time before teleporting to the next enemy
+@export var teleport_delay: float = 0.325  # time before teleporting to the next enemy
 @export var slash_gap: float = 0.08      # time after the hit, before the next teleport starts
 @export var cooldown: float = 1.0
 @export var root_duration_buffer: float = 0.35

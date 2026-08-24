@@ -1,7 +1,7 @@
 extends Node
 
 @export var projectile_scene: PackedScene = preload("res://Scenes/icy_projectile.tscn")
-@export var cooldown: float = 1.0
+@export var cooldown: float = 0.05
 
 @onready var icyshot_audio_player: AudioStreamPlayer = $"/root/Game/AbilityFolder/IcyShot/icyshot_audio_player"
 

@@ -20,6 +20,7 @@ var projectile_cooldown = 2
 var rooted: bool = false
 var root_timer: float = 0.0
 var slow_active: bool = false
+var spawn: float = 1.0
 	
 	
 
@@ -94,9 +95,10 @@ func take_damage(amount: float):
 	current_health -= amount
 	animation_player.play("damaged")
 	await get_tree().create_timer(0.1).timeout
-	if current_health == 3:
+	if current_health <= 3 and spawn >= 1:
 		animated_sprite_2d.play("deflated")
 		spawn_child(25)
+		spawn = 0
 	
 
 func spawn_child(amount):

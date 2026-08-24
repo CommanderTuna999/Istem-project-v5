@@ -11,9 +11,7 @@ extends Node
 @export var cooldown: float = 0.01
 
 @export var mana_cost: float = 10.0
-@export var max_mana: float = 100.0
-@export var current_mana: float = 100.0
-@export var mana_regeneration: float = 2.5
+
 
 @export var teleport_symbol_texture: Texture2D
 @export var teleport_symbol_scale: float = 0.045
@@ -21,26 +19,16 @@ extends Node
 @export var teleport_symbol_growth: float = 1.25
 @export var teleport_symbol_spin_turns: float = 1.5
 
-@onready var mana_bar = %ManaBar
 @onready var explosion_audio_player: AudioStreamPlayer = $explosion_audio_player
 var on_cooldown: bool = false
 var teleport_symbol_active: bool = false
 
-func update_mana_bar() -> void:
-	mana_bar.max_value = max_mana
-	mana_bar.value = current_mana
-
-func _ready() -> void:
-	update_mana_bar()
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Ability") and AbilityFolder.ability == "Tsunami_Impact" and not on_cooldown:
-		if current_mana > 9.99 and not AbilityFolder.is_typing:
+		if Mana.current_mana > 9.99 and not AbilityFolder.is_typing:
 			activate_tsunami_impact()
-	if current_mana < max_mana:
-		current_mana += mana_regeneration * delta
-		current_mana = min(current_mana, max_mana)
-		update_mana_bar()
+
 
 
 func activate_tsunami_impact() -> void:
@@ -85,8 +73,7 @@ func find_nearest_enemy(from_position: Vector2) -> Node2D:
 
 
 func explode(player: CharacterBody2D) -> void:
-	current_mana -= mana_cost
-	update_mana_bar()
+	Mana.current_mana -= mana_cost
 	var damage_multiplier := float(player.total_damage_increase)
 	for possible_enemy in get_tree().get_nodes_in_group("enemy"):
 		var enemy := possible_enemy as Node2D

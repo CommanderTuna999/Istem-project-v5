@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://bj7ldtrm577dp" path="res://Scenes/spear.tscn" id="2_71axn"]
 [ext_resource type="AudioStream" uid="uid://cf683y6d2h27h" path="res://sfx/slashed.mp3" id="3_4f4ik"]
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="3_bf53h"]
-[ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="4_71axn"]
 [ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="4_alh3a"]
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="4_dahhg"]
 [ext_resource type="PackedScene" uid="uid://ony1pqjkvd1j" path="res://Scenes/Enemies/clownfish.tscn" id="4_kldst"]
@@ -45,6 +44,7 @@
 [ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="33_shield_icon"]
 [ext_resource type="AudioStream" uid="uid://b2qjnu0vwgjvk" path="res://sfx/5f569f554286fe2cda904c330392f6cf781aa63f.ogg" id="37_lmarx"]
 [ext_resource type="AudioStream" uid="uid://b6v7oy4yptpx" path="res://sfx/9b50f8b4ace51d032fdb0dfe37b5edd9591cb41e.mp3" id="40_7av8l"]
+[ext_resource type="Script" uid="uid://d0ngdut317ugr" path="res://Scenes/mana.gd" id="45_t2joc"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -736,23 +736,6 @@ theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelUpLabel" type="Label" parent="UI/CanvasLayer" unique_id=609736575]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("4_71axn")
-
 [node name="ShieldBar" type="TextureProgressBar" parent="UI/CanvasLayer" unique_id=1227095526]
 texture_filter = 1
 offset_left = 63.0
@@ -1067,6 +1050,9 @@ stream = ExtResource("31_i1pr2")
 volume_db = -12.035
 autoplay = true
 parameters/looping = true
+
+[node name="Mana" type="Node" parent="." unique_id=31072134]
+script = ExtResource("45_t2joc")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
