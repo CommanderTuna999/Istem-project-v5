@@ -5,7 +5,7 @@ extends Node2D
 var cooldown = 1.0
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("Ability") and AbilityFolder.ability == "Extra_Dash":
+	if Input.is_action_just_pressed("Ability") and AbilityFolder.ability == "Extra_Dash" and not on_cooldown:
 		start_extra_dash(player.direction)
 	var mouse_pos = get_global_mouse_position()
 

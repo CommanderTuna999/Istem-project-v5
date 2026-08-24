@@ -590,8 +590,8 @@ var heal_per_second:
 #defense stuff below
 var defence:
 	get:
-		return 10 * total_defence_increase
-@export var total_defence_increase = 1.0
+		return total_defence_increase
+@export var total_defence_increase = 0.0
 
 var current_health = 100
 var damage_occuring = false
@@ -708,7 +708,7 @@ func take_player_damage(amount: float) -> void:
 		starsaveused = true
 		emptybeams.visible = false
 	else:
-		current_health -= amount * (1.0 - ((defence / 2.0) / 100))
+		current_health -= amount * (100.0 / (defence + 100.0))
 		update_shield_bar()
 		current_health = max(current_health, 0)
 		can_heal = false
