@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://p47ksxrd7ixv" path="res://bomb_projectile.gd" id="1_hkl56"]
 [ext_resource type="Texture2D" uid="uid://db6mha5ulkwma" path="res://Assets/pixil-frame-0.png" id="2_pqtwr"]
+[ext_resource type="AudioStream" uid="uid://cadbf1wbr8lyu" path="res://sfx/minecraft-tnt-explosion.mp3" id="3_grm7b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_grm7b"]
 radius = 11.18034
@@ -19,5 +20,9 @@ texture = ExtResource("2_pqtwr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1444953842]
 shape = SubResource("CircleShape2D_grm7b")
+
+[node name="bomb_explosion_audio" type="AudioStreamPlayer" parent="." unique_id=1713697596]
+stream = ExtResource("3_grm7b")
+bus = &"bombexplosion"
 
 [connection signal="body_entered" from="." to="." method="_on_hitbox_body_entered"]

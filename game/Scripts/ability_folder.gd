@@ -1,4 +1,4 @@
 extends Node
 
-@onready var ability = "Wind_Cloak"
+@onready var ability = "Petals"
 var is_typing: bool = false

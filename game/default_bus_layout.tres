@@ -89,6 +89,21 @@ wet = 0.05
 voice/1/delay_ms = 35.0
 voice/2/delay_ms = 50.0
 
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_dqt2m"]
+resource_name = "Reverb"
+predelay_msec = 50.0
+predelay_feedback = 0.65
+room_size = 0.25
+damping = 0.25
+dry = 0.88
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_n8wo2"]
+resource_name = "Chorus"
+dry = 0.5
+wet = 0.0
+voice/1/delay_ms = 10.0
+voice/2/delay_ms = 15.0
+
 [resource]
 bus/0/bypass_fx = true
 bus/1/name = &"Petal(fire)"
@@ -161,3 +176,13 @@ bus/7/effect/0/effect = SubResource("AudioEffectReverb_cenje")
 bus/7/effect/0/enabled = true
 bus/7/effect/1/effect = SubResource("AudioEffectChorus_g28q7")
 bus/7/effect/1/enabled = true
+bus/8/name = &"bombexplosion"
+bus/8/solo = false
+bus/8/mute = false
+bus/8/bypass_fx = false
+bus/8/volume_db = 0.0
+bus/8/send = &"Master"
+bus/8/effect/0/effect = SubResource("AudioEffectReverb_dqt2m")
+bus/8/effect/0/enabled = true
+bus/8/effect/1/effect = SubResource("AudioEffectChorus_n8wo2")
+bus/8/effect/1/enabled = true

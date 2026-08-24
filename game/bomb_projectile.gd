@@ -12,7 +12,7 @@ extends Area2D
 @export var base_damage: float = 1.0
 @export var knockback_strength: float = 900.0
 @export var flash_fade_time: float = 0.33
-
+@onready var bomb_explosion_audio: AudioStreamPlayer = $bomb_explosion_audio
 var start_position: Vector2
 var target_position: Vector2
 var travel_timer: float = 0.0
@@ -61,35 +61,37 @@ func explode() -> void:
 	if has_exploded:
 		return
 	has_exploded = true
+	for i in range(2): 
+		var player := get_tree().get_first_node_in_group("player") as CharacterBody2D
+		var damage_multiplier := 1.0
+		if player and player.get("total_damage_increase") != null:
+			damage_multiplier = float(player.total_damage_increase)
 
-	var player := get_tree().get_first_node_in_group("player") as CharacterBody2D
-	var damage_multiplier := 1.0
-	if player and player.get("total_damage_increase") != null:
-		damage_multiplier = float(player.total_damage_increase)
-
-	for possible_enemy in get_tree().get_nodes_in_group("enemy"):
-		var enemy := possible_enemy as Node2D
-		if enemy == null or not is_instance_valid(enemy):
-			continue
-		if global_position.distance_to(enemy.global_position) > explosion_radius:
-			continue
-		if enemy.has_method("take_damage"):
-			enemy.take_damage(base_damage * damage_multiplier)
-		if enemy.has_method("take_kb"):
-			enemy.take_kb(global_position)
-			var knockback_direction := global_position.direction_to(enemy.global_position)
-			if knockback_direction == Vector2.ZERO:
-				knockback_direction = Vector2.RIGHT
-			if enemy.get("kbvelocity") != null:
-				enemy.set("kbvelocity", knockback_direction * knockback_strength)
-			if enemy.get("kbtime") != null:
-				enemy.set("kbtime", 0.22)
-
-	spawn_explosion_flash()
+		for possible_enemy in get_tree().get_nodes_in_group("enemy"):
+			var enemy := possible_enemy as Node2D
+			if enemy == null or not is_instance_valid(enemy):
+				continue
+			if global_position.distance_to(enemy.global_position) > explosion_radius:
+				continue
+			if enemy.has_method("take_damage"):
+				enemy.take_damage(base_damage * damage_multiplier)
+			if enemy.has_method("take_kb"):
+				enemy.take_kb(global_position)
+				var knockback_direction := global_position.direction_to(enemy.global_position)
+				if knockback_direction == Vector2.ZERO:
+					knockback_direction = Vector2.RIGHT
+				if enemy.get("kbvelocity") != null:
+					enemy.set("kbvelocity", knockback_direction * knockback_strength)
+				if enemy.get("kbtime") != null:
+					enemy.set("kbtime", 0.22)
+	
+		spawn_explosion_flash()
+		bomb_explosion_audio.play()
 
 	# Hide the bomb sprite immediately, wait for the flash to finish, then free
-	visible = false
-	await get_tree().create_timer(flash_fade_time).timeout
+		visible = false
+		await get_tree().create_timer(flash_fade_time).timeout
+		await get_tree().create_timer(0.05).timeout
 	queue_free()
 
 
