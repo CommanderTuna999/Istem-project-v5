@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bdqbpmxw31kbp" path="res://Scenes/player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://bj7ldtrm577dp" path="res://Scenes/spear.tscn" id="2_71axn"]
-[ext_resource type="AudioStream" uid="uid://cf683y6d2h27h" path="res://sfx/slashed.mp3" id="3_4f4ik"]
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="3_bf53h"]
 [ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="4_alh3a"]
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="4_dahhg"]
@@ -560,12 +559,6 @@ position = Vector2(895, -1867)
 
 [node name="Spear" parent="Player" unique_id=1804206196 instance=ExtResource("2_71axn")]
 position = Vector2(-0.21830654, 0.45456308)
-
-[node name="slash_sound_player" type="AudioStreamPlayer" parent="Player/Spear" unique_id=717879808]
-stream = ExtResource("3_4f4ik")
-volume_db = -20.0
-pitch_scale = 1.5
-bus = &"Spear attack"
 
 [node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=17055866]
 

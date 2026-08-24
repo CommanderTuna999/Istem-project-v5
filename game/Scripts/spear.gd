@@ -1,7 +1,7 @@
 extends Node2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AttackPivot/AnimatedSprite2D
 
-@onready var slash_sound_player: AudioStreamPlayer = $"/root/Game/Player/Spear/slash_sound_player"
+@onready var slash_sound_player: AudioStreamPlayer = $slash_sound_player
 
 var direction = "right"
 var restside = "right"
