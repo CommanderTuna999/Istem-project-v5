@@ -104,7 +104,10 @@ var kbvelocity = Vector2.ZERO
 @export var dash_cost: float = 25.0
 @export var dash_recharge_per_second: float = 5
 @export var dash_recharge_delay: float = 0.5
-@export var dash_speed: float = 550
+@export var dash_speed_increase: float = 1.0
+var dash_speed:
+	get:
+		return 825 * dash_speed_increase
 @export var dash_duration: float = 0.1
 @export var dash_bar_display_value: float = dash_max
 
@@ -113,6 +116,7 @@ var dash_recharge_timer: float = 0.0
 var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
+var direction: Vector2 = Vector2.ZERO
 
 
 var recharge_timer: float = 0.0
@@ -262,7 +266,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		$HarpoonLine.visible = false
 		
-	var direction = Input.get_vector("Left", "Right", "Up", "Down")
+	direction = Input.get_vector("Left", "Right", "Up", "Down")
 	handle_dash(delta, direction)
 	#if not is_on_floor():
 		#velocity += get_gravity() * delta
@@ -501,7 +505,8 @@ func handle_dash(delta: float, direction: Vector2) -> void:
 		return
 
 	if Input.is_action_just_pressed("Dash") and dash_value >= dash_cost:
-		start_dash(direction)
+		if not AbilityFolder.is_typing:
+			start_dash(direction)
 
 	if dash_recharge_timer > 0.0:
 		dash_recharge_timer -= delta

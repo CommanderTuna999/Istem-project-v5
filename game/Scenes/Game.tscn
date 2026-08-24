@@ -45,8 +45,11 @@
 [ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="33_shield_icon"]
 [ext_resource type="AudioStream" uid="uid://b2qjnu0vwgjvk" path="res://sfx/5f569f554286fe2cda904c330392f6cf781aa63f.ogg" id="37_lmarx"]
 [ext_resource type="AudioStream" uid="uid://b6v7oy4yptpx" path="res://sfx/9b50f8b4ace51d032fdb0dfe37b5edd9591cb41e.mp3" id="40_7av8l"]
+[ext_resource type="Script" uid="uid://d0mpvugton4lg" path="res://Scenes/dash.gd" id="45_6okg5"]
 [ext_resource type="Script" uid="uid://d0ngdut317ugr" path="res://Scripts/mana.gd" id="45_t2joc"]
 [ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="46_audqb"]
+[ext_resource type="Script" uid="uid://bg1c3kuwpayjl" path="res://Scenes/big_bomb.gd" id="46_oo65k"]
+[ext_resource type="PackedScene" uid="uid://dl5ur657j3wwt" path="res://bomb_projectile.tscn" id="47_smnwb"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -688,10 +691,10 @@ process_material = SubResource("ParticleProcessMaterial_3cx6b")
 libraries/ = SubResource("AnimationLibrary_3cx6b")
 
 [node name="health_label" type="Label" parent="UI/CanvasLayer" unique_id=1764853478]
-offset_left = 63.0
-offset_top = 25.0
-offset_right = 103.0
-offset_bottom = 48.0
+offset_left = 26.0
+offset_top = 19.0
+offset_right = 66.0
+offset_bottom = 42.0
 metadata/_edit_use_anchors_ = true
 
 [node name="sprintbar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=2096385657]
@@ -824,10 +827,10 @@ text = "click me for ability changing guide"
 
 [node name="GuideLabel" type="Label" parent="UI/CanvasLayer/GuideInput" unique_id=624003929]
 layout_mode = 0
-offset_left = 210.0
-offset_top = 349.0
-offset_right = 310.0
-offset_bottom = 500.0
+offset_left = 153.0
+offset_top = 352.0
+offset_right = 291.0
+offset_bottom = 531.0
 theme_override_font_sizes/font_size = 7
 text = "Ability Guide: C to close
 Hyperion: Tsunami_Impact
@@ -842,6 +845,16 @@ make sure to type it exactly, use the
 above gui (cick the thin button then type
 into the thick one).
 "
+
+[node name="GuideLabel2" type="Label" parent="UI/CanvasLayer/GuideInput" unique_id=1472532914]
+layout_mode = 0
+offset_left = 298.0
+offset_top = 351.0
+offset_right = 436.0
+offset_bottom = 530.0
+theme_override_font_sizes/font_size = 7
+text = "Big Bomb: Bomb
+Extra Dash: Extra_Dash"
 
 [node name="TileMap" parent="." unique_id=610993365 instance=ExtResource("5_fgofq")]
 position = Vector2(-2912, 2018)
@@ -979,12 +992,12 @@ script = ExtResource("19_tfod6")
 
 [node name="timestop_initiate" type="AudioStreamPlayer" parent="AbilityFolder/TimeStop" unique_id=1360087804]
 stream = ExtResource("28_7w24h")
-volume_db = -4.0
+volume_db = -4.5
 bus = &"timestopstart"
 
 [node name="clock_ticking" type="AudioStreamPlayer" parent="AbilityFolder/TimeStop" unique_id=446403598]
 stream = ExtResource("26_dctr5")
-volume_db = -1.85
+volume_db = -4.5
 
 [node name="Petals" type="Node" parent="AbilityFolder" unique_id=2040170037]
 script = ExtResource("21_petals")
@@ -1033,12 +1046,20 @@ bus = &"Icy shot"
 
 [node name="TsunamiImpact" type="Node" parent="AbilityFolder" unique_id=118034739]
 script = ExtResource("28_tsunami")
+explosion_radius = 115.0
 teleport_symbol_texture = ExtResource("29_tsunami_symbol")
 
 [node name="explosion_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/TsunamiImpact" unique_id=1834551913]
 stream = ExtResource("40_7av8l")
 volume_db = -6.0
 bus = &"Lightning"
+
+[node name="Extra_Dash" type="Node2D" parent="AbilityFolder" unique_id=1169288772]
+script = ExtResource("45_6okg5")
+
+[node name="Big_Bomb" type="Node" parent="AbilityFolder" unique_id=367520742]
+script = ExtResource("46_oo65k")
+bomb_scene = ExtResource("47_smnwb")
 
 [node name="TimeStopFilter" type="CanvasLayer" parent="." unique_id=510772542]
 
@@ -1056,6 +1077,8 @@ script = ExtResource("45_t2joc")
 
 [node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=1273361286]
 script = ExtResource("46_audqb")
+
+[node name="Currency_System" type="Node" parent="." unique_id=578037596]
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

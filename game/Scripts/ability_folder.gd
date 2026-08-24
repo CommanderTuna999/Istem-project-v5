@@ -1,4 +1,4 @@
 extends Node
 
-@onready var ability = "Time_Stop"
+@onready var ability = "Bomb"
 var is_typing: bool = false
