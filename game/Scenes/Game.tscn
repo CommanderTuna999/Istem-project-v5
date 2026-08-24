@@ -12,10 +12,11 @@
 [ext_resource type="Script" uid="uid://ppdc2n30qyie" path="res://Scripts/test_armour_1.gd" id="6_2irst"]
 [ext_resource type="Texture2D" uid="uid://b402fgvpvj5jx" path="res://icon.svg" id="7_bf53h"]
 [ext_resource type="Script" uid="uid://by4l5aip8ooh3" path="res://Scripts/sprite_2d(test_armour).gd" id="8_71axn"]
+[ext_resource type="Script" uid="uid://blhwcnjdrj1wj" path="res://Scripts/mana_bar.gd" id="11_audqb"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="13_3cx6b"]
-[ext_resource type="Script" uid="uid://f8giy3vrs6bh" path="res://Scenes/ability_input.gd" id="13_mi7vx"]
+[ext_resource type="Script" uid="uid://f8giy3vrs6bh" path="res://Scripts/ability_input.gd" id="13_mi7vx"]
 [ext_resource type="PackedScene" uid="uid://blb2pf33p5wbr" path="res://Scenes/Enemies/seahorse.tscn" id="13_wxwew"]
-[ext_resource type="Script" uid="uid://hmovf1c68vo2" path="res://Scenes/guide_input.gd" id="14_t2joc"]
+[ext_resource type="Script" uid="uid://hmovf1c68vo2" path="res://Scripts/guide_input.gd" id="14_t2joc"]
 [ext_resource type="Texture2D" uid="uid://dt5cs6dqupia1" path="res://Assets/Cobblestone.png" id="14_wxwew"]
 [ext_resource type="Script" uid="uid://b3173ry3n47c5" path="res://Scripts/level_01.gd" id="17_4q8tf"]
 [ext_resource type="PackedScene" uid="uid://dx5181rkqvp8" path="res://Scenes/Enemies/starfish.tscn" id="18_x3xnh"]
@@ -33,18 +34,19 @@
 [ext_resource type="AudioStream" uid="uid://d35o65uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="25_3jf1l"]
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="25_i0vto"]
 [ext_resource type="AudioStream" uid="uid://clklxrgjbhver" path="res://sfx/clock-tick.mp3" id="26_dctr5"]
-[ext_resource type="Script" uid="uid://j8cqe2er2s8a" path="res://hard_hit.gd" id="26_hardhit"]
+[ext_resource type="Script" uid="uid://j8cqe2er2s8a" path="res://Scripts/hard_hit.gd" id="26_hardhit"]
 [ext_resource type="Script" uid="uid://bk3ngxqppw15h" path="res://Scripts/icy_shot.gd" id="27_icyshot"]
+[ext_resource type="AudioStream" uid="uid://bo8j36ljf0gtc" path="res://sfx/slap-battles-time-stop-god-hand.mp3" id="28_7w24h"]
 [ext_resource type="Script" uid="uid://chymha3bnjeuw" path="res://Scripts/tsunami_impact.gd" id="28_tsunami"]
 [ext_resource type="Texture2D" uid="uid://bvya2681j5nfo" path="res://Assets/tsunami_impact_symbol.png" id="29_tsunami_symbol"]
 [ext_resource type="Texture2D" uid="uid://cfrt5seuqiidd" path="res://Assets/shield_bar_under.png" id="30_shield_under"]
-[ext_resource type="AudioStream" uid="uid://bvyxt7w82f6u0" path="res://sfx/Beyond Ocean Waters.mp3" id="31_i1pr2"]
 [ext_resource type="Texture2D" uid="uid://k2f0fhtg6f8f" path="res://Assets/shield_bar_progress.png" id="31_shield_progress"]
 [ext_resource type="Texture2D" uid="uid://qanfhvpgpvi1" path="res://Assets/shield_bar_over.png" id="32_shield_over"]
 [ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="33_shield_icon"]
 [ext_resource type="AudioStream" uid="uid://b2qjnu0vwgjvk" path="res://sfx/5f569f554286fe2cda904c330392f6cf781aa63f.ogg" id="37_lmarx"]
 [ext_resource type="AudioStream" uid="uid://b6v7oy4yptpx" path="res://sfx/9b50f8b4ace51d032fdb0dfe37b5edd9591cb41e.mp3" id="40_7av8l"]
-[ext_resource type="Script" uid="uid://d0ngdut317ugr" path="res://Scenes/mana.gd" id="45_t2joc"]
+[ext_resource type="Script" uid="uid://d0ngdut317ugr" path="res://Scripts/mana.gd" id="45_t2joc"]
+[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="46_audqb"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -766,6 +768,7 @@ offset_right = -270.03204
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_7av8l")
+script = ExtResource("11_audqb")
 
 [node name="ShieldIcon" type="TextureRect" parent="UI/CanvasLayer" unique_id=583903118]
 texture_filter = 1
@@ -975,6 +978,9 @@ script = ExtResource("19_vvhu1")
 script = ExtResource("19_tfod6")
 
 [node name="timestop_initiate" type="AudioStreamPlayer" parent="AbilityFolder/TimeStop" unique_id=1360087804]
+stream = ExtResource("28_7w24h")
+volume_db = -4.0
+bus = &"timestopstart"
 
 [node name="clock_ticking" type="AudioStreamPlayer" parent="AbilityFolder/TimeStop" unique_id=446403598]
 stream = ExtResource("26_dctr5")
@@ -1031,7 +1037,7 @@ teleport_symbol_texture = ExtResource("29_tsunami_symbol")
 
 [node name="explosion_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/TsunamiImpact" unique_id=1834551913]
 stream = ExtResource("40_7av8l")
-volume_db = -4.0
+volume_db = -6.0
 bus = &"Lightning"
 
 [node name="TimeStopFilter" type="CanvasLayer" parent="." unique_id=510772542]
@@ -1045,14 +1051,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1638872217]
-stream = ExtResource("31_i1pr2")
-volume_db = -12.035
-autoplay = true
-parameters/looping = true
-
 [node name="Mana" type="Node" parent="." unique_id=31072134]
 script = ExtResource("45_t2joc")
+
+[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=1273361286]
+script = ExtResource("46_audqb")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

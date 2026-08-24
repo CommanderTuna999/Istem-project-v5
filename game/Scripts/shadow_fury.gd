@@ -1,7 +1,7 @@
 extends Node
 
 @export var search_radius: float = 417.5
-@export var behind_distance: float = 30.0
+@export var behind_distance: float = 40.0
 @export var teleport_delay: float = 0.325  # time before teleporting to the next enemy
 @export var slash_gap: float = 0.08      # time after the hit, before the next teleport starts
 @export var cooldown: float = 1.0
@@ -55,6 +55,7 @@ func execute_chain() -> void:
 
 	player.velocity = Vector2.ZERO
 	player.invincible = true
+	player.kbresistanceincrease = 1.0
 	root_targets(targets, total_root_duration)
 
 	while not remaining_targets.is_empty():
@@ -94,6 +95,7 @@ func execute_chain() -> void:
 	teleport_player(player, origin_position)
 	player.velocity = origin_velocity
 	player.invincible = original_invincible
+	player.kbresistanceincrease = 0.0
 	executing = false
 
 	await get_tree().create_timer(cooldown).timeout

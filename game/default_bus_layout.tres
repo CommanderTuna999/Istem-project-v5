@@ -73,6 +73,22 @@ predelay_feedback = 0.5
 room_size = 0.2
 damping = 0.1
 
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_cenje"]
+resource_name = "Reverb"
+predelay_msec = 100.0
+predelay_feedback = 0.5
+room_size = 0.2
+damping = 0.25
+spread = 0.85
+wet = 0.3
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_g28q7"]
+resource_name = "Chorus"
+dry = 0.5
+wet = 0.05
+voice/1/delay_ms = 35.0
+voice/2/delay_ms = 50.0
+
 [resource]
 bus/0/bypass_fx = true
 bus/1/name = &"Petal(fire)"
@@ -93,8 +109,6 @@ bus/2/volume_db = 0.0
 bus/2/send = &"Master"
 bus/2/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
 bus/2/effect/0/enabled = true
-bus/2/effect/1/effect = SubResource("AudioEffectEQ10_j3pel")
-bus/2/effect/1/enabled = false
 bus/3/name = &"Heal"
 bus/3/solo = false
 bus/3/mute = false
@@ -137,3 +151,13 @@ bus/6/volume_db = 0.0
 bus/6/send = &"Master"
 bus/6/effect/0/effect = SubResource("AudioEffectReverb_5t1r3")
 bus/6/effect/0/enabled = true
+bus/7/name = &"timestopstart"
+bus/7/solo = false
+bus/7/mute = false
+bus/7/bypass_fx = false
+bus/7/volume_db = 0.0
+bus/7/send = &"Master"
+bus/7/effect/0/effect = SubResource("AudioEffectReverb_cenje")
+bus/7/effect/0/enabled = true
+bus/7/effect/1/effect = SubResource("AudioEffectChorus_g28q7")
+bus/7/effect/1/enabled = true

@@ -1,9 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://t3o5nre7xsq8"]
 
-[ext_resource type="Script" path="res://Scripts/icy_projectile.gd" id="1_icy"]
+[ext_resource type="Script" uid="uid://cqlvh45i8dj4p" path="res://Scripts/icy_projectile.gd" id="1_icy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_icy"]
-radius = 10.0
-
-[node name="IcyProjectile" type="Node2D"]
+[node name="IcyProjectile" type="Node2D" unique_id=590475141]
 script = ExtResource("1_icy")
+hit_radius = 36.0

@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://k2f0fhtg6f8f" path="res://Assets/shield_bar_progress.png" id="11_c2pji"]
 [ext_resource type="PackedScene" uid="uid://d1ur1edkugqec" path="res://Scenes/anemone.tscn" id="11_cs32c"]
 [ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="12_khfxu"]
-[ext_resource type="Script" uid="uid://c2dfxpxy1bxcx" path="res://Scenes/level_02.gd" id="12_rmyfx"]
+[ext_resource type="Script" uid="uid://c2dfxpxy1bxcx" path="res://Scripts/level_02.gd" id="12_rmyfx"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="13_osdef"]
 [ext_resource type="Script" uid="uid://c8n16i5rg5b64" path="res://Scripts/ability_folder.gd" id="13_vh3c3"]
 [ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="14_osdef"]

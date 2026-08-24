@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cn64o6ycguwvc" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://bhk0tr1pyxfv" path="res://Scenes/harpoon_projectile.tscn" id="2_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://bjddxyp8stb25" path="res://Assets/mc idle spritesheet.png" id="4_fkybt"]
-[ext_resource type="Script" uid="uid://bxuajbif0gs0l" path="res://damage_number_template.gd" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://bxuajbif0gs0l" path="res://Scripts/damage_number_template.gd" id="4_vgqql"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("4_fkybt")

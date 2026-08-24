@@ -2,6 +2,7 @@ extends Node
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var clock_ticking: AudioStreamPlayer = $"/root/Game/AbilityFolder/TimeStop/clock_ticking"
+@onready var timestop_initiate: AudioStreamPlayer = $"/root/Game/AbilityFolder/TimeStop/timestop_initiate"
 @export var time_stop_active = false
 var time_stop_cooldown = false
 func _process(delta: float) -> void:
@@ -16,8 +17,11 @@ func activate_time_stop() -> void:
 	print("Time Stop is active.")
 	get_node("/root/Game/TimeStopFilter/ColorRect").visible = true
 	player.current_health *= 0.71
+	MusicManager.pause_music()
+	timestop_initiate.play()
 	clock_ticking.play()
 	await get_tree().create_timer(6.0).timeout
+	MusicManager.unpause_music()
 	get_node("/root/Game/TimeStopFilter/ColorRect").visible = false
 	time_stop_active = false
 	await get_tree().create_timer(1.0).timeout

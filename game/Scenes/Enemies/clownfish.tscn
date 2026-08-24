@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://daec8wtnucrkt" path="res://Assets/clownfish aggro spritesheet v2.png" id="2_ldcme"]
 [ext_resource type="Texture2D" uid="uid://dtb2d3j1bnguo" path="res://Assets/spritesheet_clownfish(idle).png" id="2_wx3q7"]
 [ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_wx3q7"]
-[ext_resource type="Script" uid="uid://bxuajbif0gs0l" path="res://damage_number_template.gd" id="5_gxtgd"]
+[ext_resource type="Script" uid="uid://bxuajbif0gs0l" path="res://Scripts/damage_number_template.gd" id="5_gxtgd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmbcv"]
 atlas = ExtResource("2_ldcme")

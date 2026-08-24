@@ -71,6 +71,12 @@ var wasoverstretched = false
 var currentharpoonmaxspeed: float = normalharpoonmaxspeed
 var maxropelength = 0.0
 
+#the lower kbresistance the less kb you take
+var kbresistance:
+	get:
+		return 1.0 - kbresistanceincrease
+var kbresistanceincrease = 0.0
+
 #defines absolute max extention
 var maxstretchratio = 1.5
 #defines how far through extention does charge activate
@@ -602,16 +608,7 @@ var crab_boss_damage = 75
 func _process(delta):
 	handle_health_regen(delta)
 	update_health_ui(delta)
-	
-	#armour testing level thing
-	if Input.is_action_just_pressed("armour_level_test"):
-		can_level_up_N = false
-		armour_DoT_level += 1
-		DoT_strength += (armour_DoT_level * 0.05)
-		get_tree().current_scene.get_node("UI/CanvasLayer/LevelUpLabel").show_level_up(armour_DoT_level)
-		
-		await get_tree().create_timer(0.5).timeout
-		can_level_up_N = true
+
 		
 	if current_health <= 0:
 		get_tree().call_deferred("reload_current_scene")
@@ -777,20 +774,20 @@ func handleenemycontact(body: Node2D):
 	#damage scripts
 	if body.is_in_group("clownfish"):
 		damage = clownfish_damage
-		kbstrength = 500
+		kbstrength = 500 * kbresistance
 	elif body.is_in_group("shark"):
 		damage = shark_damage
-		kbstrength = 2000
+		kbstrength = 2000 * kbresistance
 	elif body.is_in_group("seahorse_projectile"):
 		damage = seahorse_projectile_damage
-		kbstrength = 300
+		kbstrength = 300 * kbresistance
 		body.queue_free()
 	elif body.is_in_group("crab"):
 		damage = crab_damage
-		kbstrength = 2000
+		kbstrength = 2000 * kbresistance
 	elif body.is_in_group("starfish"):
 		damage = starfish_damage
-		kbstrength = 700
+		kbstrength = 700 * kbresistance
 		
 	elif body.is_in_group("crab_boss"):
 		damage = crab_boss_damage
