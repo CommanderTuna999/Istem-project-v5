@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var player = $"/root/Game/Player"
+@onready var player = $Player
 @export var on_cooldown = false
 var cooldown = 1.0
 

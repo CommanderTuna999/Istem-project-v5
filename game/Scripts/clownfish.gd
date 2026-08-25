@@ -28,7 +28,21 @@ var homeposition = Vector2.ZERO
 
 var wandertarget = Vector2.ZERO
 var wanderwaittimer = 0.0
-	
+
+var scroll_drop_increase = 0.0
+var scrolls_drop_amount_increase = 0.0
+var scrolls_drop_amount:
+	get:
+		return 1.0 + scrolls_drop_amount_increase
+var scroll_drop_chance:
+	get:
+		return (0.5 + scroll_drop_increase)
+
+func scroll_drop():
+	var roll: float = randf()
+	if roll <= scroll_drop_chance:
+		CurrencySystem.scrolls += scrolls_drop_amount
+
 func _ready() -> void:
 	animated_sprite_2d.play("idle")
 	if homemarker:
@@ -47,6 +61,9 @@ func _process(_delta): #x axis flipping for now
 	if current_health <= 0:
 		if TimeStop.time_stop_active == true:
 			return
+		var clownfish_coins_drop: float = randi_range(45,55)
+		CurrencySystem.TotalCoins += clownfish_coins_drop
+		scroll_drop()
 		queue_free()
 
 	if rooted:

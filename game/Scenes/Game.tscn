@@ -48,6 +48,7 @@
 [ext_resource type="Script" uid="uid://bgr2nvcr5gmta" path="res://Scenes/wind_cloak.gd" id="46_e2w45"]
 [ext_resource type="Script" uid="uid://bg1c3kuwpayjl" path="res://Scenes/big_bomb.gd" id="46_oo65k"]
 [ext_resource type="PackedScene" uid="uid://dl5ur657j3wwt" path="res://bomb_projectile.tscn" id="47_smnwb"]
+[ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="49_e2w45"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -1096,6 +1097,7 @@ script = ExtResource("45_t2joc")
 script = ExtResource("46_audqb")
 
 [node name="Currency_System" type="Node" parent="." unique_id=578037596]
+script = ExtResource("49_e2w45")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
