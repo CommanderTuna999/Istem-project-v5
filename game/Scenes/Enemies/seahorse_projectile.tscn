@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://bd1vdwjk4jeb2"]
 
 [ext_resource type="Script" uid="uid://yug8up3fncm5" path="res://Scripts/seahorse_projectile.gd" id="1_qh253"]
-[ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="2_6b4ms"]
+[ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="2_tjc78"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eqj8x"]
-atlas = ExtResource("2_6b4ms")
-region = Rect2(768, 256, 384, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxrs8"]
+atlas = ExtResource("2_tjc78")
+region = Rect2(0, 0, 360, 360)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kvis1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eqj8x")
+"texture": SubResource("AtlasTexture_kxrs8")
 }],
 "loop": true,
 "name": &"default",
@@ -19,7 +19,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qh253"]
-size = Vector2(18, 12)
+size = Vector2(18, 17.289719)
 
 [node name="seahorse_projectile" type="CharacterBody2D" unique_id=524211509 groups=["seahorse_projectile"]]
 scale = Vector2(3.64, 4.28)
@@ -33,4 +33,6 @@ scale = Vector2(0.048177082, 0.048177086)
 sprite_frames = SubResource("SpriteFrames_kvis1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=253376344]
+position = Vector2(0, -0.23364563)
+scale = Vector2(1.0000002, 1)
 shape = SubResource("RectangleShape2D_qh253")
