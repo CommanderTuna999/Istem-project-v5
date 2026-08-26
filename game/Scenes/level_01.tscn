@@ -911,7 +911,7 @@ position = Vector2(9039, 1566)
 homemarker = NodePath("../Enemies/Anemone2/Marker2D")
 
 [node name="Level02" type="Area2D" parent="." unique_id=2077541829]
-position = Vector2(375, -991)
+position = Vector2(375, -959)
 collision_layer = 0
 script = ExtResource("12_rmyfx")
 

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c76elw3gvywnj" path="res://Assets/firsttilemap.png" id="1_oxvi3"]
 [ext_resource type="PackedScene" uid="uid://bdqbpmxw31kbp" path="res://Scenes/player.tscn" id="2_fp6ws"]
 [ext_resource type="PackedScene" uid="uid://bj7ldtrm577dp" path="res://Scenes/spear.tscn" id="3_3g5eb"]
+[ext_resource type="Script" uid="uid://bpv7cvbxfka7v" path="res://Scenes/level_03.gd" id="4_a4xl1"]
 [ext_resource type="Texture2D" uid="uid://dcp1jfbn6oa0r" path="res://Assets/Placeholder particle.png" id="4_nd2gt"]
 [ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="5_a4xl1"]
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="6_803yd"]
@@ -550,6 +551,8 @@ initial_velocity_max = 8.0
 scale_min = 0.03
 scale_max = 0.03
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5yiq"]
+
 [node name="Level02" type="Node2D" unique_id=1228467427]
 
 [node name="LevelEditor" type="TileMapLayer" parent="." unique_id=1081958257]
@@ -982,10 +985,27 @@ position = Vector2(10185, -182)
 [node name="seahorse4" parent="." unique_id=1388875316 instance=ExtResource("13_nd2gt")]
 position = Vector2(10215, -678)
 
+[node name="Level03" type="Area2D" parent="." unique_id=393461521]
+position = Vector2(4915, 532)
+collision_layer = 0
+script = ExtResource("4_a4xl1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level03" unique_id=303166538]
+shape = SubResource("RectangleShape2D_i5yiq")
+
+[node name="ColorRect" type="ColorRect" parent="Level03" unique_id=156245816]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(0.6392157, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="Player/ShieldRechargeDelay" to="Player" method="_on_shield_recharge_delay_timeout"]
 [connection signal="timeout" from="Player/ShieldRechargeTimer" to="Player" method="_on_shield_recharge_timer_timeout"]
+[connection signal="body_entered" from="Level03" to="Level03" method="on_LEVELONE_body_entered"]
 
 [editable path="Enemies/Anemone"]
 [editable path="Enemies/Anemone2"]
