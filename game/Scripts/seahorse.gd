@@ -19,14 +19,27 @@ var kbvelocity = Vector2.ZERO
 var projectile_cooldown = 2
 var rooted: bool = false
 var root_timer: float = 0.0
+var slow_active: bool = false
+var spawn: float = 1.0
+var scroll_drop_increase = 0.0
+var scrolls_drop_amount_increase = 0.0
+var scrolls_drop_amount:
+	get:
+		return 1.0 + scrolls_drop_amount_increase
+var scroll_drop_chance:
+	get:
+		return (0.5 + scroll_drop_increase)
 	
 	
-
 
 
 func _ready() -> void:
 	var main = get_tree().current_scene #identifies the main game scene for projectiles
 	animated_sprite_2d.play("pregnant")
+func scroll_drop():
+	var roll: float = randf()
+	if roll <= scroll_drop_chance:
+		CurrencySystem.scrolls += scrolls_drop_amount
 func _process(_delta): #x axis flipping for now
 	if not chase_subject == null and chase_subject.position.x > position.x:
 		animated_sprite_2d.flip_h = true
@@ -37,6 +50,9 @@ func _process(_delta): #x axis flipping for now
 	if current_health <= 0:
 		if TimeStop.time_stop_active == true:
 			return
+		var seahorse_coins_drop = randi_range(80, 120)
+		CurrencySystem.TotalCoins += seahorse_coins_drop
+		scroll_drop()
 		queue_free()
 
 	if rooted:
@@ -93,9 +109,10 @@ func take_damage(amount: float):
 	current_health -= amount
 	animation_player.play("damaged")
 	await get_tree().create_timer(0.1).timeout
-	if current_health == 3:
+	if current_health <= 3 and spawn >= 1:
 		animated_sprite_2d.play("deflated")
 		spawn_child(25)
+		spawn = 0
 	
 
 func spawn_child(amount):
@@ -132,6 +149,15 @@ func _shoot():
 func set_rooted(duration: float) -> void:
 	rooted = true
 	root_timer = max(root_timer, duration)
+
+func set_slowed(duration: float, multiplier: float) -> void:
+	if slow_active:
+		return
+	slow_active = true
+	speed *= multiplier
+	await get_tree().create_timer(duration).timeout
+	speed /= multiplier
+	slow_active = false
 
 	
 

@@ -9,11 +9,13 @@ extends Node
 var is_casting: bool = false
 var on_cooldown: bool = false
 
+@onready var petal_audio_player: AudioStreamPlayer = $"/root/Game/AbilityFolder/Petals/petal_audio_player"
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Ability"):
 		if AbilityFolder.ability == "Petals" and not is_casting and not on_cooldown:
-			cast_petals()
+			if not AbilityFolder.is_typing:
+				cast_petals()
 
 
 func cast_petals() -> void:
@@ -23,6 +25,9 @@ func cast_petals() -> void:
 
 	for shot_index in range(shot_count):
 		fire_petal(shot_index)
+		if petal_audio_player != null:
+			petal_audio_player.pitch_scale = 0.65
+			petal_audio_player.play()
 
 		if shot_index < shot_count - 1:
 			await get_tree().create_timer(shot_interval).timeout

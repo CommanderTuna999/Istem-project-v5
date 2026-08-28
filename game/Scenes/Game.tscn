@@ -3,17 +3,17 @@
 [ext_resource type="PackedScene" uid="uid://bdqbpmxw31kbp" path="res://Scenes/player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://bj7ldtrm577dp" path="res://Scenes/spear.tscn" id="2_71axn"]
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="3_bf53h"]
-[ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="4_71axn"]
 [ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="4_alh3a"]
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="4_dahhg"]
 [ext_resource type="PackedScene" uid="uid://ony1pqjkvd1j" path="res://Scenes/Enemies/clownfish.tscn" id="4_kldst"]
 [ext_resource type="Texture2D" uid="uid://dcp1jfbn6oa0r" path="res://Assets/Placeholder particle.png" id="5_3so38"]
 [ext_resource type="PackedScene" uid="uid://b7brt10lbkmsj" path="res://Scenes/tile_map.tscn" id="5_fgofq"]
-[ext_resource type="Script" uid="uid://ppdc2n30qyie" path="res://Scripts/test_armour_1.gd" id="6_2irst"]
 [ext_resource type="Texture2D" uid="uid://b402fgvpvj5jx" path="res://icon.svg" id="7_bf53h"]
-[ext_resource type="Script" uid="uid://by4l5aip8ooh3" path="res://Scripts/sprite_2d(test_armour).gd" id="8_71axn"]
+[ext_resource type="Script" uid="uid://blhwcnjdrj1wj" path="res://Scripts/mana_bar.gd" id="11_audqb"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="13_3cx6b"]
+[ext_resource type="Script" uid="uid://f8giy3vrs6bh" path="res://Scripts/ability_input.gd" id="13_mi7vx"]
 [ext_resource type="PackedScene" uid="uid://blb2pf33p5wbr" path="res://Scenes/Enemies/seahorse.tscn" id="13_wxwew"]
+[ext_resource type="Script" uid="uid://hmovf1c68vo2" path="res://Scripts/guide_input.gd" id="14_t2joc"]
 [ext_resource type="Texture2D" uid="uid://dt5cs6dqupia1" path="res://Assets/Cobblestone.png" id="14_wxwew"]
 [ext_resource type="Script" uid="uid://b3173ry3n47c5" path="res://Scripts/level_01.gd" id="17_4q8tf"]
 [ext_resource type="PackedScene" uid="uid://dx5181rkqvp8" path="res://Scenes/Enemies/starfish.tscn" id="18_x3xnh"]
@@ -21,11 +21,35 @@
 [ext_resource type="Script" uid="uid://c8n16i5rg5b64" path="res://Scripts/ability_folder.gd" id="19_vvhu1"]
 [ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="20_rajel"]
 [ext_resource type="PackedScene" uid="uid://djkcscyv2ayrs" path="res://Scenes/Enemies/crab boss.tscn" id="20_tfod6"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/stealth_stalker.tscn" id="21_oo65k"]
 [ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="21_petals"]
+[ext_resource type="AudioStream" uid="uid://kakrcthx40tf" path="res://sfx/bow_shoot.mp3" id="22_i4lct"]
 [ext_resource type="Script" uid="uid://e5f1vnkckbm6" path="res://Scripts/heal.gd" id="22_lbihj"]
 [ext_resource type="Script" uid="uid://bsai75bhb1o3a" path="res://Scripts/cookie.gd" id="23_raj38"]
 [ext_resource type="Script" uid="uid://cdyg2msh6uppt" path="res://Scripts/shadow_fury.gd" id="24_8e0uq"]
+[ext_resource type="AudioStream" uid="uid://cmtmo11w24jcs" path="res://sfx/nom-nom-nom_gPJiWn4.mp3" id="24_356ba"]
+[ext_resource type="AudioStream" uid="uid://dpvo8eortnl8e" path="res://sfx/heal-skill-ro.mp3" id="24_iyesh"]
+[ext_resource type="AudioStream" uid="uid://d35o65uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="25_3jf1l"]
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="25_i0vto"]
+[ext_resource type="AudioStream" uid="uid://clklxrgjbhver" path="res://sfx/clock-tick.mp3" id="26_dctr5"]
+[ext_resource type="Script" uid="uid://j8cqe2er2s8a" path="res://Scripts/hard_hit.gd" id="26_hardhit"]
+[ext_resource type="Script" uid="uid://bk3ngxqppw15h" path="res://Scripts/icy_shot.gd" id="27_icyshot"]
+[ext_resource type="AudioStream" uid="uid://bo8j36ljf0gtc" path="res://sfx/slap-battles-time-stop-god-hand.mp3" id="28_7w24h"]
+[ext_resource type="Script" uid="uid://chymha3bnjeuw" path="res://Scripts/tsunami_impact.gd" id="28_tsunami"]
+[ext_resource type="Texture2D" uid="uid://bvya2681j5nfo" path="res://Assets/tsunami_impact_symbol.png" id="29_tsunami_symbol"]
+[ext_resource type="Texture2D" uid="uid://cfrt5seuqiidd" path="res://Assets/shield_bar_under.png" id="30_shield_under"]
+[ext_resource type="Texture2D" uid="uid://k2f0fhtg6f8f" path="res://Assets/shield_bar_progress.png" id="31_shield_progress"]
+[ext_resource type="Texture2D" uid="uid://qanfhvpgpvi1" path="res://Assets/shield_bar_over.png" id="32_shield_over"]
+[ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="33_shield_icon"]
+[ext_resource type="AudioStream" uid="uid://b2qjnu0vwgjvk" path="res://sfx/5f569f554286fe2cda904c330392f6cf781aa63f.ogg" id="37_lmarx"]
+[ext_resource type="AudioStream" uid="uid://b6v7oy4yptpx" path="res://sfx/9b50f8b4ace51d032fdb0dfe37b5edd9591cb41e.mp3" id="40_7av8l"]
+[ext_resource type="Script" uid="uid://d0mpvugton4lg" path="res://Scenes/dash.gd" id="45_6okg5"]
+[ext_resource type="Script" uid="uid://d0ngdut317ugr" path="res://Scripts/mana.gd" id="45_t2joc"]
+[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="46_audqb"]
+[ext_resource type="Script" uid="uid://bgr2nvcr5gmta" path="res://Scenes/wind_cloak.gd" id="46_e2w45"]
+[ext_resource type="Script" uid="uid://bg1c3kuwpayjl" path="res://Scenes/big_bomb.gd" id="46_oo65k"]
+[ext_resource type="PackedScene" uid="uid://dl5ur657j3wwt" path="res://bomb_projectile.tscn" id="47_smnwb"]
+[ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="49_e2w45"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -384,8 +408,43 @@ _data = {
 &"damageflash": SubResource("Animation_3so38")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_alh3a"]
-bg_color = Color(0.056951813, 0.44398353, 0.7298303, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmarx"]
+bg_color = Color(0.09239707, 0.09239706, 0.09239706, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7av8l"]
+bg_color = Color(0, 0.8586935, 0.99825805, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mi7vx"]
+bg_color = Color(0.5714107, 0.6092862, 0.6100922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2joc"]
+
+[sub_resource type="GDScript" id="GDScript_oo65k"]
+script/source = "extends Area2D
+signal item_obtained(item_name, message)
+@export var target_node: Node
+
+func _ready():
+	body_entered.connect(_on_body_entered)
+
+func _on_body_entered(body):
+	if body.name == \"Player\":
+		target_node.activate()
+		$\"../UI/CanvasLayer\".show_item_popup(
+			\"DoT Armour\",
+			\"You obtained DoT Armour.\\nGo to the shopkeeper to unequip, upgrade or change it!\"
+		)
+		queue_free()
+"
+
+[sub_resource type="GDScript" id="GDScript_smnwb"]
+script/source = "extends Sprite2D
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2irst"]
 size = Vector2(75, 73)
@@ -605,26 +664,26 @@ offset_bottom = 40.0
 [node name="EmptyBeams" type="TextureRect" parent="UI/CanvasLayer/HealthHUD" unique_id=1105062498]
 modulate = Color(0, 0, 0.2784314, 1)
 layout_mode = 0
-offset_left = 60.0
-offset_top = -20.0
-offset_right = 1371.0
-offset_bottom = 746.0
+offset_left = 24.0
+offset_top = -26.0
+offset_right = 1335.0
+offset_bottom = 740.0
 scale = Vector2(0.32, 0.314)
 texture = ExtResource("4_dahhg")
 
 [node name="HealthBeams" type="TextureProgressBar" parent="UI/CanvasLayer/HealthHUD" unique_id=772302586]
 layout_mode = 0
-offset_left = 60.0
-offset_top = -20.000002
-offset_right = 1371.0
-offset_bottom = 746.0
+offset_left = 24.0
+offset_top = -26.0
+offset_right = 1335.0
+offset_bottom = 740.0
 scale = Vector2(0.31999847, 0.31376988)
 value = 50.0
 texture_progress = ExtResource("4_dahhg")
 
 [node name="HitParticlesA" type="GPUParticles2D" parent="UI/CanvasLayer/HealthHUD" unique_id=1605783747]
 modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
-position = Vector2(474, 100)
+position = Vector2(438, 94)
 emitting = false
 amount = 10
 texture = ExtResource("5_3so38")
@@ -635,7 +694,7 @@ process_material = SubResource("ParticleProcessMaterial_3cx6b")
 
 [node name="HitParticlesB" type="GPUParticles2D" parent="UI/CanvasLayer/HealthHUD" unique_id=2037204531]
 modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
-position = Vector2(474, 100)
+position = Vector2(438, 94)
 emitting = false
 amount = 10
 texture = ExtResource("5_3so38")
@@ -648,10 +707,10 @@ process_material = SubResource("ParticleProcessMaterial_3cx6b")
 libraries/ = SubResource("AnimationLibrary_3cx6b")
 
 [node name="health_label" type="Label" parent="UI/CanvasLayer" unique_id=1764853478]
-offset_left = 63.0
-offset_top = 25.0
-offset_right = 103.0
-offset_bottom = 48.0
+offset_left = 26.0
+offset_top = 19.0
+offset_right = 66.0
+offset_bottom = 42.0
 metadata/_edit_use_anchors_ = true
 
 [node name="sprintbar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=2096385657]
@@ -661,10 +720,10 @@ offset_right = 424.0
 offset_bottom = 1781.0
 
 [node name="dashbar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=2025877455]
-offset_left = 90.0
-offset_top = 230.0
-offset_right = 185.0
-offset_bottom = 435.0
+offset_left = 49.0
+offset_top = 244.0
+offset_right = 144.0
+offset_bottom = 449.0
 fill_mode = 3
 
 [node name="Panel" type="Panel" parent="UI/CanvasLayer" unique_id=855191754]
@@ -698,44 +757,134 @@ theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelUpLabel" type="Label" parent="UI/CanvasLayer" unique_id=609736575]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+[node name="ShieldBar" type="TextureProgressBar" parent="UI/CanvasLayer" unique_id=1227095526]
+texture_filter = 1
+offset_left = 63.0
+offset_top = 174.0
+offset_right = 393.0
+offset_bottom = 206.0
+texture_under = ExtResource("30_shield_under")
+texture_over = ExtResource("32_shield_over")
+texture_progress = ExtResource("31_shield_progress")
+
+[node name="Panel2" type="Panel" parent="UI/CanvasLayer" unique_id=751726702]
+clip_children = 2
+offset_left = 49.0
+offset_top = 565.0
+offset_right = 325.0
+offset_bottom = 588.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lmarx")
+
+[node name="ManaBar" type="ProgressBar" parent="UI/CanvasLayer/Panel2" unique_id=713346589]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -8.945001
+anchor_right = 1.9820001
+anchor_bottom = 1.0
+offset_top = 205.73502
+offset_right = -270.03204
 grow_horizontal = 2
 grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("4_71axn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7av8l")
+script = ExtResource("11_audqb")
 
-[node name="ShieldBar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=1227095526]
-offset_left = 86.0
-offset_top = 170.0
-offset_right = 460.0
-offset_bottom = 197.0
-scale = Vector2(1, 1.0400048)
-theme_override_styles/fill = SubResource("StyleBoxFlat_alh3a")
+[node name="ShieldIcon" type="TextureRect" parent="UI/CanvasLayer" unique_id=583903118]
+texture_filter = 1
+offset_left = 32.0
+offset_top = 162.0
+offset_right = 86.0
+offset_bottom = 218.8421
+texture = ExtResource("33_shield_icon")
+
+[node name="AbilityInput" type="Control" parent="UI/CanvasLayer" unique_id=1509775247]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_mi7vx")
+
+[node name="Button" type="Button" parent="UI/CanvasLayer/AbilityInput" unique_id=545394340]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 198.0
+offset_top = 272.0
+offset_right = 326.0
+offset_bottom = 280.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_mi7vx")
+action_mode = 0
+
+[node name="LineEdit" type="LineEdit" parent="UI/CanvasLayer/AbilityInput" unique_id=569223855]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 226.0
+offset_top = 291.0
+offset_right = 294.5
+offset_bottom = 322.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_t2joc")
+
+[node name="GuideInput" type="Control" parent="UI/CanvasLayer" unique_id=620232588]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_t2joc")
+
+[node name="GuideButton" type="Button" parent="UI/CanvasLayer/GuideInput" unique_id=486031683]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 331.0
+offset_right = 366.0
+offset_bottom = 345.0
+theme_override_font_sizes/font_size = 6
+text = "click me for ability changing guide"
+
+[node name="GuideLabel" type="Label" parent="UI/CanvasLayer/GuideInput" unique_id=624003929]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 352.0
+offset_right = 291.0
+offset_bottom = 531.0
+theme_override_font_sizes/font_size = 7
+text = "Ability Guide: C to close
+Hyperion: Tsunami_Impact
+Ice shot thing: Icy_Shot
+Petal bouncing thing: Petals
+Cookie: Cookie
+Heal: Heal
+Hard hit (ig bro): Hard_Hit
+Teleport ability: Shadow_Fury
+Timestop: Time_Stop
+make sure to type it exactly, use the 
+above gui (cick the thin button then type
+into the thick one).
+"
+
+[node name="GuideLabel2" type="Label" parent="UI/CanvasLayer/GuideInput" unique_id=1472532914]
+layout_mode = 0
+offset_left = 298.0
+offset_top = 351.0
+offset_right = 436.0
+offset_bottom = 530.0
+theme_override_font_sizes/font_size = 7
+text = "Big Bomb: Bomb
+Extra Dash: Extra_Dash"
 
 [node name="TileMap" parent="." unique_id=610993365 instance=ExtResource("5_fgofq")]
 position = Vector2(-2912, 2018)
 layer_0/tile_data = PackedInt32Array(-3997680, 1, 0, -3997671, 1, 0, -3997670, 1, 0, -3997669, 1, 0, -3997668, 1, 0, -3997658, 1, 0, -3997657, 1, 0, -3997656, 1, 0, -3997655, 1, 0, -3997654, 1, 0, -3997653, 1, 0, -3997652, 1, 0, -3997651, 1, 0, -3997647, 1, 0, -3997646, 1, 0, -3997643, 1, 0, -3997642, 1, 0, -4063215, 1, 0, -4063214, 1, 0, -4063213, 1, 0, -4063177, 1, 0, -4063176, 1, 0, -4063175, 1, 0, -4063174, 1, 0, -4063173, 1, 0, -4063172, 1, 0, -4128450, 1, 0, -4128449, 1, 0, -4128448, 1, 0, -4128447, 1, 0, -4128446, 1, 0, -4128445, 1, 0, -4128444, 1, 0, -4128443, 1, 0, -4128442, 1, 0, -4128441, 1, 0, -4128440, 1, 0, -4128439, 1, 0, -4128434, 1, 0, -4128433, 1, 0, -4128432, 1, 0, -4128431, 1, 0, -4128430, 1, 0, -4128429, 1, 0, -4128428, 1, 0, -4128427, 1, 0, -4128426, 1, 0, -4128425, 1, 0, -4128424, 1, 0, -4128423, 1, 0, -4128422, 1, 0, -4128421, 1, 0, -4128420, 1, 0, -4128419, 1, 0, -4128418, 1, 0, -4128417, 1, 0, -4128416, 1, 0, -4128415, 1, 0, -4128414, 1, 0, -4128413, 1, 0, -4128412, 1, 0, -4128411, 1, 0, -4128410, 1, 0, -4128409, 1, 0, -4128408, 1, 0, -4128407, 1, 0, -4128406, 1, 0, -4128405, 1, 0, -4128404, 1, 0, -4128403, 1, 0, -4128402, 1, 0, -4128401, 1, 0, -4128400, 1, 0, -4128399, 1, 0, -4128398, 1, 0, -4128397, 1, 0, -4128396, 1, 0, -4128395, 1, 0, -4128394, 1, 0, -4128393, 1, 0, -4128392, 1, 0, -4128391, 1, 0, -4128390, 1, 0, -4128389, 1, 0, -4128388, 1, 0, -4128387, 1, 0, -4128386, 1, 0, -4128385, 1, 0, -4128384, 1, 0, -4128383, 1, 0, -4128382, 1, 0, -4128381, 1, 0, -4128380, 1, 0, -4128379, 1, 0, -4128378, 1, 0, -4128377, 1, 0, -4128376, 1, 0, -4128375, 1, 0, -4128374, 1, 0, -4128373, 1, 0, -4128372, 1, 0, -4128371, 1, 0, -4128370, 1, 0, -4128369, 1, 0, -4128368, 1, 0, -4128367, 1, 0, -4128366, 1, 0, -4128365, 1, 0, -4128364, 1, 0, -4128363, 1, 0, -4128362, 1, 0, -4128361, 1, 0, -4128360, 1, 0, -4128359, 1, 0, -4128358, 1, 0, -4128357, 1, 0, -4128356, 1, 0, -4128355, 1, 0, -4128354, 1, 0, -4128353, 1, 0, -4128352, 1, 0, -4128351, 1, 0, -4128350, 1, 0, -4128349, 1, 0, -4128348, 1, 0, -4128347, 1, 0, -4128346, 1, 0, -4128345, 1, 0, -4128344, 1, 0, -4128343, 1, 0, -4128342, 1, 0, -4128341, 1, 0, -4128340, 1, 0, -4128339, 1, 0, -4128338, 1, 0, -4128337, 1, 0, -4128336, 1, 0, -4128335, 1, 0, -4128334, 1, 0, -4128333, 1, 0, -4128332, 1, 0, -4128331, 1, 0, -4128330, 1, 0, -4128329, 1, 0, -4128328, 1, 0, -4128327, 1, 0, -4128326, 1, 0, -4128325, 1, 0, -4128324, 1, 0, -4128323, 1, 0, -4128322, 1, 0, -4128321, 1, 0, -4128320, 1, 0, -4128319, 1, 0, -4128318, 1, 0, -4128317, 1, 0, -4128316, 1, 0, -4128315, 1, 0, -4128314, 1, 0, -4128313, 1, 0, -4128312, 1, 0, -4128311, 1, 0, -4128310, 1, 0, -4128309, 1, 0, -4128308, 1, 0, -4128307, 1, 0, -4128306, 1, 0, -4128305, 1, 0, -4128304, 1, 0, -4128303, 1, 0, -4128302, 1, 0, -4128301, 1, 0, -4128300, 1, 0, -4128299, 1, 0, -4128298, 1, 0, -4128297, 1, 0, -4128296, 1, 0, -4128295, 1, 0, -4128294, 1, 0, -4128293, 1, 0, -4128292, 1, 0, -4128291, 1, 0, -4128290, 1, 0, -4128289, 1, 0, -4128288, 1, 0, -4128287, 1, 0, -4128286, 1, 0, -4128285, 1, 0, -4128284, 1, 0, -4128283, 1, 0, -4128282, 1, 0, -4128281, 1, 0, -4128280, 1, 0, -4128279, 1, 0, -4128278, 1, 0, -4128277, 1, 0, -4128276, 1, 0, -4128275, 1, 0, -4128274, 1, 0, -4128273, 1, 0, -4128272, 1, 0, -4128271, 1, 0, -4128270, 1, 0, -4128269, 1, 0, -4128268, 1, 0, -4128267, 1, 0, -4128266, 1, 0, -4128265, 1, 0, -4128264, 1, 0, -4128263, 1, 0, -4128262, 1, 0, -4128261, 1, 0, -4128260, 1, 0, -4128259, 1, 0, -4128258, 1, 0, -4128257, 1, 0, -4128256, 1, 0, -4128255, 1, 0, -4128254, 1, 0, -4128253, 1, 0, -4128252, 1, 0, -4128251, 1, 0, -4128250, 1, 0, -4128249, 1, 0, -4128248, 1, 0, -4128247, 1, 0, -4128246, 1, 0, -4128245, 1, 0, -4128244, 1, 0, -4128243, 1, 0, -4128242, 1, 0, -4128241, 1, 0, -4128240, 1, 0, -4128239, 1, 0, -4128238, 1, 0, -4128237, 1, 0, -4128236, 1, 0, -4128235, 1, 0, -4128234, 1, 0, -4128233, 1, 0, -4128232, 1, 0, -4128231, 1, 0, -4128230, 1, 0, -4128229, 1, 0, -4128228, 1, 0, -4128227, 1, 0, -4128226, 1, 0, -4128225, 1, 0, -4128224, 1, 0, -4128223, 1, 0, -4128222, 1, 0, -4128221, 1, 0, -4128220, 1, 0, -4128219, 1, 0, -4128218, 1, 0, -4128217, 1, 0, -4128216, 1, 0, -4128215, 1, 0, -4128214, 1, 0, -4128213, 1, 0, -4128212, 1, 0, -4128211, 1, 0, -4128210, 1, 0, -13238345, 1, 0, -13303881, 1, 0, -13369417, 1, 0, -13434953, 1, 0, -13500489, 1, 0, -13566025, 1, 0, -13631561, 1, 0, -13697097, 1, 0, -13762633, 1, 0, -13828169, 1, 0, -13893705, 1, 0, -13959241, 1, 0, -14024777, 1, 0, -14090313, 1, 0, -14155849, 1, 0, -14221385, 1, 0, -14286921, 1, 0, -14352457, 1, 0, -14417993, 1, 0, -13303245, 1, 0, -13237709, 1, 0, -13172173, 1, 0, -13106637, 1, 0, -13041101, 1, 0, -12975565, 1, 0, -12910029, 1, 0, -12844493, 1, 0, -12778957, 1, 0, -12713421, 1, 0, -12647885, 1, 0, -12582349, 1, 0, -12516813, 1, 0, -12451277, 1, 0, -12385741, 1, 0, -12320205, 1, 0, -12254669, 1, 0, -12189133, 1, 0, -12123597, 1, 0, -12058061, 1, 0, -11992525, 1, 0, -11926989, 1, 0, -11861453, 1, 0, -11795917, 1, 0, -11730381, 1, 0, -11664845, 1, 0, -11599309, 1, 0, -11533773, 1, 0, -11468237, 1, 0, -11402701, 1, 0, -11337165, 1, 0, -11271629, 1, 0, -11206093, 1, 0, -11140557, 1, 0, -11075021, 1, 0, -11009485, 1, 0, -10943949, 1, 0, -10878413, 1, 0, -10812877, 1, 0, -10747341, 1, 0, -10681805, 1, 0, -10616269, 1, 0, -10550733, 1, 0, -10485197, 1, 0, -10419661, 1, 0, -10354125, 1, 0, -10288589, 1, 0, -10223053, 1, 0, -10157517, 1, 0, -10091981, 1, 0, -10026445, 1, 0, -9960909, 1, 0, -9895373, 1, 0, -9829837, 1, 0, -9764301, 1, 0, -9698765, 1, 0, -9633228, 1, 0, -9567692, 1, 0, -9502156, 1, 0, -9436620, 1, 0, -9371084, 1, 0, -9305548, 1, 0, -9240012, 1, 0, -9174476, 1, 0, -9108940, 1, 0, -9043404, 1, 0, -8977868, 1, 0, -8912332, 1, 0, -8846796, 1, 0, -8781260, 1, 0, -8715724, 1, 0, -8650188, 1, 0, -8584652, 1, 0, -8519116, 1, 0, -8453580, 1, 0, -8388044, 1, 0, -8322508, 1, 0, -8256972, 1, 0, -8191436, 1, 0, -8125900, 1, 0, -8060364, 1, 0, -7994828, 1, 0, -7929292, 1, 0, -7863756, 1, 0, -7798220, 1, 0, -7732684, 1, 0, -7667148, 1, 0, -7601612, 1, 0, -7536076, 1, 0, -7470540, 1, 0, -7405004, 1, 0, -7339468, 1, 0, -7273932, 1, 0, -7208396, 1, 0, -7142860, 1, 0, -7077324, 1, 0, -7011788, 1, 0, -6946252, 1, 0, -6880716, 1, 0, -6815180, 1, 0, -6749644, 1, 0, -6684108, 1, 0, -6618572, 1, 0, -6553036, 1, 0, -6487500, 1, 0, -6421964, 1, 0, -6356428, 1, 0, -6290892, 1, 0, -6225356, 1, 0, -6159820, 1, 0, -6094284, 1, 0, -6028747, 1, 0, -5963211, 1, 0, -5897675, 1, 0, -5832139, 1, 0, -5766603, 1, 0, -5701067, 1, 0, -5635531, 1, 0, -5569995, 1, 0, -5504459, 1, 0, -5438923, 1, 0, -5373387, 1, 0, -5307851, 1, 0, -5242315, 1, 0, -5176779, 1, 0, -5111243, 1, 0, -5045707, 1, 0, -4980171, 1, 0, -4914635, 1, 0, -4849099, 1, 0, -4783563, 1, 0, -4718027, 1, 0, -4652491, 1, 0, -4586955, 1, 0, -4521419, 1, 0, -4455883, 1, 0, -4390347, 1, 0, -4324811, 1, 0, -4259275, 1, 0, -13238347, 1, 0, -13303883, 1, 0, -13369419, 1, 0, -13434955, 1, 0, -13434954, 1, 0, -13500490, 1, 0, -13566026, 1, 0, -13631562, 1, 0, -13697098, 1, 0, -13762634, 1, 0, -13828170, 1, 0, -13893706, 1, 0, -13959242, 1, 0, -14024778, 1, 0, -13893707, 1, 0, -13959243, 1, 0, -14024779, 1, 0, -14090315, 1, 0, -14155851, 1, 0, -14221387, 1, 0, -14286923, 1, 0, -14352459, 1, 0, -14417995, 1, 0, -14483531, 1, 0, -14549067, 1, 0, -14614603, 1, 0, -14680139, 1, 0, -14745675, 1, 0, -14811211, 1, 0, -14876747, 1, 0, -14942283, 1, 0, -15007819, 1, 0, -15073355, 1, 0, -13172769, 1, 0, -13172779, 1, 0, -13172789, 1, 0, -13172799, 1, 0, -8257592, 1, 0, -7602232, 1, 0, -6029337, 1, 0, -6029327, 1, 0, -7471112, 1, 0, -8060936, 1, 0, -10747949, 1, 0, -10158125, 1, 0, -10158115, 1, 0, -10158105, 1, 0, -10747939, 1, 0, -10747929, 1, 0)
 
 [node name="DoT_Armour" type="Area2D" parent="." unique_id=1432841927 node_paths=PackedStringArray("target_node")]
-script = ExtResource("6_2irst")
+script = SubResource("GDScript_oo65k")
 target_node = NodePath("../Player")
 
 [node name="Sprite2D" type="Sprite2D" parent="DoT_Armour" unique_id=1993723288]
 position = Vector2(-4231.5, 780.5)
 scale = Vector2(0.4921875, 0.5234375)
 texture = ExtResource("7_bf53h")
-script = ExtResource("8_71axn")
+script = SubResource("GDScript_smnwb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoT_Armour" unique_id=1909451576]
 position = Vector2(-4235, 780)
@@ -786,12 +935,33 @@ position = Vector2(-2154.0002, 50)
 position = Vector2(-1884.0001, 5)
 
 [node name="clownfish8" parent="Enemies/clownfish_folder" unique_id=1932719547 instance=ExtResource("4_kldst")]
-position = Vector2(-1904.0001, 112)
+position = Vector2(-281, -1154)
+
+[node name="clownfish9" parent="Enemies/clownfish_folder" unique_id=1832031630 instance=ExtResource("4_kldst")]
+position = Vector2(198.99988, -837)
+
+[node name="clownfish10" parent="Enemies/clownfish_folder" unique_id=412523269 instance=ExtResource("4_kldst")]
+position = Vector2(486.99988, -544)
+
+[node name="clownfish11" parent="Enemies/clownfish_folder" unique_id=495342366 instance=ExtResource("4_kldst")]
+position = Vector2(-132, -714)
 
 [node name="seahorse_folder" type="Node" parent="Enemies" unique_id=1487093843]
 
 [node name="seahorse" parent="Enemies/seahorse_folder" unique_id=829669778 instance=ExtResource("13_wxwew")]
-position = Vector2(-3228.0002, -894.99994)
+position = Vector2(-3040.9995, -812.99994)
+
+[node name="seahorse2" parent="Enemies/seahorse_folder" unique_id=1736424733 instance=ExtResource("13_wxwew")]
+position = Vector2(-1926.0002, -828.99994)
+
+[node name="seahorse3" parent="Enemies/seahorse_folder" unique_id=2085543103 instance=ExtResource("13_wxwew")]
+position = Vector2(-1607.0002, 161.00024)
+
+[node name="seahorse4" parent="Enemies/seahorse_folder" unique_id=634758625 instance=ExtResource("13_wxwew")]
+position = Vector2(1449, 699.00024)
+
+[node name="seahorse5" parent="Enemies/seahorse_folder" unique_id=998693175 instance=ExtResource("13_wxwew")]
+position = Vector2(-1647.0005, 28.000122)
 
 [node name="crab_folder" type="Node" parent="Enemies" unique_id=577862657]
 
@@ -808,6 +978,11 @@ position = Vector2(434.00006, -1649.0001)
 
 [node name="starfish4" parent="Enemies/starfish_folder" unique_id=853676229 instance=ExtResource("18_x3xnh")]
 position = Vector2(919, -2016)
+
+[node name="ghostshark_folder" type="Node" parent="Enemies" unique_id=1016474154]
+
+[node name="GhostShark" parent="Enemies/ghostshark_folder" unique_id=371451389 instance=ExtResource("21_oo65k")]
+position = Vector2(786, -1520)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)
@@ -828,7 +1003,7 @@ color = Color(0.6392157, 0, 0, 1)
 tile_set = SubResource("TileSet_rajel")
 
 [node name="clownfish" parent="." unique_id=2025178942 instance=ExtResource("20_tfod6")]
-position = Vector2(1018, -1352)
+position = Vector2(3644, -414)
 
 [node name="AbilityFolder" type="Node" parent="." unique_id=363169500]
 script = ExtResource("19_vvhu1")
@@ -836,20 +1011,79 @@ script = ExtResource("19_vvhu1")
 [node name="TimeStop" type="Node" parent="AbilityFolder" unique_id=1383738787]
 script = ExtResource("19_tfod6")
 
-[node name="Petal" type="Node" parent="AbilityFolder" unique_id=2040170037]
+[node name="timestop_initiate" type="AudioStreamPlayer" parent="AbilityFolder/TimeStop" unique_id=1360087804]
+stream = ExtResource("28_7w24h")
+volume_db = -4.5
+bus = &"timestopstart"
+
+[node name="clock_ticking" type="AudioStreamPlayer" parent="AbilityFolder/TimeStop" unique_id=446403598]
+stream = ExtResource("26_dctr5")
+volume_db = -4.5
+
+[node name="Petals" type="Node" parent="AbilityFolder" unique_id=2040170037]
 script = ExtResource("21_petals")
+
+[node name="petal_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Petals" unique_id=1676015694]
+stream = ExtResource("22_i4lct")
+bus = &"Petal(fire)"
+
+[node name="petalbounce_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Petals" unique_id=1248639867]
+stream = ExtResource("22_i4lct")
+bus = &"Petal(bounce)"
 
 [node name="Heal" type="Node" parent="AbilityFolder" unique_id=443403185]
 script = ExtResource("22_lbihj")
 
+[node name="heal_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Heal" unique_id=801660082]
+stream = ExtResource("24_iyesh")
+bus = &"Heal"
+
 [node name="Cookie" type="Node" parent="AbilityFolder" unique_id=745596389]
 script = ExtResource("23_raj38")
 
+[node name="cookie_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/Cookie" unique_id=1936830156]
+stream = ExtResource("24_356ba")
+
 [node name="ShadowFury" type="Node" parent="AbilityFolder" unique_id=227714529]
 script = ExtResource("24_8e0uq")
+teleport_sound = ExtResource("25_3jf1l")
+
+[node name="teleport_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/ShadowFury" unique_id=385698162]
 
 [node name="ShadowFurySupportScript" type="Node" parent="AbilityFolder" unique_id=725315113]
 script = ExtResource("25_i0vto")
+
+[node name="HardHit" type="Node" parent="AbilityFolder" unique_id=2005999913]
+script = ExtResource("26_hardhit")
+
+[node name="IcyShot" type="Node" parent="AbilityFolder" unique_id=178318764]
+script = ExtResource("27_icyshot")
+
+[node name="icyshot_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/IcyShot" unique_id=1485086645]
+stream = ExtResource("37_lmarx")
+volume_db = -4.5
+pitch_scale = 1.15
+bus = &"Icy shot"
+
+[node name="TsunamiImpact" type="Node" parent="AbilityFolder" unique_id=118034739]
+script = ExtResource("28_tsunami")
+explosion_radius = 115.0
+teleport_symbol_texture = ExtResource("29_tsunami_symbol")
+
+[node name="explosion_audio_player" type="AudioStreamPlayer" parent="AbilityFolder/TsunamiImpact" unique_id=1834551913]
+stream = ExtResource("40_7av8l")
+volume_db = -6.0
+bus = &"Lightning"
+
+[node name="Extra_Dash" type="Node2D" parent="AbilityFolder" unique_id=1169288772]
+script = ExtResource("45_6okg5")
+
+[node name="Big_Bomb" type="Node" parent="AbilityFolder" unique_id=367520742]
+script = ExtResource("46_oo65k")
+bomb_scene = ExtResource("47_smnwb")
+
+[node name="Wind_Cloak" type="Node" parent="AbilityFolder" unique_id=476365300]
+script = ExtResource("46_e2w45")
 
 [node name="TimeStopFilter" type="CanvasLayer" parent="." unique_id=510772542]
 
@@ -862,8 +1096,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Mana" type="Node" parent="." unique_id=31072134]
+script = ExtResource("45_t2joc")
+
+[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=1273361286]
+script = ExtResource("46_audqb")
+
+[node name="Currency_System" type="Node" parent="." unique_id=578037596]
+script = ExtResource("49_e2w45")
+
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="Player/ShieldRechargeDelay" to="Player" method="_on_shield_recharge_delay_timeout"]
 [connection signal="timeout" from="Player/ShieldRechargeTimer" to="Player" method="_on_shield_recharge_timer_timeout"]
+[connection signal="pressed" from="UI/CanvasLayer/AbilityInput/Button" to="UI/CanvasLayer/AbilityInput" method="_on_button_pressed"]
+[connection signal="text_submitted" from="UI/CanvasLayer/AbilityInput/LineEdit" to="UI/CanvasLayer/AbilityInput" method="_on_line_edit_text_submitted"]
 [connection signal="body_entered" from="Level01" to="Level01" method="on_LEVELONE_body_entered"]

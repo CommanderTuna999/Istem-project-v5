@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed: float = 1500.0
+@export var speed: float = 1150.0
 @export var base_damage: float = 0.5
 @export var damage_multiplier: float = 1.0
 @export var bonus_flat_damage: float = 0.0
@@ -8,8 +8,11 @@ extends Area2D
 @export var hit_distance: float = 12.0
 @export var retarget_delay: float = 0.08
 @export var lifetime: float = 6.0
+@export var fade_duration: float = 0.65
 @export var max_travel_distance: float = 1200.0
-@export var spin_speed: float = 24.0
+@export var spin_speed: float = 48.0
+
+@onready var petalbounce_audio_player: AudioStreamPlayer = $"/root/Game/AbilityFolder/Petals/petalbounce_audio_player"
 
 var caster: Node2D = null
 var current_target: Node2D = null
@@ -17,6 +20,7 @@ var hit_enemies: Array[Node2D] = []
 var bounces_used: int = 0
 var can_hit: bool = true
 var travel_distance: float = 0.0
+var is_fading: bool = false
 
 var damage: float:
 	get:
@@ -29,13 +33,26 @@ var damage: float:
 
 
 func _ready() -> void:
-	get_tree().create_timer(lifetime).timeout.connect(queue_free)
+	start_lifetime_expiry()
 
 	if current_target == null:
 		current_target = find_nearest_enemy(global_position)
 
 	if current_target == null:
 		queue_free()
+
+
+func start_lifetime_expiry() -> void:
+	var fade_start_delay := maxf(lifetime - fade_duration, 0.0)
+	await get_tree().create_timer(fade_start_delay).timeout
+
+	is_fading = true
+	monitoring = false
+	var fade_tween := create_tween().set_parallel(true)
+	fade_tween.tween_property(self, "scale", Vector2.ZERO, fade_duration)
+	fade_tween.tween_property(self, "modulate:a", 0.0, fade_duration)
+	await fade_tween.finished
+	queue_free()
 
 
 func setup(new_caster: Node2D, shot_index: int = 0) -> void:
@@ -47,6 +64,10 @@ func setup(new_caster: Node2D, shot_index: int = 0) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if is_fading:
+		$Sprite2D.rotation += spin_speed * delta
+		return
+
 	if current_target == null or not is_instance_valid(current_target):
 		current_target = find_nearest_enemy(global_position)
 		if current_target == null:
@@ -85,6 +106,8 @@ func hit_enemy(enemy: Node2D) -> void:
 
 	if enemy.has_method("take_damage"):
 		enemy.take_damage(damage)
+		petalbounce_audio_player.pitch_scale = 1.5
+		petalbounce_audio_player.play()
 
 	if enemy.has_method("take_kb"):
 		enemy.take_kb(global_position)

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b0c8qy0nn5d3x"]
+
+[ext_resource type="AudioStream" uid="uid://bvyxt7w82f6u0" path="res://sfx/Beyond Ocean Waters.mp3" id="1_tylfe"]
+[ext_resource type="Script" uid="uid://igslunvnp6bm" path="res://Scripts/music_manager.gd" id="2_rjr7q"]
+
+[node name="Music_Manager" type="AudioStreamPlayer" unique_id=221841532]
+stream = ExtResource("1_tylfe")
+volume_db = -12.035
+script = ExtResource("2_rjr7q")

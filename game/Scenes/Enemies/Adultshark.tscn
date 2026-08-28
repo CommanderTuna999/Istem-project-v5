@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://c6gsif1fbsa4u"]
+
+[ext_resource type="Script" uid="uid://dogudylb6s7cx" path="res://Scripts/adultshark.gd" id="1_ysnjy"]
+[ext_resource type="Texture2D" uid="uid://cb6ym6ygs78b5" path="res://Assets/Shark_Adult_Sprite.png" id="2_ysnjy"]
+[ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_v14x3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koqdk"]
+atlas = ExtResource("2_ysnjy")
+region = Rect2(0, 0, 180, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qi2p4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koqdk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wyy8k"]
+radius = 9.780821
+height = 91.2809
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8g0i4"]
+radius = 679.0319
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m247r"]
+radius = 8.289692
+height = 66.63308
+
+[sub_resource type="Animation" id="Animation_wx3q7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ldcme"]
+resource_name = "damaged"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.05),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.09803922, 0.043137256, 1), Color(0.9845465, 0.9845466, 0.9845465, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.17976891295541614, 0.22514747, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a3qtr"]
+_data = {
+&"RESET": SubResource("Animation_wx3q7"),
+&"damaged": SubResource("Animation_ldcme")
+}
+
+[node name="Adultshark" type="CharacterBody2D" unique_id=1111911240 groups=["adult_shark", "enemy"]]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("1_ysnjy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=330375805]
+z_index = 3
+position = Vector2(-3.0517578e-05, 0.9615402)
+sprite_frames = SubResource("SpriteFrames_qi2p4")
+frame_progress = 0.64510477
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1121136378]
+position = Vector2(-0.057662964, 0.5219886)
+rotation = 1.5707964
+scale = Vector2(4.978, 2.023)
+shape = SubResource("CapsuleShape2D_wyy8k")
+
+[node name="aggro_area" type="Area2D" parent="." unique_id=785846885]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_area" unique_id=1075834730]
+scale = Vector2(0.7498907, 0.7498907)
+shape = SubResource("CircleShape2D_8g0i4")
+
+[node name="TemplateHurtbox" type="Area2D" parent="." unique_id=567805197]
+scale = Vector2(2.62, 2.5)
+script = ExtResource("3_v14x3")
+metadata/_custom_type_script = "uid://dmd61flg7jy52"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TemplateHurtbox" unique_id=1610760545]
+position = Vector2(-0.4615469, 5.9604645e-08)
+rotation = 1.5707964
+scale = Vector2(2.4126348, 1.0626383)
+shape = SubResource("CapsuleShape2D_m247r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1773414453]
+libraries/ = SubResource("AnimationLibrary_a3qtr")
+
+[connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]
+[connection signal="area_entered" from="TemplateHurtbox" to="." method="_on_template_hurtbox_area_entered"]
+[connection signal="area_exited" from="TemplateHurtbox" to="." method="_on_template_hurtbox_area_exited"]
+[connection signal="body_entered" from="TemplateHurtbox" to="." method="_on_template_hurtbox_body_entered"]

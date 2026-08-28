@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://kgv6iidjbhru" path="res://Scripts/spear.gd" id="1_7nbcr"]
 [ext_resource type="Texture2D" uid="uid://b5yjblxcdda77" path="res://Assets/spear thrust spritesheet.png" id="2_i4w2o"]
 [ext_resource type="Script" uid="uid://cwkj4oue3o6jv" path="res://Scripts/Hitbox.gd" id="2_y4joh"]
+[ext_resource type="AudioStream" uid="uid://cf683y6d2h27h" path="res://sfx/slashed.mp3" id="4_t4qxn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4qxn"]
 atlas = ExtResource("2_i4w2o")
@@ -84,6 +85,12 @@ metadata/_custom_type_script = "uid://cwkj4oue3o6jv"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackPivot/TemplateHitbox" unique_id=870998502]
 shape = SubResource("RectangleShape2D_y4joh")
+
+[node name="slash_sound_player" type="AudioStreamPlayer" parent="." unique_id=2042271233]
+stream = ExtResource("4_t4qxn")
+volume_db = -20.0
+pitch_scale = 1.5
+bus = &"Spear attack"
 
 [connection signal="body_entered" from="AttackPivot/TemplateHitbox" to="." method="_on_body_entered"]
 [connection signal="body_exited" from="AttackPivot/TemplateHitbox" to="." method="_on_body_exited"]

@@ -1,0 +1,188 @@
+[gd_resource type="AudioBusLayout" format=3 uid="uid://bhjjn5ldl8t67"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
+resource_name = "Reverb"
+room_size = 0.4
+wet = 0.12
+
+[sub_resource type="AudioEffectEQ10" id="AudioEffectEQ10_j3pel"]
+resource_name = "EQ10"
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]
+resource_name = "Delay"
+tap1_delay_ms = 0.0
+tap1_level_db = 0.0
+tap2_active = false
+feedback_active = true
+feedback_delay_ms = 145.0
+feedback_level_db = -3.3
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_g28q7"]
+resource_name = "Reverb"
+predelay_msec = 20.0
+damping = 0.16
+dry = 0.18
+wet = 0.0
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_n8wo2"]
+resource_name = "Reverb"
+wet = 0.0
+
+[sub_resource type="AudioEffectEQ10" id="AudioEffectEQ10_g28q7"]
+resource_name = "EQ10"
+band_db/31_hz = -24.0
+band_db/62_hz = -18.0
+band_db/125_hz = -12.0
+band_db/250_hz = -10.0
+band_db/500_hz = -6.0
+band_db/2000_hz = 3.0
+band_db/4000_hz = 5.0
+band_db/8000_hz = 4.0
+band_db/16000_hz = 2.0
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_g28q7"]
+resource_name = "Delay"
+tap1_delay_ms = 100.0
+tap2_delay_ms = 200.0
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_j3pel"]
+resource_name = "HighPassFilter"
+cutoff_hz = 300.0
+
+[sub_resource type="AudioEffectEQ21" id="AudioEffectEQ21_j3pel"]
+resource_name = "EQ21"
+band_db/5600_hz = 5.0
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_j3pel"]
+resource_name = "Chorus"
+dry = 0.0
+wet = 0.75
+voice/1/delay_ms = 5.0
+voice/1/rate_hz = 0.5
+voice/1/depth_ms = 4.0
+voice/1/pan = -1.0
+voice/2/delay_ms = 12.0
+voice/2/rate_hz = 0.9
+voice/2/depth_ms = 5.0
+voice/2/pan = 1.0
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_5t1r3"]
+resource_name = "Reverb"
+predelay_msec = 175.0
+predelay_feedback = 0.5
+room_size = 0.2
+damping = 0.1
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_cenje"]
+resource_name = "Reverb"
+predelay_msec = 100.0
+predelay_feedback = 0.5
+room_size = 0.2
+damping = 0.25
+spread = 0.85
+wet = 0.3
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_g28q7"]
+resource_name = "Chorus"
+dry = 0.5
+wet = 0.05
+voice/1/delay_ms = 35.0
+voice/2/delay_ms = 50.0
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_dqt2m"]
+resource_name = "Reverb"
+predelay_msec = 50.0
+predelay_feedback = 0.65
+room_size = 0.25
+damping = 0.25
+dry = 0.88
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_n8wo2"]
+resource_name = "Chorus"
+dry = 0.5
+wet = 0.0
+voice/1/delay_ms = 10.0
+voice/2/delay_ms = 15.0
+
+[resource]
+bus/0/bypass_fx = true
+bus/1/name = &"Petal(fire)"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 6.0199986
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
+bus/1/effect/0/enabled = false
+bus/1/effect/1/effect = SubResource("AudioEffectEQ10_j3pel")
+bus/1/effect/1/enabled = false
+bus/2/name = &"Petal(bounce)"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
+bus/2/effect/0/enabled = true
+bus/3/name = &"Heal"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -2.7102394
+bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectDelay_j3pel")
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource("AudioEffectReverb_g28q7")
+bus/3/effect/1/enabled = true
+bus/4/name = &"Spear attack"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = -6.089478
+bus/4/send = &"Master"
+bus/4/effect/0/effect = SubResource("AudioEffectReverb_n8wo2")
+bus/4/effect/0/enabled = true
+bus/4/effect/1/effect = SubResource("AudioEffectEQ10_g28q7")
+bus/4/effect/1/enabled = true
+bus/4/effect/2/effect = SubResource("AudioEffectDelay_g28q7")
+bus/4/effect/2/enabled = true
+bus/5/name = &"Icy shot"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = -4.504105
+bus/5/send = &"Master"
+bus/5/effect/0/effect = SubResource("AudioEffectHighPassFilter_j3pel")
+bus/5/effect/0/enabled = true
+bus/5/effect/1/effect = SubResource("AudioEffectEQ21_j3pel")
+bus/5/effect/1/enabled = true
+bus/5/effect/2/effect = SubResource("AudioEffectChorus_j3pel")
+bus/5/effect/2/enabled = true
+bus/6/name = &"Lightning"
+bus/6/solo = false
+bus/6/mute = false
+bus/6/bypass_fx = false
+bus/6/volume_db = 0.0
+bus/6/send = &"Master"
+bus/6/effect/0/effect = SubResource("AudioEffectReverb_5t1r3")
+bus/6/effect/0/enabled = true
+bus/7/name = &"timestopstart"
+bus/7/solo = false
+bus/7/mute = false
+bus/7/bypass_fx = false
+bus/7/volume_db = 0.0
+bus/7/send = &"Master"
+bus/7/effect/0/effect = SubResource("AudioEffectReverb_cenje")
+bus/7/effect/0/enabled = true
+bus/7/effect/1/effect = SubResource("AudioEffectChorus_g28q7")
+bus/7/effect/1/enabled = true
+bus/8/name = &"bombexplosion"
+bus/8/solo = false
+bus/8/mute = false
+bus/8/bypass_fx = false
+bus/8/volume_db = 0.0
+bus/8/send = &"Master"
+bus/8/effect/0/effect = SubResource("AudioEffectReverb_dqt2m")
+bus/8/effect/0/enabled = true
+bus/8/effect/1/effect = SubResource("AudioEffectChorus_n8wo2")
+bus/8/effect/1/enabled = true

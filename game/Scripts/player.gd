@@ -71,6 +71,12 @@ var wasoverstretched = false
 var currentharpoonmaxspeed: float = normalharpoonmaxspeed
 var maxropelength = 0.0
 
+#the lower kbresistance the less kb you take
+var kbresistance:
+	get:
+		return 1.0 - kbresistanceincrease
+var kbresistanceincrease = 0.0
+
 #defines absolute max extention
 var maxstretchratio = 1.5
 #defines how far through extention does charge activate
@@ -98,7 +104,10 @@ var kbvelocity = Vector2.ZERO
 @export var dash_cost: float = 25.0
 @export var dash_recharge_per_second: float = 5
 @export var dash_recharge_delay: float = 0.5
-@export var dash_speed: float = 550
+@export var dash_speed_increase: float = 1.0
+var dash_speed:
+	get:
+		return 825 * dash_speed_increase
 @export var dash_duration: float = 0.1
 @export var dash_bar_display_value: float = dash_max
 
@@ -107,6 +116,7 @@ var dash_recharge_timer: float = 0.0
 var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
+var direction: Vector2 = Vector2.ZERO
 
 
 var recharge_timer: float = 0.0
@@ -256,7 +266,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		$HarpoonLine.visible = false
 		
-	var direction = Input.get_vector("Left", "Right", "Up", "Down")
+	direction = Input.get_vector("Left", "Right", "Up", "Down")
 	handle_dash(delta, direction)
 	#if not is_on_floor():
 		#velocity += get_gravity() * delta
@@ -422,8 +432,9 @@ func _physics_process(delta: float) -> void:
 	var crashed = false
 	
 	if Input.is_action_just_pressed("Restart"):
-		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Game.tscn")
-		get_tree().call_deferred("reload_current_scene")
+		if not AbilityFolder.is_typing:
+			get_tree().call_deferred("change_scene_to_file", "res://Scenes/Game.tscn")
+			get_tree().call_deferred("reload_current_scene")
 	#for bounce
 	if bouncegracetimer > 0.0:
 		bouncegracetimer -= delta
@@ -494,7 +505,8 @@ func handle_dash(delta: float, direction: Vector2) -> void:
 		return
 
 	if Input.is_action_just_pressed("Dash") and dash_value >= dash_cost:
-		start_dash(direction)
+		if not AbilityFolder.is_typing:
+			start_dash(direction)
 
 	if dash_recharge_timer > 0.0:
 		dash_recharge_timer -= delta
@@ -578,8 +590,8 @@ var heal_per_second:
 #defense stuff below
 var defence:
 	get:
-		return 10 * total_defence_increase
-@export var total_defence_increase = 1.0
+		return total_defence_increase
+@export var total_defence_increase = 0.0
 
 var current_health = 100
 var damage_occuring = false
@@ -590,10 +602,12 @@ var starsaveused = false
 
 var clownfish_damage = 5
 var shark_damage = 25
+var Adultshark_damage = 1000
 var seahorse_projectile_damage = 10
 var crab_damage = 45
 var starfish_damage = 15
 var crab_boss_damage = 75
+var stealth_stalker_damage = 10
 
 	
 
@@ -601,16 +615,7 @@ var crab_boss_damage = 75
 func _process(delta):
 	handle_health_regen(delta)
 	update_health_ui(delta)
-	
-	#armour testing level thing
-	if Input.is_action_just_pressed("armour_level_test"):
-		can_level_up_N = false
-		armour_DoT_level += 1
-		DoT_strength += (armour_DoT_level * 0.05)
-		get_tree().current_scene.get_node("UI/CanvasLayer/LevelUpLabel").show_level_up(armour_DoT_level)
-		
-		await get_tree().create_timer(0.5).timeout
-		can_level_up_N = true
+
 		
 	if current_health <= 0:
 		get_tree().call_deferred("reload_current_scene")
@@ -705,7 +710,7 @@ func take_player_damage(amount: float) -> void:
 		starsaveused = true
 		emptybeams.visible = false
 	else:
-		current_health -= amount * (1.0 - ((defence / 2.0) / 100))
+		current_health -= amount * (100.0 / (defence + 100.0))
 		update_shield_bar()
 		current_health = max(current_health, 0)
 		can_heal = false
@@ -776,24 +781,31 @@ func handleenemycontact(body: Node2D):
 	#damage scripts
 	if body.is_in_group("clownfish"):
 		damage = clownfish_damage
-		kbstrength = 500
+		kbstrength = 500 * kbresistance
 	elif body.is_in_group("shark"):
 		damage = shark_damage
-		kbstrength = 2000
+		kbstrength = 1000 * kbresistance
 	elif body.is_in_group("seahorse_projectile"):
 		damage = seahorse_projectile_damage
-		kbstrength = 300
+		kbstrength = 300 * kbresistance
 		body.queue_free()
 	elif body.is_in_group("crab"):
 		damage = crab_damage
-		kbstrength = 2000
+		kbstrength = 2000 * kbresistance
 	elif body.is_in_group("starfish"):
 		damage = starfish_damage
-		kbstrength = 700
+		kbstrength = 700 * kbresistance
+	elif body.is_in_group("stealth_stalker"):
+		damage = stealth_stalker_damage
+		kbstrength = 500 * kbresistance
 		
 	elif body.is_in_group("crab_boss"):
 		damage = crab_boss_damage
 		kbstrength = 700
+		
+	elif body.is_in_group("adult_shark"):
+		damage = Adultshark_damage
+		kbstrength = 1500
 	
 	else:
 		return
