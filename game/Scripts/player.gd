@@ -846,6 +846,37 @@ func on_spear_hit(hurtbox: TemplateHurtbox) -> void:
 	
 
 
+func spear_wall_bounce(wall_normal: Vector2, hit_position: Vector2) -> void:
+	# Keep the same minimum-speed requirement as the existing body-collision parry.
+	if velocity.length() < 300.0:
+		return
+
+	var incomingvelocity := velocity
+	var impactspeed := incomingvelocity.dot(-wall_normal)
+
+	# Only reflect if the player is actually travelling into the surface.
+	if impactspeed <= 0.0:
+		return
+
+	# Reflect the player's current movement across the real wall normal.
+	# This preserves the angle/momentum instead of simply sending the player
+	# backwards from the spear direction.
+	velocity = incomingvelocity.bounce(wall_normal) * 1.1
+
+	# Preserve the rewards from the existing parry system.
+	dash_value = dash_max
+	bouncegracetimer = 0.0
+
+	if highmode:
+		highmodeduration = 1
+		play_parry_effect(hit_position, wall_normal)
+	else:
+		$ParryBubbles.global_position = hit_position
+		$ParryBubbles.rotation = wall_normal.angle() + PI
+		$ParryBubbles.restart()
+		$ParryBubbles.emitting = true
+
+
 func setcanbounce(value):
 	if value:
 		can_bounce = true
@@ -895,4 +926,3 @@ func _on_shield_recharge_timer_timeout() -> void:
 		shield_health += shield_max_health * shield_recharge
 		shield_health = min(shield_health, shield_max_health)
 		update_shield_bar()
-	
