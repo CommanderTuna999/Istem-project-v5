@@ -55,6 +55,11 @@ animations = [{
 "loop": false,
 "name": &"thrust",
 "speed": 35.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"thrust2",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4joh"]
@@ -69,9 +74,7 @@ script = ExtResource("1_7nbcr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackPivot" unique_id=2011597535]
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_vrs0w")
-animation = &"thrust"
-frame = 6
-frame_progress = 1.0
+animation = &"thrust2"
 
 [node name="TemplateHitbox" type="Area2D" parent="AttackPivot" unique_id=1861446660]
 collision_layer = 16
