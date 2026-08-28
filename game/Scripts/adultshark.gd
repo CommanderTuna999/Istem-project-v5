@@ -26,12 +26,12 @@ func _on_aggro_area_body_entered(body):
 	print("entered")
 
 
-func _on_aggro_area_body_exited(body: Node2D) -> void:
-	if body == chase_subject:
-		chase_subject = null
-		aggro = false
+#func _on_aggro_area_body_exited(body: Node2D) -> void:
+	#if body == chase_subject:
+		#chase_subject = null
+		#aggro = false
 
-	print("exited")
+	#print("exited")
 
 
 func _physics_process(delta):
