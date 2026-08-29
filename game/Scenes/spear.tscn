@@ -1,9 +1,34 @@
 [gd_scene format=3 uid="uid://bj7ldtrm577dp"]
 
 [ext_resource type="Script" uid="uid://kgv6iidjbhru" path="res://Scripts/spear.gd" id="1_7nbcr"]
+[ext_resource type="Texture2D" uid="uid://dikeaadbkg063" path="res://Assets/Atk_anim.png" id="2_1qmmw"]
 [ext_resource type="Texture2D" uid="uid://b5yjblxcdda77" path="res://Assets/spear thrust spritesheet.png" id="2_i4w2o"]
 [ext_resource type="Script" uid="uid://cwkj4oue3o6jv" path="res://Scripts/Hitbox.gd" id="2_y4joh"]
 [ext_resource type="AudioStream" uid="uid://cf683y6d2h27h" path="res://sfx/slashed.mp3" id="4_t4qxn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrs0w"]
+atlas = ExtResource("2_1qmmw")
+region = Rect2(0, 0, 55, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21kay"]
+atlas = ExtResource("2_1qmmw")
+region = Rect2(55, 0, 55, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0kxi"]
+atlas = ExtResource("2_1qmmw")
+region = Rect2(110, 0, 55, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpnpb"]
+atlas = ExtResource("2_1qmmw")
+region = Rect2(165, 0, 55, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj5lp"]
+atlas = ExtResource("2_1qmmw")
+region = Rect2(220, 0, 55, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_703vn"]
+atlas = ExtResource("2_1qmmw")
+region = Rect2(275, 0, 55, 35)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4qxn"]
 atlas = ExtResource("2_i4w2o")
@@ -33,6 +58,29 @@ region = Rect2(0, 99, 615, 99)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vrs0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21kay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0kxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpnpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj5lp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_703vn")
+}],
+"loop": true,
+"name": &"thrust",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_t4qxn")
 }, {
 "duration": 1.0,
@@ -54,28 +102,22 @@ animations = [{
 "texture": SubResource("AtlasTexture_t4qxn")
 }],
 "loop": false,
-"name": &"thrust",
+"name": &"thrust1",
 "speed": 35.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"thrust2",
-"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4joh"]
-size = Vector2(31.5, 10.5)
+size = Vector2(24.187498, 16.25)
 
 [node name="Spear" type="Node2D" unique_id=1804206196]
-scale = Vector2(5, 5)
 script = ExtResource("1_7nbcr")
 
 [node name="AttackPivot" type="Node2D" parent="." unique_id=391111560]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackPivot" unique_id=2011597535]
-scale = Vector2(0.05, 0.05)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_vrs0w")
-animation = &"thrust2"
+animation = &"thrust"
 
 [node name="TemplateHitbox" type="Area2D" parent="AttackPivot" unique_id=1861446660]
 collision_layer = 16
@@ -84,6 +126,8 @@ script = ExtResource("2_y4joh")
 metadata/_custom_type_script = "uid://cwkj4oue3o6jv"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackPivot/TemplateHitbox" unique_id=870998502]
+position = Vector2(-7.0000005, 1)
+scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_y4joh")
 
 [node name="slash_sound_player" type="AudioStreamPlayer" parent="." unique_id=2042271233]

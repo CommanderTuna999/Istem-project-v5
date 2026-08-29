@@ -10,17 +10,20 @@ var attacking := false
 # Stops one attack from wall-parrying multiple times.
 var bounced_this_attack := false
 
+# True only during the short period where a wall parry is allowed.
+var wall_parry_active := false
+
 var mouse_pos := Vector2.ZERO
 var direction_to_mouse := Vector2.ZERO
 var hard_hit_damage_multiplier: float = 1.0
 
 const winduptime = 0.05
-const attacktime := 0.1
+const attacktime := 0.18
 const attackcooldown := 0.25
-const spearoffset := 20
+const spearoffset := 50
 const handoffset := 8
 
-# Distance used to search for the wall surface when the spear hits it.
+# How far ahead of the player the ray searches for a wall.
 const wall_parry_ray_length := 64.0
 
 @onready var attackpivot = $AttackPivot
@@ -30,8 +33,6 @@ const wall_parry_ray_length := 64.0
 
 func _ready() -> void:
 	animated_sprite_2d.frame = 0
-
-	# No spear/effect visible while resting.
 	animated_sprite_2d.visible = false
 
 	attackpivot.position = Vector2(handoffset, 0)
@@ -41,6 +42,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("left_click") and not attacking:
 		mouse_pos = get_global_mouse_position()
+
 		direction_to_mouse = (
 			mouse_pos - global_position
 		).normalized()
@@ -48,9 +50,17 @@ func _process(_delta: float) -> void:
 		attack()
 
 
+func _physics_process(_delta: float) -> void:
+	# Instead of requiring one exact Area/body-entered frame,
+	# repeatedly check for a wall while the visible attack is active.
+	if wall_parry_active and not bounced_this_attack:
+		check_for_wall_parry()
+
+
 func attack():
 	attacking = true
 	bounced_this_attack = false
+	wall_parry_active = false
 
 	get_parent().facinglocked = true
 
@@ -83,11 +93,15 @@ func attack():
 
 	hitboxshape.disabled = false
 
+	# Wall parrying is now allowed for the full visible attack window.
+	wall_parry_active = true
+
 
 	await get_tree().create_timer(attacktime).timeout
 
 
 	# ATTACK DISAPPEARS.
+	wall_parry_active = false
 	hitboxshape.disabled = true
 	animated_sprite_2d.visible = false
 
@@ -135,18 +149,12 @@ func successful_hit(hurtbox: TemplateHurtbox) -> void:
 			)
 
 
-# WALL PARRY
-func _on_body_entered(_body):
-	if not attacking:
-		return
-
-	if bounced_this_attack:
-		return
-
-
+# Checks whether the spear currently appears to be striking a wall.
+func check_for_wall_parry() -> void:
 	var space_state := get_world_2d().direct_space_state
 
 	var ray_start := global_position
+
 	var ray_end := (
 		global_position
 		+ direction_to_mouse * wall_parry_ray_length
@@ -180,6 +188,11 @@ func _on_body_entered(_body):
 	)
 
 
+# We don't need body_entered to decide wall parries anymore.
+func _on_body_entered(_body):
+	pass
+
+
 func _on_body_exited(_body):
 	pass
 
@@ -189,6 +202,7 @@ func _on_body_exited(_body):
 func ability_point_and_thrust(target_position: Vector2) -> void:
 	attacking = true
 	bounced_this_attack = false
+	wall_parry_active = false
 
 	get_parent().facinglocked = true
 
@@ -199,12 +213,12 @@ func ability_point_and_thrust(target_position: Vector2) -> void:
 	attackpivot.position = direction_to_mouse * spearoffset
 	attackpivot.rotation = direction_to_mouse.angle()
 
-	# ShadowFury also needs to make the attack visible.
 	animated_sprite_2d.visible = true
 	animated_sprite_2d.play("thrust")
 
 
 func ability_finish() -> void:
+	wall_parry_active = false
 	animated_sprite_2d.visible = false
 
 	returntorest()
