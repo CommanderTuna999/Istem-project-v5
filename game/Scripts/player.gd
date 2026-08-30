@@ -16,7 +16,17 @@ var turnaccel = 1500
 var accel = 360
 var pivoting = false
 var pivot_hit = false
+var active_currents: Array[Area2D] = []
 
+
+func enter_current(current: Area2D) -> void:
+	if current not in active_currents:
+		active_currents.append(current)
+
+
+func exit_current(current: Area2D) -> void:
+	active_currents.erase(current)
+	
 #shield stuff below
 var shield_max_health:
 	get: 
@@ -441,6 +451,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		can_bounce = false
 	var incomingvelocity := velocity
+	for current in active_currents:
+		if is_instance_valid(current):
+			var current_direction: Vector2 = current.current_direction.normalized()
+			var current_strength: float = current.current_strength
+
+			velocity += current_direction * current_strength * delta
 	move_and_slide()
 	update_dash_bar(delta)
 	
@@ -926,3 +942,11 @@ func _on_shield_recharge_timer_timeout() -> void:
 		shield_health += shield_max_health * shield_recharge
 		shield_health = min(shield_health, shield_max_health)
 		update_shield_bar()
+
+
+func _on_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
+
+
+func _on_body_exited(body: Node2D) -> void:
+	pass # Replace with function body.

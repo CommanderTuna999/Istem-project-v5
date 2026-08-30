@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="7_l7uoe"]
 [ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="8_aoih6"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="9_topbc"]
+[ext_resource type="Script" uid="uid://cmcs1ex8mjg15" path="res://Scripts/currrent_area.gd" id="11_4ve4b"]
 [ext_resource type="Script" uid="uid://bxgcs1dxq3gny" path="res://Scenes/level_04.gd" id="15_tr7da"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
@@ -548,6 +549,9 @@ scale_max = 0.03
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jqwyi"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cri7j"]
+size = Vector2(323, 80)
+
 [node name="Level03" type="Node2D" unique_id=1228467427]
 
 [node name="LevelEditor" type="TileMapLayer" parent="." unique_id=1081958257]
@@ -855,8 +859,19 @@ offset_bottom = 10.0
 color = Color(0.6392157, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="CurrrentArea" type="Area2D" parent="." unique_id=1887404962]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("11_4ve4b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CurrrentArea" unique_id=1460248852]
+position = Vector2(6091, 539)
+shape = SubResource("RectangleShape2D_cri7j")
+
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="Player/ShieldRechargeDelay" to="Player" method="_on_shield_recharge_delay_timeout"]
 [connection signal="timeout" from="Player/ShieldRechargeTimer" to="Player" method="_on_shield_recharge_timer_timeout"]
 [connection signal="body_entered" from="Level04" to="Level04" method="on_LEVELONE_body_entered"]
+[connection signal="body_entered" from="CurrrentArea" to="Player" method="_on_body_entered"]
+[connection signal="body_exited" from="CurrrentArea" to="Player" method="_on_body_exited"]
