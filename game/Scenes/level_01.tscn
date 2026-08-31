@@ -30,6 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://bvyxt7w82f6u0" path="res://sfx/Beyond Ocean Waters.mp3" id="25_0fel4"]
 [ext_resource type="PackedScene" uid="uid://c6gsif1fbsa4u" path="res://Scenes/Enemies/Adultshark.tscn" id="29_ywwm3"]
 [ext_resource type="PackedScene" uid="uid://d1ur1edkugqec" path="res://Scenes/anemone.tscn" id="30_b4ywe"]
+[ext_resource type="Texture2D" uid="uid://4tj81ke8dhan" path="res://Assets/RockMidground1.png" id="31_c2pji"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_0h1yu")
@@ -1094,6 +1095,12 @@ offset_bottom = -128.0
 [node name="clownfish" parent="." unique_id=912476201 node_paths=PackedStringArray("homemarker") instance=ExtResource("10_pw4n1")]
 position = Vector2(6746, -831)
 homemarker = NodePath("../Anemone/Marker2D")
+
+[node name="RockMidground1" type="Sprite2D" parent="." unique_id=1466007862]
+modulate = Color(0.44705883, 0.44705883, 0.827451, 1)
+z_index = -1
+position = Vector2(928, -812)
+texture = ExtResource("31_c2pji")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
