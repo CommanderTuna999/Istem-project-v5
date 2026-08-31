@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://c6gsif1fbsa4u" path="res://Scenes/Enemies/Adultshark.tscn" id="29_ywwm3"]
 [ext_resource type="PackedScene" uid="uid://d1ur1edkugqec" path="res://Scenes/anemone.tscn" id="30_b4ywe"]
 [ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="31_c2pji"]
+[ext_resource type="Texture2D" uid="uid://4tj81ke8dhan" path="res://Assets/RockMidground1.png" id="32_rock_midground"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_0h1yu")
@@ -1104,6 +1105,12 @@ homemarker = NodePath("../Anemone/Marker2D")
 
 [node name="Currency_System" type="Node" parent="." unique_id=1759355730]
 script = ExtResource("31_c2pji")
+
+[node name="RockMidground1" type="Sprite2D" parent="." unique_id=1466007862]
+modulate = Color(0.44705883, 0.44705883, 0.827451, 1)
+z_index = -1
+position = Vector2(928, -812)
+texture = ExtResource("32_rock_midground")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
