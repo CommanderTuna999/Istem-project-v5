@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://c8n16i5rg5b64" path="res://Scripts/ability_folder.gd" id="13_vh3c3"]
 [ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="14_osdef"]
 [ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="15_eqa25"]
+[ext_resource type="PackedScene" uid="uid://dumg0isp3lbea" path="res://Scenes/Enemies/stealth_stalker.tscn" id="15_khfxu"]
 [ext_resource type="AudioStream" uid="uid://kakrcthx40tf" path="res://sfx/bow_shoot.mp3" id="16_wejbp"]
 [ext_resource type="Script" uid="uid://e5f1vnkckbm6" path="res://Scripts/heal.gd" id="17_ywwm3"]
 [ext_resource type="AudioStream" uid="uid://dpvo8eortnl8e" path="res://sfx/heal-skill-ro.mp3" id="18_b4ywe"]
@@ -30,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://bvyxt7w82f6u0" path="res://sfx/Beyond Ocean Waters.mp3" id="25_0fel4"]
 [ext_resource type="PackedScene" uid="uid://c6gsif1fbsa4u" path="res://Scenes/Enemies/Adultshark.tscn" id="29_ywwm3"]
 [ext_resource type="PackedScene" uid="uid://d1ur1edkugqec" path="res://Scenes/anemone.tscn" id="30_b4ywe"]
+[ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="31_c2pji"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_0h1yu")
@@ -1010,6 +1012,11 @@ position = Vector2(4652, 526)
 
 [node name="shark_folder" type="Node" parent="Enemies" unique_id=67066988]
 
+[node name="Node" type="Node" parent="Enemies" unique_id=927071067]
+
+[node name="StealthStalker" parent="Enemies/Node" unique_id=2079988035 instance=ExtResource("15_khfxu")]
+position = Vector2(966, -839)
+
 [node name="Level02" type="Area2D" parent="." unique_id=2077541829]
 position = Vector2(375, -959)
 collision_layer = 0
@@ -1094,6 +1101,9 @@ offset_bottom = -128.0
 [node name="clownfish" parent="." unique_id=912476201 node_paths=PackedStringArray("homemarker") instance=ExtResource("10_pw4n1")]
 position = Vector2(6746, -831)
 homemarker = NodePath("../Anemone/Marker2D")
+
+[node name="Currency_System" type="Node" parent="." unique_id=1759355730]
+script = ExtResource("31_c2pji")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

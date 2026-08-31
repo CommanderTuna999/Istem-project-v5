@@ -3,7 +3,8 @@ extends CharacterBody2D
 @export var speed: float = 185.0
 @export var max_health: float = 4.0
 @export var aggro_radius: float = 360.0
-@export var reveal_distance: float = 60.0
+@export var reveal_distance: float = 165.0
+
 @export var wander_radius: float = 160.0
 @export var wander_speed: float = 60.0
 
@@ -19,7 +20,7 @@ var rooted: bool = false
 var root_timer: float = 0.0
 var slow_active: bool = false
 
-@onready var placeholder_sprite: Polygon2D = $PlaceholderSprite
+@onready var placeholder_sprite: AnimatedSprite2D = $PlaceholderSprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_template: AnimatedSprite2D = $AnimationTemplate
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D

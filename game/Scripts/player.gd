@@ -624,6 +624,7 @@ var crab_damage = 45
 var starfish_damage = 15
 var crab_boss_damage = 75
 var stealth_stalker_damage = 10
+var hatchetfish_damage = 15.0
 
 	
 
@@ -814,7 +815,9 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("stealth_stalker"):
 		damage = stealth_stalker_damage
 		kbstrength = 500 * kbresistance
-		
+	elif body.is_in_group("hatchetfish"):
+		damage = hatchetfish_damage
+		kbstrength = 1000
 	elif body.is_in_group("crab_boss"):
 		damage = crab_boss_damage
 		kbstrength = 700
