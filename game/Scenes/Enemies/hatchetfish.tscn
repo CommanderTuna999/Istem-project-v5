@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c31p1nqtvdsku"]
 
 [ext_resource type="Script" uid="uid://brfpd6f2sskxe" path="res://Scripts/hatchetfish.gd" id="1_hatchet"]
-[ext_resource type="Texture2D" uid="uid://d4abekkf8q5r" path="res://Assets/image (1).png" id="2_h4ppe"]
+[ext_resource type="Texture2D" uid="uid://b06o6mc43ar0" path="res://download (3).png" id="2_h4ppe"]
 [ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_hurtbox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
@@ -23,8 +23,8 @@ aggro_radius = null
 
 [node name="PlaceholderSprite" type="Sprite2D" parent="." unique_id=698291278]
 z_index = 3
-position = Vector2(1.9073486e-06, 0.9999981)
-scale = Vector2(0.2278374, 0.22783738)
+position = Vector2(-0.79680383, -0.77190244)
+scale = Vector2(0.15245855, 0.15245855)
 texture = ExtResource("2_h4ppe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1261126365 groups=["enemy", "hatchetfish"]]
