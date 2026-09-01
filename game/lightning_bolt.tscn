@@ -6,7 +6,7 @@
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_47df3"]
 particle_flag_disable_z = true
 spread = 180.0
-gravity = Vector3(0, 98, 0)
+gravity = Vector3(0, 0, 0)
 
 [node name="LightningBolt" type="Node2D" unique_id=619182221]
 script = ExtResource("1_tx5fy")
