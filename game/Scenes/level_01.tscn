@@ -1021,7 +1021,11 @@ position = Vector2(4652, 526)
 [node name="Node" type="Node" parent="Enemies" unique_id=927071067]
 
 [node name="StealthStalker" parent="Enemies/Node" unique_id=2079988035 instance=ExtResource("15_khfxu")]
+<<<<<<< Updated upstream
 position = Vector2(737, -936)
+=======
+position = Vector2(1078, -882)
+>>>>>>> Stashed changes
 
 [node name="Level02" type="Area2D" parent="." unique_id=2077541829]
 position = Vector2(12690, 5553)
