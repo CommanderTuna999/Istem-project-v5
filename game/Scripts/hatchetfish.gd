@@ -12,8 +12,12 @@ var chase_subject: Node2D
 var home_position: Vector2
 var kb_time: float = 0.0
 var kb_velocity: Vector2 = Vector2.ZERO
+<<<<<<< Updated upstream
 
 @onready var placeholder_sprite: Sprite2D = $PlaceholderSprite
+=======
+@onready var placeholder_sprite: Sprite2D = $HatchetfishSprite
+>>>>>>> Stashed changes
 @onready var aggro_area: Area2D = $aggro_area
 
 
@@ -45,10 +49,15 @@ func _physics_process(delta: float) -> void:
 
 	if is_instance_valid(chase_subject):
 		aggro = true
-		#steer_toward(chase_subject.global_position, speed)
+		steer_toward(chase_subject.global_position, speed)
 	else:
 		aggro = false
+<<<<<<< Updated upstream
 
+=======
+		velocity = Vector2.ZERO
+	update_facing(velocity.x)
+>>>>>>> Stashed changes
 	move_and_slide()
 
 
@@ -58,6 +67,7 @@ func refresh_aggro_target() -> void:
 		if body.is_in_group("player"):
 			chase_subject = body as Node2D
 			return
+<<<<<<< Updated upstream
 
 
 #func steer_toward(target_position: Vector2, movement_speed: float) -> void:
@@ -73,6 +83,10 @@ func refresh_aggro_target() -> void:
 
 
 
+=======
+func steer_toward(target_position: Vector2, movement_speed: float) -> void:
+	velocity = global_position.direction_to(target_position) * movement_speed
+>>>>>>> Stashed changes
 func update_facing(horizontal_speed: float) -> void:
 	if is_zero_approx(horizontal_speed):
 		return
@@ -82,8 +96,11 @@ func update_facing(horizontal_speed: float) -> void:
 func update_visibility() -> void:
 	# No fade - only visible while actively aggro'd on the player.
 	placeholder_sprite.modulate.a = 1.0 if aggro else 0.0
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 func take_damage(amount: float) -> void:
 	current_health -= amount
 

@@ -3,10 +3,11 @@ extends CharacterBody2D
 @export var speed: float = 185.0
 @export var max_health: float = 4.0
 @export var aggro_radius: float = 360.0
-@export var reveal_distance: float = 165.0
 
 @export var wander_radius: float = 160.0
 @export var wander_speed: float = 60.0
+
+@export var kb_cooldown_duration: float = 0.4
 
 var current_health: float
 var aggro: bool = false
@@ -16,16 +17,13 @@ var wander_target: Vector2
 var wander_wait_time: float = 0.0
 var kb_time: float = 0.0
 var kb_velocity: Vector2 = Vector2.ZERO
+var kb_cooldown_timer: float = 0.0
 var rooted: bool = false
 var root_timer: float = 0.0
 var slow_active: bool = false
 
-<<<<<<< Updated upstream
-@onready var placeholder_sprite: AnimatedSprite2D = $PlaceholderSprite
-=======
->>>>>>> Stashed changes
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var animation_template: AnimatedSprite2D = $AnimationTemplate
+@onready var animation_template: AnimatedSprite2D = $AnimationZeus
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var aggro_area: Area2D = $aggro_area
 
@@ -38,7 +36,6 @@ func _ready() -> void:
 		aggro_shape.radius = aggro_radius
 	pick_new_wander_target()
 	animation_template.play("idle")
-	update_visibility()
 
 
 func _process(_delta: float) -> void:
@@ -46,26 +43,25 @@ func _process(_delta: float) -> void:
 		queue_free()
 		return
 
-	update_visibility()
-
 
 func _physics_process(delta: float) -> void:
 	refresh_aggro_target()
 
-<<<<<<< Updated upstream
-	#if rooted:
-		#root_timer -= delta
-		#velocity = Vector2.ZERO
-		#if root_timer <= 0.0:
-			#rooted = false
-		#move_and_slide()
-		#return
+	if kb_cooldown_timer > 0.0:
+		kb_cooldown_timer -= delta
 
-=======
->>>>>>> Stashed changes
+	if rooted:
+		root_timer -= delta
+		velocity = Vector2.ZERO
+		if root_timer <= 0.0:
+			rooted = false
+		move_and_slide()
+		return
+
 	if kb_time > 0.0:
 		kb_time -= delta
 		velocity = kb_velocity
+		update_facing(velocity.x)
 		move_and_slide()
 		return
 
@@ -77,10 +73,7 @@ func _physics_process(delta: float) -> void:
 		aggro = false
 		wander(delta)
 
-<<<<<<< Updated upstream
-=======
 	update_facing(velocity.x)
->>>>>>> Stashed changes
 	move_and_slide()
 
 
@@ -100,10 +93,6 @@ func steer_toward(target_position: Vector2, movement_speed: float) -> void:
 		if path_position.distance_to(global_position) > 1.0:
 			next_position = path_position
 	velocity = global_position.direction_to(next_position) * movement_speed
-<<<<<<< Updated upstream
-	update_facing(velocity.x)
-=======
->>>>>>> Stashed changes
 
 
 func wander(delta: float) -> void:
@@ -131,31 +120,7 @@ func pick_new_wander_target() -> void:
 func update_facing(horizontal_speed: float) -> void:
 	if is_zero_approx(horizontal_speed):
 		return
-<<<<<<< Updated upstream
-	placeholder_sprite.scale.x = absf(placeholder_sprite.scale.x) * signf(horizontal_speed)
-	animation_template.flip_h = horizontal_speed < 0.0
-=======
 	animation_template.flip_h = horizontal_speed > 0.0
->>>>>>> Stashed changes
-
-
-func update_visibility() -> void:
-	var player := get_tree().get_first_node_in_group("player") as Node2D
-	if player == null:
-<<<<<<< Updated upstream
-		placeholder_sprite.modulate.a = 0.0
-=======
-		animation_template.modulate.a = 0.0
->>>>>>> Stashed changes
-		return
-
-	var distance := global_position.distance_to(player.global_position)
-	var reveal_amount := clampf(1.0 - (distance / reveal_distance), 0.0, 1.0)
-<<<<<<< Updated upstream
-	placeholder_sprite.modulate.a = reveal_amount
-=======
-	animation_template.modulate.a = reveal_amount
->>>>>>> Stashed changes
 
 
 func play_template_animation(animation_name: StringName) -> void:
@@ -170,8 +135,11 @@ func take_damage(amount: float) -> void:
 
 
 func take_kb(source_position: Vector2) -> void:
+	if kb_cooldown_timer > 0.0:
+		return
 	kb_velocity = (global_position - source_position).normalized() * 600.0
 	kb_time = 0.12
+	kb_cooldown_timer = kb_cooldown_duration
 
 
 func set_rooted(duration: float) -> void:
