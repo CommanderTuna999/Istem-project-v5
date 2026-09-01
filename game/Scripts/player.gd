@@ -635,6 +635,7 @@ func _process(delta):
 
 		
 	if current_health <= 0:
+		get_tree().change_scene_to_file("res://scenes/level_2.tscn")
 		get_tree().call_deferred("reload_current_scene")
 		
 func handle_health_regen(delta: float) -> void:
