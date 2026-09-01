@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://7avgf1v1slos"]
+
+[ext_resource type="Script" uid="uid://cersxc5q7bnpk" path="res://Scenes/Enemies/blackdragonfish_fire.tscn.gd" id="1_cruqx"]
+[ext_resource type="Texture2D" uid="uid://ohhn4gwjdyjk" path="res://Assets/download (6) (1).png" id="2_cruqx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kvis1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cruqx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mvxya"]
+radius = 9.113975
+
+[node name="fire_projectile" type="Area2D" unique_id=1334159856 groups=["seahorse_projectile"]]
+scale = Vector2(3.64, 4.28)
+collision_layer = 32
+script = ExtResource("1_cruqx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=359251092]
+position = Vector2(0.27472544, 0)
+scale = Vector2(0.038143173, 0.030728094)
+sprite_frames = SubResource("SpriteFrames_kvis1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=253376344]
+position = Vector2(0, -0.23364563)
+scale = Vector2(1.0000002, 1)
+shape = SubResource("CircleShape2D_mvxya")

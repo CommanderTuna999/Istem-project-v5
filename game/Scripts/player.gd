@@ -627,6 +627,7 @@ var stealth_stalker_damage = 10
 var hatchetfish_damage = 15.0
 var zeus_damage = 10.0
 var lightning_damage = 15.0
+var bdragfish_damage = 10.0
 
 	
 
@@ -837,6 +838,9 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("adult_shark"):
 		damage = Adultshark_damage
 		kbstrength = 1500
+	elif body.is_in_group("black_dragonfish"):
+		damage = bdragfish_damage
+		kbstrength = 450
 	
 	else:
 		return
@@ -958,10 +962,13 @@ func _on_shield_recharge_timer_timeout() -> void:
 		shield_health = min(shield_health, shield_max_health)
 		update_shield_bar()
 
+func apply_slow(duration: float, multiplier: float) -> void:
+	total_speed_increase -= multiplier
+	await get_tree().create_timer(duration).timeout
+	total_speed_increase += multiplier
 
-func _on_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
-
-
-func _on_body_exited(body: Node2D) -> void:
-	pass # Replace with function body.
+func apply_burn(dps: float, duration: float) -> void:
+	var ticks := int(duration)
+	for i in range(ticks):
+		await get_tree().create_timer(1.0).timeout
+		take_player_damage(dps)

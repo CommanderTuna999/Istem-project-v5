@@ -26,6 +26,7 @@
 [ext_resource type="AudioStream" uid="uid://kakrcthx40tf" path="res://sfx/bow_shoot.mp3" id="22_i4lct"]
 [ext_resource type="Script" uid="uid://e5f1vnkckbm6" path="res://Scripts/heal.gd" id="22_lbihj"]
 [ext_resource type="PackedScene" uid="uid://dalc8mwkcbhvs" path="res://zeus_fish.tscn" id="22_smnwb"]
+[ext_resource type="PackedScene" uid="uid://cl037qotl8cd1" path="res://blackdragonfish.tscn" id="23_lkuj1"]
 [ext_resource type="Script" uid="uid://bsai75bhb1o3a" path="res://Scripts/cookie.gd" id="23_raj38"]
 [ext_resource type="Script" uid="uid://cdyg2msh6uppt" path="res://Scripts/shadow_fury.gd" id="24_8e0uq"]
 [ext_resource type="AudioStream" uid="uid://cmtmo11w24jcs" path="res://sfx/nom-nom-nom_gPJiWn4.mp3" id="24_356ba"]
@@ -989,6 +990,11 @@ position = Vector2(868, -1747)
 
 [node name="Zeus!!" parent="Enemies/zeus_folder" unique_id=1345799120 instance=ExtResource("22_smnwb")]
 position = Vector2(912, -642)
+
+[node name="blackdragonfish_folder" type="Node" parent="Enemies" unique_id=372684413]
+
+[node name="blackdragonfish" parent="Enemies/blackdragonfish_folder" unique_id=79016938 instance=ExtResource("23_lkuj1")]
+position = Vector2(779, -1951)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)

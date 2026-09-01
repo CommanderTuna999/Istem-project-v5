@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://cl037qotl8cd1"]
+
+[ext_resource type="Script" uid="uid://faju4my8hrmd" path="res://blackdragonfish.gd" id="1_14882"]
+[ext_resource type="Texture2D" uid="uid://dg6yci26sup1h" path="res://Assets/bdragfishf1(2).png" id="2_xlud3"]
+[ext_resource type="Texture2D" uid="uid://cxafx83hkeslu" path="res://Assets/bdragfishf2(2).png" id="3_x7tia"]
+[ext_resource type="Texture2D" uid="uid://ciux4tybdkydr" path="res://Assets/bdragfishf3(2).png" id="4_hpuge"]
+[ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="5_xlud3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vk64t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xlud3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x7tia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hpuge")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x7tia")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xlud3"]
+radius = 15.0
+height = 146.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7tia"]
+radius = 267.26767
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hpuge"]
+radius = 157.62297
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x7tia"]
+height = 122.0
+
+[node name="blackdragonfish" type="CharacterBody2D" unique_id=79016938 groups=["black_dragonfish", "enemy"]]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_14882")
+
+[node name="bdraganim" type="AnimatedSprite2D" parent="." unique_id=27600789]
+position = Vector2(1.9999995, -3.5762787e-07)
+scale = Vector2(1.5078125, 1.5078125)
+sprite_frames = SubResource("SpriteFrames_vk64t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1123985783]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_xlud3")
+
+[node name="aggro_area" type="Area2D" parent="." unique_id=462482327]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_area" unique_id=911055743]
+shape = SubResource("CircleShape2D_x7tia")
+
+[node name="range_area" type="Area2D" parent="." unique_id=1646531930 groups=["black_dragonfish", "enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="range_area" unique_id=1005328822]
+shape = SubResource("CircleShape2D_hpuge")
+
+[node name="bdragHurtbox" type="Area2D" parent="." unique_id=924187197]
+script = ExtResource("5_xlud3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bdragHurtbox" unique_id=328632664]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_x7tia")
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=675631731]
+wait_time = 1.5
+
+[connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]
+[connection signal="body_entered" from="range_area" to="." method="_on_range_area_body_entered"]
+[connection signal="body_exited" from="range_area" to="." method="_on_range_area_body_exited"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

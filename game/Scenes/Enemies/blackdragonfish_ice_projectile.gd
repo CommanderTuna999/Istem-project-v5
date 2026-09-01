@@ -1,23 +1,18 @@
 #everyone will look at this script eventually so important info:
 #Layer 1 = Player
 #Layer 6 (value 32) = Enemy projectile
-#
-#One script, two scenes: blackdragonfish_ice_projectile.tscn and
-#blackdragonfish_fire_projectile.tscn both use this script and differ only
-#by the effect_type value set in the Inspector.
+
 
 extends Area2D
 
-@export_enum("ice", "fire") var effect_type: String = "fire"
-@export var speed: float = 500.0
+@export_enum("ice", "fire") var effect_type: String = "ice"
+@export var speed: float = 750.0
 @export var damage: float = 5.0
-@export var lifetime: float = 4.0
+@export var lifetime: float = 5.0
 
-# ice effect
 @export var slow_duration: float = 2.0
 @export var slow_multiplier: float = 0.5 
 
-# fire effect
 @export var burn_dps: float = 5.0
 @export var burn_duration: float = 4.0
 
@@ -44,8 +39,8 @@ func _on_body_entered(body: Node2D) -> void:
 
 	already_hit = true
 
-	if body.has_method("take_damage"):
-		body.take_damage(damage)
+	if body.has_method("take_player_damage"):
+		body.take_player_damage(damage)
 
 	if effect_type == "ice":
 		if body.has_method("apply_slow"):
