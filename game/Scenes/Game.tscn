@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bdqbpmxw31kbp" path="res://Scenes/player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://bj7ldtrm577dp" path="res://Scenes/spear.tscn" id="2_71axn"]
+[ext_resource type="PackedScene" uid="uid://ct0r7pl2ej4q6" path="res://lightning_bolt.tscn" id="2_lklsk"]
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="3_bf53h"]
 [ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="4_alh3a"]
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="4_dahhg"]
@@ -560,6 +561,7 @@ shader = ExtResource("20_rajel")
 
 [node name="Player" parent="." unique_id=982439447 instance=ExtResource("1_gl6un")]
 position = Vector2(895, -1867)
+lightning_bolt_scene = ExtResource("2_lklsk")
 
 [node name="Spear" parent="Player" unique_id=1804206196 instance=ExtResource("2_71axn")]
 position = Vector2(-0.21830654, 0.45456308)
@@ -989,12 +991,12 @@ position = Vector2(868, -1747)
 [node name="zeus_folder" type="Node" parent="Enemies" unique_id=1626172881]
 
 [node name="Zeus!!" parent="Enemies/zeus_folder" unique_id=1345799120 instance=ExtResource("22_smnwb")]
-position = Vector2(912, -642)
+position = Vector2(688, -1660)
 
 [node name="blackdragonfish_folder" type="Node" parent="Enemies" unique_id=372684413]
 
 [node name="blackdragonfish" parent="Enemies/blackdragonfish_folder" unique_id=79016938 instance=ExtResource("23_lkuj1")]
-position = Vector2(779, -1951)
+position = Vector2(1631, -1652)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)

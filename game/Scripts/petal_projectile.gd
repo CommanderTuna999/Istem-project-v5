@@ -12,7 +12,7 @@ extends Area2D
 @export var max_travel_distance: float = 1200.0
 @export var spin_speed: float = 48.0
 
-@onready var petalbounce_audio_player: AudioStreamPlayer = $"/root/Game/AbilityFolder/Petals/petalbounce_audio_player"
+@onready var petalbounce_audio_player: AudioStreamPlayer = $petalbounce_audio_player
 
 var caster: Node2D = null
 var current_target: Node2D = null

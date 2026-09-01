@@ -1,8 +1,8 @@
 extends Node
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var clock_ticking: AudioStreamPlayer = $"/root/Game/AbilityFolder/TimeStop/clock_ticking"
-@onready var timestop_initiate: AudioStreamPlayer = $"/root/Game/AbilityFolder/TimeStop/timestop_initiate"
+@onready var clock_ticking: AudioStreamPlayer = $clock_ticking
+@onready var timestop_initiate: AudioStreamPlayer = $timestop_initiate
 @export var time_stop_active = false
 var time_stop_cooldown = false
 func _process(delta: float) -> void:

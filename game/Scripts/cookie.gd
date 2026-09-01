@@ -5,7 +5,7 @@ signal cookie_boost_requested(speed_bonus: float, damage_bonus: float, passive_h
 var cookie_on_cooldown: bool = false
 
 #@export var cookie_eat_sound: AudioStream
-@onready var cookie_audio_player: AudioStreamPlayer = $"/root/Game/AbilityFolder/Cookie/cookie_audio_player"
+@onready var cookie_audio_player: AudioStreamPlayer = $cookie_audio_player
 
 func _ready() -> void:
 	var player := get_tree().get_first_node_in_group("player")

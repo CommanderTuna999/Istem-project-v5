@@ -9,7 +9,7 @@ extends Node
 var is_casting: bool = false
 var on_cooldown: bool = false
 
-@onready var petal_audio_player: AudioStreamPlayer = $"/root/Game/AbilityFolder/Petals/petal_audio_player"
+@onready var petal_audio_player: AudioStreamPlayer = $petal_audio_player
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Ability"):

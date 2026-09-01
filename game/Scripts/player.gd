@@ -18,6 +18,9 @@ var pivoting = false
 var pivot_hit = false
 var active_currents: Array[Area2D] = []
 
+@export var lightning_bolt_scene: PackedScene
+var stunned: bool = false
+var stun_duration: float = 0.5
 
 func enter_current(current: Area2D) -> void:
 	if current not in active_currents:
@@ -360,6 +363,8 @@ func _physics_process(delta: float) -> void:
 		if harpooning:
 			currentdragaccel = harpoondragaccel
 			
+		if stunned:
+			return
 		velocity = velocity.move_toward(
 			Vector2.ZERO,
 			currentdragaccel * delta
@@ -789,11 +794,14 @@ func _on_hurt_area_body_exited(body: Node2D) -> void:
 func activate():
 	armour_DoT = true
 
-func zeus_lightning():
-	await get_tree().create_timer(1.5).timeout 
-	var damage = lightning_damage
-	damage_occuring = true
-	take_player_damage(damage)
+func zeus_lightning() -> void:
+	await get_tree().create_timer(1.5).timeout
+	if lightning_bolt_scene:
+		var bolt = lightning_bolt_scene.instantiate()
+		bolt.global_position = global_position
+		get_tree().current_scene.add_child(bolt)
+	take_player_damage(lightning_damage)
+	stun()
 
 func handleenemycontact(body: Node2D):
 	if not is_instance_valid(body):
@@ -972,3 +980,8 @@ func apply_burn(dps: float, duration: float) -> void:
 	for i in range(ticks):
 		await get_tree().create_timer(1.0).timeout
 		take_player_damage(dps)
+
+func stun():
+	stunned = true
+	await get_tree().create_timer(stun_duration).timeout
+	stunned = false

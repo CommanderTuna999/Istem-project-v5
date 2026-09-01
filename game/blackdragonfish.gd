@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 @export var shot_ammo: int = 4
 
-@export var shot_cooldown: float = 1.5
+@export var shot_cooldown: float = 0.5
 
 var max_health: float = 6.0
 var current_health: float

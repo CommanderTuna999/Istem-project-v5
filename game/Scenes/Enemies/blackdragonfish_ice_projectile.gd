@@ -6,7 +6,7 @@
 extends Area2D
 
 @export_enum("ice", "fire") var effect_type: String = "ice"
-@export var speed: float = 750.0
+@export var speed: float = 1000.0
 @export var damage: float = 5.0
 @export var lifetime: float = 5.0
 
