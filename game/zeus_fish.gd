@@ -61,7 +61,6 @@ func _physics_process(delta: float) -> void:
 	if kb_time > 0.0:
 		kb_time -= delta
 		velocity = kb_velocity
-		update_facing(velocity.x)
 		move_and_slide()
 		return
 

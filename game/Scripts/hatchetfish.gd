@@ -2,12 +2,14 @@ extends CharacterBody2D
 @export var speed: float = 150.0
 @export var max_health: float = 4.0
 @export var aggro_radius: float = 90.0
+@export var kb_cooldown_duration: float = 0.4
 var current_health: float
 var aggro: bool = false
 var chase_subject: Node2D
 var home_position: Vector2
 var kb_time: float = 0.0
 var kb_velocity: Vector2 = Vector2.ZERO
+var kb_cooldown_timer: float = 0.0
 @onready var placeholder_sprite: Sprite2D = $HatchetfishSprite
 @onready var aggro_area: Area2D = $aggro_area
 func _ready() -> void:
@@ -24,6 +26,10 @@ func _process(_delta: float) -> void:
 	update_visibility()
 func _physics_process(delta: float) -> void:
 	refresh_aggro_target()
+
+	if kb_cooldown_timer > 0.0:
+		kb_cooldown_timer -= delta
+
 	if kb_time > 0.0:
 		kb_time -= delta
 		velocity = kb_velocity
@@ -56,11 +62,12 @@ func update_visibility() -> void:
 func take_damage(amount: float) -> void:
 	current_health -= amount
 func take_kb(source_position: Vector2) -> void:
-	if kb_time > 0.0:
+	if kb_cooldown_timer > 0.0:
 		return
 	print("knockback")
 	kb_velocity = (global_position - source_position).normalized() * 600.0
 	kb_time = 0.12
+	kb_cooldown_timer = kb_cooldown_duration
 func _on_aggro_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		chase_subject = body

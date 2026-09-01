@@ -21,7 +21,7 @@ var root_timer: float = 0.0
 var slow_active: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var animation_template: AnimatedSprite2D = $AnimationTemplate
+@onready var animation_template: AnimatedSprite2D = $AnimationGSHARK
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var aggro_area: Area2D = $aggro_area
 
@@ -33,7 +33,7 @@ func _ready() -> void:
 	if aggro_shape != null:
 		aggro_shape.radius = aggro_radius
 	pick_new_wander_target()
-	animation_template.play("idle")
+	animation_template.play("aggro")
 	update_visibility()
 
 
@@ -51,7 +51,6 @@ func _physics_process(delta: float) -> void:
 	if kb_time > 0.0:
 		kb_time -= delta
 		velocity = kb_velocity
-		update_facing(velocity.x)
 		move_and_slide()
 		return
 

@@ -77,7 +77,7 @@ collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_stalker")
 
-[node name="AnimationTemplate" type="AnimatedSprite2D" parent="." unique_id=550808718]
+[node name="AnimationGSHARK" type="AnimatedSprite2D" parent="." unique_id=550808718]
 position = Vector2(23, 22)
 scale = Vector2(1.55, 1.55)
 sprite_frames = SubResource("SpriteFrames_template")
