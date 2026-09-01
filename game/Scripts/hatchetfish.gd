@@ -8,15 +8,7 @@ var chase_subject: Node2D
 var home_position: Vector2
 var kb_time: float = 0.0
 var kb_velocity: Vector2 = Vector2.ZERO
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 @onready var placeholder_sprite: Sprite2D = $PlaceholderSprite
-=======
-@onready var placeholder_sprite: Sprite2D = $HatchetfishSprite
->>>>>>> Stashed changes
 @onready var aggro_area: Area2D = $aggro_area
 func _ready() -> void:
 	current_health = max_health
@@ -40,19 +32,10 @@ func _physics_process(delta: float) -> void:
 		return
 	if is_instance_valid(chase_subject):
 		aggro = true
-		steer_toward(chase_subject.global_position, speed)
+		#steer_toward(chase_subject.global_position, speed)
 	else:
 		aggro = false
-<<<<<<< HEAD
 	update_facing(velocity.x)
-=======
-<<<<<<< Updated upstream
-
-=======
-		velocity = Vector2.ZERO
-	update_facing(velocity.x)
->>>>>>> Stashed changes
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 	move_and_slide()
 func refresh_aggro_target() -> void:
 	chase_subject = null
@@ -60,12 +43,6 @@ func refresh_aggro_target() -> void:
 		if body.is_in_group("player"):
 			chase_subject = body as Node2D
 			return
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-
-
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 #func steer_toward(target_position: Vector2, movement_speed: float) -> void:
 	#navigation_agent.target_position = target_position
 	#var next_position := target_position
@@ -74,34 +51,13 @@ func refresh_aggro_target() -> void:
 		#if path_position.distance_to(global_position) > 1.0:
 			#next_position = path_position
 	#velocity = global_position.direction_to(next_position) * movement_speed
-<<<<<<< HEAD
-=======
-	#update_facing(velocity.x)
-
-
-
-
-=======
-func steer_toward(target_position: Vector2, movement_speed: float) -> void:
-	velocity = global_position.direction_to(target_position) * movement_speed
->>>>>>> Stashed changes
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 func update_facing(horizontal_speed: float) -> void:
 	if is_zero_approx(horizontal_speed):
 		return
 	placeholder_sprite.flip_h = horizontal_speed > 0.0
 func update_visibility() -> void:
 	# No fade - only visible while actively aggro'd on the player.
-<<<<<<< HEAD
 	placeholder_sprite.modulate.a = 1.0 if aggro else 1.0
-=======
-	placeholder_sprite.modulate.a = 1.0 if aggro else 0.0
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 func take_damage(amount: float) -> void:
 	current_health -= amount
 func take_kb(source_position: Vector2) -> void:
