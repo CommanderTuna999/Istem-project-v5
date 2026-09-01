@@ -1601,7 +1601,7 @@ position = Vector2(7888, -566)
 position = Vector2(10869, -866)
 
 [node name="crab2" parent="." unique_id=342008386 instance=ExtResource("38_bwi4u")]
-position = Vector2(7520, -149)
+position = Vector2(7515, -154.00002)
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
