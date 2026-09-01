@@ -1,98 +1,91 @@
 extends CharacterBody2D
-@export var speed: float = 150.0
+
+@export var speed: float = 185.0
 @export var max_health: float = 4.0
-@export var aggro_radius: float = 90.0
+@export var aggro_radius: float = 360.0
+
+@export var wander_radius: float = 160.0
+@export var wander_speed: float = 60.0
+
+@export var kb_cooldown_duration: float = 0.4
+
 var current_health: float
 var aggro: bool = false
 var chase_subject: Node2D
 var home_position: Vector2
+var wander_target: Vector2
+var wander_wait_time: float = 0.0
 var kb_time: float = 0.0
 var kb_velocity: Vector2 = Vector2.ZERO
-<<<<<<< HEAD
-@onready var placeholder_sprite: Sprite2D = $PlaceholderSprite
-=======
+var kb_cooldown_timer: float = 0.0
 var rooted: bool = false
 var root_timer: float = 0.0
 var slow_active: bool = false
 
-<<<<<<< Updated upstream
-@onready var placeholder_sprite: AnimatedSprite2D = $PlaceholderSprite
-=======
->>>>>>> Stashed changes
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var animation_template: AnimatedSprite2D = $AnimationTemplate
+@onready var animation_template: AnimatedSprite2D = $AnimationZeus
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 @onready var aggro_area: Area2D = $aggro_area
+
+
 func _ready() -> void:
 	current_health = max_health
 	home_position = global_position
 	var aggro_shape := $aggro_area/CollisionShape2D.shape as CircleShape2D
 	if aggro_shape != null:
 		aggro_shape.radius = aggro_radius
-	update_visibility()
+	pick_new_wander_target()
+	animation_template.play("idle")
+
+
 func _process(_delta: float) -> void:
 	if current_health <= 0.0:
 		queue_free()
 		return
-	update_visibility()
+
+
 func _physics_process(delta: float) -> void:
 	refresh_aggro_target()
-<<<<<<< HEAD
-=======
 
-<<<<<<< Updated upstream
-	#if rooted:
-		#root_timer -= delta
-		#velocity = Vector2.ZERO
-		#if root_timer <= 0.0:
-			#rooted = false
-		#move_and_slide()
-		#return
+	if kb_cooldown_timer > 0.0:
+		kb_cooldown_timer -= delta
 
-=======
->>>>>>> Stashed changes
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
+	if rooted:
+		root_timer -= delta
+		velocity = Vector2.ZERO
+		if root_timer <= 0.0:
+			rooted = false
+		move_and_slide()
+		return
+
 	if kb_time > 0.0:
 		kb_time -= delta
 		velocity = kb_velocity
 		update_facing(velocity.x)
 		move_and_slide()
 		return
+
 	if is_instance_valid(chase_subject):
 		aggro = true
 		steer_toward(chase_subject.global_position, speed)
+		play_template_animation("aggro")
 	else:
 		aggro = false
-<<<<<<< HEAD
-		velocity = Vector2.ZERO
-	update_facing(velocity.x)
-=======
 		wander(delta)
 
-<<<<<<< Updated upstream
-=======
 	update_facing(velocity.x)
->>>>>>> Stashed changes
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 	move_and_slide()
+
+
 func refresh_aggro_target() -> void:
 	chase_subject = null
 	for body in aggro_area.get_overlapping_bodies():
 		if body.is_in_group("player"):
 			chase_subject = body as Node2D
 			return
+
+
 func steer_toward(target_position: Vector2, movement_speed: float) -> void:
-<<<<<<< HEAD
-	velocity = global_position.direction_to(target_position) * movement_speed
-func update_facing(horizontal_speed: float) -> void:
-	if is_zero_approx(horizontal_speed):
-		return
-	placeholder_sprite.flip_h = horizontal_speed > 0.0
-func update_visibility() -> void:
-	# No fade - only visible while actively aggro'd on the player.
-	placeholder_sprite.modulate.a = 1.0 if aggro else 0.0
-=======
 	navigation_agent.target_position = target_position
 	var next_position := target_position
 	if navigation_agent.get_navigation_map().is_valid() and not navigation_agent.is_navigation_finished():
@@ -100,10 +93,6 @@ func update_visibility() -> void:
 		if path_position.distance_to(global_position) > 1.0:
 			next_position = path_position
 	velocity = global_position.direction_to(next_position) * movement_speed
-<<<<<<< Updated upstream
-	update_facing(velocity.x)
-=======
->>>>>>> Stashed changes
 
 
 func wander(delta: float) -> void:
@@ -131,31 +120,7 @@ func pick_new_wander_target() -> void:
 func update_facing(horizontal_speed: float) -> void:
 	if is_zero_approx(horizontal_speed):
 		return
-<<<<<<< Updated upstream
-	placeholder_sprite.scale.x = absf(placeholder_sprite.scale.x) * signf(horizontal_speed)
-	animation_template.flip_h = horizontal_speed < 0.0
-=======
 	animation_template.flip_h = horizontal_speed > 0.0
->>>>>>> Stashed changes
-
-
-func update_visibility() -> void:
-	var player := get_tree().get_first_node_in_group("player") as Node2D
-	if player == null:
-<<<<<<< Updated upstream
-		placeholder_sprite.modulate.a = 0.0
-=======
-		animation_template.modulate.a = 0.0
->>>>>>> Stashed changes
-		return
-
-	var distance := global_position.distance_to(player.global_position)
-	var reveal_amount := clampf(1.0 - (distance / reveal_distance), 0.0, 1.0)
-<<<<<<< Updated upstream
-	placeholder_sprite.modulate.a = reveal_amount
-=======
-	animation_template.modulate.a = reveal_amount
->>>>>>> Stashed changes
 
 
 func play_template_animation(animation_name: StringName) -> void:
@@ -163,18 +128,42 @@ func play_template_animation(animation_name: StringName) -> void:
 		animation_template.play(animation_name)
 
 
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 func take_damage(amount: float) -> void:
 	current_health -= amount
+	if animation_player.has_animation("damaged"):
+		animation_player.play("damaged")
+
+
 func take_kb(source_position: Vector2) -> void:
-	if kb_time > 0.0:
+	if kb_cooldown_timer > 0.0:
 		return
-	print("knockback")
 	kb_velocity = (global_position - source_position).normalized() * 600.0
 	kb_time = 0.12
+	kb_cooldown_timer = kb_cooldown_duration
+
+
+func set_rooted(duration: float) -> void:
+	rooted = true
+	root_timer = maxf(root_timer, duration)
+
+
+func set_slowed(duration: float, multiplier: float) -> void:
+	if slow_active:
+		return
+	slow_active = true
+	speed *= multiplier
+	wander_speed *= multiplier
+	await get_tree().create_timer(duration).timeout
+	speed /= multiplier
+	wander_speed /= multiplier
+	slow_active = false
+
+
 func _on_aggro_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		chase_subject = body
+
+
 func _on_aggro_area_body_exited(body: Node2D) -> void:
 	if body == chase_subject:
 		chase_subject = null

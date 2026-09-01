@@ -985,11 +985,22 @@ position = Vector2(919, -2016)
 [node name="Hatchetfish" parent="Enemies/hatchetfish_folder" unique_id=700759828 instance=ExtResource("21_oo65k")]
 position = Vector2(868, -1747)
 
+<<<<<<< HEAD
 [node name="zeus_folder" type="Node" parent="Enemies" unique_id=1626172881]
 
 [node name="Node2D" parent="Enemies/zeus_folder" unique_id=1345799120 instance=ExtResource("22_smnwb")]
 position = Vector2(859, -644)
 
+=======
+<<<<<<< Updated upstream
+=======
+[node name="zeus_folder" type="Node" parent="Enemies" unique_id=1626172881]
+
+[node name="Zeus!!" parent="Enemies/zeus_folder" unique_id=1345799120 instance=ExtResource("22_smnwb")]
+position = Vector2(912, -642)
+
+>>>>>>> Stashed changes
+>>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)
 collision_layer = 0
