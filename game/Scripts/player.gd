@@ -625,6 +625,8 @@ var starfish_damage = 15
 var crab_boss_damage = 75
 var stealth_stalker_damage = 10
 var hatchetfish_damage = 15.0
+var zeus_damage = 10.0
+var lightning_damage = 15.0
 
 	
 
@@ -786,6 +788,12 @@ func _on_hurt_area_body_exited(body: Node2D) -> void:
 func activate():
 	armour_DoT = true
 
+func zeus_lightning():
+	await get_tree().create_timer(1.5).timeout 
+	var damage = 0
+	damage = lightning_damage
+	damage_occuring = true
+
 func handleenemycontact(body: Node2D):
 	if not is_instance_valid(body):
 		return
@@ -818,11 +826,22 @@ func handleenemycontact(body: Node2D):
 		kbstrength = 500 * kbresistance
 	elif body.is_in_group("hatchetfish"):
 		damage = hatchetfish_damage
+<<<<<<< HEAD
 		kbstrength = 10
+=======
+<<<<<<< Updated upstream
+		kbstrength = 1000
+=======
+		kbstrength = 400
+>>>>>>> Stashed changes
+>>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 	elif body.is_in_group("crab_boss"):
 		damage = crab_boss_damage
 		kbstrength = 700
-		
+	elif body.is_in_group("zeus_fish"):
+		damage = zeus_damage
+		kbstrength = 500
+		zeus_lightning()
 	elif body.is_in_group("adult_shark"):
 		damage = Adultshark_damage
 		kbstrength = 1500
