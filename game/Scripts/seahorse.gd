@@ -38,8 +38,8 @@ func _ready() -> void:
 	animated_sprite_2d.play("pregnant")
 func scroll_drop():
 	var roll: float = randf()
-	if roll <= scroll_drop_chance:
-		CurrencySystem.scrolls += scrolls_drop_amount
+	#if roll <= scroll_drop_chance:
+#		CurrencySystem.scrolls += scrolls_drop_amount
 func _process(_delta): #x axis flipping for now
 	if not chase_subject == null and chase_subject.position.x > position.x:
 		animated_sprite_2d.flip_h = true
@@ -51,7 +51,7 @@ func _process(_delta): #x axis flipping for now
 		if TimeStop.time_stop_active == true:
 			return
 		var seahorse_coins_drop = randi_range(80, 120)
-		CurrencySystem.TotalCoins += seahorse_coins_drop
+		#CurrencySystem.TotalCoins += seahorse_coins_drop
 		scroll_drop()
 		queue_free()
 
