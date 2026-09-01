@@ -1,35 +1,16 @@
 [gd_scene format=3 uid="uid://dalc8mwkcbhvs"]
 
-<<<<<<< HEAD
-[ext_resource type="Texture2D" uid="uid://dmrdgb1x4l3we" path="res://Assets/pixil-layer-Background (2).png" id="1_warfe"]
-=======
 [ext_resource type="Script" uid="uid://bwupdt4thchta" path="res://zeus_fish.gd" id="1_7jced"]
 [ext_resource type="Texture2D" uid="uid://dmrdgb1x4l3we" path="res://Assets/pixil-layer-Background (2).png" id="1_warfe"]
 [ext_resource type="Texture2D" uid="uid://bh432lg41d5u6" path="res://Assets/pixil-layer-Background (3).png" id="3_jin7i"]
 [ext_resource type="Texture2D" uid="uid://dblijw3yrnr2f" path="res://Assets/pixil-layer-Background (4).png" id="4_5m8db"]
 [ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="5_my4m3"]
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8yk8k"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_warfe")
-<<<<<<< HEAD
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[node name="Zeus!!" type="CharacterBody2D" unique_id=1345799120]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1674279055]
-scale = Vector2(2.725, 2.725)
-sprite_frames = SubResource("SpriteFrames_8yk8k")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1772208954]
-=======
 }, {
 "duration": 1.0,
 "texture": ExtResource("3_jin7i")
@@ -67,7 +48,7 @@ animation = &"idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1772208954]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=153501644 groups=["enemy", "zeus_fish"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=153501644]
 position = Vector2(2.5, 2)
 shape = SubResource("RectangleShape2D_1rymt")
 
@@ -78,13 +59,12 @@ shape = SubResource("CircleShape2D_pwnda")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=2100872832]
 
-[node name="ZeusHurtbox" type="Area2D" parent="." unique_id=472592445 groups=["enemy", "zeus_fish"]]
+[node name="ZeusHurtbox" type="Area2D" parent="." unique_id=472592445]
 script = ExtResource("5_my4m3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ZeusHurtbox" unique_id=1659062784 groups=["enemy", "zeus_fish"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZeusHurtbox" unique_id=1659062784]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_pmt40")
 
 [connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
 [connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee

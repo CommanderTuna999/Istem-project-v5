@@ -790,9 +790,9 @@ func activate():
 
 func zeus_lightning():
 	await get_tree().create_timer(1.5).timeout 
-	var damage = 0
-	damage = lightning_damage
+	var damage = lightning_damage
 	damage_occuring = true
+	take_player_damage(damage)
 
 func handleenemycontact(body: Node2D):
 	if not is_instance_valid(body):
@@ -826,15 +826,7 @@ func handleenemycontact(body: Node2D):
 		kbstrength = 500 * kbresistance
 	elif body.is_in_group("hatchetfish"):
 		damage = hatchetfish_damage
-<<<<<<< HEAD
-		kbstrength = 10
-=======
-<<<<<<< Updated upstream
-		kbstrength = 1000
-=======
-		kbstrength = 400
->>>>>>> Stashed changes
->>>>>>> 7dc4d4ef2b45ae500cb1d91d78aba8dd436aa0ee
+		kbstrength = 500
 	elif body.is_in_group("crab_boss"):
 		damage = crab_boss_damage
 		kbstrength = 700
