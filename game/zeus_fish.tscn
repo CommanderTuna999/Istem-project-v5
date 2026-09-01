@@ -38,7 +38,7 @@ height = 88.0
 
 [node name="Zeus!!" type="CharacterBody2D" unique_id=1345799120 groups=["enemy", "zeus_fish"]]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 10
 script = ExtResource("1_7jced")
 
 [node name="AnimationZeus" type="AnimatedSprite2D" parent="." unique_id=1674279055]

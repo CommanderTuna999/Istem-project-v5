@@ -15,7 +15,7 @@ size = Vector2(119, 44)
 
 [node name="Hatchetfish" type="CharacterBody2D" unique_id=899756020 groups=["enemy", "hatchetfish"]]
 collision_layer = 8
-collision_mask = 3
+collision_mask = 10
 script = ExtResource("1_hatchet")
 
 [node name="HatchetfishSprite" type="Sprite2D" parent="." unique_id=698291278]

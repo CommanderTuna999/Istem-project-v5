@@ -94,7 +94,7 @@ _data = {
 [node name="seahorse_child" type="CharacterBody2D" unique_id=1111911240 groups=["clownfish", "enemy"]]
 scale = Vector2(0.48201895, 0.4836929)
 collision_layer = 8
-collision_mask = 10
+collision_mask = 2
 script = ExtResource("1_sbm2b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=330375805]

@@ -256,7 +256,7 @@ _data = {
 &"damaged": SubResource("Animation_ldcme")
 }
 
-[node name="starfish" type="CharacterBody2D" unique_id=1111911240 groups=["starfish", "enemy"]]
+[node name="starfish" type="CharacterBody2D" unique_id=1111911240 groups=["enemy", "starfish"]]
 scale = Vector2(1.5220168, 1.5273025)
 collision_layer = 8
 collision_mask = 10

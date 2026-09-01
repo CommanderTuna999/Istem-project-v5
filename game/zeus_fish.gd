@@ -136,7 +136,7 @@ func take_damage(amount: float) -> void:
 func take_kb(source_position: Vector2) -> void:
 	if kb_cooldown_timer > 0.0:
 		return
-	kb_velocity = (global_position - source_position).normalized() * 600.0
+	kb_velocity = (global_position - source_position).normalized() * 1200.0
 	kb_time = 0.12
 	kb_cooldown_timer = kb_cooldown_duration
 
