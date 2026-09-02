@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://csalksyt6fihe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p5ngi"]
+font_size = 100
 
 [node name="Death" type="Node2D" unique_id=1230929487]
 
@@ -11,10 +12,22 @@ offset_bottom = 818.0
 [node name="Label" type="Label" parent="ColorRect" unique_id=213129200]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 518.0
-offset_top = 312.0
-offset_right = 762.0
-offset_bottom = 574.0
+offset_left = 382.0
+offset_top = 237.0
+offset_right = 755.0
+offset_bottom = 499.0
 theme_override_font_sizes/font_size = 700
 text = "ur dead"
+label_settings = SubResource("LabelSettings_p5ngi")
+
+[node name="Label" type="Label" parent="ColorRect/Label" unique_id=1911397863]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = -243.0
+offset_top = 102.0
+offset_right = 678.0
+offset_bottom = 379.0
+theme_override_font_sizes/font_size = 21
+text = "press r to restart ig
+"
 label_settings = SubResource("LabelSettings_p5ngi")
