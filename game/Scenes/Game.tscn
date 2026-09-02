@@ -37,6 +37,7 @@
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="25_i0vto"]
 [ext_resource type="AudioStream" uid="uid://clklxrgjbhver" path="res://sfx/clock-tick.mp3" id="26_dctr5"]
 [ext_resource type="Script" uid="uid://j8cqe2er2s8a" path="res://Scripts/hard_hit.gd" id="26_hardhit"]
+[ext_resource type="PackedScene" uid="uid://cn4m04bhkfiwb" path="res://camerafish.tscn" id="26_jamva"]
 [ext_resource type="Script" uid="uid://bk3ngxqppw15h" path="res://Scripts/icy_shot.gd" id="27_icyshot"]
 [ext_resource type="AudioStream" uid="uid://bo8j36ljf0gtc" path="res://sfx/slap-battles-time-stop-god-hand.mp3" id="28_7w24h"]
 [ext_resource type="Script" uid="uid://chymha3bnjeuw" path="res://Scripts/tsunami_impact.gd" id="28_tsunami"]
@@ -992,7 +993,7 @@ position = Vector2(868, -1747)
 [node name="zeus_folder" type="Node" parent="Enemies" unique_id=1626172881]
 
 [node name="Zeus!!" parent="Enemies/zeus_folder" unique_id=1345799120 instance=ExtResource("22_smnwb")]
-position = Vector2(688, -1660)
+position = Vector2(2298, -1550)
 
 [node name="blackdragonfish_folder" type="Node" parent="Enemies" unique_id=372684413]
 
@@ -1003,6 +1004,11 @@ position = Vector2(1631, -1652)
 
 [node name="torpedo" parent="Enemies/torpedo_folder" unique_id=1953908890 instance=ExtResource("25_34hf4")]
 position = Vector2(1095, -709)
+
+[node name="camerafish_folder" type="Node" parent="Enemies" unique_id=389683705]
+
+[node name="CameraFish" parent="Enemies/camerafish_folder" unique_id=2118139995 instance=ExtResource("26_jamva")]
+position = Vector2(1093, -1765)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)

@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 @export var shot_ammo: int = 4
 
-@export var shot_cooldown: float = 1.5
+@export var shot_cooldown: float = 1.0
 
 @export var wander_radius: float = 160.0
 @export var wander_speed: float = 85.0

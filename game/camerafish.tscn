@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cn4m04bhkfiwb"]
+
+[ext_resource type="Script" uid="uid://kfv67hpd34q7" path="res://camerafish.gd" id="1_a1klm"]
+[ext_resource type="Texture2D" uid="uid://cpejmtb7vsure" path="res://Assets/pixil-frame-0 (5).png" id="2_a1klm"]
+[ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_n6ou3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rpmt"]
+atlas = ExtResource("2_a1klm")
+region = Rect2(2, 0, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6ou3"]
+atlas = ExtResource("2_a1klm")
+region = Rect2(34, 0, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocjo2"]
+atlas = ExtResource("2_a1klm")
+region = Rect2(66, 0, 32, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6hu7g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rpmt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6ou3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocjo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6ou3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a1klm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hql41"]
+radius = 124.57929
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6egou"]
+
+[node name="CameraFish" type="CharacterBody2D" unique_id=2118139995 groups=["camerafish", "enemy"]]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_a1klm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=712744776]
+sprite_frames = SubResource("SpriteFrames_6hu7g")
+frame_progress = 0.29186317
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2033515426]
+position = Vector2(0, -3)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_a1klm")
+
+[node name="aggro_area" type="Area2D" parent="." unique_id=548972491]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_area" unique_id=1739110348]
+shape = SubResource("CircleShape2D_hql41")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=574556357]
+collision_layer = 1024
+collision_mask = 16
+script = ExtResource("3_n6ou3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=650766851]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_6egou")
+
+[connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]

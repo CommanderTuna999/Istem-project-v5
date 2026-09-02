@@ -4,6 +4,7 @@ extends Node2D
 @export var jaggedness: float = 64.0
 @export var min_segment_length: float = 10.0
 @export var bolt_lifetime: float = 0.5
+@export var fade_start: float = 0.6
 
 @onready var bolt: Line2D = $Bolt
 @onready var sparks: GPUParticles2D = $Sparks
@@ -13,7 +14,12 @@ func _ready() -> void:
 	generate_bolt()
 	sparks.restart()
 	sparks.emitting = true
-	await get_tree().create_timer(bolt_lifetime).timeout
+	var fade_delay := bolt_lifetime * fade_start
+	var fade_duration := bolt_lifetime - fade_delay
+	await get_tree().create_timer(fade_delay).timeout
+	var tween := create_tween()
+	tween.parallel().tween_property(bolt, "width", 0.0, fade_duration)
+	await tween.finished
 	queue_free()
 
 

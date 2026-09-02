@@ -616,8 +616,20 @@ var defence:
 
 var current_health = 100
 var damage_occuring = false
-var iframe_duration = 0.9
+var iframe_duration = 0.5
 var starsaveused = false
+
+#mob special effects (custom calling ig)
+@export var area_symbol_scene: PackedScene = preload("res://Scenes/Enemies/area_symbol.tscn")
+@export var camera_strike_spawn_distance: float = 900.0
+
+func trigger_camera_strike() -> void:
+	var random_angle := randf_range(0.0, TAU)
+	var spawn_offset := Vector2(cos(random_angle), sin(random_angle)) * camera_strike_spawn_distance
+	var symbol = area_symbol_scene.instantiate()
+	symbol.global_position = global_position + spawn_offset
+	symbol.target_position = global_position
+	get_tree().current_scene.add_child(symbol)
 
 #mob damages
 
@@ -633,6 +645,7 @@ var hatchetfish_damage = 15.0
 var zeus_damage = 10.0
 var lightning_damage = 15.0
 var bdragfish_damage = 10.0
+var camerafish_damage = 5.0
 
 	
 
@@ -849,6 +862,11 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("black_dragonfish"):
 		damage = bdragfish_damage
 		kbstrength = 450
+	elif body.is_in_group("camerafish"):
+		damage = camerafish_damage
+		kbstrength = 305
+		await get_tree().create_timer(0.1).timeout
+		trigger_camera_strike()
 	
 	else:
 		return
@@ -1011,4 +1029,9 @@ func apply_burn(dps: float, duration: float) -> void:
 func stun():
 	stunned = true
 	await get_tree().create_timer(stun_duration).timeout
+	stunned = false
+
+func camera_stun(duration: float) -> void:
+	stunned = true
+	await get_tree().create_timer(duration).timeout
 	stunned = false

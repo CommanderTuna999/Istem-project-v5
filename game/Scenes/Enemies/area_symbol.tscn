@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dc2c7jtqjim55"]
+
+[ext_resource type="Script" uid="uid://c2we6h60jl22e" path="res://Scenes/Enemies/area_symbol.gd" id="1_us3ko"]
+[ext_resource type="Texture2D" uid="uid://cmorx8sy2oixb" path="res://Assets/pixil-layer-Background (11).png" id="1_y5rbc"]
+[ext_resource type="Texture2D" uid="uid://6a33m6mi014g" path="res://Assets/pixil-layer-Background (7).png" id="2_us3ko"]
+[ext_resource type="Texture2D" uid="uid://bl4hhxc76jigq" path="res://Assets/pixil-layer-Background (10).png" id="3_jnuk5"]
+[ext_resource type="Texture2D" uid="uid://436xoby5v2b4" path="res://Assets/pixil-layer-Background (9).png" id="4_577u5"]
+[ext_resource type="Texture2D" uid="uid://ci8rnqjdn0uuf" path="res://pixil-layer-Background (8).png" id="5_koanv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fiqby"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y5rbc")
+}],
+"loop": true,
+"name": &"dragging",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_us3ko")
+}],
+"loop": true,
+"name": &"flashing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y5rbc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jnuk5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_577u5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_koanv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_us3ko")
+}],
+"loop": false,
+"name": &"growth",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_us3ko"]
+size = Vector2(115, 109)
+
+[node name="AreaSymbol" type="Node2D" unique_id=2021130842]
+script = ExtResource("1_us3ko")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2124484513]
+scale = Vector2(6.2666664, 6.2666664)
+sprite_frames = SubResource("SpriteFrames_fiqby")
+animation = &"growth"
+
+[node name="StrikeArea" type="Area2D" parent="." unique_id=1766550759]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea" unique_id=1492650357]
+shape = SubResource("RectangleShape2D_us3ko")
