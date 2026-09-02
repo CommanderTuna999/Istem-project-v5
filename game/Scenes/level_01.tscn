@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="14_osdef"]
 [ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="15_eqa25"]
 [ext_resource type="AudioStream" uid="uid://kakrcthx40tf" path="res://sfx/bow_shoot.mp3" id="16_wejbp"]
+[ext_resource type="PackedScene" uid="uid://cn4m04bhkfiwb" path="res://camerafish.tscn" id="16_xe54j"]
 [ext_resource type="Script" uid="uid://e5f1vnkckbm6" path="res://Scripts/heal.gd" id="17_ywwm3"]
 [ext_resource type="AudioStream" uid="uid://dpvo8eortnl8e" path="res://sfx/heal-skill-ro.mp3" id="18_b4ywe"]
 [ext_resource type="Script" uid="uid://bsai75bhb1o3a" path="res://Scripts/cookie.gd" id="19_c2pji"]
@@ -1021,7 +1022,10 @@ process_material = SubResource("ParticleProcessMaterial_f8buc")
 
 [node name="shark_folder" type="Node" parent="Enemies" unique_id=67066988]
 
-[node name="Node" type="Node" parent="Enemies" unique_id=927071067]
+[node name="camerafish_folder(testing" type="Node" parent="Enemies" unique_id=927071067]
+
+[node name="CameraFish" parent="Enemies/camerafish_folder(testing" unique_id=2118139995 instance=ExtResource("16_xe54j")]
+position = Vector2(443, -943)
 
 [node name="Level02" type="Area2D" parent="." unique_id=2077541829]
 position = Vector2(12690, 5553)
@@ -1092,7 +1096,6 @@ grow_vertical = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=33751702]
 stream = ExtResource("25_0fel4")
 volume_db = -10.035
-autoplay = true
 parameters/looping = true
 
 [node name="Adultshark" parent="." unique_id=888717338 instance=ExtResource("29_ywwm3")]
