@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var fuse_time: float = 2.0
 @export var explosion_radius: float = 150.0
 @export var damage: float = 15.0
-@export var knockback_strength: float = 900.0
+@export var knockback_strength: float = 1800.0
 @export var flash_fade_time: float = 0.167
 
 var max_health: float = 4.0
