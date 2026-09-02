@@ -45,7 +45,7 @@ animations = [{
 size = Vector2(25.55062, 48.71257)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fs7ks"]
-size = Vector2(14.626535, 28.75)
+size = Vector2(14.626535, 34.443527)
 
 [sub_resource type="LabelSettings" id="LabelSettings_vgqql"]
 font_size = 8
@@ -87,7 +87,8 @@ scale = Vector2(1.3200011, 1.2000004)
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_area" unique_id=1919571177]
-scale = Vector2(1.1539409, 0.99658495)
+position = Vector2(0, 2.8370416)
+scale = Vector2(1.1539408, 0.9965849)
 shape = SubResource("RectangleShape2D_fs7ks")
 
 [node name="damage_number_template" type="Node2D" parent="." unique_id=2107003186]

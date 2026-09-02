@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AttackPivot/AnimatedSprite2D
 @onready var slash_sound_player: AudioStreamPlayer = $slash_sound_player
-
+@onready var hit_effect = preload("res://hit_effect.tscn")
 var direction = "right"
 var restside = "right"
 var attacking := false
@@ -24,7 +24,7 @@ const spearoffset := 50
 const handoffset := 8
 
 # How far ahead of the player the ray searches for a wall.
-const wall_parry_ray_length := 64.0
+const wall_parry_ray_length := 110.0
 
 @onready var attackpivot = $AttackPivot
 @onready var spearsprite = $AttackPivot/AnimatedSprite2D
@@ -88,6 +88,9 @@ func attack():
 
 
 	# ATTACK APPEARS.
+	animated_sprite_2d.stop()
+	animated_sprite_2d.frame = 0
+	animated_sprite_2d.frame_progress = 0.0
 	animated_sprite_2d.visible = true
 	animated_sprite_2d.play("thrust")
 
@@ -178,13 +181,16 @@ func check_for_wall_parry() -> void:
 
 	var wall_normal: Vector2 = result["normal"]
 	var hit_position: Vector2 = result["position"]
+	
+	spawn_hit_effect(hit_position - wall_normal * 4.0)
 
 
 	bounced_this_attack = true
 
 	get_parent().spear_wall_bounce(
-		wall_normal,
-		hit_position
+		wall_normal,	
+		hit_position,
+		direction_to_mouse
 	)
 
 
@@ -225,3 +231,11 @@ func ability_finish() -> void:
 
 	get_parent().facinglocked = false
 	attacking = false
+	
+	#Hit effect at position
+func spawn_hit_effect(hit_position: Vector2) -> void:
+	var effect = hit_effect.instantiate()
+
+	get_tree().current_scene.add_child(effect)
+
+	effect.global_position = hit_position

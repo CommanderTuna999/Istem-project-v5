@@ -107,7 +107,7 @@ var kbvelocity = Vector2.ZERO
 @export var harpoonprojectilescene: PackedScene
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-@onready var dash_bar: ProgressBar = get_tree().current_scene.find_child("dashbar", true, false) as ProgressBar
+@onready var dash_bar: ColorRect = %DashFill
 @onready var shield_bar = get_tree().current_scene.get_node("UI/CanvasLayer/ShieldBar")
 @export var recharge_per_second: float = 20.0
 @export var exhausted_recharge_per_second: float = 10.0
@@ -118,6 +118,7 @@ var kbvelocity = Vector2.ZERO
 @export var dash_recharge_per_second: float = 5
 @export var dash_recharge_delay: float = 0.5
 @export var dash_speed_increase: float = 1.0
+var dash_bar_full_width: float = 0.0
 var dash_speed:
 	get:
 		return 825 * dash_speed_increase
@@ -153,10 +154,7 @@ func _ready() -> void:
 	$HarpoonLine.visible = false
 	$HarpoonLine.width = 1
 	if dash_bar:
-		dash_bar.min_value = 0
-		dash_bar.max_value = dash_max
-		dash_bar.value = dash_value
-		dash_bar.show_percentage = false
+		dash_bar_full_width = dash_bar.size.x
 	if health_bar:
 		health_bar.min_value = 0
 		health_bar.max_value = max_health
@@ -574,7 +572,8 @@ func update_dash_bar(delta: float) -> void:
 			60.0 * delta
 		)
 
-		dash_bar.value = dash_bar_display_value
+		var percent := dash_bar_display_value / dash_max
+		dash_bar.size.x = dash_bar_full_width * percent
 func start_highmode_flash() -> void:
 	$AnimatedSprite2D.modulate = Color.WHITE * 1.5
 	await get_tree().create_timer(0.1).timeout
@@ -890,30 +889,57 @@ func on_spear_hit(hurtbox: TemplateHurtbox) -> void:
 	
 
 
-func spear_wall_bounce(wall_normal: Vector2, hit_position: Vector2) -> void:
-	# Keep the same minimum-speed requirement as the existing body-collision parry.
+func spear_wall_bounce(
+	wall_normal: Vector2,
+	hit_position: Vector2,
+	spear_direction: Vector2
+) -> void:
+
 	if velocity.length() < 300.0:
 		return
+
 
 	var incomingvelocity := velocity
 	var impactspeed := incomingvelocity.dot(-wall_normal)
 
-	# Only reflect if the player is actually travelling into the surface.
-	if impactspeed <= 0.0:
+
+	# Check whether the SPEAR is actually pointing into the wall.
+	var spearimpact := spear_direction.dot(-wall_normal)
+
+	if spearimpact <= 0.0:
 		return
 
-	# Reflect the player's current movement across the real wall normal.
-	# This preserves the angle/momentum instead of simply sending the player
-	# backwards from the spear direction.
-	velocity = incomingvelocity.bounce(wall_normal) * 1.1
 
-	# Preserve the rewards from the existing parry system.
+	# If the player is already travelling into the wall,
+	# use the real momentum reflection.
+	if impactspeed > 0.0:
+		velocity = incomingvelocity.bounce(wall_normal) * 1.1
+
+
+	# If the spear hits the wall but the player's movement is mostly
+	# sideways, still give the parry because visually the spear connected.
+	else:
+		var currentspeed := incomingvelocity.length()
+
+		var tangentvelocity := (
+			incomingvelocity
+			- wall_normal * incomingvelocity.dot(wall_normal)
+		)
+
+		velocity = (
+			tangentvelocity
+			+ wall_normal * currentspeed * 0.7
+		) * 1.1
+
+
 	dash_value = dash_max
 	bouncegracetimer = 0.0
+
 
 	if highmode:
 		highmodeduration = 1
 		play_parry_effect(hit_position, wall_normal)
+
 	else:
 		$ParryBubbles.global_position = hit_position
 		$ParryBubbles.rotation = wall_normal.angle() + PI

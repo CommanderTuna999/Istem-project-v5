@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://c755mpbmhubm"]
+
+[ext_resource type="Script" uid="uid://b0rfyyhx7lvjn" path="res://Scripts/hit_effect.gd" id="1_cji3q"]
+
+[sub_resource type="Animation" id="Animation_bai1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Polygon2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Polygon2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.17453292]
+}
+
+[sub_resource type="Animation" id="Animation_6v0c6"]
+resource_name = "hit"
+length = 0.12
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.07, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(1.4, 1.4), Vector2(0.8, 0.8), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Polygon2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.07, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Polygon2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.07, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.17453292, 0.13962634, 0.2617994, 0.34906584]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cji3q"]
+_data = {
+&"RESET": SubResource("Animation_bai1y"),
+&"hit": SubResource("Animation_6v0c6")
+}
+
+[node name="HitEffect" type="Node2D" unique_id=1562402761]
+script = ExtResource("1_cji3q")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1876932344]
+modulate = Color(1, 1, 1, 0)
+rotation = -0.17453292
+scale = Vector2(0.2, 0.2)
+polygon = PackedVector2Array(-32, 0, 0, -4, 32, 0, 0, 4)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=564700441]
+libraries/ = SubResource("AnimationLibrary_cji3q")
+autoplay = &"hit"

@@ -6,7 +6,7 @@
 #blackdragonfish_fire_projectile.tscn both use this script and differ only
 #by the effect_type value set in the Inspector.
 
-extends Area2D
+extends CharacterBody2D
 
 @export_enum("ice", "fire") var effect_type: String = "fire"
 @export var speed: float = 500.0
@@ -23,11 +23,15 @@ extends Area2D
 
 var dir: Vector2 = Vector2.RIGHT 
 var already_hit: bool = false
+var SpawnPos: Vector2 = Vector2.ZERO
+var SpawnRot: float = 0.0
 
 
 func _ready() -> void:
+	global_position = SpawnPos
+	global_rotation = SpawnRot
 	rotation = dir.angle()
-	body_entered.connect(_on_body_entered)
+
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
 

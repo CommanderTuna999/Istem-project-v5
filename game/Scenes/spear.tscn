@@ -110,6 +110,7 @@ animations = [{
 size = Vector2(24.187498, 16.25)
 
 [node name="Spear" type="Node2D" unique_id=1804206196]
+z_index = -1
 script = ExtResource("1_7nbcr")
 
 [node name="AttackPivot" type="Node2D" parent="." unique_id=391111560]

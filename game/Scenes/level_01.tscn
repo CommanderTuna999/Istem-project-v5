@@ -33,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://d1ur1edkugqec" path="res://Scenes/anemone.tscn" id="30_b4ywe"]
 [ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="31_c2pji"]
 [ext_resource type="Texture2D" uid="uid://4tj81ke8dhan" path="res://Assets/RockMidground1.png" id="32_rock_midground"]
+[ext_resource type="PackedScene" uid="uid://blb2pf33p5wbr" path="res://Scenes/Enemies/seahorse.tscn" id="34_dmyo7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_0h1yu")
@@ -837,7 +838,8 @@ offset_bottom = 566.25006
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("7_41lu1")
 
-[node name="ColorRect" type="ColorRect" parent="UI/CanvasLayer/DashHUD" unique_id=1231367931]
+[node name="DashFill" type="ColorRect" parent="UI/CanvasLayer/DashHUD" unique_id=1231367931]
+unique_name_in_owner = true
 z_index = -1
 layout_mode = 0
 offset_left = 238.75
@@ -997,6 +999,9 @@ position = Vector2(29586.094, 10540.75)
 scale = Vector2(40.331398, 28.071966)
 texture = ExtResource("13_osdef")
 
+[node name="seahorse" parent="BackgroundParallex" unique_id=1111911240 instance=ExtResource("34_dmyo7")]
+position = Vector2(2166.7292, -3123.0544)
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=58869801]
 modulate = Color(0.24113, 0.46937478, 0.999983, 0.99607843)
 position = Vector2(4776, 105.99994)
@@ -1111,6 +1116,16 @@ modulate = Color(0.44705883, 0.44705883, 0.827451, 1)
 z_index = -1
 position = Vector2(928, -812)
 texture = ExtResource("32_rock_midground")
+
+[node name="clownfish2" parent="." unique_id=2117982012 node_paths=PackedStringArray("patrolpoints") instance=ExtResource("10_pw4n1")]
+position = Vector2(221, -1141)
+patrolpoints = [NodePath("../Marker2D"), NodePath("../Marker2D2")]
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=2133491858]
+position = Vector2(162, -965)
+
+[node name="Marker2D2" type="Marker2D" parent="." unique_id=248944934]
+position = Vector2(782, -952)
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

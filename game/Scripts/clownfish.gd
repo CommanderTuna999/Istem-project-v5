@@ -14,6 +14,7 @@ var chase_subject = null
 var current_health = 2
 var kbtime = 0.0
 var kbvelocity = Vector2.ZERO
+var dying = false
 var rooted: bool = false
 var root_timer: float = 0.0
 var slow_active: bool = false
@@ -23,6 +24,12 @@ var separationdirection = Vector2.ZERO
 var separationstrength = 80.0
 @export var homemarker: Marker2D
 var homeposition = Vector2.ZERO
+
+@export var patrolpoints: Array[Marker2D] = []
+var currentpatrolpoint = 0
+var patrolwaittimer = 0.0
+@export var patrolspeed: float = 80.0
+
 @export var wanderradius: float = 70.0
 @export var wanderspeed: float = 60.0
 
@@ -45,9 +52,15 @@ var scroll_drop_chance:
 
 func _ready() -> void:
 	animated_sprite_2d.play("idle")
+
 	if homemarker:
+		#anemone clownfish
 		homeposition = homemarker.global_position
 		picknewwandertarget()
+
+	elif patrolpoints.size() > 0:
+		#patrol clownfish
+		currentpatrolpoint = 0
 func _process(_delta): #x axis flipping for now
 	if TimeStop.time_stop_active == true:
 		return
@@ -58,12 +71,17 @@ func _process(_delta): #x axis flipping for now
 		animated_sprite_2d.flip_h = false
 	
 	
-	if current_health <= 0:
+	if current_health <= 0 and not dying:
 		if TimeStop.time_stop_active == true:
 			return
+
+		dying = true
+		animation_player.play("death")
+		await animation_player.animation_finished
+		queue_free()
 		#var clownfish_coins_drop: float = randi_range(45,55)
 		#CurrencySystem.TotalCoins += clownfish_coins_drop
-		queue_free()
+
 
 	if rooted:
 		return
@@ -92,47 +110,96 @@ func _on_aggro_area_body_exited(_body: Node2D) -> void:
 func _physics_process(_delta):
 	if TimeStop.time_stop_active == true:
 		return
+
 	if rooted:
 		root_timer -= _delta
 		velocity = Vector2.ZERO
 		move_and_slide()
+
 		if root_timer <= 0.0:
 			rooted = false
+
 		return
+
 	if kbtime > 0:
-		kbtime 	-= _delta
+		kbtime -= _delta
 		velocity = kbvelocity
+
 	else:
+		#player nearby, chase them
 		if aggro and chase_subject:
-			velocity = (chase_subject.global_position - global_position).normalized() * speed
+			velocity = (
+				chase_subject.global_position - global_position
+			).normalized() * speed
+
 			separationdirection = Vector2.ZERO
+
 			for fish in nearbyclownfish:
 				if is_instance_valid(fish):
-					separationdirection += (global_position - fish.global_position).normalized()
+					separationdirection += (
+						global_position - fish.global_position
+					).normalized()
 
 			if separationdirection != Vector2.ZERO:
 				separationdirection = separationdirection.normalized()
 				velocity += separationdirection * separationstrength
-		else: 
-			var direction_to_home = homeposition - global_position
 
 
-			if wanderwaittimer > 0.0:
-				wanderwaittimer -= _delta
-				velocity = Vector2.ZERO
-			else:
-				var directiontowander = wandertarget - global_position
-				if directiontowander.length() > 10:
-					velocity = directiontowander.normalized() * wanderspeed
-					if velocity.x > 0:
-						animated_sprite_2d.flip_h = true
-					elif velocity.x <= 0:
-						animated_sprite_2d.flip_h = false
+		#if it has an anemone, wander around the anemone
+		else:
+			if homemarker:
+
+				if wanderwaittimer > 0.0:
+					wanderwaittimer -= _delta
+					velocity = Vector2.ZERO
+
 				else:
-					wanderwaittimer = randf_range(0.5, 2.0)
-					picknewwandertarget()
+					var directiontowander = wandertarget - global_position
 
-	
+					if directiontowander.length() > 10:
+						velocity = directiontowander.normalized() * wanderspeed
+
+						if velocity.x > 0:
+							animated_sprite_2d.flip_h = true
+
+						elif velocity.x <= 0:
+							animated_sprite_2d.flip_h = false
+
+					else:
+						wanderwaittimer = randf_range(0.5, 2.0)
+						picknewwandertarget()
+
+
+			#if it doesnt have an anemone, patrol between its markers
+			elif patrolpoints.size() > 0:
+				var targetpoint = patrolpoints[currentpatrolpoint]
+
+				if is_instance_valid(targetpoint):
+					var directiontopoint = (
+						targetpoint.global_position - global_position
+					)
+
+					if directiontopoint.length() > 10:
+						velocity = directiontopoint.normalized() * patrolspeed
+
+						if velocity.x > 0:
+							animated_sprite_2d.flip_h = true
+
+						elif velocity.x <= 0:
+							animated_sprite_2d.flip_h = false
+
+					else:
+						currentpatrolpoint += 1
+
+						if currentpatrolpoint >= patrolpoints.size():
+							currentpatrolpoint = 0
+
+
+			#if it has neither, stay still
+			else:
+				velocity = Vector2.ZERO
+
+
 	move_and_slide()
 	
 	
