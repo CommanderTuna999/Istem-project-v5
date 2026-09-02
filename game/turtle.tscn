@@ -38,6 +38,7 @@ radius = 55.0
 height = 284.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgedt"]
+radius = 400.0
 
 [node name="turtle" type="CharacterBody2D" unique_id=1125597631 groups=["enemy", "turtle"]]
 collision_layer = 8

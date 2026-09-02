@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed: float = 150.0
 @export var wander_radius: float = 160.0
 @export var wander_speed: float = 60.0
-@export var absorb_radius: float = 200.0
+@export var absorb_radius: float = 500.0
 @export var absorb_percent: float = 0.25
 
 var max_health: float = 25.0
