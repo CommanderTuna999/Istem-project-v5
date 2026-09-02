@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://csalksyt6fihe"]
 
+[ext_resource type="Script" uid="uid://b8u2vijqooebp" path="res://death.gd" id="1_qemge"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_p5ngi"]
 font_size = 100
 
 [node name="Death" type="Node2D" unique_id=1230929487]
+script = ExtResource("1_qemge")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1705938828]
 offset_right = 1198.0
