@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="4_yjbb4"]
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="5_g8eo0"]
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="6_nnuef"]
+[ext_resource type="Texture2D" uid="uid://dcj3m57rjiect" path="res://Assets/Stamina_bar.png" id="7_41lu1"]
 [ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="7_fcb2x"]
 [ext_resource type="Texture2D" uid="uid://cfrt5seuqiidd" path="res://Assets/shield_bar_under.png" id="9_ywwm3"]
 [ext_resource type="Texture2D" uid="uid://qanfhvpgpvi1" path="res://Assets/shield_bar_over.png" id="10_b4ywe"]
@@ -18,7 +19,6 @@
 [ext_resource type="Script" uid="uid://c8n16i5rg5b64" path="res://Scripts/ability_folder.gd" id="13_vh3c3"]
 [ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="14_osdef"]
 [ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="15_eqa25"]
-[ext_resource type="PackedScene" uid="uid://dumg0isp3lbea" path="res://Scenes/Enemies/stealth_stalker.tscn" id="15_khfxu"]
 [ext_resource type="AudioStream" uid="uid://kakrcthx40tf" path="res://sfx/bow_shoot.mp3" id="16_wejbp"]
 [ext_resource type="Script" uid="uid://e5f1vnkckbm6" path="res://Scripts/heal.gd" id="17_ywwm3"]
 [ext_resource type="AudioStream" uid="uid://dpvo8eortnl8e" path="res://sfx/heal-skill-ro.mp3" id="18_b4ywe"]
@@ -33,11 +33,6 @@
 [ext_resource type="PackedScene" uid="uid://d1ur1edkugqec" path="res://Scenes/anemone.tscn" id="30_b4ywe"]
 [ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="31_c2pji"]
 [ext_resource type="Texture2D" uid="uid://4tj81ke8dhan" path="res://Assets/RockMidground1.png" id="32_rock_midground"]
-[ext_resource type="PackedScene" uid="uid://blb2pf33p5wbr" path="res://Scenes/Enemies/seahorse.tscn" id="34_dmyo7"]
-[ext_resource type="PackedScene" uid="uid://vpeush0nlhjd" path="res://Scenes/Enemies/shark.tscn" id="35_41lu1"]
-[ext_resource type="PackedScene" uid="uid://c31p1nqtvdsku" path="res://Scenes/Enemies/hatchetfish.tscn" id="36_8g2wq"]
-[ext_resource type="PackedScene" uid="uid://dx5181rkqvp8" path="res://Scenes/Enemies/starfish.tscn" id="37_23ldf"]
-[ext_resource type="PackedScene" uid="uid://dlfil1d4hc4ke" path="res://Scenes/Enemies/crab.tscn" id="38_bwi4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_0h1yu")
@@ -832,18 +827,24 @@ offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.8, 0.8)
 
-[node name="TextureRect" type="TextureRect" parent="UI/CanvasLayer/DashHUD" unique_id=910413719]
+[node name="DashBar" type="TextureRect" parent="UI/CanvasLayer/DashHUD" unique_id=910413719]
+modulate = Color(0.8235294, 1, 1, 1)
 layout_mode = 0
-offset_left = 123.749985
-offset_top = 141.24998
-offset_right = 1483.75
-offset_bottom = 551.25
+offset_left = 126.25006
+offset_top = 156.25006
+offset_right = 1486.25
+offset_bottom = 566.25006
 scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_41lu1")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/CanvasLayer/DashHUD" unique_id=1969356823]
+[node name="ColorRect" type="ColorRect" parent="UI/CanvasLayer/DashHUD" unique_id=1231367931]
+z_index = -1
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 238.75
+offset_top = 196.25
+offset_right = 457.5
+offset_bottom = 218.75
+color = Color(0.7137255, 1, 1, 1)
 
 [node name="HealthHUD" type="Control" parent="UI/CanvasLayer" unique_id=1958590082]
 layout_mode = 3
@@ -968,9 +969,9 @@ script = ExtResource("7_fcb2x")
 [node name="ShieldBar" type="TextureProgressBar" parent="UI/CanvasLayer" unique_id=1823998990]
 texture_filter = 1
 offset_left = 99.0
-offset_top = 180.0
+offset_top = 190.0
 offset_right = 429.0
-offset_bottom = 212.0
+offset_bottom = 222.0
 texture_under = ExtResource("9_ywwm3")
 texture_over = ExtResource("10_b4ywe")
 texture_progress = ExtResource("11_c2pji")
@@ -978,9 +979,9 @@ texture_progress = ExtResource("11_c2pji")
 [node name="ShieldIcon" type="TextureRect" parent="UI/CanvasLayer" unique_id=1649499499]
 texture_filter = 1
 offset_left = 68.0
-offset_top = 168.0
+offset_top = 178.0
 offset_right = 122.0
-offset_bottom = 224.8421
+offset_bottom = 234.8421
 texture = ExtResource("12_khfxu")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=120829579]
@@ -992,7 +993,7 @@ scale = Vector2(0.28337643, 0.28337643)
 [node name="DistantSilhoutte" type="Sprite2D" parent="BackgroundParallex" unique_id=1373530684]
 modulate = Color(0.23784047, 0.37488055, 0.5483943, 1)
 z_index = -10
-position = Vector2(30632.59, 10501.932)
+position = Vector2(29586.094, 10540.75)
 scale = Vector2(40.331398, 28.071966)
 texture = ExtResource("13_osdef")
 
@@ -1009,9 +1010,6 @@ process_material = SubResource("ParticleProcessMaterial_f8buc")
 
 [node name="clownfish_folder" type="Node" parent="Enemies" unique_id=1781396354]
 
-[node name="clownfish" parent="Enemies/clownfish_folder" unique_id=1111911240 instance=ExtResource("10_pw4n1")]
-position = Vector2(4652, 526)
-
 [node name="seahorse_folder" type="Node" parent="Enemies" unique_id=85514349]
 
 [node name="crab_folder" type="Node" parent="Enemies" unique_id=1333439632]
@@ -1019,9 +1017,6 @@ position = Vector2(4652, 526)
 [node name="shark_folder" type="Node" parent="Enemies" unique_id=67066988]
 
 [node name="Node" type="Node" parent="Enemies" unique_id=927071067]
-
-[node name="StealthStalker" parent="Enemies/Node" unique_id=2079988035 instance=ExtResource("15_khfxu")]
-position = Vector2(737, -936)
 
 [node name="Level02" type="Area2D" parent="." unique_id=2077541829]
 position = Vector2(12690, 5553)
@@ -1116,492 +1111,6 @@ modulate = Color(0.44705883, 0.44705883, 0.827451, 1)
 z_index = -1
 position = Vector2(928, -812)
 texture = ExtResource("32_rock_midground")
-
-[node name="seahorse" parent="." unique_id=1439708515 instance=ExtResource("34_dmyo7")]
-position = Vector2(12401, 3865)
-
-[node name="seahorse2" parent="." unique_id=542647503 instance=ExtResource("34_dmyo7")]
-position = Vector2(12945, 3918)
-
-[node name="shark" parent="." unique_id=2021711917 instance=ExtResource("35_41lu1")]
-position = Vector2(12742, 2812)
-
-[node name="Adultshark2" parent="." unique_id=1888301388 instance=ExtResource("29_ywwm3")]
-position = Vector2(13152, 2307)
-
-[node name="shark2" parent="." unique_id=1325557656 instance=ExtResource("35_41lu1")]
-position = Vector2(13083, 2840)
-
-[node name="Hatchetfish" parent="." unique_id=899756020 instance=ExtResource("36_8g2wq")]
-position = Vector2(12987, 904)
-
-[node name="starfish" parent="." unique_id=832322826 instance=ExtResource("37_23ldf")]
-position = Vector2(12196, 1260)
-
-[node name="starfish2" parent="." unique_id=2052515385 instance=ExtResource("37_23ldf")]
-position = Vector2(12194, 1140)
-
-[node name="starfish3" parent="." unique_id=2064939301 instance=ExtResource("37_23ldf")]
-position = Vector2(12196, 1054)
-
-[node name="clownfish2" parent="." unique_id=1808412985 instance=ExtResource("10_pw4n1")]
-position = Vector2(13119, -364)
-
-[node name="clownfish10" parent="." unique_id=1163567241 instance=ExtResource("10_pw4n1")]
-position = Vector2(13179, -449)
-
-[node name="clownfish11" parent="." unique_id=627201706 instance=ExtResource("10_pw4n1")]
-position = Vector2(13254, -451)
-
-[node name="clownfish12" parent="." unique_id=1136611018 instance=ExtResource("10_pw4n1")]
-position = Vector2(13288, -412)
-
-[node name="clownfish13" parent="." unique_id=1255377001 instance=ExtResource("10_pw4n1")]
-position = Vector2(13341, -379)
-
-[node name="clownfish14" parent="." unique_id=1055385146 instance=ExtResource("10_pw4n1")]
-position = Vector2(13326, -318)
-
-[node name="clownfish15" parent="." unique_id=668908353 instance=ExtResource("10_pw4n1")]
-position = Vector2(13275, -299)
-
-[node name="clownfish16" parent="." unique_id=270134261 instance=ExtResource("10_pw4n1")]
-position = Vector2(13183, -297)
-
-[node name="clownfish3" parent="." unique_id=281705652 instance=ExtResource("10_pw4n1")]
-position = Vector2(13163, -405)
-
-[node name="clownfish4" parent="." unique_id=1329244277 instance=ExtResource("10_pw4n1")]
-position = Vector2(13194, -357)
-
-[node name="clownfish5" parent="." unique_id=315627893 instance=ExtResource("10_pw4n1")]
-position = Vector2(13256, -346)
-
-[node name="clownfish6" parent="." unique_id=1516779938 instance=ExtResource("10_pw4n1")]
-position = Vector2(13302, -367)
-
-[node name="clownfish7" parent="." unique_id=78996517 instance=ExtResource("10_pw4n1")]
-position = Vector2(13234, -411)
-
-[node name="clownfish8" parent="." unique_id=729258714 instance=ExtResource("10_pw4n1")]
-position = Vector2(13342, -438)
-
-[node name="clownfish9" parent="." unique_id=1563447857 instance=ExtResource("10_pw4n1")]
-position = Vector2(13405, -413)
-
-[node name="StealthStalker" parent="." unique_id=1583151886 instance=ExtResource("15_khfxu")]
-position = Vector2(11831, -1095)
-
-[node name="StealthStalker2" parent="." unique_id=89816712 instance=ExtResource("15_khfxu")]
-position = Vector2(11841, -1278)
-
-[node name="seahorse3" parent="." unique_id=2032237222 instance=ExtResource("34_dmyo7")]
-position = Vector2(12849, -1169)
-
-[node name="seahorse4" parent="." unique_id=1803444835 instance=ExtResource("34_dmyo7")]
-position = Vector2(9464, -445)
-
-[node name="shark3" parent="." unique_id=2116515483 instance=ExtResource("35_41lu1")]
-position = Vector2(1114, -964)
-
-[node name="clownfish17" parent="." unique_id=863194049 instance=ExtResource("10_pw4n1")]
-position = Vector2(2099, -967)
-
-[node name="clownfish18" parent="." unique_id=70398806 instance=ExtResource("10_pw4n1")]
-position = Vector2(2213, -966)
-
-[node name="clownfish19" parent="." unique_id=695477261 instance=ExtResource("10_pw4n1")]
-position = Vector2(2169, -941)
-
-[node name="clownfish20" parent="." unique_id=2081255442 instance=ExtResource("10_pw4n1")]
-position = Vector2(2133, -932)
-
-[node name="clownfish21" parent="." unique_id=1705171040 instance=ExtResource("10_pw4n1")]
-position = Vector2(2175, -912)
-
-[node name="clownfish22" parent="." unique_id=1335867620 instance=ExtResource("10_pw4n1")]
-position = Vector2(2233, -948)
-
-[node name="clownfish23" parent="." unique_id=237315227 instance=ExtResource("10_pw4n1")]
-position = Vector2(2157, -975)
-
-[node name="clownfish24" parent="." unique_id=295071351 instance=ExtResource("10_pw4n1")]
-position = Vector2(2209, -925)
-
-[node name="clownfish25" parent="." unique_id=564490586 instance=ExtResource("10_pw4n1")]
-position = Vector2(2243, -967)
-
-[node name="clownfish26" parent="." unique_id=207950235 instance=ExtResource("10_pw4n1")]
-position = Vector2(2243, -916)
-
-[node name="clownfish27" parent="." unique_id=60890573 instance=ExtResource("10_pw4n1")]
-position = Vector2(2201, -877)
-
-[node name="clownfish28" parent="." unique_id=1490003817 instance=ExtResource("10_pw4n1")]
-position = Vector2(2160, -882)
-
-[node name="clownfish29" parent="." unique_id=1698327435 instance=ExtResource("10_pw4n1")]
-position = Vector2(2121, -894)
-
-[node name="clownfish30" parent="." unique_id=1384837953 instance=ExtResource("10_pw4n1")]
-position = Vector2(2087, -920)
-
-[node name="clownfish31" parent="." unique_id=698405770 instance=ExtResource("10_pw4n1")]
-position = Vector2(2061, -959)
-
-[node name="clownfish32" parent="." unique_id=2067483739 instance=ExtResource("10_pw4n1")]
-position = Vector2(2079, -989)
-
-[node name="clownfish33" parent="." unique_id=1537398499 instance=ExtResource("10_pw4n1")]
-position = Vector2(2118, -1023)
-
-[node name="clownfish34" parent="." unique_id=1557129590 instance=ExtResource("10_pw4n1")]
-position = Vector2(2171, -1016)
-
-[node name="clownfish35" parent="." unique_id=2063572118 instance=ExtResource("10_pw4n1")]
-position = Vector2(2196, -1007)
-
-[node name="clownfish36" parent="." unique_id=973922960 instance=ExtResource("10_pw4n1")]
-position = Vector2(2233, -1007)
-
-[node name="clownfish37" parent="." unique_id=1798015332 instance=ExtResource("10_pw4n1")]
-position = Vector2(2266, -1000)
-
-[node name="clownfish38" parent="." unique_id=1562549105 instance=ExtResource("10_pw4n1")]
-position = Vector2(2279, -949)
-
-[node name="clownfish39" parent="." unique_id=471831937 instance=ExtResource("10_pw4n1")]
-position = Vector2(2292, -911)
-
-[node name="clownfish40" parent="." unique_id=698561264 instance=ExtResource("10_pw4n1")]
-position = Vector2(2266, -894)
-
-[node name="clownfish41" parent="." unique_id=1704842805 instance=ExtResource("10_pw4n1")]
-position = Vector2(2261, -884)
-
-[node name="clownfish42" parent="." unique_id=208485537 instance=ExtResource("10_pw4n1")]
-position = Vector2(2261, -908)
-
-[node name="clownfish43" parent="." unique_id=1073932714 instance=ExtResource("10_pw4n1")]
-position = Vector2(2872, -911)
-
-[node name="clownfish44" parent="." unique_id=337977789 instance=ExtResource("10_pw4n1")]
-position = Vector2(2986, -910)
-
-[node name="clownfish45" parent="." unique_id=318764633 instance=ExtResource("10_pw4n1")]
-position = Vector2(2942, -885)
-
-[node name="clownfish46" parent="." unique_id=181680159 instance=ExtResource("10_pw4n1")]
-position = Vector2(2906, -876)
-
-[node name="clownfish47" parent="." unique_id=539174935 instance=ExtResource("10_pw4n1")]
-position = Vector2(2948, -856)
-
-[node name="clownfish48" parent="." unique_id=1745863593 instance=ExtResource("10_pw4n1")]
-position = Vector2(3006, -892)
-
-[node name="clownfish49" parent="." unique_id=1377845311 instance=ExtResource("10_pw4n1")]
-position = Vector2(2930, -919)
-
-[node name="clownfish50" parent="." unique_id=173604538 instance=ExtResource("10_pw4n1")]
-position = Vector2(2982, -869)
-
-[node name="clownfish51" parent="." unique_id=259273102 instance=ExtResource("10_pw4n1")]
-position = Vector2(3016, -911)
-
-[node name="clownfish52" parent="." unique_id=1315487526 instance=ExtResource("10_pw4n1")]
-position = Vector2(3016, -860)
-
-[node name="clownfish53" parent="." unique_id=2034799664 instance=ExtResource("10_pw4n1")]
-position = Vector2(2974, -821)
-
-[node name="clownfish54" parent="." unique_id=1430379083 instance=ExtResource("10_pw4n1")]
-position = Vector2(2933, -826)
-
-[node name="clownfish55" parent="." unique_id=1569674719 instance=ExtResource("10_pw4n1")]
-position = Vector2(2894, -838)
-
-[node name="clownfish56" parent="." unique_id=479353116 instance=ExtResource("10_pw4n1")]
-position = Vector2(2860, -864)
-
-[node name="clownfish57" parent="." unique_id=1022234652 instance=ExtResource("10_pw4n1")]
-position = Vector2(2834, -903)
-
-[node name="clownfish58" parent="." unique_id=1145380897 instance=ExtResource("10_pw4n1")]
-position = Vector2(2852, -933)
-
-[node name="clownfish59" parent="." unique_id=958462280 instance=ExtResource("10_pw4n1")]
-position = Vector2(2891, -967)
-
-[node name="clownfish60" parent="." unique_id=1689238859 instance=ExtResource("10_pw4n1")]
-position = Vector2(2944, -960)
-
-[node name="clownfish61" parent="." unique_id=1744441209 instance=ExtResource("10_pw4n1")]
-position = Vector2(2969, -951)
-
-[node name="clownfish62" parent="." unique_id=226978558 instance=ExtResource("10_pw4n1")]
-position = Vector2(3006, -951)
-
-[node name="clownfish63" parent="." unique_id=1841469872 instance=ExtResource("10_pw4n1")]
-position = Vector2(3039, -944)
-
-[node name="clownfish64" parent="." unique_id=640622327 instance=ExtResource("10_pw4n1")]
-position = Vector2(3052, -893)
-
-[node name="clownfish65" parent="." unique_id=1763092326 instance=ExtResource("10_pw4n1")]
-position = Vector2(3065, -855)
-
-[node name="clownfish66" parent="." unique_id=723269456 instance=ExtResource("10_pw4n1")]
-position = Vector2(3039, -838)
-
-[node name="clownfish67" parent="." unique_id=2025996916 instance=ExtResource("10_pw4n1")]
-position = Vector2(3034, -828)
-
-[node name="clownfish68" parent="." unique_id=816593266 instance=ExtResource("10_pw4n1")]
-position = Vector2(3034, -852)
-
-[node name="clownfish69" parent="." unique_id=36053515 instance=ExtResource("10_pw4n1")]
-position = Vector2(3565, -916)
-
-[node name="clownfish70" parent="." unique_id=136340514 instance=ExtResource("10_pw4n1")]
-position = Vector2(3679, -915)
-
-[node name="clownfish71" parent="." unique_id=154341265 instance=ExtResource("10_pw4n1")]
-position = Vector2(3635, -890)
-
-[node name="clownfish72" parent="." unique_id=408552870 instance=ExtResource("10_pw4n1")]
-position = Vector2(3599, -881)
-
-[node name="clownfish73" parent="." unique_id=258133057 instance=ExtResource("10_pw4n1")]
-position = Vector2(3641, -861)
-
-[node name="clownfish74" parent="." unique_id=528804335 instance=ExtResource("10_pw4n1")]
-position = Vector2(3699, -897)
-
-[node name="clownfish75" parent="." unique_id=1190667647 instance=ExtResource("10_pw4n1")]
-position = Vector2(3623, -924)
-
-[node name="clownfish76" parent="." unique_id=635459047 instance=ExtResource("10_pw4n1")]
-position = Vector2(3675, -874)
-
-[node name="clownfish77" parent="." unique_id=598431229 instance=ExtResource("10_pw4n1")]
-position = Vector2(3709, -916)
-
-[node name="clownfish78" parent="." unique_id=2066749627 instance=ExtResource("10_pw4n1")]
-position = Vector2(3709, -865)
-
-[node name="clownfish79" parent="." unique_id=659934315 instance=ExtResource("10_pw4n1")]
-position = Vector2(3667, -826)
-
-[node name="clownfish80" parent="." unique_id=644332176 instance=ExtResource("10_pw4n1")]
-position = Vector2(3626, -831)
-
-[node name="clownfish81" parent="." unique_id=2047728590 instance=ExtResource("10_pw4n1")]
-position = Vector2(3587, -843)
-
-[node name="clownfish82" parent="." unique_id=829922187 instance=ExtResource("10_pw4n1")]
-position = Vector2(3553, -869)
-
-[node name="clownfish83" parent="." unique_id=1346796949 instance=ExtResource("10_pw4n1")]
-position = Vector2(3527, -908)
-
-[node name="clownfish84" parent="." unique_id=1530066382 instance=ExtResource("10_pw4n1")]
-position = Vector2(3545, -938)
-
-[node name="clownfish85" parent="." unique_id=1730387028 instance=ExtResource("10_pw4n1")]
-position = Vector2(3584, -972)
-
-[node name="clownfish86" parent="." unique_id=1772247939 instance=ExtResource("10_pw4n1")]
-position = Vector2(3637, -965)
-
-[node name="clownfish87" parent="." unique_id=432223601 instance=ExtResource("10_pw4n1")]
-position = Vector2(3662, -956)
-
-[node name="clownfish88" parent="." unique_id=1398281103 instance=ExtResource("10_pw4n1")]
-position = Vector2(3699, -956)
-
-[node name="clownfish89" parent="." unique_id=1254331732 instance=ExtResource("10_pw4n1")]
-position = Vector2(3732, -949)
-
-[node name="clownfish90" parent="." unique_id=185894687 instance=ExtResource("10_pw4n1")]
-position = Vector2(3745, -898)
-
-[node name="clownfish91" parent="." unique_id=1920996810 instance=ExtResource("10_pw4n1")]
-position = Vector2(3758, -860)
-
-[node name="clownfish92" parent="." unique_id=1592524480 instance=ExtResource("10_pw4n1")]
-position = Vector2(3732, -843)
-
-[node name="clownfish93" parent="." unique_id=946903359 instance=ExtResource("10_pw4n1")]
-position = Vector2(3727, -833)
-
-[node name="clownfish94" parent="." unique_id=1798353256 instance=ExtResource("10_pw4n1")]
-position = Vector2(3727, -857)
-
-[node name="crab" parent="." unique_id=979665521 instance=ExtResource("38_bwi4u")]
-position = Vector2(4620, -772)
-
-[node name="clownfish95" parent="." unique_id=1237424747 instance=ExtResource("10_pw4n1")]
-position = Vector2(7117, -830)
-
-[node name="clownfish96" parent="." unique_id=719754071 instance=ExtResource("10_pw4n1")]
-position = Vector2(7231, -829)
-
-[node name="clownfish97" parent="." unique_id=1280052445 instance=ExtResource("10_pw4n1")]
-position = Vector2(7187, -804)
-
-[node name="clownfish98" parent="." unique_id=466851028 instance=ExtResource("10_pw4n1")]
-position = Vector2(7151, -795)
-
-[node name="clownfish99" parent="." unique_id=415899966 instance=ExtResource("10_pw4n1")]
-position = Vector2(7193, -775)
-
-[node name="clownfish100" parent="." unique_id=267466186 instance=ExtResource("10_pw4n1")]
-position = Vector2(7251, -811)
-
-[node name="clownfish101" parent="." unique_id=74410176 instance=ExtResource("10_pw4n1")]
-position = Vector2(7175, -838)
-
-[node name="clownfish102" parent="." unique_id=407098335 instance=ExtResource("10_pw4n1")]
-position = Vector2(7227, -788)
-
-[node name="clownfish103" parent="." unique_id=803616135 instance=ExtResource("10_pw4n1")]
-position = Vector2(7261, -830)
-
-[node name="clownfish104" parent="." unique_id=1735018826 instance=ExtResource("10_pw4n1")]
-position = Vector2(7261, -779)
-
-[node name="clownfish105" parent="." unique_id=1291504010 instance=ExtResource("10_pw4n1")]
-position = Vector2(7219, -740)
-
-[node name="clownfish106" parent="." unique_id=2101006028 instance=ExtResource("10_pw4n1")]
-position = Vector2(7178, -745)
-
-[node name="clownfish107" parent="." unique_id=463549458 instance=ExtResource("10_pw4n1")]
-position = Vector2(7139, -757)
-
-[node name="clownfish108" parent="." unique_id=1725686917 instance=ExtResource("10_pw4n1")]
-position = Vector2(7105, -783)
-
-[node name="clownfish109" parent="." unique_id=1209988607 instance=ExtResource("10_pw4n1")]
-position = Vector2(7079, -822)
-
-[node name="clownfish110" parent="." unique_id=1111407460 instance=ExtResource("10_pw4n1")]
-position = Vector2(7097, -852)
-
-[node name="clownfish111" parent="." unique_id=2056798181 instance=ExtResource("10_pw4n1")]
-position = Vector2(7136, -886)
-
-[node name="clownfish112" parent="." unique_id=1864124142 instance=ExtResource("10_pw4n1")]
-position = Vector2(7189, -879)
-
-[node name="clownfish113" parent="." unique_id=446110934 instance=ExtResource("10_pw4n1")]
-position = Vector2(7214, -870)
-
-[node name="clownfish114" parent="." unique_id=1698305636 instance=ExtResource("10_pw4n1")]
-position = Vector2(7251, -870)
-
-[node name="clownfish115" parent="." unique_id=988530575 instance=ExtResource("10_pw4n1")]
-position = Vector2(7284, -863)
-
-[node name="clownfish116" parent="." unique_id=700454388 instance=ExtResource("10_pw4n1")]
-position = Vector2(7297, -812)
-
-[node name="clownfish117" parent="." unique_id=270381788 instance=ExtResource("10_pw4n1")]
-position = Vector2(7310, -774)
-
-[node name="clownfish118" parent="." unique_id=1691320131 instance=ExtResource("10_pw4n1")]
-position = Vector2(7284, -757)
-
-[node name="clownfish119" parent="." unique_id=484338263 instance=ExtResource("10_pw4n1")]
-position = Vector2(7279, -747)
-
-[node name="clownfish120" parent="." unique_id=184000914 instance=ExtResource("10_pw4n1")]
-position = Vector2(7279, -771)
-
-[node name="clownfish121" parent="." unique_id=1218285303 instance=ExtResource("10_pw4n1")]
-position = Vector2(7726, -625)
-
-[node name="clownfish122" parent="." unique_id=675747642 instance=ExtResource("10_pw4n1")]
-position = Vector2(7840, -624)
-
-[node name="clownfish123" parent="." unique_id=594058710 instance=ExtResource("10_pw4n1")]
-position = Vector2(7796, -599)
-
-[node name="clownfish124" parent="." unique_id=1845109805 instance=ExtResource("10_pw4n1")]
-position = Vector2(7760, -590)
-
-[node name="clownfish125" parent="." unique_id=305962256 instance=ExtResource("10_pw4n1")]
-position = Vector2(7802, -570)
-
-[node name="clownfish126" parent="." unique_id=88557297 instance=ExtResource("10_pw4n1")]
-position = Vector2(7860, -606)
-
-[node name="clownfish127" parent="." unique_id=500998252 instance=ExtResource("10_pw4n1")]
-position = Vector2(7784, -633)
-
-[node name="clownfish128" parent="." unique_id=1972448953 instance=ExtResource("10_pw4n1")]
-position = Vector2(7836, -583)
-
-[node name="clownfish129" parent="." unique_id=745334216 instance=ExtResource("10_pw4n1")]
-position = Vector2(7870, -625)
-
-[node name="clownfish130" parent="." unique_id=2116406373 instance=ExtResource("10_pw4n1")]
-position = Vector2(7870, -574)
-
-[node name="clownfish131" parent="." unique_id=1582850147 instance=ExtResource("10_pw4n1")]
-position = Vector2(7828, -535)
-
-[node name="clownfish132" parent="." unique_id=1795052692 instance=ExtResource("10_pw4n1")]
-position = Vector2(7787, -540)
-
-[node name="clownfish133" parent="." unique_id=1177986864 instance=ExtResource("10_pw4n1")]
-position = Vector2(7748, -552)
-
-[node name="clownfish134" parent="." unique_id=1360662844 instance=ExtResource("10_pw4n1")]
-position = Vector2(7714, -578)
-
-[node name="clownfish135" parent="." unique_id=1030883182 instance=ExtResource("10_pw4n1")]
-position = Vector2(7688, -617)
-
-[node name="clownfish136" parent="." unique_id=2142333923 instance=ExtResource("10_pw4n1")]
-position = Vector2(7706, -647)
-
-[node name="clownfish137" parent="." unique_id=158745211 instance=ExtResource("10_pw4n1")]
-position = Vector2(7745, -681)
-
-[node name="clownfish138" parent="." unique_id=2076974433 instance=ExtResource("10_pw4n1")]
-position = Vector2(7798, -674)
-
-[node name="clownfish139" parent="." unique_id=1697338809 instance=ExtResource("10_pw4n1")]
-position = Vector2(7823, -665)
-
-[node name="clownfish140" parent="." unique_id=234415404 instance=ExtResource("10_pw4n1")]
-position = Vector2(7860, -665)
-
-[node name="clownfish141" parent="." unique_id=1716440332 instance=ExtResource("10_pw4n1")]
-position = Vector2(7893, -658)
-
-[node name="clownfish142" parent="." unique_id=1916673302 instance=ExtResource("10_pw4n1")]
-position = Vector2(7906, -607)
-
-[node name="clownfish143" parent="." unique_id=905414968 instance=ExtResource("10_pw4n1")]
-position = Vector2(7919, -569)
-
-[node name="clownfish144" parent="." unique_id=1902437024 instance=ExtResource("10_pw4n1")]
-position = Vector2(7893, -552)
-
-[node name="clownfish145" parent="." unique_id=1681891577 instance=ExtResource("10_pw4n1")]
-position = Vector2(7888, -542)
-
-[node name="clownfish146" parent="." unique_id=1551417908 instance=ExtResource("10_pw4n1")]
-position = Vector2(7888, -566)
-
-[node name="shark4" parent="." unique_id=930994878 instance=ExtResource("35_41lu1")]
-position = Vector2(10869, -866)
-
-[node name="crab2" parent="." unique_id=342008386 instance=ExtResource("38_bwi4u")]
-position = Vector2(7515, -154.00002)
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
