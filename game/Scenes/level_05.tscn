@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="7_6yrns"]
 [ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="8_ul6ab"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="9_k3ksa"]
-[ext_resource type="Script" uid="uid://cgvcqh5bx8xvv" path="res://Scenes/level_05.gd" id="10_nl67w"]
+[ext_resource type="Script" uid="uid://bk6vu2ajmmcxs" path="res://Scenes/level_06.gd" id="10_54itx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_54itx")
@@ -842,7 +842,7 @@ process_material = SubResource("ParticleProcessMaterial_f8buc")
 [node name="Level06" type="Area2D" parent="." unique_id=308123412]
 position = Vector2(5281, 489)
 collision_layer = 0
-script = ExtResource("10_nl67w")
+script = ExtResource("10_54itx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level06" unique_id=1687457284]
 shape = SubResource("RectangleShape2D_jqwyi")

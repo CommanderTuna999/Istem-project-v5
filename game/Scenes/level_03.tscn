@@ -15,6 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://blb2pf33p5wbr" path="res://Scenes/Enemies/seahorse.tscn" id="14_5fuui"]
 [ext_resource type="PackedScene" uid="uid://ony1pqjkvd1j" path="res://Scenes/Enemies/clownfish.tscn" id="15_nj836"]
 [ext_resource type="Script" uid="uid://bxgcs1dxq3gny" path="res://Scenes/level_04.gd" id="15_tr7da"]
+[ext_resource type="PackedScene" uid="uid://vpeush0nlhjd" path="res://Scenes/Enemies/shark.tscn" id="16_cwaol"]
+[ext_resource type="PackedScene" uid="uid://dumg0isp3lbea" path="res://Scenes/Enemies/stealth_stalker.tscn" id="17_l7uoe"]
+[ext_resource type="PackedScene" uid="uid://dalc8mwkcbhvs" path="res://zeus_fish.tscn" id="18_aoih6"]
+[ext_resource type="PackedScene" uid="uid://cl037qotl8cd1" path="res://blackdragonfish.tscn" id="19_topbc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_ekib6")
@@ -848,7 +852,7 @@ process_material = SubResource("ParticleProcessMaterial_f8buc")
 [node name="shark_folder" type="Node" parent="Enemies" unique_id=67066988]
 
 [node name="Level04" type="Area2D" parent="." unique_id=308123412]
-position = Vector2(5281, 489)
+position = Vector2(16536, 3057)
 collision_layer = 0
 script = ExtResource("15_tr7da")
 
@@ -1183,6 +1187,321 @@ position = Vector2(5225, 240)
 
 [node name="clownfish96" parent="." unique_id=1726219082 instance=ExtResource("15_nj836")]
 position = Vector2(5197, 182)
+
+[node name="crab4" parent="." unique_id=1170782125 instance=ExtResource("13_jqwyi")]
+position = Vector2(5717, 549)
+
+[node name="shark" parent="." unique_id=245171953 instance=ExtResource("16_cwaol")]
+position = Vector2(7188, 1005)
+
+[node name="shark2" parent="." unique_id=1172965115 instance=ExtResource("16_cwaol")]
+position = Vector2(7404, 1055)
+
+[node name="shark3" parent="." unique_id=1280527745 instance=ExtResource("16_cwaol")]
+position = Vector2(7588, 1083)
+
+[node name="GhostShark" parent="." unique_id=2079988035 instance=ExtResource("17_l7uoe")]
+position = Vector2(7784, 816)
+
+[node name="GhostShark2" parent="." unique_id=1997032035 instance=ExtResource("17_l7uoe")]
+position = Vector2(7617, 822)
+
+[node name="GhostShark3" parent="." unique_id=811636898 instance=ExtResource("17_l7uoe")]
+position = Vector2(7495, 794)
+
+[node name="GhostShark4" parent="." unique_id=1766776744 instance=ExtResource("17_l7uoe")]
+position = Vector2(7350, 772)
+
+[node name="GhostShark5" parent="." unique_id=353366019 instance=ExtResource("17_l7uoe")]
+position = Vector2(7211, 716)
+
+[node name="Zeus!!" parent="." unique_id=1345799120 instance=ExtResource("18_aoih6")]
+position = Vector2(6883, 661)
+
+[node name="Zeus!!2" parent="." unique_id=229472837 instance=ExtResource("18_aoih6")]
+position = Vector2(6816, 644)
+
+[node name="Zeus!!3" parent="." unique_id=1808657532 instance=ExtResource("18_aoih6")]
+position = Vector2(6994, 705)
+
+[node name="Zeus!!4" parent="." unique_id=1245564559 instance=ExtResource("18_aoih6")]
+position = Vector2(8861, 611)
+
+[node name="Zeus!!5" parent="." unique_id=199498123 instance=ExtResource("18_aoih6")]
+position = Vector2(8761, 616)
+
+[node name="Zeus!!6" parent="." unique_id=1362042271 instance=ExtResource("18_aoih6")]
+position = Vector2(8967, 611)
+
+[node name="Zeus!!7" parent="." unique_id=2020990175 instance=ExtResource("18_aoih6")]
+position = Vector2(9067, 622)
+
+[node name="Zeus!!8" parent="." unique_id=1385340179 instance=ExtResource("18_aoih6")]
+position = Vector2(9161, 627)
+
+[node name="blackdragonfish" parent="." unique_id=79016938 instance=ExtResource("19_topbc")]
+position = Vector2(9317, 638)
+
+[node name="blackdragonfish2" parent="." unique_id=1512758967 instance=ExtResource("19_topbc")]
+position = Vector2(8544, 599)
+
+[node name="blackdragonfish3" parent="." unique_id=1519093839 instance=ExtResource("19_topbc")]
+position = Vector2(9839, 863)
+
+[node name="seahorse4" parent="." unique_id=739957701 instance=ExtResource("14_5fuui")]
+position = Vector2(14268, 1803)
+
+[node name="seahorse5" parent="." unique_id=536719302 instance=ExtResource("14_5fuui")]
+position = Vector2(13958, 2833)
+
+[node name="seahorse6" parent="." unique_id=535667954 instance=ExtResource("14_5fuui")]
+position = Vector2(14389, 3007)
+
+[node name="seahorse7" parent="." unique_id=1408116353 instance=ExtResource("14_5fuui")]
+position = Vector2(15068, 2954)
+
+[node name="seahorse8" parent="." unique_id=865256115 instance=ExtResource("14_5fuui")]
+position = Vector2(15634, 2174)
+
+[node name="seahorse9" parent="." unique_id=1493447046 instance=ExtResource("14_5fuui")]
+position = Vector2(14520.999, 2390.9998)
+
+[node name="seahorse10" parent="." unique_id=1001200139 instance=ExtResource("14_5fuui")]
+position = Vector2(15151, 539)
+
+[node name="Zeus!!9" parent="." unique_id=2016367354 instance=ExtResource("18_aoih6")]
+position = Vector2(10753, 760)
+
+[node name="Zeus!!10" parent="." unique_id=1773164985 instance=ExtResource("18_aoih6")]
+position = Vector2(10647, 1053)
+
+[node name="Zeus!!11" parent="." unique_id=1837311258 instance=ExtResource("18_aoih6")]
+position = Vector2(10720, 1362)
+
+[node name="Zeus!!12" parent="." unique_id=1208227068 instance=ExtResource("18_aoih6")]
+position = Vector2(10924, 711)
+
+[node name="Zeus!!13" parent="." unique_id=1494595517 instance=ExtResource("18_aoih6")]
+position = Vector2(11103, 540)
+
+[node name="Zeus!!14" parent="." unique_id=691678080 instance=ExtResource("18_aoih6")]
+position = Vector2(11021, 206)
+
+[node name="Zeus!!15" parent="." unique_id=1374817089 instance=ExtResource("18_aoih6")]
+position = Vector2(11152, -79)
+
+[node name="Hatchetfish3" parent="." unique_id=1749198985 instance=ExtResource("12_tr7da")]
+position = Vector2(11194, 1626)
+
+[node name="Hatchetfish4" parent="." unique_id=1565794511 instance=ExtResource("12_tr7da")]
+position = Vector2(11373, 2489)
+
+[node name="Hatchetfish5" parent="." unique_id=39924706 instance=ExtResource("12_tr7da")]
+position = Vector2(11292, 2155)
+
+[node name="shark4" parent="." unique_id=77008514 instance=ExtResource("16_cwaol")]
+position = Vector2(10885, 2179)
+
+[node name="GhostShark6" parent="." unique_id=467444792 instance=ExtResource("17_l7uoe")]
+position = Vector2(11292, 1927)
+
+[node name="GhostShark7" parent="." unique_id=1503188871 instance=ExtResource("17_l7uoe")]
+position = Vector2(12615, -401)
+
+[node name="GhostShark8" parent="." unique_id=537892050 instance=ExtResource("17_l7uoe")]
+position = Vector2(12859, -401)
+
+[node name="shark5" parent="." unique_id=97626768 instance=ExtResource("16_cwaol")]
+position = Vector2(16153, 3297)
+
+[node name="shark6" parent="." unique_id=1710859033 instance=ExtResource("16_cwaol")]
+position = Vector2(16292, 3362)
+
+[node name="shark7" parent="." unique_id=880271605 instance=ExtResource("16_cwaol")]
+position = Vector2(16162, 3395)
+
+[node name="shark8" parent="." unique_id=20843333 instance=ExtResource("16_cwaol")]
+position = Vector2(16178, 3419)
+
+[node name="shark9" parent="." unique_id=888290992 instance=ExtResource("16_cwaol")]
+position = Vector2(16479, 3427)
+
+[node name="shark10" parent="." unique_id=750128085 instance=ExtResource("16_cwaol")]
+position = Vector2(16764, 2801)
+
+[node name="shark11" parent="." unique_id=1708273799 instance=ExtResource("16_cwaol")]
+position = Vector2(16707, 2721)
+
+[node name="shark12" parent="." unique_id=441811189 instance=ExtResource("16_cwaol")]
+position = Vector2(16658, 2613)
+
+[node name="GhostShark9" parent="." unique_id=1096473448 instance=ExtResource("17_l7uoe")]
+position = Vector2(13859, -22)
+
+[node name="GhostShark10" parent="." unique_id=1097966560 instance=ExtResource("17_l7uoe")]
+position = Vector2(13865, -53)
+
+[node name="GhostShark11" parent="." unique_id=936642043 instance=ExtResource("17_l7uoe")]
+position = Vector2(14018, 27)
+
+[node name="GhostShark12" parent="." unique_id=838709872 instance=ExtResource("17_l7uoe")]
+position = Vector2(14030, -114)
+
+[node name="GhostShark13" parent="." unique_id=1024064092 instance=ExtResource("17_l7uoe")]
+position = Vector2(14047, -70)
+
+[node name="GhostShark14" parent="." unique_id=1471660164 instance=ExtResource("17_l7uoe")]
+position = Vector2(14067, -3)
+
+[node name="GhostShark15" parent="." unique_id=2146268915 instance=ExtResource("17_l7uoe")]
+position = Vector2(14000, 31)
+
+[node name="GhostShark16" parent="." unique_id=917632927 instance=ExtResource("17_l7uoe")]
+position = Vector2(13966, 75)
+
+[node name="GhostShark17" parent="." unique_id=1630585539 instance=ExtResource("17_l7uoe")]
+position = Vector2(14047, 109)
+
+[node name="GhostShark18" parent="." unique_id=1814080838 instance=ExtResource("17_l7uoe")]
+position = Vector2(14104, 129)
+
+[node name="GhostShark19" parent="." unique_id=1098278830 instance=ExtResource("17_l7uoe")]
+position = Vector2(14141, 139)
+
+[node name="GhostShark20" parent="." unique_id=1910888402 instance=ExtResource("17_l7uoe")]
+position = Vector2(14154, 68)
+
+[node name="GhostShark21" parent="." unique_id=1667142961 instance=ExtResource("17_l7uoe")]
+position = Vector2(14157, 21)
+
+[node name="GhostShark22" parent="." unique_id=1074008957 instance=ExtResource("17_l7uoe")]
+position = Vector2(14157, -29)
+
+[node name="GhostShark23" parent="." unique_id=1299924703 instance=ExtResource("17_l7uoe")]
+position = Vector2(14147, -93)
+
+[node name="GhostShark24" parent="." unique_id=2015285795 instance=ExtResource("17_l7uoe")]
+position = Vector2(14147, -130)
+
+[node name="GhostShark25" parent="." unique_id=1988783816 instance=ExtResource("17_l7uoe")]
+position = Vector2(14134, -164)
+
+[node name="GhostShark26" parent="." unique_id=41489332 instance=ExtResource("17_l7uoe")]
+position = Vector2(14191, -151)
+
+[node name="GhostShark27" parent="." unique_id=1153791055 instance=ExtResource("17_l7uoe")]
+position = Vector2(14215, -127)
+
+[node name="GhostShark28" parent="." unique_id=1990752634 instance=ExtResource("17_l7uoe")]
+position = Vector2(14242, -87)
+
+[node name="GhostShark29" parent="." unique_id=1024263228 instance=ExtResource("17_l7uoe")]
+position = Vector2(14249, -50)
+
+[node name="GhostShark30" parent="." unique_id=1714802108 instance=ExtResource("17_l7uoe")]
+position = Vector2(14256, -26)
+
+[node name="GhostShark31" parent="." unique_id=1477520030 instance=ExtResource("17_l7uoe")]
+position = Vector2(14263, 24)
+
+[node name="GhostShark32" parent="." unique_id=86463457 instance=ExtResource("17_l7uoe")]
+position = Vector2(14246, 85)
+
+[node name="GhostShark33" parent="." unique_id=294893626 instance=ExtResource("17_l7uoe")]
+position = Vector2(14226, 139)
+
+[node name="Zeus!!16" parent="." unique_id=1036901315 instance=ExtResource("18_aoih6")]
+position = Vector2(13709, 3122)
+
+[node name="Zeus!!17" parent="." unique_id=16942200 instance=ExtResource("18_aoih6")]
+position = Vector2(13773, 3142)
+
+[node name="Zeus!!18" parent="." unique_id=846397702 instance=ExtResource("18_aoih6")]
+position = Vector2(13844, 3155)
+
+[node name="Zeus!!19" parent="." unique_id=1139810990 instance=ExtResource("18_aoih6")]
+position = Vector2(13827, 3084)
+
+[node name="Zeus!!20" parent="." unique_id=587981006 instance=ExtResource("18_aoih6")]
+position = Vector2(13773, 3081)
+
+[node name="Zeus!!21" parent="." unique_id=1632545944 instance=ExtResource("18_aoih6")]
+position = Vector2(13612, 3047)
+
+[node name="Zeus!!22" parent="." unique_id=1405750588 instance=ExtResource("18_aoih6")]
+position = Vector2(13599, 3108)
+
+[node name="Zeus!!23" parent="." unique_id=837104490 instance=ExtResource("18_aoih6")]
+position = Vector2(13572, 3189)
+
+[node name="Zeus!!24" parent="." unique_id=1867635694 instance=ExtResource("18_aoih6")]
+position = Vector2(13703, 3210)
+
+[node name="Zeus!!25" parent="." unique_id=624460356 instance=ExtResource("18_aoih6")]
+position = Vector2(13538, 3160)
+
+[node name="Zeus!!26" parent="." unique_id=150401139 instance=ExtResource("18_aoih6")]
+position = Vector2(13481, 3120)
+
+[node name="Zeus!!27" parent="." unique_id=1607395427 instance=ExtResource("18_aoih6")]
+position = Vector2(13743, 3093)
+
+[node name="Zeus!!28" parent="." unique_id=2052243554 instance=ExtResource("18_aoih6")]
+position = Vector2(13891, 3110)
+
+[node name="Zeus!!29" parent="." unique_id=1563556948 instance=ExtResource("18_aoih6")]
+position = Vector2(13955, 3110)
+
+[node name="Zeus!!30" parent="." unique_id=684489708 instance=ExtResource("18_aoih6")]
+position = Vector2(13975, 3076)
+
+[node name="Zeus!!31" parent="." unique_id=1977568691 instance=ExtResource("18_aoih6")]
+position = Vector2(13982, 3039)
+
+[node name="Zeus!!32" parent="." unique_id=1314804733 instance=ExtResource("18_aoih6")]
+position = Vector2(13898, 2992)
+
+[node name="Zeus!!33" parent="." unique_id=816443956 instance=ExtResource("18_aoih6")]
+position = Vector2(13807, 2989)
+
+[node name="Zeus!!34" parent="." unique_id=349273417 instance=ExtResource("18_aoih6")]
+position = Vector2(13763, 2992)
+
+[node name="Zeus!!35" parent="." unique_id=758930310 instance=ExtResource("18_aoih6")]
+position = Vector2(13709, 2995)
+
+[node name="Zeus!!36" parent="." unique_id=1829839579 instance=ExtResource("18_aoih6")]
+position = Vector2(13654, 3000)
+
+[node name="Zeus!!37" parent="." unique_id=738490456 instance=ExtResource("18_aoih6")]
+position = Vector2(13795, 3124)
+
+[node name="Zeus!!38" parent="." unique_id=1873563822 instance=ExtResource("18_aoih6")]
+position = Vector2(13923, 3144)
+
+[node name="Zeus!!39" parent="." unique_id=682690944 instance=ExtResource("18_aoih6")]
+position = Vector2(14021, 3124)
+
+[node name="Zeus!!40" parent="." unique_id=1990942061 instance=ExtResource("18_aoih6")]
+position = Vector2(14055, 3121)
+
+[node name="Zeus!!41" parent="." unique_id=1831013142 instance=ExtResource("18_aoih6")]
+position = Vector2(14099, 3121)
+
+[node name="Zeus!!42" parent="." unique_id=1714825807 instance=ExtResource("18_aoih6")]
+position = Vector2(14079, 3044)
+
+[node name="Zeus!!43" parent="." unique_id=2121418977 instance=ExtResource("18_aoih6")]
+position = Vector2(14052, 2987)
+
+[node name="Zeus!!44" parent="." unique_id=1749885148 instance=ExtResource("18_aoih6")]
+position = Vector2(13998, 2950)
+
+[node name="Zeus!!45" parent="." unique_id=1216181842 instance=ExtResource("18_aoih6")]
+position = Vector2(13934, 2923)
+
+[node name="Zeus!!46" parent="." unique_id=1835374777 instance=ExtResource("18_aoih6")]
+position = Vector2(13934, 2923)
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

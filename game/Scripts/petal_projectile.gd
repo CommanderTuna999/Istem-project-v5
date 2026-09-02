@@ -106,8 +106,8 @@ func hit_enemy(enemy: Node2D) -> void:
 
 	if enemy.has_method("take_damage"):
 		enemy.take_damage(damage)
-		petalbounce_audio_player.pitch_scale = 1.5
-		petalbounce_audio_player.play()
+#		petalbounce_audio_player.pitch_scale = 1.5
+#		petalbounce_audio_player.play()
 
 	if enemy.has_method("take_kb"):
 		enemy.take_kb(global_position)

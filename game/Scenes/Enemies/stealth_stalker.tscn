@@ -51,13 +51,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
-size = Vector2(123, 50)
+size = Vector2(123, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fnisb"]
 radius = 98.71676
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hurtbox"]
-size = Vector2(119, 44)
+size = Vector2(119, 33)
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -86,7 +86,7 @@ flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1314933740]
 visibility_layer = 2
-position = Vector2(0, -1)
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_body")
 
 [node name="aggro_area" type="Area2D" parent="." unique_id=1449816365]
@@ -104,7 +104,7 @@ collision_mask = 16
 script = ExtResource("2_hurtbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TemplateHurtbox" unique_id=730459337]
-position = Vector2(0.5, -2)
+position = Vector2(0.5, -7.5)
 shape = SubResource("RectangleShape2D_hurtbox")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=337429627]
