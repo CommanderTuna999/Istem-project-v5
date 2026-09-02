@@ -39,6 +39,7 @@
 [ext_resource type="Script" uid="uid://j8cqe2er2s8a" path="res://Scripts/hard_hit.gd" id="26_hardhit"]
 [ext_resource type="PackedScene" uid="uid://cn4m04bhkfiwb" path="res://camerafish.tscn" id="26_jamva"]
 [ext_resource type="Script" uid="uid://bk3ngxqppw15h" path="res://Scripts/icy_shot.gd" id="27_icyshot"]
+[ext_resource type="PackedScene" uid="uid://4iv3yv24u8gm" path="res://turtle.tscn" id="27_m15vq"]
 [ext_resource type="AudioStream" uid="uid://bo8j36ljf0gtc" path="res://sfx/slap-battles-time-stop-god-hand.mp3" id="28_7w24h"]
 [ext_resource type="Script" uid="uid://chymha3bnjeuw" path="res://Scripts/tsunami_impact.gd" id="28_tsunami"]
 [ext_resource type="Texture2D" uid="uid://bvya2681j5nfo" path="res://Assets/tsunami_impact_symbol.png" id="29_tsunami_symbol"]
@@ -1009,6 +1010,11 @@ position = Vector2(1095, -709)
 
 [node name="CameraFish" parent="Enemies/camerafish_folder" unique_id=2118139995 instance=ExtResource("26_jamva")]
 position = Vector2(1093, -1765)
+
+[node name="turtle_folder" type="Node" parent="Enemies" unique_id=1992869913]
+
+[node name="turtle" parent="Enemies/turtle_folder" unique_id=1125597631 instance=ExtResource("27_m15vq")]
+position = Vector2(787, -1561)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)

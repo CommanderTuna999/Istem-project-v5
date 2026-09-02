@@ -1016,9 +1016,9 @@ func _on_shield_recharge_timer_timeout() -> void:
 		update_shield_bar()
 
 func apply_slow(duration: float, multiplier: float) -> void:
-	total_speed_increase -= multiplier
+	total_speed_increase *= multiplier
 	await get_tree().create_timer(duration).timeout
-	total_speed_increase += multiplier
+	total_speed_increase /= multiplier
 
 func apply_burn(dps: float, duration: float) -> void:
 	var ticks := int(duration)

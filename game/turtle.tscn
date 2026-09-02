@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://4iv3yv24u8gm"]
+
+[ext_resource type="Script" uid="uid://d2cvcj0h4hyxk" path="res://turtle.gd" id="1_w1etq"]
+[ext_resource type="Texture2D" uid="uid://dnhagj1qwm5i3" path="res://Assets/pixilart-sprite_3.webp" id="2_ghgcf"]
+[ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_hlk0a"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e1omo"]
+radius = 50.0
+height = 282.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4wnx"]
+atlas = ExtResource("2_ghgcf")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxseb"]
+atlas = ExtResource("2_ghgcf")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vv5kj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4wnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxseb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f1u4q"]
+radius = 778.9737
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2g1hy"]
+radius = 55.0
+height = 284.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgedt"]
+
+[node name="turtle" type="CharacterBody2D" unique_id=1125597631 groups=["enemy", "turtle"]]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_w1etq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=215397836]
+position = Vector2(3, -17)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_e1omo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1386853996]
+position = Vector2(7.6293945e-06, 1.5258789e-05)
+scale = Vector2(12.455, 12.455)
+sprite_frames = SubResource("SpriteFrames_vv5kj")
+frame_progress = 0.9225934
+offset = Vector2(6.9851484, 13.40827)
+
+[node name="aggro" type="Area2D" parent="." unique_id=952697341]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro" unique_id=424387220]
+shape = SubResource("CircleShape2D_f1u4q")
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=135960073]
+collision_layer = 1024
+collision_mask = 16
+script = ExtResource("3_hlk0a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=1018340130]
+position = Vector2(2, -17)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_2g1hy")
+
+[node name="absorb_area" type="Area2D" parent="." unique_id=1746248140]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="absorb_area" unique_id=2060580726]
+shape = SubResource("CircleShape2D_cgedt")
+
+[connection signal="body_entered" from="aggro" to="." method="_on_aggro_body_entered"]
+[connection signal="body_exited" from="aggro" to="." method="_on_aggro_body_exited"]
