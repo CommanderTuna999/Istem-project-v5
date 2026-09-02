@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
-@export var speed: float = 185.5
+@export var speed: float = 185.0
 @export var range_radius: float = 250.0
 
 @export var shot_ammo: int = 4
 
-@export var shot_cooldown: float = 0.5
+@export var shot_cooldown: float = 1.5
+
+@export var wander_radius: float = 160.0
+@export var wander_speed: float = 85.0
 
 var max_health: float = 6.0
 var current_health: float
@@ -22,6 +25,10 @@ var kbvelocity: Vector2 = Vector2.ZERO
 var rooted: bool = false
 var root_timer: float = 0.0
 var slow_active: bool = false
+
+var home_position: Vector2 = Vector2.ZERO
+var wander_target: Vector2 = Vector2.ZERO
+var wander_wait_time: float = 0.0
 
 var ice_projectile = preload("res://Scenes/Enemies/blackdragonfish_ice_projectile.tscn")
 var fire_projectile = preload("res://Scenes/Enemies/blackdragonfish_fire_projectile.tscn")
@@ -44,6 +51,9 @@ func _ready() -> void:
 	if range_shape:
 		range_shape.radius = range_radius
 
+	home_position = global_position
+	pick_new_wander_target()
+
 
 func _physics_process(delta: float) -> void:
 	if rooted:
@@ -65,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	if not aggro or chase_subject == null:
-		velocity = Vector2.ZERO
+		wander(delta)
 		move_and_slide()
 		return
 
@@ -80,6 +90,29 @@ func _physics_process(delta: float) -> void:
 		velocity = (chase_subject.global_position - global_position).normalized() * speed
 
 	move_and_slide()
+
+
+func wander(delta: float) -> void:
+	if wander_wait_time > 0.0:
+		wander_wait_time -= delta
+		velocity = Vector2.ZERO
+		return
+
+	if global_position.distance_to(wander_target) < 10.0:
+		wander_wait_time = randf_range(0.6, 1.8)
+		pick_new_wander_target()
+		return
+
+	velocity = (wander_target - global_position).normalized() * wander_speed
+	if velocity.x > 0:
+		animation.flip_h = true
+	elif velocity.x < 0:
+		animation.flip_h = false
+
+
+func pick_new_wander_target() -> void:
+	var random_offset := Vector2(randf_range(-wander_radius, wander_radius), randf_range(-wander_radius, wander_radius))
+	wander_target = home_position + random_offset
 
 
 func _on_aggro_area_body_entered(body: Node2D) -> void:
@@ -140,7 +173,7 @@ func take_damage(amount: float) -> void:
 
 func take_kb(source_position: Vector2) -> void:
 	var kbdirection = (global_position - source_position).normalized()
-	kbvelocity = kbdirection * 950
+	kbvelocity = kbdirection * 600
 	kbtime = 0.12
 
 

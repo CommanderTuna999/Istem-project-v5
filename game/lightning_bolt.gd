@@ -3,7 +3,7 @@ extends Node2D
 @export var strike_height: float = 400.0
 @export var jaggedness: float = 64.0
 @export var min_segment_length: float = 10.0
-@export var bolt_lifetime: float = 0.8
+@export var bolt_lifetime: float = 0.5
 
 @onready var bolt: Line2D = $Bolt
 @onready var sparks: GPUParticles2D = $Sparks

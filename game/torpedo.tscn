@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://b5d16ukkykxly"]
+
+[ext_resource type="Script" uid="uid://rkorurfui71" path="res://torpedo.gd" id="1_ongux"]
+[ext_resource type="Texture2D" uid="uid://do1g47rnqcpwi" path="res://Assets/pixil-layer-Background (6).png" id="2_obqh4"]
+[ext_resource type="Texture2D" uid="uid://diuipy2w1vv1r" path="res://Assets/pixil-layer-Background (5).png" id="3_gs7b2"]
+[ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="4_f4ydo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0e48y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_obqh4")
+}],
+"loop": true,
+"name": &"armed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gs7b2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_epypp"]
+radius = 7.0
+height = 52.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e4vws"]
+radius = 1387.0292
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jgctd"]
+radius = 30.016663
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gvges"]
+radius = 7.0
+height = 54.0
+
+[node name="torpedo" type="CharacterBody2D" unique_id=1953908890]
+script = ExtResource("1_ongux")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=353605740]
+position = Vector2(145, 45)
+scale = Vector2(1.65, 1.65)
+sprite_frames = SubResource("SpriteFrames_0e48y")
+offset = Vector2(-87, -25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1503915374]
+position = Vector2(1, -2)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_epypp")
+
+[node name="aggro_area" type="Area2D" parent="." unique_id=1079827309]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_area" unique_id=1161780476]
+shape = SubResource("CircleShape2D_e4vws")
+
+[node name="detonate_area" type="Area2D" parent="." unique_id=60802477]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detonate_area" unique_id=311547144]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_jgctd")
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=415038642]
+collision_layer = 1024
+collision_mask = 16
+script = ExtResource("4_f4ydo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=780300722]
+position = Vector2(1, -2)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_gvges")
+
+[connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]
+[connection signal="body_entered" from="detonate_area" to="." method="_on_detonate_area_body_entered"]

@@ -278,7 +278,8 @@ func _physics_process(delta: float) -> void:
 		]
 	else:
 		$HarpoonLine.visible = false
-		
+	if stunned == true:
+		return
 	direction = Input.get_vector("Left", "Right", "Up", "Down")
 	handle_dash(delta, direction)
 	#if not is_on_floor():
@@ -327,7 +328,7 @@ func _physics_process(delta: float) -> void:
 		faceside("left")
 	elif direction.x < 0:
 		faceside("right")
-	#sprite flipping ends here, please depart from the train. Functions await below
+
 
 	
 	#if harpooning:
@@ -363,7 +364,7 @@ func _physics_process(delta: float) -> void:
 		if harpooning:
 			currentdragaccel = harpoondragaccel
 			
-		if stunned:
+		if stunned == true:
 			return
 		velocity = velocity.move_toward(
 			Vector2.ZERO,

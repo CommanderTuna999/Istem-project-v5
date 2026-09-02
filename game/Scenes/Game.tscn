@@ -33,6 +33,7 @@
 [ext_resource type="AudioStream" uid="uid://cmtmo11w24jcs" path="res://sfx/nom-nom-nom_gPJiWn4.mp3" id="24_356ba"]
 [ext_resource type="AudioStream" uid="uid://dpvo8eortnl8e" path="res://sfx/heal-skill-ro.mp3" id="24_iyesh"]
 [ext_resource type="AudioStream" uid="uid://d35o65uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="25_3jf1l"]
+[ext_resource type="PackedScene" uid="uid://b5d16ukkykxly" path="res://torpedo.tscn" id="25_34hf4"]
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="25_i0vto"]
 [ext_resource type="AudioStream" uid="uid://clklxrgjbhver" path="res://sfx/clock-tick.mp3" id="26_dctr5"]
 [ext_resource type="Script" uid="uid://j8cqe2er2s8a" path="res://Scripts/hard_hit.gd" id="26_hardhit"]
@@ -997,6 +998,23 @@ position = Vector2(688, -1660)
 
 [node name="blackdragonfish" parent="Enemies/blackdragonfish_folder" unique_id=79016938 instance=ExtResource("23_lkuj1")]
 position = Vector2(1631, -1652)
+
+[node name="torpedo_folder" type="Node" parent="Enemies" unique_id=1396536562]
+
+[node name="torpedo" parent="Enemies/torpedo_folder" unique_id=1953908890 instance=ExtResource("25_34hf4")]
+position = Vector2(1095, -709)
+
+[node name="torpedo2" parent="Enemies/torpedo_folder" unique_id=1308937944 instance=ExtResource("25_34hf4")]
+position = Vector2(1182, -732)
+
+[node name="torpedo3" parent="Enemies/torpedo_folder" unique_id=649428172 instance=ExtResource("25_34hf4")]
+position = Vector2(1006, -736)
+
+[node name="torpedo4" parent="Enemies/torpedo_folder" unique_id=1892459489 instance=ExtResource("25_34hf4")]
+position = Vector2(1026, -681)
+
+[node name="torpedo5" parent="Enemies/torpedo_folder" unique_id=684353836 instance=ExtResource("25_34hf4")]
+position = Vector2(1157, -678)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)

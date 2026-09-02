@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bnuh27p2j1o3b"]
+
+[ext_resource type="Texture2D" uid="uid://diuipy2w1vv1r" path="res://Assets/pixil-layer-Background (5).png" id="1_wtcfe"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0e48y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wtcfe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_epypp"]
+radius = 27.0
+height = 62.0
+
+[node name="torpedo" type="CharacterBody2D" unique_id=1953908890]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=353605740]
+position = Vector2(87, 25)
+sprite_frames = SubResource("SpriteFrames_0e48y")
+offset = Vector2(-87, -25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1503915374]
+shape = SubResource("CapsuleShape2D_epypp")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1079827309]
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=60802477]
+
+[node name="Area2D3" type="Area2D" parent="." unique_id=415038642]
