@@ -646,6 +646,7 @@ var zeus_damage = 10.0
 var lightning_damage = 15.0
 var bdragfish_damage = 10.0
 var camerafish_damage = 5.0
+var turtle_damage = 17.5
 
 	
 
@@ -867,6 +868,9 @@ func handleenemycontact(body: Node2D):
 		kbstrength = 305
 		await get_tree().create_timer(0.1).timeout
 		trigger_camera_strike()
+	elif body.is_in_group("turtle"):
+		damage = turtle_damage
+		kbstrength = 710
 	
 	else:
 		return

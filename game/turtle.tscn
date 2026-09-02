@@ -51,15 +51,15 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_e1omo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1386853996]
-position = Vector2(7.6293945e-06, 1.5258789e-05)
+position = Vector2(-13.999999, 9.094947e-13)
 scale = Vector2(12.455, 12.455)
 sprite_frames = SubResource("SpriteFrames_vv5kj")
-frame_progress = 0.9225934
-offset = Vector2(6.9851484, 13.40827)
+frame_progress = 0.5467769
+offset = Vector2(7.5, 12.5)
 
-[node name="aggro" type="Area2D" parent="." unique_id=952697341]
+[node name="aggro_area" type="Area2D" parent="." unique_id=952697341]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro" unique_id=424387220]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_area" unique_id=424387220]
 shape = SubResource("CircleShape2D_f1u4q")
 
 [node name="hurtbox" type="Area2D" parent="." unique_id=135960073]
@@ -73,9 +73,12 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_2g1hy")
 
 [node name="absorb_area" type="Area2D" parent="." unique_id=1746248140]
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="absorb_area" unique_id=2060580726]
 shape = SubResource("CircleShape2D_cgedt")
 
-[connection signal="body_entered" from="aggro" to="." method="_on_aggro_body_entered"]
-[connection signal="body_exited" from="aggro" to="." method="_on_aggro_body_exited"]
+[connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]
+[connection signal="body_entered" from="absorb_area" to="." method="_on_absorb_area_body_entered"]
+[connection signal="body_exited" from="absorb_area" to="." method="_on_absorb_area_body_exited"]

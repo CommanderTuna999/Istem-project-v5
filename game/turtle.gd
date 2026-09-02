@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var wander_speed: float = 60.0
 @export var absorb_radius: float = 500.0
 @export var absorb_percent: float = 0.25
+@export var sprite_offset_x: float = 7.5
 
 var max_health: float = 25.0
 var current_health: float
@@ -22,7 +23,10 @@ var rooted: bool = false
 var root_timer: float = 0.0
 var slow_active: bool = false
 
+var protection_lines: Dictionary = {}
+
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+@onready var absorb_area: Area2D = $absorb_area
 
 
 func _ready() -> void:
@@ -39,6 +43,28 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if current_health <= 0:
 		queue_free()
+	update_protection_lines()
+
+
+func update_protection_lines() -> void:
+	for body in protection_lines.keys():
+		if not is_instance_valid(body):
+			protection_lines[body].queue_free()
+			protection_lines.erase(body)
+			continue
+		var line: Line2D = protection_lines[body]
+		line.points = [Vector2.ZERO, to_local(body.global_position)]
+		var distance := global_position.distance_to(body.global_position)
+		line.modulate.a = line_alpha_factor(distance)
+
+
+func line_alpha_factor(distance: float) -> float:
+	if distance <= 200.0:
+		return 1.0
+	if distance >= 500.0:
+		return 0.2
+	var t := (distance - 200.0) / (500.0 - 200.0)
+	return lerp(1.0, 0.2, t)
 
 
 func _physics_process(delta: float) -> void:
@@ -59,9 +85,9 @@ func _physics_process(delta: float) -> void:
 	if aggro and chase_subject:
 		velocity = (chase_subject.global_position - global_position).normalized() * speed
 		if velocity.x > 0:
-			animation.flip_h = true
+			set_facing(true)
 		elif velocity.x < 0:
-			animation.flip_h = false
+			set_facing(false)
 	else:
 		wander(delta)
 
@@ -81,9 +107,9 @@ func wander(delta: float) -> void:
 
 	velocity = (wander_target - global_position).normalized() * wander_speed
 	if velocity.x > 0:
-		animation.flip_h = true
+		set_facing(true)
 	elif velocity.x < 0:
-		animation.flip_h = false
+		set_facing(false)
 
 
 func pick_new_wander_target() -> void:
@@ -91,16 +117,42 @@ func pick_new_wander_target() -> void:
 	wander_target = home_position + random_offset
 
 
-func _on_aggro_body_entered(body: Node2D) -> void:
+func set_facing(flipped: bool) -> void:
+	animation.flip_h = flipped
+	animation.offset.x = -sprite_offset_x if flipped else sprite_offset_x
+
+
+func _on_aggro_area_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
 	chase_subject = body
 	aggro = true
 
 
-func _on_aggro_body_exited(_body: Node2D) -> void:
+func _on_aggro_area_body_exited(_body: Node2D) -> void:
 	chase_subject = null
 	aggro = false
+
+
+func _on_absorb_area_body_entered(body: Node2D) -> void:
+	if body == self:
+		return
+	if not body.is_in_group("enemy"):
+		return
+	if protection_lines.has(body):
+		return
+	var line := Line2D.new()
+	line.width = 3.0
+	line.default_color = Color(0.4, 1.0, 0.6, 0.8)
+	line.z_index = -1
+	add_child(line)
+	protection_lines[body] = line
+
+
+func _on_absorb_area_body_exited(body: Node2D) -> void:
+	if protection_lines.has(body):
+		protection_lines[body].queue_free()
+		protection_lines.erase(body)
 
 
 func absorb_damage(amount: float) -> void:
