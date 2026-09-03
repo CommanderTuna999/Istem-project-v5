@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var shuriken_scene = preload("res://Scenes/Enemies/shuriken.tscn")
+@onready var curse_scene = preload("res://Scenes/Enemies/curse.tscn")
 
 var damage_occuring = false
 var aggro = false
@@ -17,7 +17,7 @@ var root_timer = 0.0
 var slow_active = false
 
 var homeposition = Vector2.ZERO
-var wander_teleport_radius = 200.0
+var wander_radius = 200.0
 var wander_wait_timer = 0.0
 
 var retreating = false
@@ -128,7 +128,7 @@ func pick_new_wander_teleport() -> void:
 
 	for i in range(attempts):
 		var angle = randf_range(0, TAU)
-		var distance = randf_range(wander_teleport_radius * 0.5, wander_teleport_radius)
+		var distance = randf_range(wander_radius * 0.5, wander_radius)
 		var offset = Vector2(cos(angle), sin(angle)) * distance
 		var candidate_position = homeposition + offset
 
@@ -161,15 +161,15 @@ func throw_shuriken() -> void:
 
 	shot_count += 1
 	var main = get_tree().current_scene
-	var instance = shuriken_scene.instantiate()
+	var instance = curse_scene.instantiate()
 
 	var direction = (last_known_player_position - global_position).normalized()
 	instance.direction = direction
 
-	var is_shiny = shot_count % 4 == 0
-	if is_shiny:
-		instance.speed *= 1.2
-		instance.modulate = Color(1.5, 1.5, 1.5, 1.0)
+	var is_cursed = shot_count % 6 == 0
+	if is_cursed:
+		instance.speed *= 1.1
+		instance.morecurse = true
 
 	main.call_deferred("add_child", instance)
 	instance.global_position = global_position

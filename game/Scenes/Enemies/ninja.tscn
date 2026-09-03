@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1x0x08kh0r5g"]
 
-[ext_resource type="Script" uid="uid://bjwrogkxl44v3" path="res://ninja.gd" id="1_ypd7y"]
+[ext_resource type="Script" uid="uid://bjwrogkxl44v3" path="res://Scripts/ninja.gd" id="1_ypd7y"]
 [ext_resource type="Texture2D" uid="uid://cj5g3uprsb6lm" path="res://Assets/pixil-frame-0 (6).png" id="2_e6yk7"]
 [ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_y0cbb"]
 

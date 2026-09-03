@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4iv3yv24u8gm"]
 
-[ext_resource type="Script" uid="uid://d2cvcj0h4hyxk" path="res://turtle.gd" id="1_w1etq"]
+[ext_resource type="Script" uid="uid://d2cvcj0h4hyxk" path="res://Scripts/turtle.gd" id="1_w1etq"]
 [ext_resource type="Texture2D" uid="uid://dnhagj1qwm5i3" path="res://Assets/pixilart-sprite_3.webp" id="2_ghgcf"]
 [ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_hlk0a"]
 

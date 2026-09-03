@@ -4,7 +4,6 @@ extends CharacterBody2D
 @export var max_health: float = 4.0
 @export var aggro_radius: float = 360.0
 @export var reveal_distance: float = 165.0
-
 @export var wander_radius: float = 160.0
 @export var wander_speed: float = 60.0
 

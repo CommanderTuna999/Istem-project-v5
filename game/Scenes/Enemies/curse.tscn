@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://jkk7hpvwiwvk"]
+
+[ext_resource type="Texture2D" uid="uid://7v0t4yb8wk4d" path="res://Assets/pixil-frame-0 (9).png" id="1_jspm0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dswov"]
+size = Vector2(26, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3bpgc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jspm0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="curse" type="Area2D" unique_id=1546039796]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1189776651]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_dswov")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=822612826]
+sprite_frames = SubResource("SpriteFrames_3bpgc")
+
+[node name="Timer" type="Timer" parent="." unique_id=1341700066]

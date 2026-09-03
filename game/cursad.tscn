@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cptu331386as2"]
+
+[ext_resource type="Texture2D" uid="uid://km3rdsfv8tgd" path="res://Assets/pixilart-drawing_1.webp" id="1_7hke4"]
+[ext_resource type="Script" uid="uid://d2cqgid6rg7oo" path="res://cursad.gd" id="1_yr4qr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yr4qr"]
+radius = 7.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_al7av"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7hke4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f807t"]
+radius = 414.79755
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7wjgv"]
+
+[node name="Cursad" type="CharacterBody2D" unique_id=981987303]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("1_yr4qr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=963131801]
+shape = SubResource("CircleShape2D_yr4qr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1878304364]
+sprite_frames = SubResource("SpriteFrames_al7av")
+
+[node name="aggro_area" type="Area2D" parent="." unique_id=390798734]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_area" unique_id=1843282544]
+shape = SubResource("CircleShape2D_f807t")
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=1527837224]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=1280735146]
+rotation = 1.8325958
+shape = SubResource("CapsuleShape2D_7wjgv")

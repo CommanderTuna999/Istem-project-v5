@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cn4m04bhkfiwb"]
 
-[ext_resource type="Script" uid="uid://kfv67hpd34q7" path="res://camerafish.gd" id="1_a1klm"]
+[ext_resource type="Script" uid="uid://kfv67hpd34q7" path="res://Scripts/camerafish.gd" id="1_a1klm"]
 [ext_resource type="Texture2D" uid="uid://cpejmtb7vsure" path="res://Assets/pixil-frame-0 (5).png" id="2_a1klm"]
 [ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_n6ou3"]
 

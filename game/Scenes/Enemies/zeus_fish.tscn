@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dalc8mwkcbhvs"]
 
-[ext_resource type="Script" uid="uid://bwupdt4thchta" path="res://zeus_fish.gd" id="1_7jced"]
+[ext_resource type="Script" uid="uid://bwupdt4thchta" path="res://Scripts/zeus_fish.gd" id="1_7jced"]
 [ext_resource type="Texture2D" uid="uid://dmrdgb1x4l3we" path="res://Assets/pixil-layer-Background (2).png" id="1_warfe"]
 [ext_resource type="Texture2D" uid="uid://bh432lg41d5u6" path="res://Assets/pixil-layer-Background (3).png" id="3_jin7i"]
 [ext_resource type="Texture2D" uid="uid://dblijw3yrnr2f" path="res://Assets/pixil-layer-Background (4).png" id="4_5m8db"]
