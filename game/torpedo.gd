@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed: float = 666.0
 
 @export var detonate_range: float = 60.0
-@export var fuse_time: float = 2.0
+@export var fuse_time: float = 1.35
 @export var explosion_radius: float = 150.0
 @export var damage: float = 15.0
 @export var knockback_strength: float = 1800.0
