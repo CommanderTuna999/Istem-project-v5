@@ -1164,6 +1164,12 @@ offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UpgradeTree_UI_Manager" unique_id=1002986835]
 
+[node name="CursedExplosionFilter" type="CanvasLayer" parent="." unique_id=1836989706]
+
+[node name="ColorRect" type="ColorRect" parent="CursedExplosionFilter" unique_id=139394896]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="Player/ShieldRechargeDelay" to="Player" method="_on_shield_recharge_delay_timeout"]

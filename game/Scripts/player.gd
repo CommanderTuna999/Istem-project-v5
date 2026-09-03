@@ -623,7 +623,7 @@ var defence:
 
 var current_health = 100
 var damage_occuring = false
-var iframe_duration = 0.5
+var iframe_duration = 0.45
 var starsaveused = false
 
 #mob special effects (custom calling ig)
@@ -1067,5 +1067,5 @@ func reverse_movement():
 	
 func explode():
 	var explosion_damage = 10000000
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	take_player_damage(explosion_damage)
