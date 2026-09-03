@@ -30,7 +30,7 @@ var retreatdistance = 150.0
 
 var last_known_player_position = Vector2.ZERO
 
-var shot_cooldown = 1.15
+var shot_cooldown = 1.3
 var shot_timer = 0.0
 var shot_count = 0
 
@@ -42,9 +42,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if not chase_subject == null and chase_subject.position.x > position.x:
-		animated_sprite_2d.flip_h = true
-	elif not chase_subject == null and chase_subject.position.x < position.x:
 		animated_sprite_2d.flip_h = false
+	elif not chase_subject == null and chase_subject.position.x < position.x:
+		animated_sprite_2d.flip_h = true
 
 	if current_health <= 0 and not dying:
 		dying = true
@@ -87,7 +87,7 @@ func _physics_process(delta: float) -> void:
 
 		shot_timer -= delta
 		if shot_timer <= 0.0:
-			throw_shuriken()
+			throw_curse()
 			shot_timer = shot_cooldown
 
 		if retreatcooldown > 0.0:
@@ -150,12 +150,12 @@ func pick_new_wander_teleport() -> void:
 	global_position = chosen_position
 
 	if chosen_position.x > old_position.x:
-		animated_sprite_2d.flip_h = true
-	elif chosen_position.x < old_position.x:
 		animated_sprite_2d.flip_h = false
+	elif chosen_position.x < old_position.x:
+		animated_sprite_2d.flip_h = true
 
 
-func throw_shuriken() -> void:
+func throw_curse() -> void:
 	if not is_instance_valid(chase_subject):
 		return
 
@@ -168,7 +168,7 @@ func throw_shuriken() -> void:
 
 	var is_cursed = shot_count % 6 == 0
 	if is_cursed:
-		instance.speed *= 1.1
+		instance.speed *= 1.2
 		instance.morecurse = true
 
 	main.call_deferred("add_child", instance)
