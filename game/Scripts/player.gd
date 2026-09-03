@@ -841,7 +841,7 @@ func handleenemycontact(body: Node2D):
 		body.queue_free()
 	elif body.is_in_group("crab"):
 		damage = crab_damage
-		kbstrength = 2000 * kbresistance
+		kbstrength = 500 * kbresistance
 	elif body.is_in_group("starfish"):
 		damage = starfish_damage
 		kbstrength = 700 * kbresistance

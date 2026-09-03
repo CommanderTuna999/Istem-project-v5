@@ -69,10 +69,10 @@ func update_facing() -> void:
 
 	if abs(move_angle) > PI / 2.0:
 		animated_sprite_2d.rotation = move_angle + PI
-		animated_sprite_2d.flip_v = true
+		animated_sprite_2d.flip_h = true
 	else:
 		animated_sprite_2d.rotation = move_angle
-		animated_sprite_2d.flip_v = false
+		animated_sprite_2d.flip_h = false
 
 
 # Damage still works so attacks/parries can interact with the shark.
