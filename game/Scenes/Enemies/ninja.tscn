@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://d1x0x08kh0r5g"]
+
+[ext_resource type="Script" uid="uid://bjwrogkxl44v3" path="res://ninja.gd" id="1_ypd7y"]
+[ext_resource type="Texture2D" uid="uid://cj5g3uprsb6lm" path="res://Assets/pixil-frame-0 (6).png" id="2_e6yk7"]
+[ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_y0cbb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyd4q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e6yk7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8b3yq"]
+radius = 16.0
+height = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yjnhy"]
+radius = 105.38501
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aq14x"]
+
+[node name="Ninja" type="CharacterBody2D" unique_id=722717547 groups=["enemy", "ninja"]]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_ypd7y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1640191069]
+position = Vector2(0.99999905, -1.4305115e-06)
+scale = Vector2(1.525, 1.525)
+sprite_frames = SubResource("SpriteFrames_dyd4q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1206548517]
+position = Vector2(1, -1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_8b3yq")
+
+[node name="aggro_area" type="Area2D" parent="." unique_id=1945037747]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_area" unique_id=1052904098]
+shape = SubResource("CircleShape2D_yjnhy")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=238599480]
+collision_layer = 1024
+collision_mask = 16
+script = ExtResource("3_y0cbb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1633267156]
+position = Vector2(1, -1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_aq14x")
+
+[connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]

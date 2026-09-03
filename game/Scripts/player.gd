@@ -647,6 +647,7 @@ var lightning_damage = 15.0
 var bdragfish_damage = 10.0
 var camerafish_damage = 5.0
 var turtle_damage = 17.5
+var ninja_damage = 7.5
 
 	
 
@@ -871,6 +872,9 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("turtle"):
 		damage = turtle_damage
 		kbstrength = 710
+	elif body.is_in_group("ninja"):
+		damage = ninja_damage
+		kbstrength = 400
 	
 	else:
 		return
@@ -1039,3 +1043,8 @@ func camera_stun(duration: float) -> void:
 	stunned = true
 	await get_tree().create_timer(duration).timeout
 	stunned = false
+
+func bleed() -> void:
+	for i in range(5):
+		await get_tree().create_timer(1.0).timeout
+		take_player_damage(current_health * 0.05)

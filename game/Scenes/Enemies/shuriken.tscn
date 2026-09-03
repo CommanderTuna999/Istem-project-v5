@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://yu4geqrpuh1v"]
+
+[ext_resource type="Script" uid="uid://cqjo6ea4g1s4q" path="res://Scenes/Enemies/shuriken.gd" id="1_tvp4d"]
+[ext_resource type="Texture2D" uid="uid://o2mbihoj8elu" path="res://Assets/pixil-frame-0 (7).png" id="2_x43u6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bd2gl"]
+radius = 10.049875
+
+[node name="Shuriken" type="Area2D" unique_id=1082356395]
+collision_layer = 32
+collision_mask = 3
+script = ExtResource("1_tvp4d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=119911277]
+shape = SubResource("CircleShape2D_bd2gl")
+
+[node name="LifetimeTimer" type="Timer" parent="." unique_id=1036759990]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=884170862]
+position = Vector2(4.7683716e-07, 4.7683716e-07)
+scale = Vector2(0.9826991, 0.9826991)
+texture = ExtResource("2_x43u6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="LifetimeTimer" to="." method="_on_lifetime_timer_timeout"]
