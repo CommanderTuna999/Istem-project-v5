@@ -302,7 +302,7 @@ func take_kb(source_position: Vector2):
 		global_position - source_position
 	).normalized()
 
-	kbvelocity = kbdirection * 600
+	kbvelocity = kbdirection * 300
 	kbtime = 0.12
 
 
