@@ -43,6 +43,7 @@
 [ext_resource type="AudioStream" uid="uid://bo8j36ljf0gtc" path="res://sfx/slap-battles-time-stop-god-hand.mp3" id="28_7w24h"]
 [ext_resource type="PackedScene" uid="uid://d1x0x08kh0r5g" path="res://Scenes/Enemies/ninja.tscn" id="28_a05uw"]
 [ext_resource type="Script" uid="uid://chymha3bnjeuw" path="res://Scripts/tsunami_impact.gd" id="28_tsunami"]
+[ext_resource type="PackedScene" uid="uid://qh5sagmwtoxn" path="res://missingtexture.tscn" id="29_n2ugt"]
 [ext_resource type="Texture2D" uid="uid://bvya2681j5nfo" path="res://Assets/tsunami_impact_symbol.png" id="29_tsunami_symbol"]
 [ext_resource type="Texture2D" uid="uid://cfrt5seuqiidd" path="res://Assets/shield_bar_under.png" id="30_shield_under"]
 [ext_resource type="Texture2D" uid="uid://k2f0fhtg6f8f" path="res://Assets/shield_bar_progress.png" id="31_shield_progress"]
@@ -1017,10 +1018,16 @@ position = Vector2(1093, -1765)
 [node name="turtle" parent="Enemies/turtle_folder" unique_id=1125597631 instance=ExtResource("27_m15vq")]
 position = Vector2(787, -1561)
 
+[node name="turtle2" parent="Enemies/turtle_folder" unique_id=1431804796 instance=ExtResource("27_m15vq")]
+position = Vector2(978, -1380)
+
 [node name="ninja_folder" type="Node" parent="Enemies" unique_id=45314948]
 
 [node name="Ninja" parent="Enemies/ninja_folder" unique_id=722717547 instance=ExtResource("28_a05uw")]
 position = Vector2(1179, -1550)
+
+[node name="invisarea" parent="Enemies" unique_id=1267716083 instance=ExtResource("29_n2ugt")]
+position = Vector2(906, -1586)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)
