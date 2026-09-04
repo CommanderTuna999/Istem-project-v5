@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://km3rdsfv8tgd" path="res://Assets/pixilart-drawing_1.webp" id="1_7hke4"]
 [ext_resource type="Script" uid="uid://d2cqgid6rg7oo" path="res://cursad.gd" id="1_yr4qr"]
+[ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_al7av"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yr4qr"]
 radius = 7.0
@@ -31,7 +32,9 @@ script = ExtResource("1_yr4qr")
 shape = SubResource("CircleShape2D_yr4qr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1878304364]
+scale = Vector2(0.82795703, 0.827957)
 sprite_frames = SubResource("SpriteFrames_al7av")
+flip_h = true
 
 [node name="aggro_area" type="Area2D" parent="." unique_id=390798734]
 
@@ -39,7 +42,11 @@ sprite_frames = SubResource("SpriteFrames_al7av")
 shape = SubResource("CircleShape2D_f807t")
 
 [node name="hurtbox" type="Area2D" parent="." unique_id=1527837224]
+script = ExtResource("3_al7av")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=1280735146]
 rotation = 1.8325958
 shape = SubResource("CapsuleShape2D_7wjgv")
+
+[connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]

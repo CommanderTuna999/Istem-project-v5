@@ -45,6 +45,7 @@
 [ext_resource type="Script" uid="uid://chymha3bnjeuw" path="res://Scripts/tsunami_impact.gd" id="28_tsunami"]
 [ext_resource type="PackedScene" uid="uid://qh5sagmwtoxn" path="res://missingtexture.tscn" id="29_n2ugt"]
 [ext_resource type="Texture2D" uid="uid://bvya2681j5nfo" path="res://Assets/tsunami_impact_symbol.png" id="29_tsunami_symbol"]
+[ext_resource type="PackedScene" uid="uid://cptu331386as2" path="res://cursad.tscn" id="30_n24vg"]
 [ext_resource type="Texture2D" uid="uid://cfrt5seuqiidd" path="res://Assets/shield_bar_under.png" id="30_shield_under"]
 [ext_resource type="Texture2D" uid="uid://k2f0fhtg6f8f" path="res://Assets/shield_bar_progress.png" id="31_shield_progress"]
 [ext_resource type="Texture2D" uid="uid://qanfhvpgpvi1" path="res://Assets/shield_bar_over.png" id="32_shield_over"]
@@ -58,6 +59,8 @@
 [ext_resource type="Script" uid="uid://bg1c3kuwpayjl" path="res://Scenes/big_bomb.gd" id="46_oo65k"]
 [ext_resource type="PackedScene" uid="uid://dl5ur657j3wwt" path="res://bomb_projectile.tscn" id="47_smnwb"]
 [ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="49_e2w45"]
+[ext_resource type="PackedScene" uid="uid://blryjdtwjaq03" path="res://Scenes/cursed_explosion_filter.tscn" id="60_ym08v"]
+[ext_resource type="PackedScene" uid="uid://dlfil1d4hc4ke" path="res://Scenes/Enemies/crab.tscn" id="61_8ekww"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -1016,10 +1019,10 @@ position = Vector2(1093, -1765)
 [node name="turtle_folder" type="Node" parent="Enemies" unique_id=1992869913]
 
 [node name="turtle" parent="Enemies/turtle_folder" unique_id=1125597631 instance=ExtResource("27_m15vq")]
-position = Vector2(787, -1561)
+position = Vector2(-244, -610)
 
 [node name="turtle2" parent="Enemies/turtle_folder" unique_id=1431804796 instance=ExtResource("27_m15vq")]
-position = Vector2(978, -1380)
+position = Vector2(1777, -653)
 
 [node name="ninja_folder" type="Node" parent="Enemies" unique_id=45314948]
 
@@ -1028,6 +1031,11 @@ position = Vector2(1179, -1550)
 
 [node name="invisarea" parent="Enemies" unique_id=1267716083 instance=ExtResource("29_n2ugt")]
 position = Vector2(906, -1586)
+
+[node name="Cursad" type="Node" parent="Enemies" unique_id=2070435042]
+
+[node name="Cursad" parent="Enemies/Cursad" unique_id=981987303 instance=ExtResource("30_n24vg")]
+position = Vector2(550, -1163)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)
@@ -1157,6 +1165,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UpgradeTree_UI_Manager" unique_id=1002986835]
+
+[node name="CursedExplosionFilter" parent="." unique_id=1302474987 instance=ExtResource("60_ym08v")]
+
+[node name="crab" parent="." unique_id=1837046843 instance=ExtResource("61_8ekww")]
+position = Vector2(670, -1529)
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
