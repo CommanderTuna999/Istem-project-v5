@@ -59,6 +59,7 @@
 [ext_resource type="Script" uid="uid://bg1c3kuwpayjl" path="res://Scenes/big_bomb.gd" id="46_oo65k"]
 [ext_resource type="PackedScene" uid="uid://dl5ur657j3wwt" path="res://bomb_projectile.tscn" id="47_smnwb"]
 [ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="49_e2w45"]
+[ext_resource type="PackedScene" uid="uid://blryjdtwjaq03" path="res://Scenes/cursed_explosion_filter.tscn" id="60_ym08v"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -1164,11 +1165,7 @@ offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UpgradeTree_UI_Manager" unique_id=1002986835]
 
-[node name="CursedExplosionFilter" type="CanvasLayer" parent="." unique_id=1836989706]
-
-[node name="ColorRect" type="ColorRect" parent="CursedExplosionFilter" unique_id=139394896]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CursedExplosionFilter" parent="." unique_id=1302474987 instance=ExtResource("60_ym08v")]
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

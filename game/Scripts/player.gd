@@ -154,7 +154,6 @@ var timerrunning = true
 var spawnposition = Vector2.ZERO
 
 func _ready() -> void:
-	#var particles: Particles = $ExplosionParticles
 	update_shield_bar()
 	$HarpoonLine.visible = false
 	$HarpoonLine.width = 1
@@ -1068,4 +1067,9 @@ func reverse_movement():
 func explode():
 	var explosion_damage = 10000000
 	await get_tree().create_timer(0.5).timeout
+	var mat = invert_screen.get_node("CanvasLayer/CursedExplosionFilter").material as ShaderMaterial
+	if mat:
+		var is_active: bool = mat.get_shader_parameter("active")
+		print("inverted")
+		mat.set_shader_parameter("active", not is_active)
 	take_player_damage(explosion_damage)
