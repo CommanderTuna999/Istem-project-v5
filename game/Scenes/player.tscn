@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bhk0tr1pyxfv" path="res://Scenes/harpoon_projectile.tscn" id="2_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://bjddxyp8stb25" path="res://Assets/mc idle spritesheet.png" id="4_fkybt"]
 [ext_resource type="Script" uid="uid://bxuajbif0gs0l" path="res://Scripts/damage_number_template.gd" id="4_vgqql"]
+[ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="5_fkybt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("4_fkybt")
@@ -53,6 +54,24 @@ font_color = Color(1, 1, 0, 1)
 outline_size = 1
 shadow_size = 0
 
+[sub_resource type="Curve" id="Curve_fkybt"]
+_data = [Vector2(0, 0.49888146), 0.0, 0.0, 0, 0, Vector2(1, 0.17673385), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x3wgy"]
+curve = SubResource("Curve_fkybt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x3wgy"]
+particle_flag_disable_z = true
+spread = 90.0
+initial_velocity_min = 80.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.01
+color = Color(0.41981313, 0.41981313, 0.4198131, 1)
+alpha_curve = SubResource("CurveTexture_x3wgy")
+
 [node name="Player" type="CharacterBody2D" unique_id=982439447 groups=["player"]]
 collision_mask = 2
 script = ExtResource("1_v0iea")
@@ -97,6 +116,15 @@ label_settings = SubResource("LabelSettings_vgqql")
 metadata/_custom_type_script = "uid://bxuajbif0gs0l"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1981488566]
+
+[node name="SurfaceImpactParticles" type="GPUParticles2D" parent="." unique_id=350819958]
+emitting = false
+amount = 30
+texture = ExtResource("5_fkybt")
+lifetime = 0.35000000000000003
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_x3wgy")
 
 [connection signal="body_entered" from="hurt_area" to="." method="_on_hurt_area_body_entered"]
 [connection signal="body_exited" from="hurt_area" to="." method="_on_hurt_area_body_exited"]

@@ -1092,7 +1092,7 @@ grow_vertical = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=33751702]
 stream = ExtResource("25_0fel4")
-volume_db = -10.035
+volume_db = -50.0
 parameters/looping = true
 
 [node name="Adultshark" parent="." unique_id=888717338 instance=ExtResource("29_ywwm3")]

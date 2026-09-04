@@ -111,6 +111,36 @@ var kbvelocity = Vector2.ZERO
 @export var harpoonprojectilescene: PackedScene
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+#player movement visuals
+@export var visual_max_lean_degrees: float = 10.0
+@export var visual_fast_speed_start: float = 450.0
+@export var visual_full_stretch_speed: float = 900.0
+@export var visual_speed_stretch: float = 0.10
+@export var visual_speed_squash: float = 0.05
+@export var visual_smoothing: float = 12.0
+
+var visual_base_scale: Vector2 = Vector2.ONE
+var visual_base_rotation: float = 0.0
+var visual_current_scale: Vector2 = Vector2.ONE
+var visual_current_rotation: float = 0.0
+
+var dash_visual_timer: float = 0.0
+var dash_visual_duration: float = 0.16
+
+var impact_visual_timer: float = 0.0
+var impact_visual_duration: float = 0.12
+var impact_visual_strength: float = 0.0
+var impact_visual_normal: Vector2 = Vector2.ZERO
+
+var parry_visual_timer: float = 0.0
+var parry_visual_duration: float = 0.16
+var parry_visual_strength: float = 1.0
+var parry_visual_normal: Vector2 = Vector2.ZERO
+
+var damage_visual_timer: float = 0.0
+var damage_visual_duration: float = 0.14
+var damage_visual_direction: Vector2 = Vector2.ZERO
+
 @onready var dash_bar: ColorRect = %DashFill
 @onready var shield_bar = get_tree().current_scene.get_node("UI/CanvasLayer/ShieldBar")
 @export var recharge_per_second: float = 20.0
@@ -154,6 +184,11 @@ var timerrunning = true
 var spawnposition = Vector2.ZERO
 
 func _ready() -> void:
+	visual_base_scale = animated_sprite_2d.scale
+	visual_base_rotation = animated_sprite_2d.rotation
+	visual_current_scale = visual_base_scale
+	visual_current_rotation = visual_base_rotation
+
 	update_shield_bar()
 	$HarpoonLine.visible = false
 	$HarpoonLine.width = 1
@@ -483,6 +518,7 @@ func _physics_process(delta: float) -> void:
 				bouncegracetimer = 0.0
 				velocity = incomingvelocity.bounce(normal) * 1.1
 				dash_value = dash_max
+				start_parry_visual(normal, impactspeed)
 
 				if highmode:
 					highmodeduration = 1
@@ -496,6 +532,12 @@ func _physics_process(delta: float) -> void:
 				break
 			else:
 				crashed = true
+				start_impact_visual(normal, impactspeed)
+				
+				$SurfaceImpactParticles.global_position = collision.get_position()
+				$SurfaceImpactParticles.rotation = normal.angle()
+				$SurfaceImpactParticles.restart()
+				$SurfaceImpactParticles.emitting = true
 	if crashed:
 		velocity *= 0.7
 
@@ -551,6 +593,7 @@ func start_dash(direction: Vector2) -> void:
 	$DashParticles.rotation = dash_direction.angle()
 	$DashParticles.restart()
 	$DashParticles.emitting = true
+	start_dash_visual()
 	is_dashing = true
 	dash_timer = dash_duration
 
@@ -661,6 +704,7 @@ var ninja_damage = 7.5
 func _process(delta):
 	handle_health_regen(delta)
 	update_health_ui(delta)
+	update_player_visual(delta)
 
 		
 	if current_health <= 0:
@@ -898,6 +942,7 @@ func handleenemycontact(body: Node2D):
 	kbdirection = kbdirection.normalized()
 	kbvelocity = kbdirection * kbstrength
 	kbtime = 0.12
+	start_damage_visual(kbdirection)
 	$damage_number_template.spawn_label(damage, false)
 	take_player_damage(damage)
 	
@@ -908,6 +953,7 @@ func on_spear_hit(hurtbox: TemplateHurtbox) -> void:
 	velocity = velocity.bounce(normal)
 	dash_value = dash_max
 	bouncegracetimer = 0.0
+	start_parry_visual(effect_normal, velocity.length())
 	
 	if highmode:
 		highmodeduration = 1
@@ -966,6 +1012,7 @@ func spear_wall_bounce(
 
 	dash_value = dash_max
 	bouncegracetimer = 0.0
+	start_parry_visual(wall_normal, incomingvelocity.length())
 
 
 	if highmode:
@@ -977,6 +1024,746 @@ func spear_wall_bounce(
 		$ParryBubbles.rotation = wall_normal.angle() + PI
 		$ParryBubbles.restart()
 		$ParryBubbles.emitting = true
+
+
+#---------------- PLAYER MOVEMENT VISUALS ----------------
+# These only transform AnimatedSprite2D. They do not change collision,
+# velocity, spear logic, or any other gameplay system.
+
+#---------------- PLAYER MOVEMENT VISUALS ----------------
+# These only transform AnimatedSprite2D.
+# They do not change collision, velocity, spear logic, or gameplay physics.
+
+func start_dash_visual() -> void:
+	dash_visual_timer = dash_visual_duration
+
+
+func start_impact_visual(wall_normal: Vector2, impact_speed: float) -> void:
+	if impact_visual_timer > 0.0:
+		return
+
+	impact_visual_timer = impact_visual_duration
+	impact_visual_normal = wall_normal.normalized()
+
+	impact_visual_strength = clampf(
+		impact_speed / 900.0,
+		0.35,
+		1.0
+	)
+
+
+func start_parry_visual(hit_normal: Vector2, movement_speed: float) -> void:
+	parry_visual_timer = parry_visual_duration
+	parry_visual_normal = hit_normal.normalized()
+
+	parry_visual_strength = clampf(
+		movement_speed / 900.0,
+		0.65,
+		1.25
+	)
+
+
+func start_damage_visual(knockback_direction: Vector2) -> void:
+	damage_visual_timer = damage_visual_duration
+	damage_visual_direction = knockback_direction.normalized()
+
+
+func update_player_visual(delta: float) -> void:
+
+	# Count temporary visual reactions down.
+	dash_visual_timer = maxf(
+		dash_visual_timer - delta,
+		0.0
+	)
+
+	impact_visual_timer = maxf(
+		impact_visual_timer - delta,
+		0.0
+	)
+
+	parry_visual_timer = maxf(
+		parry_visual_timer - delta,
+		0.0
+	)
+
+	damage_visual_timer = maxf(
+		damage_visual_timer - delta,
+		0.0
+	)
+
+
+	var speed: float = velocity.length()
+
+	var target_scale_multiplier: Vector2 = Vector2.ONE
+
+	var target_rotation: float = visual_base_rotation
+
+
+	# Sprite direction is handled using flip_h.
+	# This makes vertical lean work correctly while facing either direction.
+	var facing_sign: float = 1.0
+
+	if animated_sprite_2d.flip_h:
+		facing_sign = -1.0
+
+
+	# ------------------------------------------------
+	# 1. NORMAL MOVEMENT LEAN
+	# ------------------------------------------------
+
+	if speed > 20.0:
+
+		var movement_direction: Vector2 = velocity.normalized()
+
+		target_rotation += (
+			movement_direction.y
+			* deg_to_rad(visual_max_lean_degrees)
+			* facing_sign
+		)
+
+
+	# ------------------------------------------------
+	# 2. HIGH-SPEED STRETCH
+	# ------------------------------------------------
+
+	if speed > visual_fast_speed_start:
+
+		var speed_range: float = maxf(
+			visual_full_stretch_speed - visual_fast_speed_start,
+			1.0
+		)
+
+		var speed_amount: float = clampf(
+			(speed - visual_fast_speed_start) / speed_range,
+			0.0,
+			1.0
+		)
+
+		target_scale_multiplier.x += (
+			visual_speed_stretch
+			* speed_amount
+		)
+
+		target_scale_multiplier.y -= (
+			visual_speed_squash
+			* speed_amount
+		)
+
+
+	# ------------------------------------------------
+	# 3. HARPOON TENSION
+	# ------------------------------------------------
+
+	if harpooning and harpoon_point != Vector2.ZERO:
+
+		var direction_to_harpoon: Vector2 = (
+			harpoon_point - global_position
+		).normalized()
+
+		var distance_to_harpoon: float = (
+			global_position.distance_to(harpoon_point)
+		)
+
+		var rope_stretch: float = maxf(
+			distance_to_harpoon - harpoonrestlength,
+			0.0
+		)
+
+		var tension_divisor: float = maxf(
+			slingshotstretchthreshold,
+			1.0
+		)
+
+		var tension_amount: float = clampf(
+			rope_stretch / tension_divisor,
+			0.0,
+			1.0
+		)
+
+		target_scale_multiplier.x += (
+			0.035
+			+ (0.055 * tension_amount)
+		)
+
+		target_scale_multiplier.y -= (
+			0.02
+			+ (0.025 * tension_amount)
+		)
+
+		target_rotation += (
+			direction_to_harpoon.y
+			* deg_to_rad(5.0)
+			* facing_sign
+		)
+
+
+	# ------------------------------------------------
+	# 4. DASH SNAP
+	# ------------------------------------------------
+
+	if dash_visual_timer > 0.0:
+
+		var dash_progress: float = (
+			1.0
+			- (dash_visual_timer / dash_visual_duration)
+		)
+
+		var dash_scale: Vector2 = Vector2.ONE
+
+
+		# Small anticipation squash.
+		if dash_progress < 0.18:
+
+			var dash_phase_anticipation: float = (
+				dash_progress / 0.18
+			)
+
+			dash_scale = Vector2(
+				lerpf(
+					1.0,
+					0.90,
+					dash_phase_anticipation
+				),
+				lerpf(
+					1.0,
+					1.08,
+					dash_phase_anticipation
+				)
+			)
+
+
+		# Strong stretch.
+		elif dash_progress < 0.58:
+
+			var dash_phase_stretch: float = (
+				(dash_progress - 0.18)
+				/ 0.40
+			)
+
+			dash_scale = Vector2(
+				lerpf(
+					0.90,
+					1.24,
+					dash_phase_stretch
+				),
+				lerpf(
+					1.08,
+					0.84,
+					dash_phase_stretch
+				)
+			)
+
+
+		# Return to normal.
+		else:
+
+			var dash_phase_settle: float = (
+				(dash_progress - 0.58)
+				/ 0.42
+			)
+
+			dash_scale = Vector2(
+				lerpf(
+					1.24,
+					1.0,
+					dash_phase_settle
+				),
+				lerpf(
+					0.84,
+					1.0,
+					dash_phase_settle
+				)
+			)
+
+
+		target_scale_multiplier *= dash_scale
+
+
+	# ------------------------------------------------
+	# 5. HIGH-SPEED WALL IMPACT
+	# ------------------------------------------------
+
+	
+	if impact_visual_timer > 0.0:
+
+		var impact_progress: float = (
+			1.0
+			- (impact_visual_timer / impact_visual_duration)
+		)
+
+		var impact_scale: Vector2 = Vector2.ONE
+
+		var horizontal_impact: bool = (
+			absf(impact_visual_normal.x)
+			>= absf(impact_visual_normal.y)
+		)
+
+
+		# PHASE 1 — sudden compression into the surface
+		if impact_progress < 0.30:
+
+			var compress_progress: float = (
+				impact_progress / 0.30
+			)
+
+			var compression: float = (
+				0.24
+				* impact_visual_strength
+				* compress_progress
+			)
+
+			var expansion: float = (
+				0.13
+				* impact_visual_strength
+				* compress_progress
+			)
+
+			if horizontal_impact:
+				impact_scale.x = 1.0 - compression
+				impact_scale.y = 1.0 + expansion
+
+			else:
+				impact_scale.x = 1.0 + expansion
+				impact_scale.y = 1.0 - compression
+
+
+		# PHASE 2 — small recoil / overshoot away from the impact
+		elif impact_progress < 0.60:
+
+			var recoil_progress: float = (
+				(impact_progress - 0.30)
+				/ 0.30
+			)
+
+			var rebound_stretch: float = (
+				0.10
+				* impact_visual_strength
+			)
+
+			var rebound_squash: float = (
+				0.05
+				* impact_visual_strength
+			)
+
+			if horizontal_impact:
+				impact_scale.x = lerpf(
+					1.0 - (0.24 * impact_visual_strength),
+					1.0 + rebound_stretch,
+					recoil_progress
+				)
+
+				impact_scale.y = lerpf(
+					1.0 + (0.13 * impact_visual_strength),
+					1.0 - rebound_squash,
+					recoil_progress
+				)
+
+			else:
+				impact_scale.x = lerpf(
+					1.0 + (0.13 * impact_visual_strength),
+					1.0 - rebound_squash,
+					recoil_progress
+				)
+
+				impact_scale.y = lerpf(
+					1.0 - (0.24 * impact_visual_strength),
+					1.0 + rebound_stretch,
+					recoil_progress
+				)
+
+
+		# PHASE 3 — settle back to the normal body shape
+		else:
+
+			var settle_progress: float = (
+				(impact_progress - 0.60)
+				/ 0.40
+			)
+
+			var rebound_stretch: float = (
+				0.10
+				* impact_visual_strength
+			)
+
+			var rebound_squash: float = (
+				0.05
+				* impact_visual_strength
+			)
+
+			if horizontal_impact:
+				impact_scale.x = lerpf(
+					1.0 + rebound_stretch,
+					1.0,
+					settle_progress
+				)
+
+				impact_scale.y = lerpf(
+					1.0 - rebound_squash,
+					1.0,
+					settle_progress
+				)
+
+			else:
+				impact_scale.x = lerpf(
+					1.0 - rebound_squash,
+					1.0,
+					settle_progress
+				)
+
+				impact_scale.y = lerpf(
+					1.0 + rebound_stretch,
+					1.0,
+					settle_progress
+				)
+
+
+		target_scale_multiplier *= impact_scale
+
+
+	# ------------------------------------------------
+	# 6. PARRY REACTION
+	# ------------------------------------------------
+
+	if parry_visual_timer > 0.0:
+
+		var parry_progress: float = (
+			1.0
+			- (parry_visual_timer / parry_visual_duration)
+		)
+
+		var parry_scale: Vector2 = Vector2.ONE
+
+		var horizontal_hit: bool = (
+			absf(parry_visual_normal.x)
+			>= absf(parry_visual_normal.y)
+		)
+
+
+		# Compress toward contact.
+		if parry_progress < 0.25:
+
+			var parry_phase_compress: float = (
+				parry_progress / 0.25
+			)
+
+			if horizontal_hit:
+
+				parry_scale.x = lerpf(
+					1.0,
+					0.78,
+					parry_phase_compress
+				)
+
+				parry_scale.y = lerpf(
+					1.0,
+					1.16,
+					parry_phase_compress
+				)
+
+			else:
+
+				parry_scale.x = lerpf(
+					1.0,
+					1.16,
+					parry_phase_compress
+				)
+
+				parry_scale.y = lerpf(
+					1.0,
+					0.78,
+					parry_phase_compress
+				)
+
+
+		# Stretch away during rebound.
+		elif parry_progress < 0.60:
+
+			var parry_phase_rebound: float = (
+				(parry_progress - 0.25)
+				/ 0.35
+			)
+
+			var strength: float = parry_visual_strength
+
+
+			if horizontal_hit:
+
+				parry_scale.x = lerpf(
+					0.78,
+					1.0 + (0.24 * strength),
+					parry_phase_rebound
+				)
+
+				parry_scale.y = lerpf(
+					1.16,
+					1.0 - (0.14 * strength),
+					parry_phase_rebound
+				)
+
+			else:
+
+				parry_scale.x = lerpf(
+					1.16,
+					1.0 - (0.14 * strength),
+					parry_phase_rebound
+				)
+
+				parry_scale.y = lerpf(
+					0.78,
+					1.0 + (0.24 * strength),
+					parry_phase_rebound
+				)
+
+
+		# Return to normal.
+		else:
+
+			var parry_phase_settle: float = (
+				(parry_progress - 0.60)
+				/ 0.40
+			)
+
+
+			if horizontal_hit:
+
+				parry_scale.x = lerpf(
+					1.0 + (
+						0.24
+						* parry_visual_strength
+					),
+					1.0,
+					parry_phase_settle
+				)
+
+				parry_scale.y = lerpf(
+					1.0 - (
+						0.14
+						* parry_visual_strength
+					),
+					1.0,
+					parry_phase_settle
+				)
+
+			else:
+
+				parry_scale.x = lerpf(
+					1.0 - (
+						0.14
+						* parry_visual_strength
+					),
+					1.0,
+					parry_phase_settle
+				)
+
+				parry_scale.y = lerpf(
+					1.0 + (
+						0.24
+						* parry_visual_strength
+					),
+					1.0,
+					parry_phase_settle
+				)
+
+
+		target_scale_multiplier *= parry_scale
+
+
+	# ------------------------------------------------
+	# 7. DAMAGE / KNOCKBACK REACTION
+	# ------------------------------------------------
+
+	if damage_visual_timer > 0.0:
+
+		var damage_progress: float = (
+			1.0
+			- (damage_visual_timer / damage_visual_duration)
+		)
+
+		var damage_scale: Vector2 = Vector2.ONE
+
+		var horizontal_hit: bool = (
+			absf(damage_visual_direction.x)
+			>= absf(damage_visual_direction.y)
+		)
+
+
+		# PHASE 1 — stronger contraction along the hit direction
+		if damage_progress < 0.30:
+
+			var contract_progress: float = (
+				damage_progress / 0.30
+			)
+
+			if horizontal_hit:
+				damage_scale.x = lerpf(
+					1.0,
+					0.86,
+					contract_progress
+				)
+
+				damage_scale.y = lerpf(
+					1.0,
+					1.10,
+					contract_progress
+				)
+
+			else:
+				damage_scale.x = lerpf(
+					1.0,
+					1.10,
+					contract_progress
+				)
+
+				damage_scale.y = lerpf(
+					1.0,
+					0.86,
+					contract_progress
+				)
+
+
+		# PHASE 2 — small opposite rebound
+		elif damage_progress < 0.60:
+
+			var rebound_progress: float = (
+				(damage_progress - 0.30) / 0.30
+			)
+
+			if horizontal_hit:
+				damage_scale.x = lerpf(
+					0.86,
+					1.06,
+					rebound_progress
+				)
+
+				damage_scale.y = lerpf(
+					1.10,
+					0.95,
+					rebound_progress
+				)
+
+			else:
+				damage_scale.x = lerpf(
+					1.10,
+					0.95,
+					rebound_progress
+				)
+
+				damage_scale.y = lerpf(
+					0.86,
+					1.06,
+					rebound_progress
+				)
+
+
+		# PHASE 3 — settle
+		else:
+
+			var settle_progress: float = (
+				(damage_progress - 0.60) / 0.40
+			)
+
+			if horizontal_hit:
+				damage_scale.x = lerpf(
+					1.06,
+					1.0,
+					settle_progress
+				)
+
+				damage_scale.y = lerpf(
+					0.95,
+					1.0,
+					settle_progress
+				)
+
+			else:
+				damage_scale.x = lerpf(
+					0.95,
+					1.0,
+					settle_progress
+				)
+
+				damage_scale.y = lerpf(
+					1.06,
+					1.0,
+					settle_progress
+				)
+
+
+		target_scale_multiplier *= damage_scale
+
+
+		# Small rotational kick based on knockback direction.
+		var kick_sign: float = signf(
+			damage_visual_direction.x
+		)
+
+		if kick_sign == 0.0:
+			kick_sign = signf(
+				damage_visual_direction.y
+			)
+
+		target_rotation += (
+			deg_to_rad(6.0)
+			* kick_sign
+			* (1.0 - damage_progress)
+			* facing_sign
+		)
+
+
+		# Quick white impact flash.
+		if damage_progress < 0.22:
+			animated_sprite_2d.self_modulate = Color(
+				1.7,
+				1.7,
+				1.7,
+				1.0
+			)
+		else:
+			animated_sprite_2d.self_modulate = Color.WHITE
+
+	else:
+		animated_sprite_2d.self_modulate = Color.WHITE
+
+
+	# ------------------------------------------------
+	# APPLY THE FINAL VISUAL TRANSFORM
+	# ------------------------------------------------
+
+	var target_scale: Vector2 = Vector2(
+		visual_base_scale.x
+		* target_scale_multiplier.x,
+
+		visual_base_scale.y
+		* target_scale_multiplier.y
+	)
+
+
+	var smooth_amount: float = clampf(
+		visual_smoothing * delta,
+		0.0,
+		1.0
+	)
+
+
+	if impact_visual_timer > 0.0:
+		# Impacts need to be immediate or the short squash gets smoothed away.
+		visual_current_scale = target_scale
+	else:
+		visual_current_scale = visual_current_scale.lerp(
+			target_scale,
+			smooth_amount
+		)
+
+
+	visual_current_rotation = lerp_angle(
+		visual_current_rotation,
+		target_rotation,
+		smooth_amount
+	)
+
+
+	animated_sprite_2d.scale = visual_current_scale
+	animated_sprite_2d.rotation = visual_current_rotation
 
 
 func setcanbounce(value):
