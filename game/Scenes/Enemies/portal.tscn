@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://c5x0kvvl1rsrw"]
+
+[ext_resource type="Texture2D" uid="uid://cfqe4w6tfrqxv" path="res://Assets/pixil-layer-Background (13).png" id="1_164es"]
+[ext_resource type="Script" uid="uid://cwx3wi3wml4e" path="res://Scripts/hellportal.gd" id="1_pieil"]
+[ext_resource type="Texture2D" uid="uid://ikp81mimoqen" path="res://Assets/pixil-layer-Background (23).png" id="2_pieil"]
+
+[sub_resource type="Gradient" id="Gradient_yls8s"]
+offsets = PackedFloat32Array(0, 0.83196723)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ne3p1"]
+gradient = SubResource("Gradient_yls8s")
+
+[sub_resource type="Curve" id="Curve_164es"]
+_limits = [-1.5, 42.242153, 0.0, 1.0]
+_data = [Vector2(1e-05, 42.242153), 0.0, 0.0, 0, 0, Vector2(0.9865773, 41.94459), 149.26884, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pieil"]
+curve = SubResource("Curve_164es")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yls8s"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -1.0000023
+linear_accel_max = 0.04999776
+linear_accel_curve = SubResource("CurveTexture_pieil")
+tangential_accel_min = -50.0
+tangential_accel_max = 49.999996
+color_ramp = SubResource("GradientTexture1D_ne3p1")
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 1.0
+turbulence_noise_speed = Vector3(1, 1, 0)
+turbulence_influence_min = 0.030000001
+turbulence_influence_max = 0.030000001
+
+[node name="portal" type="Node2D" unique_id=119431376]
+script = ExtResource("1_pieil")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=693698405]
+position = Vector2(8.000244, 8.000244)
+scale = Vector2(209.47221, 209.47221)
+texture = ExtResource("1_164es")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=261014835]
+emitting = false
+amount = 25
+texture = ExtResource("2_pieil")
+lifetime = 2.8499999999999996
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 45
+process_material = SubResource("ParticleProcessMaterial_yls8s")

@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://0h850axd5n5t"]
+
+[ext_resource type="Script" uid="uid://dpfdynoglsd6q" path="res://the_livid.gd" id="1_xw5er"]
+[ext_resource type="Texture2D" uid="uid://daec8wtnucrkt" path="res://Assets/clownfish aggro spritesheet v2.png" id="2_bpdl6"]
+[ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_bpdl6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15lb"]
+radius = 14.0
+height = 38.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmbcv"]
+atlas = ExtResource("2_bpdl6")
+region = Rect2(1, 1, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xtjx"]
+atlas = ExtResource("2_bpdl6")
+region = Rect2(27, 1, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3rr5"]
+atlas = ExtResource("2_bpdl6")
+region = Rect2(53, 1, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jt4ee"]
+atlas = ExtResource("2_bpdl6")
+region = Rect2(79, 1, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f54m2"]
+atlas = ExtResource("2_bpdl6")
+region = Rect2(1, 18, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kvp4"]
+atlas = ExtResource("2_bpdl6")
+region = Rect2(27, 18, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3y4p"]
+atlas = ExtResource("2_bpdl6")
+region = Rect2(53, 18, 26, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jh1nj"]
+atlas = ExtResource("2_bpdl6")
+region = Rect2(79, 18, 26, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3g75h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmbcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xtjx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3rr5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jt4ee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f54m2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kvp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3y4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jh1nj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kyqlt"]
+radius = 62.008064
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l1dr6"]
+radius = 15.0
+height = 40.0
+
+[node name="The_Livid" type="CharacterBody2D" unique_id=1720621202 groups=["enemy", "livid"]]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_xw5er")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=899838632]
+position = Vector2(0, 1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_f15lb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490583327]
+scale = Vector2(1.617647, 1.617647)
+sprite_frames = SubResource("SpriteFrames_3g75h")
+frame = 2
+frame_progress = 0.40611795
+
+[node name="aggro_area" type="Area2D" parent="." unique_id=592406043]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_area" unique_id=1507768893]
+shape = SubResource("CircleShape2D_kyqlt")
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=1000834971]
+script = ExtResource("3_bpdl6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=338741101]
+position = Vector2(0, 1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_l1dr6")
+
+[connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]

@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://brgomt1vpcla5"]
+
+[ext_resource type="Texture2D" uid="uid://jou57say2tu8" path="res://Assets/pixil-layer-Background (14).png" id="1_1y2kw"]
+[ext_resource type="Script" uid="uid://c0qge1g62m8nh" path="res://Scripts/rage_bottle.gd" id="1_ee6au"]
+[ext_resource type="Texture2D" uid="uid://b04oal843rt0j" path="res://Assets/pixil-layer-Background (15).png" id="2_ee6au"]
+[ext_resource type="Texture2D" uid="uid://c01xc328qutr0" path="res://Assets/pixil-frame-0 (11).png" id="2_xv4l1"]
+[ext_resource type="Texture2D" uid="uid://c7ib120ohvxn8" path="res://Assets/pixil-layer-Background (16).png" id="3_m8gsg"]
+[ext_resource type="Texture2D" uid="uid://c86fc64iqml33" path="res://Assets/pixil-layer-Background (17).png" id="4_8sgbq"]
+[ext_resource type="Texture2D" uid="uid://bx6rrrrikoqmc" path="res://Assets/pixil-layer-Background (18).png" id="5_kbfdw"]
+[ext_resource type="Texture2D" uid="uid://bui2bjj8cg7eb" path="res://Assets/pixil-layer-Background (19).png" id="6_2djcd"]
+[ext_resource type="Texture2D" uid="uid://cqjiebteofxtg" path="res://Assets/pixil-layer-Background (20).png" id="7_f8a2i"]
+[ext_resource type="Texture2D" uid="uid://dvxvoeho1w8mb" path="res://Assets/pixil-layer-Background (21).png" id="8_f5rnm"]
+[ext_resource type="Texture2D" uid="uid://dofgjowmddyar" path="res://Assets/pixil-layer-Background (22).png" id="9_gwse1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vghd6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xv4l1")
+}],
+"loop": true,
+"name": &"potion",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1y2kw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ee6au")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_m8gsg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8sgbq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kbfdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2djcd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f8a2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f5rnm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gwse1")
+}],
+"loop": true,
+"name": &"ragesplash",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1y2kw"]
+radius = 213.84573
+
+[node name="ragesplash" type="Area2D" unique_id=1622474863]
+script = ExtResource("1_ee6au")
+
+[node name="effectimer" type="Timer" parent="." unique_id=986839257]
+wait_time = 9.0
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1417742849]
+position = Vector2(-7.9999924, -6.9999924)
+scale = Vector2(23.065788, 23.065788)
+sprite_frames = SubResource("SpriteFrames_vghd6")
+animation = &"potion"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1741576422]
+position = Vector2(2, 5)
+shape = SubResource("CircleShape2D_1y2kw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="effectimer" to="." method="_on_effectimer_timeout"]

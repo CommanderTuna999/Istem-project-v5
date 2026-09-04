@@ -650,7 +650,7 @@ var cookie_passive_heal_bonus: float = 0.01
 var cookie_boost_active: bool = false
 var max_health:
 	get:
-		return 100
+		return 10000000
 		#* total_HP_increase
 var can_heal = true
 var heal_per_second:
@@ -665,7 +665,7 @@ var defence:
 
 var current_health = 100
 var damage_occuring = false
-var iframe_duration = 0.45
+var iframe_duration = 0.25
 var starsaveused = false
 
 #mob special effects (custom calling ig)
@@ -925,7 +925,9 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("ninja"):
 		damage = ninja_damage
 		kbstrength = 400
-	
+	elif body.is_in_group("livid"):
+		damage = body.contact_damage
+		kbstrength = 500
 	else:
 		return
 	
@@ -1860,3 +1862,8 @@ func explode():
 		print("inverted")
 		mat.set_shader_parameter("active", not is_active)
 	take_player_damage(explosion_damage)
+
+func apply_dagger_slow():
+	total_speed_increase *= 0.95
+	await get_tree().create_timer(2.0).timeout
+	total_speed_increase /= 0.95
