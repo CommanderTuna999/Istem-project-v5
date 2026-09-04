@@ -1,32 +1,24 @@
 [gd_scene format=3 uid="uid://dlfil1d4hc4ke"]
 
 [ext_resource type="Script" uid="uid://xhow4i7q31pd" path="res://Scripts/crab.gd" id="1_20aek"]
-[ext_resource type="Texture2D" uid="uid://bnhcy0vtyt6qm" path="res://Assets/icon.svg" id="2_20aek"]
-[ext_resource type="Texture2D" uid="uid://b402fgvpvj5jx" path="res://icon.svg" id="3_20aek"]
+[ext_resource type="Texture2D" uid="uid://chg7ckrmut87v" path="res://Assets/Crab (1).webp" id="2_usnq2"]
 [ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="4_x0wag"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cy5ce"]
-atlas = ExtResource("2_20aek")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_87me1"]
-atlas = ExtResource("3_20aek")
-region = Rect2(0, 0, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_20aek"]
+atlas = ExtResource("2_usnq2")
+region = Rect2(0, 0, 480, 240)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qi2p4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cy5ce")
+"texture": SubResource("AtlasTexture_20aek")
 }],
 "loop": true,
 "name": &"aggro",
 "speed": 10.0
 }, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_87me1")
-}],
+"frames": [],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
