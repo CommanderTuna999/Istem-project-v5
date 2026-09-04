@@ -78,10 +78,12 @@ collision_mask = 2
 script = ExtResource("1_stalker")
 
 [node name="AnimationGSHARK" type="AnimatedSprite2D" parent="." unique_id=550808718]
-position = Vector2(23, 22)
+position = Vector2(1.0000019, -1.9999981)
 scale = Vector2(1.55, 1.55)
 sprite_frames = SubResource("SpriteFrames_template")
 animation = &"aggro"
+frame_progress = 0.6777153
+offset = Vector2(14.193547, 15.4838705)
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1314933740]

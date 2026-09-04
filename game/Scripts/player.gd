@@ -17,7 +17,11 @@ var accel = 360
 var pivoting = false
 var pivot_hit = false
 var active_currents: Array[Area2D] = []
-
+@onready var marks = 0
+var mark_strength:
+	get:
+		return 1.0 + (0.1 * marks)
+@onready var reversed = false
 @export var lightning_bolt_scene: PackedScene
 var stunned: bool = false
 var stun_duration: float = 0.5
@@ -279,6 +283,8 @@ func _physics_process(delta: float) -> void:
 	if stunned == true:
 		return
 	direction = Input.get_vector("Left", "Right", "Up", "Down")
+	if reversed:
+		direction = -direction
 	handle_dash(delta, direction)
 	#if not is_on_floor():
 		#velocity += get_gravity() * delta
@@ -616,7 +622,7 @@ var defence:
 
 var current_health = 100
 var damage_occuring = false
-var iframe_duration = 0.5
+var iframe_duration = 0.45
 var starsaveused = false
 
 #mob special effects (custom calling ig)
@@ -746,12 +752,12 @@ func take_player_damage(amount: float) -> void:
 			update_shield_bar()
 			shield_can_recharge = false
 			$ShieldRechargeDelay.start()
-	if current_health - amount <= 0 and not starsaveused and current_health > 1:
+	if current_health - (amount * mark_strength) <= 0 and not starsaveused and current_health > 1:
 		current_health = 1
 		starsaveused = true
 		emptybeams.visible = false
 	else:
-		current_health -= amount * (100.0 / (defence + 100.0))
+		current_health -= amount * (100.0 / (defence + 100.0)) * mark_strength
 		update_shield_bar()
 		current_health = max(current_health, 0)
 		can_heal = false
@@ -841,7 +847,7 @@ func handleenemycontact(body: Node2D):
 		body.queue_free()
 	elif body.is_in_group("crab"):
 		damage = crab_damage
-		kbstrength = 2000 * kbresistance
+		kbstrength = 500 * kbresistance
 	elif body.is_in_group("starfish"):
 		damage = starfish_damage
 		kbstrength = 700 * kbresistance
@@ -1048,3 +1054,22 @@ func bleed() -> void:
 	for i in range(5):
 		await get_tree().create_timer(1.0).timeout
 		take_player_damage(current_health * 0.05)
+
+func mark(mark_duration: float):
+	marks += 1
+	await get_tree().create_timer(mark_duration).timeout
+
+func reverse_movement():
+	reversed = true
+	await get_tree().create_timer(5.0).timeout
+	reversed = false
+	
+func explode():
+	var explosion_damage = 10000000
+	await get_tree().create_timer(0.5).timeout
+	var mat = invert_screen.get_node("CanvasLayer/CursedExplosionFilter").material as ShaderMaterial
+	if mat:
+		var is_active: bool = mat.get_shader_parameter("active")
+		print("inverted")
+		mat.set_shader_parameter("active", not is_active)
+	take_player_damage(explosion_damage)

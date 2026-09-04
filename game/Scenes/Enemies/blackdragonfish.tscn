@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cl037qotl8cd1"]
 
-[ext_resource type="Script" uid="uid://faju4my8hrmd" path="res://blackdragonfish.gd" id="1_14882"]
+[ext_resource type="Script" uid="uid://faju4my8hrmd" path="res://Scripts/blackdragonfish.gd" id="1_14882"]
 [ext_resource type="Texture2D" uid="uid://dg6yci26sup1h" path="res://Assets/bdragfishf1(2).png" id="2_xlud3"]
 [ext_resource type="Texture2D" uid="uid://cxafx83hkeslu" path="res://Assets/bdragfishf2(2).png" id="3_x7tia"]
 [ext_resource type="Texture2D" uid="uid://ciux4tybdkydr" path="res://Assets/bdragfishf3(2).png" id="4_hpuge"]

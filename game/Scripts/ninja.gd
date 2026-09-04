@@ -170,6 +170,7 @@ func throw_shuriken() -> void:
 	if is_shiny:
 		instance.speed *= 1.2
 		instance.modulate = Color(1.5, 1.5, 1.5, 1.0)
+		instance.bleed = true
 
 	main.call_deferred("add_child", instance)
 	instance.global_position = global_position

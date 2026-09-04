@@ -18,8 +18,8 @@ func activate_time_stop() -> void:
 	get_node("/root/Game/TimeStopFilter/ColorRect").visible = true
 	player.current_health *= 0.71
 	MusicManager.pause_music()
-	timestop_initiate.play()
-	clock_ticking.play()
+	#timestop_initiate.play()
+	#clock_ticking.play()
 	await get_tree().create_timer(6.0).timeout
 	MusicManager.unpause_music()
 	get_node("/root/Game/TimeStopFilter/ColorRect").visible = false

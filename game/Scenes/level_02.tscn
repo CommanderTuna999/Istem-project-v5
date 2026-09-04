@@ -17,9 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://dx5181rkqvp8" path="res://Scenes/Enemies/starfish.tscn" id="14_a4xl1"]
 [ext_resource type="PackedScene" uid="uid://c31p1nqtvdsku" path="res://Scenes/Enemies/hatchetfish.tscn" id="16_1i86k"]
 [ext_resource type="PackedScene" uid="uid://dumg0isp3lbea" path="res://Scenes/Enemies/stealth_stalker.tscn" id="17_1lyvx"]
-[ext_resource type="PackedScene" uid="uid://b5d16ukkykxly" path="res://torpedo.tscn" id="18_ecl8j"]
-[ext_resource type="PackedScene" uid="uid://dalc8mwkcbhvs" path="res://zeus_fish.tscn" id="19_fp516"]
-[ext_resource type="PackedScene" uid="uid://cl037qotl8cd1" path="res://blackdragonfish.tscn" id="20_jhfbt"]
+[ext_resource type="PackedScene" uid="uid://b5d16ukkykxly" path="res://Scenes/Enemies/torpedo.tscn" id="18_ecl8j"]
+[ext_resource type="PackedScene" uid="uid://dalc8mwkcbhvs" path="res://Scenes/Enemies/zeus_fish.tscn" id="19_fp516"]
+[ext_resource type="PackedScene" uid="uid://cl037qotl8cd1" path="res://Scenes/Enemies/blackdragonfish.tscn" id="20_jhfbt"]
 [ext_resource type="PackedScene" uid="uid://dlfil1d4hc4ke" path="res://Scenes/Enemies/crab.tscn" id="21_xtuqb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4xl1"]
