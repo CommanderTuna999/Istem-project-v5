@@ -62,7 +62,7 @@ harpoonprojectilescene = ExtResource("2_cvnsp")
 position = Vector2(1.1920929e-07, -2.9802322e-08)
 sprite_frames = SubResource("SpriteFrames_igrcy")
 autoplay = "default"
-frame_progress = 0.949041
+frame_progress = 0.48378617
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1047626844]
 position = Vector2(0.39228663, 4.7683716e-07)
@@ -95,6 +95,8 @@ shape = SubResource("RectangleShape2D_fs7ks")
 script = ExtResource("4_vgqql")
 label_settings = SubResource("LabelSettings_vgqql")
 metadata/_custom_type_script = "uid://bxuajbif0gs0l"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1981488566]
 
 [connection signal="body_entered" from="hurt_area" to="." method="_on_hurt_area_body_entered"]
 [connection signal="body_exited" from="hurt_area" to="." method="_on_hurt_area_body_exited"]
