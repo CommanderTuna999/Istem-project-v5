@@ -318,7 +318,7 @@ func _physics_process(delta: float) -> void:
 		]
 	else:
 		$HarpoonLine.visible = false
-	if stunned == true:
+	if stunned == true or rooted == true:
 		return
 	direction = Input.get_vector("Left", "Right", "Up", "Down")
 	if reversed:
@@ -406,7 +406,7 @@ func _physics_process(delta: float) -> void:
 		if harpooning:
 			currentdragaccel = harpoondragaccel
 			
-		if stunned == true:
+		if stunned == true or rooted == true:
 			return
 		velocity = velocity.move_toward(
 			Vector2.ZERO,
@@ -563,7 +563,7 @@ func forcefaceside(side):
 		$Spear.setrestside("left")
 		
 func handle_dash(delta: float, direction: Vector2) -> void:
-	if is_silenced:
+	if is_silenced or moon_silence_active:
 		return
 	if is_dashing:
 		dash_timer -= delta
@@ -670,7 +670,7 @@ var defence:
 
 var current_health = 100
 var damage_occuring = false
-var iframe_duration = 0.05
+var iframe_duration = 0.25
 var starsaveused = false
 
 #mob special effects (custom calling ig)
@@ -936,6 +936,7 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("livid"):
 		damage = body.contact_damage
 		kbstrength = 500
+<<<<<<< HEAD
 	elif body.is_in_group("crab"):
 		damage = crab_damage
 		kbstrength = 500 * kbresistance
@@ -956,6 +957,12 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("starfish"):
 		damage = starfish_damage
 		kbstrength = 700 * kbresistance
+=======
+	elif body.is_in_group("dreadlord") and not rooted:
+		damage = body.contact_damage
+		kbstrength = 250
+		trigger_dreadlord_silence(body.contact_silence_duration, body.contact_silence_gap)
+>>>>>>> 10f2ae5383efe9b1c1f1a7066e92d3ffc2c53491
 	else:
 		return
 	
@@ -1862,6 +1869,12 @@ func stun():
 	await get_tree().create_timer(stun_duration).timeout
 	stunned = false
 
+var rooted = false
+func moon_stun(duration: float):
+	rooted = true
+	await get_tree().create_timer(duration).timeout
+	rooted = false
+
 func camera_stun(duration: float) -> void:
 	stunned = true
 	await get_tree().create_timer(duration).timeout
@@ -1900,7 +1913,25 @@ func apply_pull(pull_vector: Vector2) -> void:
 	kbvelocity = pull_vector
 	kbtime = 0.15
 
-func apply_silence(duration: float) -> void:
+func silence(duration: float) -> void:
 	is_silenced = true
+	print("silenced")
 	await get_tree().create_timer(duration).timeout
 	is_silenced = false
+
+var dreadlord_silence_active: bool = false
+
+func trigger_dreadlord_silence(duration: float, gap: float) -> void:
+	if dreadlord_silence_active:
+		return
+	dreadlord_silence_active = true
+	silence(duration)
+	await get_tree().create_timer(gap).timeout
+	silence(duration)
+	dreadlord_silence_active = false
+
+var moon_silence_active= false
+func moon_silence(duration: float) -> void:
+	moon_silence_active = true
+	await get_tree().create_timer(duration).timeout
+	moon_silence_active = false
