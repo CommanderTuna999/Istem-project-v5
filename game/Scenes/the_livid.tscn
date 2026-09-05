@@ -90,7 +90,7 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_f15lb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490583327]
-scale = Vector2(1.617647, 1.617647)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_3g75h")
 frame = 2
 frame_progress = 0.40611795

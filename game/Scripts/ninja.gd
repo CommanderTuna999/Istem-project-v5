@@ -48,6 +48,7 @@ func _process(_delta: float) -> void:
 
 	if current_health <= 0 and not dying:
 		dying = true
+		animation_player.play("death")
 		queue_free()
 
 	if rooted:
@@ -178,7 +179,7 @@ func throw_shuriken() -> void:
 
 func take_damage(amount: float) -> void:
 	current_health -= amount
-	#animation_player.play("damaged")
+	animation_player.play("damaged")
 
 
 func take_kb(source_position: Vector2) -> void:

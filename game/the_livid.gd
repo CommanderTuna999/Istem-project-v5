@@ -98,6 +98,7 @@ func _process(_delta: float) -> void:
 
 	if current_health <= 0 and not dying:
 		dying = true
+		animation_player.play("damaged")
 		queue_free()
 
 
@@ -308,7 +309,7 @@ func start_dash() -> void:
 	if rage_level < 4:
 		return
 	
-	charging_intensity = 10.0
+	charging_intensity = 2.5
 	var cost = 0
 	if dash_count == 0:
 		cost = 2
@@ -361,7 +362,7 @@ func take_damage(amount: float) -> void:
 	if dash_invincible:
 		return
 	current_health -= amount
-	#animation_player.play("damaged")
+	animation_player.play("damaged")
 
 
 func take_kb(source_position: Vector2, strength: float = 600.0, duration: float = 0.12) -> void:

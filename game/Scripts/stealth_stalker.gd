@@ -38,6 +38,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if current_health <= 0.0:
+		animation_player.play("death")
 		queue_free()
 		return
 
@@ -127,6 +128,7 @@ func play_template_animation(animation_name: StringName) -> void:
 
 func take_damage(amount: float) -> void:
 	current_health -= amount
+	animation_player.play("damaged")
 
 
 func take_kb(source_position: Vector2) -> void:

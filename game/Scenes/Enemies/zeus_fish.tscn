@@ -36,17 +36,25 @@ radius = 255.6345
 radius = 17.0
 height = 88.0
 
+[sub_resource type="Animation" id="Animation_v5y10"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0k4vw"]
+_data = {
+&"new_animation": SubResource("Animation_v5y10")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wevfj"]
+
 [node name="Zeus!!" type="CharacterBody2D" unique_id=1345799120 groups=["enemy", "zeus_fish"]]
 collision_layer = 8
 collision_mask = 10
 script = ExtResource("1_7jced")
 
-[node name="AnimationZeus" type="AnimatedSprite2D" parent="." unique_id=1674279055]
-scale = Vector2(2.725, 2.725)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1674279055]
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_8yk8k")
 animation = &"idle"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1772208954]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=153501644]
 position = Vector2(2.5, 2)
@@ -65,6 +73,10 @@ script = ExtResource("5_my4m3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZeusHurtbox" unique_id=1659062784]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_pmt40")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=992600408]
+libraries/ = SubResource("AnimationLibrary_0k4vw")
+libraries/damage-deathanims = SubResource("AnimationLibrary_wevfj")
 
 [connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
 [connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]
