@@ -43,7 +43,7 @@ var execution_triggered = false
 signal execution_stacks_changed(current: int, max_stacks: int)
 
 @onready var moon_scene = preload("res://Scenes/Enemies/moon.tscn")
-@export var moon_shatter_damage = 20 * 5
+@export var moon_shatter_damage = 20 * 1
 
 var current_health
 var speed
@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 	if TimeStop.time_stop_active == true:
 		return
 
-	if is_instance_valid(chase_subject):
+	if is_instance_valid(chase_subject) and not chase_subject.rooted:
 		update_zone_logic(delta)
 		var direction_to_player = (chase_subject.global_position - global_position).normalized()
 		velocity = direction_to_player * speed
@@ -168,19 +168,20 @@ func trigger_execution_event() -> void:
 	if chase_subject.starsaveused:
 		run_moon_shatter_sequence()
 	else:
-		run_quiz_sequence()
+		#run_quiz_sequence()
+		run_moon_shatter_sequence()
 
 
 func run_moon_shatter_sequence() -> void:
-	if chase_subject.has_method("silence"):
-		chase_subject.silence(6.0)
+	if chase_subject.has_method("moon_silence"):
+		chase_subject.moon_silence(6.0)
 
-	if chase_subject.has_method("set_rooted"):
-		chase_subject.set_rooted(6.0)
+	if chase_subject.has_method("moon_stun"):
+		chase_subject.moon_stun(3.5)
 
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		if enemy != self and enemy.has_method("set_rooted"):
-			enemy.set_rooted(6.0)
+			enemy.set_rooted(2.0)
 
 	var moon_position = chase_subject.global_position
 	var moon = moon_scene.instantiate()
@@ -227,7 +228,7 @@ func _on_quiz_finished(passed: bool) -> void:
 		current_health = current_health * 0.5
 	else:
 		if is_instance_valid(chase_subject) and chase_subject.has_method("take_player_damage"):
-			chase_subject.take_player_damage(999999)
+			chase_subject.take_player_damage(99999)
 
 func take_damage(amount: float) -> void:
 	current_health -= amount

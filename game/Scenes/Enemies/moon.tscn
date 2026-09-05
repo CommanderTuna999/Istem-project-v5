@@ -2,16 +2,65 @@
 
 [ext_resource type="Script" uid="uid://mt7hegpvg584" path="res://moon.gd" id="1_lsi32"]
 [ext_resource type="Texture2D" uid="uid://chffv3xlgbbs5" path="res://Assets/pixil-frame-0 (15).png" id="2_84xt4"]
+[ext_resource type="Texture2D" uid="uid://d1tfjua6tydl0" path="res://Assets/pixil-frame-0 (16).png" id="3_mq0b3"]
+[ext_resource type="Texture2D" uid="uid://bnhcy0vtyt6qm" path="res://Assets/icon.svg" id="3_yxgcn"]
+
+[sub_resource type="Gradient" id="Gradient_yxgcn"]
+offsets = PackedFloat32Array(0.020491803, 0.46311477)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ojnl"]
+gradient = SubResource("Gradient_yxgcn")
+
+[sub_resource type="Curve" id="Curve_y1qvt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.12363732), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vymfi"]
+curve = SubResource("Curve_y1qvt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_onyll"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(10, 10, 1)
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+angular_velocity_min = -360.0
+angular_velocity_max = 359.99997
+gravity = Vector3(0, 0, 0)
+damping_min = 75.0
+damping_max = 75.0
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_vymfi")
+color_ramp = SubResource("GradientTexture1D_8ojnl")
 
 [node name="Moon" type="Node2D" unique_id=210756930]
 visibility_layer = 2
 script = ExtResource("1_lsi32")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1924811960]
+clip_children = 2
 position = Vector2(1.0000076, -0.9999924)
 scale = Vector2(20.692308, 20.692308)
 texture = ExtResource("2_84xt4")
 
+[node name="LeftHalf" type="Sprite2D" parent="Sprite2D" unique_id=1808150045]
+position = Vector2(-1.4014874, -1.0631974)
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("3_yxgcn")
+
+[node name="RightHalf" type="Sprite2D" parent="Sprite2D" unique_id=199772220]
+position = Vector2(2.0780663, 1.4498136)
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("3_yxgcn")
+
 [node name="Line2D" type="Line2D" parent="." unique_id=282203084]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=286354237]
+amount = 16
+texture = ExtResource("3_mq0b3")
+lifetime = 3.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_onyll")
