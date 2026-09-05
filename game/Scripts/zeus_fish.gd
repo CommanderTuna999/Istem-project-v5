@@ -23,7 +23,7 @@ var root_timer: float = 0.0
 var slow_active: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var animation_template: AnimatedSprite2D = $AnimationZeus
+@onready var animation_template: AnimatedSprite2D = $AnimatedSprite2D
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var aggro_area: Area2D = $aggro_area
 
@@ -40,6 +40,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if current_health <= 0.0:
+		#animation_player.play("death")
+		#await animation_player.animation_finished
 		queue_free()
 		return
 

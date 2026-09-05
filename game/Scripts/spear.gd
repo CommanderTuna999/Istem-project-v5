@@ -41,7 +41,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("left_click") and not attacking:
-		mouse_pos = get_global_mouse_position()
+		if not get_parent().is_silenced:
+			mouse_pos = get_global_mouse_position()
 
 		direction_to_mouse = (
 			mouse_pos - global_position

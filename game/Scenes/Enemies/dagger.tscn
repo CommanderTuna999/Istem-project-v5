@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cxs2r4exfvv2l"]
+
+[ext_resource type="Texture2D" uid="uid://cilkwok2c6e27" path="res://Assets/pixil-layer-Background (24).png" id="1_73wng"]
+[ext_resource type="Script" uid="uid://ccrnm070jqa4g" path="res://Scripts/dagger.gd" id="1_aosk0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aosk0"]
+radius = 7.7781754
+height = 36.769554
+
+[node name="dagger" type="Area2D" unique_id=936029041]
+script = ExtResource("1_aosk0")
+
+[node name="Timer" type="Timer" parent="." unique_id=746555041]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2134369013]
+position = Vector2(0, -1)
+rotation = 0.7853982
+shape = SubResource("CapsuleShape2D_aosk0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=826023794]
+position = Vector2(4.7683716e-07, 0)
+scale = Vector2(2.270833, 2.2708333)
+texture = ExtResource("1_73wng")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
