@@ -4,6 +4,12 @@
 #Layer 3 = HarpoonProjectile
 #Layer 11 = Enemies hurtbox
 
+#everyone will look at this script eventually so important info:
+#Layer 1 = Player
+#Layer 2 = Walls
+#Layer 3 = HarpoonProjectile
+#Layer 11 = Enemies hurtbox
+
 extends CharacterBody2D
 
 var speed = 70
@@ -34,8 +40,11 @@ var jumpcooldowntime = 0.8
 
 var jumping = false
 
+var base_sprite_scale: Vector2 = Vector2.ONE
+
 
 func _ready() -> void:
+	base_sprite_scale = animated_sprite_2d.scale
 	animated_sprite_2d.play("idle")
 
 
@@ -104,6 +113,7 @@ func _physics_process(_delta):
 		jumping = false
 		velocity.x = 0
 		jumpcooldown = jumpcooldowntime
+		landing_visual()
 
 
 	#if player is nearby and crab is ready, jump at them
@@ -121,6 +131,7 @@ func _physics_process(_delta):
 			velocity.y = -jumpspeed
 
 			jumping = true
+			jump_visual()
 
 
 	#stay still while grounded
@@ -129,6 +140,58 @@ func _physics_process(_delta):
 
 
 	move_and_slide()
+
+
+func jump_visual() -> void:
+	animated_sprite_2d.scale = Vector2(
+		base_sprite_scale.x * 1.10,
+		base_sprite_scale.y * 0.85
+	)
+
+	var tween: Tween = create_tween()
+
+	tween.tween_property(
+		animated_sprite_2d,
+		"scale",
+		Vector2(
+			base_sprite_scale.x * 0.90,
+			base_sprite_scale.y * 1.15
+		),
+		0.07
+	)
+
+	tween.tween_property(
+		animated_sprite_2d,
+		"scale",
+		base_sprite_scale,
+		0.12
+	)
+
+
+func landing_visual() -> void:
+	animated_sprite_2d.scale = Vector2(
+		base_sprite_scale.x * 1.16,
+		base_sprite_scale.y * 0.80
+	)
+
+	var tween: Tween = create_tween()
+
+	tween.tween_property(
+		animated_sprite_2d,
+		"scale",
+		Vector2(
+			base_sprite_scale.x * 0.96,
+			base_sprite_scale.y * 1.06
+		),
+		0.07
+	)
+
+	tween.tween_property(
+		animated_sprite_2d,
+		"scale",
+		base_sprite_scale,
+		0.10
+	)
 
 
 #damage script below
@@ -165,6 +228,3 @@ func set_slowed(duration: float, multiplier: float) -> void:
 	jumpspeed /= multiplier
 
 	slow_active = false
-
-
-	

@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bt72ci8ck2jme"]
+
+[ext_resource type="Texture2D" uid="uid://d2ytvgd0gw2vh" path="res://Assets/Ink.png" id="1_1vyl0"]
+[ext_resource type="Script" uid="uid://d1dk3ivsg5a0l" path="res://Scripts/ink_projectile.gd" id="1_wb37o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wb37o"]
+atlas = ExtResource("1_1vyl0")
+region = Rect2(0, 0, 360, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ubhv8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wb37o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tta1v"]
+radius = 8.0
+
+[node name="InkProjectile" type="CharacterBody2D" unique_id=79025629]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_wb37o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=78802107]
+scale = Vector2(0.05, 0.05)
+sprite_frames = SubResource("SpriteFrames_ubhv8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1249407695]
+shape = SubResource("CircleShape2D_tta1v")

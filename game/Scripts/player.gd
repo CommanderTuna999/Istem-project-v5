@@ -655,7 +655,7 @@ var cookie_passive_heal_bonus: float = 0.01
 var cookie_boost_active: bool = false
 var max_health:
 	get:
-		return 10000000
+		return 100
 		#* total_HP_increase
 var can_heal = true
 var heal_per_second:
@@ -692,6 +692,9 @@ var shark_damage = 25
 var Adultshark_damage = 1000
 var seahorse_projectile_damage = 10
 var crab_damage = 45
+var squid_damage = 15
+var squid_ink_damage = 10
+var octopus_damage = 15
 var starfish_damage = 15
 var crab_boss_damage = 75
 var stealth_stalker_damage = 10
@@ -933,6 +936,26 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("livid"):
 		damage = body.contact_damage
 		kbstrength = 500
+	elif body.is_in_group("crab"):
+		damage = crab_damage
+		kbstrength = 500 * kbresistance
+
+	elif body.is_in_group("squid"):
+		damage = squid_damage
+		kbstrength = 450 * kbresistance
+
+	elif body.is_in_group("squid_ink_projectile"):
+		damage = squid_ink_damage
+		kbstrength = 300 * kbresistance
+		body.queue_free()
+
+	elif body.is_in_group("octopus"):
+		damage = octopus_damage
+		kbstrength = 500 * kbresistance
+
+	elif body.is_in_group("starfish"):
+		damage = starfish_damage
+		kbstrength = 700 * kbresistance
 	else:
 		return
 	

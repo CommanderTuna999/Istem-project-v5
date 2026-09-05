@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://d2t3hr08p240j"]
+
+[ext_resource type="Script" uid="uid://ddkjwg2have8d" path="res://Scripts/squid.gd" id="1_4iy8l"]
+[ext_resource type="PackedScene" uid="uid://bt72ci8ck2jme" path="res://Scenes/InkProjectile.tscn" id="2_hfk3w"]
+[ext_resource type="Texture2D" uid="uid://djtnqwsntkf5t" path="res://Assets/Squid.png" id="2_wihr0"]
+[ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_wihr0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfk3w"]
+atlas = ExtResource("2_wihr0")
+region = Rect2(0, 0, 360, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qi2p4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfk3w")
+}],
+"loop": true,
+"name": &"deflated",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_47ae7"]
+radius = 40.301987
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8g0i4"]
+radius = 2115.5576
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ldcme"]
+radius = 41.01219
+
+[sub_resource type="Animation" id="Animation_wx3q7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ldcme"]
+resource_name = "damaged"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.05),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.09803922, 0.043137256, 1), Color(0.9845465, 0.9845466, 0.9845465, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.09, 0.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.17453292, -0.08726646, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.09, 0.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.23, 0.17), Vector2(0.19, 0.216), Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="Animation" id="Animation_keoad"]
+resource_name = "floatidle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, -3), Vector2(0, -2), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a3qtr"]
+_data = {
+&"RESET": SubResource("Animation_wx3q7"),
+&"damaged": SubResource("Animation_ldcme"),
+&"floatidle": SubResource("Animation_keoad")
+}
+
+[node name="squid" type="CharacterBody2D" unique_id=1111911240 groups=["clownfish", "enemy"]]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_4iy8l")
+ink_projectile_scene = ExtResource("2_hfk3w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=330375805]
+z_index = 3
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_qi2p4")
+animation = &"deflated"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1121136378]
+position = Vector2(0.5, 0)
+shape = SubResource("CircleShape2D_47ae7")
+
+[node name="aggro_area" type="Area2D" parent="." unique_id=785846885]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_area" unique_id=1075834730]
+position = Vector2(-1.9710691, -5.892742)
+scale = Vector2(0.4218192, 0.4218192)
+shape = SubResource("CircleShape2D_8g0i4")
+
+[node name="TemplateHurtbox" type="Area2D" parent="." unique_id=567805197]
+collision_layer = 1024
+collision_mask = 16
+script = ExtResource("3_wihr0")
+metadata/_custom_type_script = "uid://dmd61flg7jy52"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TemplateHurtbox" unique_id=1610760545]
+shape = SubResource("CircleShape2D_ldcme")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1773414453]
+libraries/ = SubResource("AnimationLibrary_a3qtr")
+autoplay = &"floatidle"
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1271873482]
+wait_time = 1.2999999999999998
+
+[node name="ShootPoint" type="Marker2D" parent="." unique_id=1206418962]
+
+[connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]
+[connection signal="area_entered" from="TemplateHurtbox" to="." method="_on_template_hurtbox_area_entered"]
+[connection signal="area_exited" from="TemplateHurtbox" to="." method="_on_template_hurtbox_area_exited"]
+[connection signal="body_entered" from="TemplateHurtbox" to="." method="_on_template_hurtbox_body_entered"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
