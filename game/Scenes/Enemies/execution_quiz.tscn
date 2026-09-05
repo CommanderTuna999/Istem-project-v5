@@ -6,20 +6,33 @@
 script = ExtResource("1_3mqnr")
 
 [node name="Panel" type="Panel" parent="." unique_id=1220839403]
-offset_left = 230.0
-offset_top = 233.0
-offset_right = 482.0
-offset_bottom = 485.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.59088
+offset_top = -51.0
+offset_right = 197.59088
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="QuestionLabel" type="Label" parent="Panel" unique_id=781431558]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 67.59088
+offset_top = 3.0
+offset_right = 320.59088
+offset_bottom = 26.0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="OptionsContainer" type="VBoxContainer" parent="Panel" unique_id=1130958551]
 layout_mode = 0
-offset_right = 246.0
-offset_bottom = 270.6
+offset_left = 74.59088
+offset_top = 31.0
+offset_right = 320.59088
+offset_bottom = 81.5
 
 [node name="OptionButton0" type="Button" parent="Panel/OptionsContainer" unique_id=655960931]
 layout_mode = 2
@@ -35,5 +48,7 @@ layout_mode = 2
 
 [node name="DialogueLabel" type="Label" parent="Panel" unique_id=238114354]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 394.59088
+offset_bottom = 24.0
+horizontal_alignment = 1
+vertical_alignment = 1

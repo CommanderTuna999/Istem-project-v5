@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ddu1ml3msxvxe" path="res://Scripts/dreadlord.gd" id="1_e1qh7"]
 [ext_resource type="Texture2D" uid="uid://dum3ia176msvd" path="res://Assets/pixil-frame-0 (13).png" id="2_wvd6d"]
 [ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_fvtbm"]
+[ext_resource type="Shader" uid="uid://bwuosthihs57s" path="res://Scenes/TimeStopFilter.gdshader" id="4_wvd6d"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b36qs"]
 animations = [{
@@ -23,10 +24,13 @@ height = 54.0
 radius = 212.00943
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kx8fu"]
-radius = 17.0
-height = 54.0
+radius = 38.0
+height = 76.0
 
-[node name="Dreadlord" type="CharacterBody2D" unique_id=415987629]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fvtbm"]
+shader = ExtResource("4_wvd6d")
+
+[node name="Dreadlord" type="CharacterBody2D" unique_id=415987629 groups=["dreadlord", "enemy"]]
 collision_layer = 8
 collision_mask = 10
 script = ExtResource("1_e1qh7")
@@ -45,11 +49,23 @@ shape = SubResource("CapsuleShape2D_yvyko")
 shape = SubResource("CircleShape2D_onai2")
 
 [node name="hurtbox" type="Area2D" parent="." unique_id=703839486]
+collision_mask = 1025
 script = ExtResource("3_fvtbm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=2121988943]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_kx8fu")
+
+[node name="TimeStopFilter" type="CanvasLayer" parent="." unique_id=1629326699]
+
+[node name="ColorRect" type="ColorRect" parent="TimeStopFilter" unique_id=2055312145]
+visible = false
+material = SubResource("ShaderMaterial_fvtbm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
 [connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]

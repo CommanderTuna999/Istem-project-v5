@@ -56,6 +56,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	if rooted:
 		root_timer -= delta
 		velocity = Vector2.ZERO
@@ -93,6 +95,8 @@ func _physics_process(delta: float) -> void:
 
 
 func wander(delta: float) -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	if wander_wait_time > 0.0:
 		wander_wait_time -= delta
 		velocity = Vector2.ZERO
@@ -111,11 +115,15 @@ func wander(delta: float) -> void:
 
 
 func pick_new_wander_target() -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	var random_offset := Vector2(randf_range(-wander_radius, wander_radius), randf_range(-wander_radius, wander_radius))
 	wander_target = home_position + random_offset
 
 
 func _on_aggro_area_body_entered(body: Node2D) -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	if not body.is_in_group("player"):
 		return
 	chase_subject = body
@@ -130,6 +138,8 @@ func _on_aggro_area_body_exited(_body: Node2D) -> void:
 
 
 func _on_range_area_body_entered(body: Node2D) -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	if not body.is_in_group("player"):
 		return
 	if out_of_ammo:
@@ -157,6 +167,8 @@ func _on_shoot_timer_timeout() -> void:
 
 
 func _shoot() -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	var is_ice_shot: bool = shots_fired % 2 == 0
 
 	var scene = ice_projectile if is_ice_shot else fire_projectile
@@ -172,6 +184,8 @@ func take_damage(amount: float) -> void:
 
 
 func take_kb(source_position: Vector2) -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	var kbdirection = (global_position - source_position).normalized()
 	kbvelocity = kbdirection * 600
 	kbtime = 0.12
