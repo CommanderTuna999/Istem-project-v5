@@ -37,11 +37,15 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	if current_health <= 0:
 		queue_free()
 
 
 func _physics_process(delta: float) -> void:
+	if TimeStop.time_stop_active == true:
+		return
 	if rooted:
 		root_timer -= delta
 		velocity = Vector2.ZERO
