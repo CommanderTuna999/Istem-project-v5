@@ -17,6 +17,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_mvxya"]
 radius = 9.113975
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_cruqx"]
+
 [node name="fire_projectile" type="Area2D" unique_id=1334159856 groups=["seahorse_projectile"]]
 scale = Vector2(3.64, 4.28)
 collision_layer = 32
@@ -31,3 +33,6 @@ sprite_frames = SubResource("SpriteFrames_kvis1")
 position = Vector2(0, -0.23364563)
 scale = Vector2(1.0000002, 1)
 shape = SubResource("CircleShape2D_mvxya")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1867985099]
+texture = SubResource("ViewportTexture_cruqx")

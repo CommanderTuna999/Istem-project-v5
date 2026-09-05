@@ -40,8 +40,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if current_health <= 0.0:
-		animation_player.play("death")
-		await animation_player.animation_finished
+		#animation_player.play("death")
+		#await animation_player.animation_finished
 		queue_free()
 		return
 

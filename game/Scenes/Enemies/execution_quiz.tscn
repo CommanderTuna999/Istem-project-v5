@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://doyol0hsyx5jk"]
+
+[ext_resource type="Script" uid="uid://d1v3ai87mbthp" path="res://Scripts/execution_quiz.gd" id="1_3mqnr"]
+
+[node name="ExecutionQuiz" type="CanvasLayer" unique_id=1721750538]
+script = ExtResource("1_3mqnr")
+
+[node name="Panel" type="Panel" parent="." unique_id=1220839403]
+offset_left = 230.0
+offset_top = 233.0
+offset_right = 482.0
+offset_bottom = 485.0
+
+[node name="QuestionLabel" type="Label" parent="Panel" unique_id=781431558]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="OptionsContainer" type="VBoxContainer" parent="Panel" unique_id=1130958551]
+layout_mode = 0
+offset_right = 246.0
+offset_bottom = 270.6
+
+[node name="OptionButton0" type="Button" parent="Panel/OptionsContainer" unique_id=655960931]
+layout_mode = 2
+
+[node name="OptionButton1" type="Button" parent="Panel/OptionsContainer" unique_id=1865951349]
+layout_mode = 2
+
+[node name="OptionButton2" type="Button" parent="Panel/OptionsContainer" unique_id=927197703]
+layout_mode = 2
+
+[node name="OptionButton3" type="Button" parent="Panel/OptionsContainer" unique_id=324178575]
+layout_mode = 2
+
+[node name="DialogueLabel" type="Label" parent="Panel" unique_id=238114354]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

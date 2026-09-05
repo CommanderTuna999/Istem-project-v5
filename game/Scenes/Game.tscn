@@ -49,6 +49,7 @@
 [ext_resource type="Texture2D" uid="uid://cfrt5seuqiidd" path="res://Assets/shield_bar_under.png" id="30_shield_under"]
 [ext_resource type="PackedScene" uid="uid://0h850axd5n5t" path="res://Scenes/the_livid.tscn" id="31_dwhu0"]
 [ext_resource type="Texture2D" uid="uid://k2f0fhtg6f8f" path="res://Assets/shield_bar_progress.png" id="31_shield_progress"]
+[ext_resource type="PackedScene" uid="uid://cabsnmmnqbm2g" path="res://Scenes/Enemies/dreadlord.tscn" id="32_nojon"]
 [ext_resource type="Texture2D" uid="uid://qanfhvpgpvi1" path="res://Assets/shield_bar_over.png" id="32_shield_over"]
 [ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="33_shield_icon"]
 [ext_resource type="AudioStream" uid="uid://b2qjnu0vwgjvk" path="res://sfx/5f569f554286fe2cda904c330392f6cf781aa63f.ogg" id="37_lmarx"]
@@ -1040,6 +1041,9 @@ position = Vector2(836, -587)
 
 [node name="The_Livid" parent="Enemies" unique_id=1720621202 instance=ExtResource("31_dwhu0")]
 position = Vector2(910, -1481)
+
+[node name="Dreadlord" parent="Enemies" unique_id=415987629 instance=ExtResource("32_nojon")]
+position = Vector2(417, -906)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)

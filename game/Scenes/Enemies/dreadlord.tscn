@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cabsnmmnqbm2g"]
+
+[ext_resource type="Script" uid="uid://ddu1ml3msxvxe" path="res://Scripts/dreadlord.gd" id="1_e1qh7"]
+[ext_resource type="Texture2D" uid="uid://dum3ia176msvd" path="res://Assets/pixil-frame-0 (13).png" id="2_wvd6d"]
+[ext_resource type="Script" uid="uid://dmd61flg7jy52" path="res://Scripts/Hurtbox.gd" id="3_fvtbm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b36qs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wvd6d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yvyko"]
+radius = 17.0
+height = 54.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onai2"]
+radius = 212.00943
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kx8fu"]
+radius = 17.0
+height = 54.0
+
+[node name="Dreadlord" type="CharacterBody2D" unique_id=415987629]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_e1qh7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=740600980]
+scale = Vector2(1.925, 1.925)
+sprite_frames = SubResource("SpriteFrames_b36qs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=409704789]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_yvyko")
+
+[node name="aggro_area" type="Area2D" parent="." unique_id=1993734712]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_area" unique_id=323995470]
+shape = SubResource("CircleShape2D_onai2")
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=703839486]
+script = ExtResource("3_fvtbm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=2121988943]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_kx8fu")
+
+[connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

@@ -119,6 +119,8 @@ script = ExtResource("1_7nbcr")
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_vrs0w")
 animation = &"thrust"
+frame = 4
+frame_progress = 0.72146636
 
 [node name="TemplateHitbox" type="Area2D" parent="AttackPivot" unique_id=1861446660]
 collision_layer = 16

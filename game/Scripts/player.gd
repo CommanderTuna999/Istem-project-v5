@@ -54,6 +54,9 @@ var highmodeduration = 1
 var highmodespeedcap = 900
 var highmodedrag = 150
 
+var is_silenced: bool = false
+
+
 #gear variables
 
 var total_speed_increase = 1.0
@@ -560,6 +563,8 @@ func forcefaceside(side):
 		$Spear.setrestside("left")
 		
 func handle_dash(delta: float, direction: Vector2) -> void:
+	if is_silenced:
+		return
 	if is_dashing:
 		dash_timer -= delta
 		if highmode:
@@ -665,7 +670,7 @@ var defence:
 
 var current_health = 100
 var damage_occuring = false
-var iframe_duration = 0.25
+var iframe_duration = 0.05
 var starsaveused = false
 
 #mob special effects (custom calling ig)
@@ -1867,3 +1872,12 @@ func apply_dagger_slow():
 	total_speed_increase *= 0.95
 	await get_tree().create_timer(2.0).timeout
 	total_speed_increase /= 0.95
+
+func apply_pull(pull_vector: Vector2) -> void:
+	kbvelocity = pull_vector
+	kbtime = 0.15
+
+func apply_silence(duration: float) -> void:
+	is_silenced = true
+	await get_tree().create_timer(duration).timeout
+	is_silenced = false
