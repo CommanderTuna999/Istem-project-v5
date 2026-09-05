@@ -655,7 +655,7 @@ var cookie_passive_heal_bonus: float = 0.01
 var cookie_boost_active: bool = false
 var max_health:
 	get:
-		return 10000000
+		return 100
 		#* total_HP_increase
 var can_heal = true
 var heal_per_second:
@@ -933,6 +933,10 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("livid"):
 		damage = body.contact_damage
 		kbstrength = 500
+	elif body.is_in_group("dreadlord"):
+		damage = body.contact_damage
+		kbstrength = 250
+		trigger_dreadlord_silence(body.contact_silence_duration, body.contact_silence_gap)
 	else:
 		return
 	
@@ -1877,7 +1881,19 @@ func apply_pull(pull_vector: Vector2) -> void:
 	kbvelocity = pull_vector
 	kbtime = 0.15
 
-func apply_silence(duration: float) -> void:
+func silence(duration: float) -> void:
 	is_silenced = true
+	print("silenced")
 	await get_tree().create_timer(duration).timeout
 	is_silenced = false
+
+var dreadlord_silence_active: bool = false
+
+func trigger_dreadlord_silence(duration: float, gap: float) -> void:
+	if dreadlord_silence_active:
+		return
+	dreadlord_silence_active = true
+	silence(duration)
+	await get_tree().create_timer(gap).timeout
+	silence(duration)
+	dreadlord_silence_active = false

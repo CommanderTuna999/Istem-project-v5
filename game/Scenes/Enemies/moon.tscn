@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://bcuuvhtxl51mx"]
 
 [ext_resource type="Script" uid="uid://mt7hegpvg584" path="res://moon.gd" id="1_lsi32"]
-[ext_resource type="Texture2D" uid="uid://4ely1o87hcip" path="res://Assets/download (9).png" id="2_0gyll"]
+[ext_resource type="Texture2D" uid="uid://chffv3xlgbbs5" path="res://Assets/pixil-frame-0 (15).png" id="2_84xt4"]
 
 [node name="Moon" type="Node2D" unique_id=210756930]
+visibility_layer = 2
 script = ExtResource("1_lsi32")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1924811960]
-texture = ExtResource("2_0gyll")
+position = Vector2(1.0000076, -0.9999924)
+scale = Vector2(20.692308, 20.692308)
+texture = ExtResource("2_84xt4")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=282203084]
 
