@@ -10,10 +10,11 @@ extends CharacterBody2D
 @export var dagger_spin_speed_base = 25.0
 @export var dagger_size_base = 1.0
 @export var wander_radius = 200.0
-
+var charging_intensity = 1.0
 var shake_intensity:
 	get:
-		return 0.25 * rage_level
+		return 0.25 * rage_level * charging_intensity
+		
 var rage_colour_max_level = 10.0
 
 var current_health
@@ -283,7 +284,7 @@ func _physics_process(delta: float) -> void:
 
 func finish_dash(dash_direction: Vector2) -> void:
 	velocity = Vector2.ZERO
-
+	charging_intensity = 1.0
 	if is_instance_valid(chase_subject):
 		if chase_subject.has_method("take_player_damage"):
 			chase_subject.take_player_damage(15)
@@ -306,7 +307,8 @@ func pick_new_wander_target() -> void:
 func start_dash() -> void:
 	if rage_level < 4:
 		return
-
+	
+	charging_intensity = 10.0
 	var cost = 0
 	if dash_count == 0:
 		cost = 2
