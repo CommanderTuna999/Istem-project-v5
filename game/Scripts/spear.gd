@@ -20,7 +20,7 @@ var hard_hit_damage_multiplier: float = 1.0
 const winduptime = 0.05
 const attacktime := 0.18
 const attackcooldown := 0.25
-const spearoffset := 50
+const spearoffset := 75
 const handoffset := 8
 
 # How far ahead of the player the ray searches for a wall.
