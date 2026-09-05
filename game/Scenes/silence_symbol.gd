@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func _process(delta) -> void:
 	if is_instance_valid(player):
-		if player.is_silenced == true:
+		if player.is_silenced == true or player.moon_silence_active == true:
 			visible = true
 		else:
 			visible = false

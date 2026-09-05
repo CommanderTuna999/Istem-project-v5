@@ -40,7 +40,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if not get_parent().is_silenced:
+	if not get_parent().is_silenced or not get_parent().moon_silence_active:
 		if Input.is_action_just_pressed("left_click") and not attacking:
 			mouse_pos = get_global_mouse_position()
 
