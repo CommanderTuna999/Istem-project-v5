@@ -687,7 +687,7 @@ terrain_set_0/terrain_0/name = "Rock"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_e16ek")
 
-[node name="Level07" type="Node2D" unique_id=1228467427]
+[node name="Level02" type="Node2D" unique_id=1228467427]
 
 [node name="Player" parent="." unique_id=982439447 instance=ExtResource("2_at3ly")]
 position = Vector2(4482, 443)

@@ -4,7 +4,7 @@ var damage = 10.0
 var explosion_radius = 120.0
 var silence_duration = 0.5
 var knockback_strength = 40.0
-var fuse_time = 2.0
+var fuse_time = 1.4
 var travel_speed = 400.0
 var direction = Vector2.ZERO
 var flash_fade_time = 0.5
@@ -12,13 +12,12 @@ var flash_fade_time = 0.5
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var explosion_area: Area2D = $ExplosionArea
 @onready var fuse_timer: Timer = $FuseTimer
-@export var trigger_radius: float = 40.0
 
 
 func _ready() -> void:
 	var shape := $CollisionShape2D.shape as CircleShape2D
 	if shape != null:
-		shape.radius = trigger_radius
+		shape.radius = explosion_radius
 
 	animated_sprite_2d.play("default")
 	rotation = direction.angle()

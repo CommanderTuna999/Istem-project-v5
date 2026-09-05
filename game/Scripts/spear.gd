@@ -3,7 +3,6 @@ extends Node2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AttackPivot/AnimatedSprite2D
 @onready var slash_sound_player: AudioStreamPlayer = $slash_sound_player
 @onready var hit_effect = preload("res://hit_effect.tscn")
-
 var direction = "right"
 var restside = "right"
 var attacking := false
@@ -24,6 +23,7 @@ const attackcooldown := 0.25
 const spearoffset := 75
 const handoffset := 8
 
+# How far ahead of the player the ray searches for a wall.
 const wall_parry_ray_length := 110.0
 
 @onready var attackpivot = $AttackPivot
@@ -40,15 +40,15 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if not get_parent().is_silenced or not get_parent().moon_silence_active:
-		if Input.is_action_just_pressed("left_click") and not attacking:
+	if Input.is_action_just_pressed("left_click") and not attacking:
+		if not get_parent().is_silenced:
 			mouse_pos = get_global_mouse_position()
 
-			direction_to_mouse = (
-				mouse_pos - global_position
-			).normalized()
+		direction_to_mouse = (
+			mouse_pos - global_position
+		).normalized()
 
-			attack()
+		attack()
 
 
 func _physics_process(_delta: float) -> void:
