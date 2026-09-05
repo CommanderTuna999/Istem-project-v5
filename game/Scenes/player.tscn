@@ -5,10 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://bjddxyp8stb25" path="res://Assets/mc idle spritesheet.png" id="4_fkybt"]
 [ext_resource type="Script" uid="uid://bxuajbif0gs0l" path="res://Scripts/damage_number_template.gd" id="4_vgqql"]
 [ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="5_fkybt"]
-[ext_resource type="Texture2D" uid="uid://cl3pnvrst6v3x" path="res://Assets/Barrier_%28held%29_JE1_BE1.webp" id="6_3smsa"]
-[ext_resource type="Script" uid="uid://bdkv68wabuspb" path="res://Scenes/silence_symbol.gd" id="7_8erm5"]
-[ext_resource type="Script" uid="uid://dnnb5r4rmyp64" path="res://Scenes/execution_stack_display.gd" id="8_f1ek2"]
-[ext_resource type="Texture2D" uid="uid://oi1hngnuebo2" path="res://Assets/pixil-frame-0 (14).png" id="9_tx1dd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("4_fkybt")
@@ -129,28 +125,6 @@ lifetime = 0.35000000000000003
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_x3wgy")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1511104242]
-position = Vector2(9.536743e-07, -30.999994)
-scale = Vector2(0.11562503, 0.11562503)
-texture = ExtResource("6_3smsa")
-script = ExtResource("7_8erm5")
-
-[node name="ExecutionStackDisplay" type="Node2D" parent="." unique_id=1601618396]
-script = ExtResource("8_f1ek2")
-
-[node name="Sprite2D" type="Sprite2D" parent="ExecutionStackDisplay" unique_id=638136827]
-position = Vector2(-7, 30)
-texture = ExtResource("9_tx1dd")
-
-[node name="CountLabel" type="Label" parent="ExecutionStackDisplay" unique_id=1659935550]
-offset_left = -1.0
-offset_top = 23.999998
-offset_right = 18.0
-offset_bottom = 47.0
-scale = Vector2(0.55, 0.55)
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="body_entered" from="hurt_area" to="." method="_on_hurt_area_body_entered"]
 [connection signal="body_exited" from="hurt_area" to="." method="_on_hurt_area_body_exited"]

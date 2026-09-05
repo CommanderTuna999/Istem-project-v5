@@ -39,8 +39,6 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if TimeStop.time_stop_active == true:
-		return
 	if current_health <= 0.0:
 		#animation_player.play("death")
 		#await animation_player.animation_finished
@@ -49,8 +47,6 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if TimeStop.time_stop_active == true:
-		return
 	refresh_aggro_target()
 
 	if kb_cooldown_timer > 0.0:
@@ -83,8 +79,6 @@ func _physics_process(delta: float) -> void:
 
 
 func refresh_aggro_target() -> void:
-	if TimeStop.time_stop_active == true:
-		return
 	chase_subject = null
 	for body in aggro_area.get_overlapping_bodies():
 		if body.is_in_group("player"):
@@ -93,8 +87,6 @@ func refresh_aggro_target() -> void:
 
 
 func steer_toward(target_position: Vector2, movement_speed: float) -> void:
-	if TimeStop.time_stop_active == true:
-		return
 	navigation_agent.target_position = target_position
 	var next_position := target_position
 	if navigation_agent.get_navigation_map().is_valid() and not navigation_agent.is_navigation_finished():
@@ -105,8 +97,6 @@ func steer_toward(target_position: Vector2, movement_speed: float) -> void:
 
 
 func wander(delta: float) -> void:
-	if TimeStop.time_stop_active == true:
-		return
 	if wander_wait_time > 0.0:
 		wander_wait_time -= delta
 		velocity = Vector2.ZERO
@@ -123,16 +113,12 @@ func wander(delta: float) -> void:
 
 
 func pick_new_wander_target() -> void:
-	if TimeStop.time_stop_active == true:
-		return
 	var random_offset := Vector2(randf_range(-wander_radius, wander_radius), randf_range(-wander_radius, wander_radius))
 	wander_target = home_position + random_offset
 	navigation_agent.target_position = wander_target
 
 
 func update_facing(horizontal_speed: float) -> void:
-	if TimeStop.time_stop_active == true:
-		return
 	if is_zero_approx(horizontal_speed):
 		return
 	animation_template.flip_h = horizontal_speed > 0.0
@@ -150,8 +136,6 @@ func take_damage(amount: float) -> void:
 
 
 func take_kb(source_position: Vector2) -> void:
-	if TimeStop.time_stop_active == true:
-		return
 	if kb_cooldown_timer > 0.0:
 		return
 	kb_velocity = (global_position - source_position).normalized() * 1200.0

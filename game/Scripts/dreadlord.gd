@@ -5,9 +5,6 @@ extends CharacterBody2D
 @export var speed_base = 135.0
 @export var aggro_radius = 350.0
 
-@onready var TimeStopDreadlord: ColorRect = $TimeStopFilter/ColorRect
-var time_stop_active = false
-
 @export var contact_silence_duration = 1.0
 @export var contact_silence_gap = 2.0
 @export var contact_silence_damage = 1.0
@@ -16,7 +13,7 @@ var silence_sequence_active = false
 @export var outer_zone_start_ratio = 0.6
 @export var inner_zone_ratio = 0.6
 
-@export var bomb_burst_interval = 1.0
+@export var bomb_burst_interval = 2.25
 @export var bomb_sub_interval = 0.5
 @export var bomb_damage = 10.0
 @export var bomb_explosion_radius = 120.0
@@ -24,9 +21,6 @@ var silence_sequence_active = false
 @export var bomb_knockback_strength = 40.0
 var bomb_burst_timer = 0.0
 var in_outer_zone = false
-
-var kbvelocity = 0
-var kbtime = 0
 
 @onready var bomb_scene = preload("res://Scenes/Enemies/dreadlord_bomb.tscn")
 
@@ -43,14 +37,13 @@ var execution_triggered = false
 signal execution_stacks_changed(current: int, max_stacks: int)
 
 @onready var moon_scene = preload("res://Scenes/Enemies/moon.tscn")
-@export var moon_shatter_damage = 20 * 1
+@export var moon_shatter_damage = 20 * 5
 
 var current_health
 var speed
 var chase_subject = null
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-#@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var aggro_area: Area2D = $aggro_area
 
 
@@ -65,18 +58,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if TimeStop.time_stop_active == true:
-		return
-
-	if is_instance_valid(chase_subject) and not chase_subject.rooted:
+	if is_instance_valid(chase_subject):
 		update_zone_logic(delta)
 		var direction_to_player = (chase_subject.global_position - global_position).normalized()
 		velocity = direction_to_player * speed
-
-		if chase_subject.global_position.x > global_position.x:
-			animated_sprite_2d.flip_h = true
-		elif chase_subject.global_position.x < global_position.x:
-			animated_sprite_2d.flip_h = false
 	else:
 		velocity = Vector2.ZERO
 		reset_zone_state()
@@ -142,13 +127,13 @@ func spawn_bomb() -> void:
 	if not is_instance_valid(chase_subject):
 		return
 	var bomb = bomb_scene.instantiate()
-	get_tree().current_scene.add_child(bomb)
 	bomb.global_position = global_position
 	bomb.direction = (chase_subject.global_position - global_position).normalized()
 	bomb.damage = bomb_damage
 	bomb.explosion_radius = bomb_explosion_radius
 	bomb.silence_duration = bomb_silence_duration
 	bomb.knockback_strength = bomb_knockback_strength
+	get_tree().current_scene.call_deferred("add_child", bomb)
 
 
 func gain_execution_stack() -> void:
@@ -173,15 +158,15 @@ func trigger_execution_event() -> void:
 
 
 func run_moon_shatter_sequence() -> void:
-	if chase_subject.has_method("moon_silence"):
-		chase_subject.moon_silence(6.0)
+	if chase_subject.has_method("silence"):
+		chase_subject.is_silenced = true
 
-	if chase_subject.has_method("moon_stun"):
-		chase_subject.moon_stun(3.5)
+	if chase_subject.has_method("set_rooted"):
+		chase_subject.set_rooted(6.0)
 
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		if enemy != self and enemy.has_method("set_rooted"):
-			enemy.set_rooted(2.0)
+			enemy.set_rooted(6.0)
 
 	var moon_position = chase_subject.global_position
 	var moon = moon_scene.instantiate()
@@ -209,17 +194,13 @@ func run_moon_shatter_sequence() -> void:
 
 
 func run_quiz_sequence() -> void:
-	activate_time_stop()
+	TimeStop.time_stop_active = true
 	var quiz_ui = preload("res://Scenes/Enemies/execution_quiz.tscn").instantiate()
 	get_tree().current_scene.add_child(quiz_ui)
 	quiz_ui.finished.connect(_on_quiz_finished)
 
 
 func _on_quiz_finished(passed: bool) -> void:
-	MusicManager.unpause_music()
-	if TimeStopDreadlord:
-		TimeStopDreadlord.visible = false
-	time_stop_active = false
 	TimeStop.time_stop_active = false
 	execution_stacks = 0
 	execution_triggered = false
@@ -227,33 +208,17 @@ func _on_quiz_finished(passed: bool) -> void:
 	if passed:
 		current_health = current_health * 0.5
 	else:
-		if is_instance_valid(chase_subject) and chase_subject.has_method("take_player_damage"):
-			chase_subject.take_player_damage(99999)
-
-func take_damage(amount: float) -> void:
-	current_health -= amount
-	#animation_player.play("damaged")
-
-func take_kb(source_position: Vector2) -> void:
-	var kbdirection = (global_position - source_position).normalized()
-	kbvelocity = kbdirection * 600
-	kbtime = 0.12
+		if chase_subject.has_method("take_player_damage"):
+			chase_subject.take_player_damage(999999)
 
 
 func _on_aggro_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		chase_subject = body
-		var stack_ui = body.get_node_or_null("ExecutionStackDisplay")
-		if stack_ui and not execution_stacks_changed.is_connected(stack_ui.update_stacks): 
-			execution_stacks_changed.connect(stack_ui.update_stacks)
 
 
 func _on_aggro_area_body_exited(body: Node2D) -> void:
 	if chase_subject == body:
-		var stack_ui = body.get_node_or_null("ExecutionStackDisplay")
-		if stack_ui and execution_stacks_changed.is_connected(stack_ui.update_stacks):
-			execution_stacks_changed.disconnect(stack_ui.update_stacks)
-			stack_ui.update_stacks(0, execution_stacks_needed)
 		chase_subject = null
 
 
@@ -264,7 +229,7 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 		trigger_silence_sequence(body)
 
 
-func trigger_silence_sequence(target: CharacterBody2D) -> void:
+func trigger_silence_sequence(target: Node) -> void:
 	if silence_sequence_active:
 		return
 	silence_sequence_active = true
@@ -276,19 +241,11 @@ func trigger_silence_sequence(target: CharacterBody2D) -> void:
 	silence_sequence_active = false
 
 
-func apply_one_silence(target: CharacterBody2D) -> void:
+func apply_one_silence(target: Node) -> void:
 	if not is_instance_valid(target):
 		return
-	if target.has_method("silence"):
-		target.silence(contact_silence_duration)
+	target.is_silenced = true
 	if target.has_method("take_player_damage"):
 		target.take_player_damage(contact_silence_damage)
 	await get_tree().create_timer(contact_silence_duration).timeout
 	target.is_silenced = false
-	
-func activate_time_stop() -> void:
-	time_stop_active = true
-	TimeStop.time_stop_active = true
-	if TimeStopDreadlord:
-		TimeStopDreadlord.visible = true
-	MusicManager.pause_music()
