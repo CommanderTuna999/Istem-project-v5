@@ -1000,7 +1000,7 @@ position = Vector2(868, -1747)
 [node name="zeus_folder" type="Node" parent="Enemies" unique_id=1626172881]
 
 [node name="Zeus!!" parent="Enemies/zeus_folder" unique_id=1345799120 instance=ExtResource("22_smnwb")]
-position = Vector2(2298, -1550)
+position = Vector2(1020, -1555)
 
 [node name="blackdragonfish_folder" type="Node" parent="Enemies" unique_id=372684413]
 

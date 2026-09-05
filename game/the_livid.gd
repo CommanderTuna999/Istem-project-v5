@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var max_health = 6.0
+@export var max_health = 10.0
 @export var contact_damage_base = 1
 @export var speed_base = 125.0
 @export var aggro_radius_base = 100.0
@@ -133,7 +133,7 @@ func gain_rage() -> void:
 	recalculate_stats()
 	rage_decay_timer = 15.0
 	
-	if rage_level == 1:
+	if rage_level == 6:
 		trigger_rage_bottle_event()
 
 	var base_speed = speed
@@ -226,7 +226,10 @@ func _physics_process(delta: float) -> void:
 						enemy.kbvelocity = push_dir * dash_swipe_knockback_strength
 					elif "kb_velocity" in enemy:
 						enemy.kb_velocity = push_dir * dash_swipe_knockback_strength
-					enemy.kbtime = 0.2
+					if "kbtime" in enemy:
+						enemy.kbtime = 0.2
+					elif "kb_time" in enemy:
+						enemy.kb_time = 0.2
 					dash_hit_enemies.append(enemy)
 
 		var hit_player = false
@@ -315,7 +318,7 @@ func start_dash() -> void:
 
 	dash_count += 1
 	dash_state = "charging"
-	dash_charge_timer = 1.8
+	dash_charge_timer = 1
 	dash_cooldown_timer = 4.0
 	dash_hit_enemies.clear()
 

@@ -58,14 +58,16 @@ func _on_body_exited(body: Node2D) -> void:
 	if body in buffed_enemies:
 		remove_buff(body)
 func apply_buff(enemy: Node) -> void:
+	if buffed_enemies.has(enemy):
+		return
 	buffed_enemies.append(enemy)
 	if enemy.has_method("recalculate_stats") and "external_speed_multiplier" in enemy:
-		enemy.external_speed_multiplier = 1.2
+		enemy.external_speed_multiplier = 2.0
 		enemy.external_aggro_multiplier = 1.15
 		enemy.recalculate_stats()
 	else:
 		if "speed" in enemy:
-			enemy.speed *= 1.2
+			enemy.speed *= 2.0
 		#if "aggro_radius" in enemy:
 			#enemy.aggro_radius *= 1.15
 func remove_buff(enemy: Node) -> void:
@@ -78,6 +80,6 @@ func remove_buff(enemy: Node) -> void:
 		enemy.recalculate_stats()
 	else:
 		if "speed" in enemy:
-			enemy.speed /= 1.2
+			enemy.speed /= 2.0
 		#if "aggro_radius" in enemy:
 			#enemy.aggro_radius /= 1.15

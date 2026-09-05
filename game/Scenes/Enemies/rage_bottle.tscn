@@ -66,10 +66,11 @@ wait_time = 9.0
 one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1417742849]
-position = Vector2(-7.9999924, -6.9999924)
+position = Vector2(4.7683716e-07, -0.99999905)
 scale = Vector2(23.065788, 23.065788)
 sprite_frames = SubResource("SpriteFrames_vghd6")
 animation = &"potion"
+offset = Vector2(-0.3468337, -0.26012522)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1741576422]
 position = Vector2(2, 5)
