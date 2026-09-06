@@ -48,3 +48,5 @@ func _on_body_entered(body: Node2D) -> void:
 	else:
 		if body.has_method("apply_burn"):
 			body.apply_burn(burn_dps, burn_duration)
+	
+	queue_free()

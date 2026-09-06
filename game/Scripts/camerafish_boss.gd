@@ -1,12 +1,16 @@
 extends CharacterBody2D
 
-
 @export var attack_cooldown: float = 1.35
 @export var spawn_distance: float = 900.0
 @export var teleport_offset: Vector2 = Vector2(500.0, 0.0)
+var slowmo_ability_cooldown = 20.0
+var slowmo_timer = 20.0
+var slowmo_duration = 3.0
 
 var max_health: float = 25.0
 var current_health: float
+var attack_count: int = 0
+var special_attack_cooldown = 2.0
 
 var has_teleported: bool = false
 var aggro: bool = false
@@ -30,19 +34,16 @@ var in_frame_scene = preload("res://Scenes/Enemies/in_frame.tscn")
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var aggro_area: Area2D = $aggro_area
 
-
 func _ready() -> void:
 	current_health = max_health
 	animation.play("default")
 	home_position = global_position
-
 
 func _process(_delta: float) -> void:
 	if TimeStop.time_stop_active == true:
 		return
 	if current_health <= 0:
 		queue_free()
-
 
 func _physics_process(delta: float) -> void:
 	if TimeStop.time_stop_active == true:
@@ -60,6 +61,8 @@ func _physics_process(delta: float) -> void:
 		velocity = kbvelocity
 		move_and_slide()
 		return
+	if slowmo_timer > 0.0:
+		slowmo_timer -= delta
 
 	if attack_timer > 0.0:
 		attack_timer -= delta
@@ -73,10 +76,23 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	if attack_timer <= 0.0:
-		perform_attack()
+		if attack_count >= 4:
+			perform_special_attack()
+		else:
+			perform_attack()
+	if slowmo_timer <= 0.0:
+		perform_slomo()
+		
 
+func perform_slomo() -> void:
+	slowmo_timer = slowmo_ability_cooldown
+	slowmo_timer -= 0.025
+	if chase_subject.has_method("slowmo_func"):
+		chase_subject.slowmo_func(slowmo_duration)
+	slowmo_duration += 0.025
 
 func perform_attack() -> void:
+	attack_count += 1
 	if chase_subject == null:
 		return
 	attack_timer = attack_cooldown
@@ -90,7 +106,36 @@ func perform_attack() -> void:
 	symbol.global_position = spawn_position
 	symbol.target_position = target_position
 	get_tree().current_scene.add_child(symbol)
+	
+func perform_special_attack() -> void:
+	attack_timer = special_attack_cooldown
+	attack_count -= 4
 
+	var target_position := chase_subject.global_position
+
+	var normal_angle := randf_range(0.0, TAU)
+	var normal_offset := Vector2(cos(normal_angle), sin(normal_angle)) * spawn_distance
+	var normal_spawn := target_position + normal_offset
+
+	var main_symbol = area_symbol_scene.instantiate()
+	main_symbol.global_position = normal_spawn
+	main_symbol.target_position = target_position
+	get_tree().current_scene.add_child(main_symbol)
+
+	for i in range(3):
+		await get_tree().create_timer(0.5).timeout
+		var offset_vector := Vector2(randf_range(-200.0, 200.0), randf_range(-200.0, 200.0))
+		var offset_target := target_position + offset_vector
+
+		var random_angle := randf_range(0.0, TAU)
+		var spawn_offset := Vector2(cos(random_angle), sin(random_angle)) * spawn_distance
+		var spawn_position := offset_target + spawn_offset
+
+		var offset_symbol = area_symbol_scene.instantiate()
+		offset_symbol.global_position = spawn_position
+		offset_symbol.target_position = offset_target
+		get_tree().current_scene.add_child(offset_symbol)
+	
 
 func wander(delta: float) -> void:
 	if wander_wait_time > 0.0:
@@ -113,29 +158,40 @@ func _on_aggro_area_body_entered(body: Node2D) -> void:
 	
 	chase_subject = body
 	aggro = true
+	chase_subject.boss_targeted = true
+	
 	if not has_teleported:
 		has_teleported = true
-		global_position = body.global_position + teleport_offset
-	
+		callable_teleport.call_deferred(body)
+
+func callable_teleport(target_player: Node2D) -> void:
+	if is_instance_valid(target_player):
+		global_position = target_player.global_position + teleport_offset
 		if in_frame_scene != null:
 			var frame_instance = in_frame_scene.instantiate()
-			frame_instance.global_position = body.global_position
-			get_tree().current_scene.call_deferred("add_child", frame_instance)
-
+			frame_instance.global_position = target_player.global_position
+			get_tree().current_scene.add_child(frame_instance)
 
 func _on_aggro_area_body_exited(_body: Node2D) -> void:
 	chase_subject = null
 	aggro = false
 
-
 func take_damage(amount: float) -> void:
 	current_health -= amount
+	
+	var target_position := chase_subject.global_position
+	var random_angle := randf_range(0.0, TAU)
+	var spawn_offset := Vector2(cos(random_angle), sin(random_angle)) * spawn_distance
+	var spawn_position := target_position + spawn_offset
 
+	var symbol = area_symbol_scene.instantiate()
+	symbol.global_position = spawn_position
+	symbol.target_position = target_position
+	get_tree().current_scene.add_child(symbol)
 
 func set_rooted(duration: float) -> void:
 	rooted = true
 	root_timer = max(root_timer, duration)
-
 
 func set_slowed(duration: float, multiplier: float) -> void:
 	if slow_active:

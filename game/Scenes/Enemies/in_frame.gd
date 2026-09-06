@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var damage_delay: float = 2.0
+@export var damage_delay: float = 0.85
 @export var out_of_bounds_damage: float = 100.0
 
 var player: Node2D = null
