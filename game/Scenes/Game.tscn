@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bdqbpmxw31kbp" path="res://Scenes/player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://bj7ldtrm577dp" path="res://Scenes/spear.tscn" id="2_71axn"]
-[ext_resource type="PackedScene" uid="uid://ct0r7pl2ej4q6" path="res://lightning_bolt.tscn" id="2_lklsk"]
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="3_bf53h"]
 [ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="4_alh3a"]
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="4_dahhg"]
@@ -21,7 +20,6 @@
 [ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="19_tfod6"]
 [ext_resource type="Script" uid="uid://c8n16i5rg5b64" path="res://Scripts/ability_folder.gd" id="19_vvhu1"]
 [ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="20_rajel"]
-[ext_resource type="PackedScene" uid="uid://djkcscyv2ayrs" path="res://Scenes/Enemies/crab boss.tscn" id="20_tfod6"]
 [ext_resource type="PackedScene" uid="uid://c31p1nqtvdsku" path="res://Scenes/Enemies/hatchetfish.tscn" id="21_oo65k"]
 [ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="21_petals"]
 [ext_resource type="AudioStream" uid="uid://kakrcthx40tf" path="res://sfx/bow_shoot.mp3" id="22_i4lct"]
@@ -63,8 +61,9 @@
 [ext_resource type="Script" uid="uid://bg1c3kuwpayjl" path="res://Scenes/big_bomb.gd" id="46_oo65k"]
 [ext_resource type="PackedScene" uid="uid://dl5ur657j3wwt" path="res://bomb_projectile.tscn" id="47_smnwb"]
 [ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="49_e2w45"]
-[ext_resource type="PackedScene" uid="uid://blryjdtwjaq03" path="res://Scenes/cursed_explosion_filter.tscn" id="60_ym08v"]
 [ext_resource type="PackedScene" uid="uid://dlfil1d4hc4ke" path="res://Scenes/Enemies/crab.tscn" id="61_8ekww"]
+[ext_resource type="PackedScene" uid="uid://ckuxdiket4a4o" path="res://silencing_torch.tscn" id="63_nojon"]
+[ext_resource type="PackedScene" uid="uid://bn5sinc3hu7y7" path="res://ticktockclock.tscn" id="64_pc5hm"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -573,7 +572,6 @@ shader = ExtResource("20_rajel")
 
 [node name="Player" parent="." unique_id=982439447 instance=ExtResource("1_gl6un")]
 position = Vector2(895, -1867)
-lightning_bolt_scene = ExtResource("2_lklsk")
 
 [node name="Spear" parent="Player" unique_id=1804206196 instance=ExtResource("2_71axn")]
 position = Vector2(-0.21830654, 0.45456308)
@@ -1050,13 +1048,11 @@ position = Vector2(836, -587)
 position = Vector2(910, -1481)
 
 [node name="Dreadlord" parent="Enemies" unique_id=415987629 instance=ExtResource("32_nojon")]
-position = Vector2(2511, -1540)
+position = Vector2(1008, -1881)
 
 [node name="CameraFishBoss" parent="Enemies" unique_id=1692452244 instance=ExtResource("33_pc5hm")]
 position = Vector2(2078, -373)
-attack_cooldown = 3.0
-spawn_distance = 900.0
-teleport_offset = Vector2(300, 0)
+teleport_offset = Vector2(0, 0)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)
@@ -1075,9 +1071,6 @@ color = Color(0.6392157, 0, 0, 1)
 
 [node name="MapBlocks" type="TileMapLayer" parent="." unique_id=452952527]
 tile_set = SubResource("TileSet_rajel")
-
-[node name="clownfish" parent="." unique_id=2025178942 instance=ExtResource("20_tfod6")]
-position = Vector2(3644, -414)
 
 [node name="AbilityFolder" type="Node" parent="." unique_id=363169500]
 script = ExtResource("19_vvhu1")
@@ -1187,10 +1180,13 @@ offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UpgradeTree_UI_Manager" unique_id=1002986835]
 
-[node name="CursedExplosionFilter" parent="." unique_id=1302474987 instance=ExtResource("60_ym08v")]
-
 [node name="crab" parent="." unique_id=1837046843 instance=ExtResource("61_8ekww")]
 position = Vector2(696, -1594)
+
+[node name="Area2D" parent="." unique_id=122582710 instance=ExtResource("63_nojon")]
+position = Vector2(693, -1297)
+
+[node name="Area2D2" parent="." unique_id=689405734 instance=ExtResource("64_pc5hm")]
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

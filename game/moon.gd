@@ -6,8 +6,8 @@ extends Node2D
 @onready var shatter_particles: GPUParticles2D = $GPUParticles2D
 @export var ghost_offset_distance: float = 300.0
 @export var ghost_travel_duration: float = 0.6
-@export var ghost_light_alpha: float = 0.2
-@export var ghost_dark_alpha: float = 0.2
+@export var ghost_light_alpha: float = 0.35
+@export var ghost_dark_alpha: float = 0.35
 
 @onready var ghost_left: Sprite2D = $GhostLeft
 @onready var ghost_right: Sprite2D = $GhostRight

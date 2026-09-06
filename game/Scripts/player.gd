@@ -24,7 +24,7 @@ var mark_strength:
 	get:
 		return 1.0 + (0.1 * marks)
 @onready var reversed = false
-@export var lightning_bolt_scene: PackedScene
+@onready var lightning_bolt_scene = preload("res://lightning_bolt.tscn")
 var stunned: bool = false
 var stun_duration: float = 0.5
 
@@ -1912,15 +1912,12 @@ func reverse_movement():
 	reversed = true
 	await get_tree().create_timer(5.0).timeout
 	reversed = false
-	
+
+@onready var screen: CanvasLayer = $CursedExplosionFilter
 func explode():
 	var explosion_damage = 10000000
 	await get_tree().create_timer(0.5).timeout
-	var mat = invert_screen.get_node("CanvasLayer/CursedExplosionFilter").material as ShaderMaterial
-	if mat:
-		var is_active: bool = mat.get_shader_parameter("active")
-		print("inverted")
-		mat.set_shader_parameter("active", not is_active)
+	screen.visible = true
 	take_player_damage(explosion_damage)
 
 func apply_dagger_slow():

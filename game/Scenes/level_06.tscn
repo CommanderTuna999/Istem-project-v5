@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="7_7b0nf"]
 [ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="8_alqoj"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="9_epw38"]
-[ext_resource type="Script" uid="uid://b7gy6f3ms3gwc" path="res://Scenes/level_07.gd" id="10_q1cyl"]
+[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="10_q1cyl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_q1cyl")
@@ -842,7 +842,6 @@ process_material = SubResource("ParticleProcessMaterial_f8buc")
 [node name="Level07" type="Area2D" parent="." unique_id=308123412]
 position = Vector2(5281, 489)
 collision_layer = 0
-script = ExtResource("10_q1cyl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level07" unique_id=1687457284]
 shape = SubResource("RectangleShape2D_jqwyi")
@@ -854,6 +853,9 @@ offset_right = 10.0
 offset_bottom = 10.0
 color = Color(0.6392157, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=133647028]
+script = ExtResource("10_q1cyl")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

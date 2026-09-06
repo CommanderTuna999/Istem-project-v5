@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="istem project v5"
-run/main_scene="uid://bgqp8w4nt7h7l"
+run/main_scene="uid://dqt3rt0ast0p5"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
