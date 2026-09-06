@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://c5u860uqo7tme" path="res://Scenes/in_frame_label.gd" id="11_pu2lt"]
 [ext_resource type="Texture2D" uid="uid://bo0s752mefknf" path="res://pixil-frame-0 (18).png" id="12_ukyrk"]
 [ext_resource type="Script" uid="uid://d2isxx5drajo7" path="res://Scenes/slowmo_indicator.gd" id="13_7dp3o"]
+[ext_resource type="PackedScene" uid="uid://blryjdtwjaq03" path="res://Scenes/cursed_explosion_filter.tscn" id="14_7dp3o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("4_fkybt")
@@ -172,6 +173,8 @@ position = Vector2(0, -31)
 scale = Vector2(1.4166666, 1.4166666)
 texture = ExtResource("12_ukyrk")
 script = ExtResource("13_7dp3o")
+
+[node name="CursedExplosionFilter" parent="." unique_id=1302474987 instance=ExtResource("14_7dp3o")]
 
 [connection signal="body_entered" from="hurt_area" to="." method="_on_hurt_area_body_entered"]
 [connection signal="body_exited" from="hurt_area" to="." method="_on_hurt_area_body_exited"]
