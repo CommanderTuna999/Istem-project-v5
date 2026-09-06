@@ -17,8 +17,9 @@
 [ext_resource type="Script" uid="uid://bxgcs1dxq3gny" path="res://Scenes/level_04.gd" id="15_tr7da"]
 [ext_resource type="PackedScene" uid="uid://vpeush0nlhjd" path="res://Scenes/Enemies/shark.tscn" id="16_cwaol"]
 [ext_resource type="PackedScene" uid="uid://dumg0isp3lbea" path="res://Scenes/Enemies/stealth_stalker.tscn" id="17_l7uoe"]
-[ext_resource type="PackedScene" uid="uid://dalc8mwkcbhvs" path="res://zeus_fish.tscn" id="18_aoih6"]
-[ext_resource type="PackedScene" uid="uid://cl037qotl8cd1" path="res://blackdragonfish.tscn" id="19_topbc"]
+[ext_resource type="PackedScene" uid="uid://dalc8mwkcbhvs" path="res://Scenes/Enemies/zeus_fish.tscn" id="18_aoih6"]
+[ext_resource type="PackedScene" uid="uid://cl037qotl8cd1" path="res://Scenes/Enemies/blackdragonfish.tscn" id="19_topbc"]
+[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="20_l7uoe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_ekib6")
@@ -1502,6 +1503,9 @@ position = Vector2(13934, 2923)
 
 [node name="Zeus!!46" parent="." unique_id=1835374777 instance=ExtResource("18_aoih6")]
 position = Vector2(13934, 2923)
+
+[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=30403167]
+script = ExtResource("20_l7uoe")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dalc8mwkcbhvs" path="res://Scenes/Enemies/zeus_fish.tscn" id="19_fp516"]
 [ext_resource type="PackedScene" uid="uid://cl037qotl8cd1" path="res://Scenes/Enemies/blackdragonfish.tscn" id="20_jhfbt"]
 [ext_resource type="PackedScene" uid="uid://dlfil1d4hc4ke" path="res://Scenes/Enemies/crab.tscn" id="21_xtuqb"]
+[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="22_1lyvx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4xl1"]
 texture = ExtResource("1_oxvi3")
@@ -1409,6 +1410,9 @@ position = Vector2(11117, 9683)
 
 [node name="torpedo16" parent="." unique_id=1737063880 instance=ExtResource("18_ecl8j")]
 position = Vector2(10961, 9811)
+
+[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=696650260]
+script = ExtResource("22_1lyvx")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="12_khfxu"]
 [ext_resource type="Script" uid="uid://c2dfxpxy1bxcx" path="res://Scripts/level_02.gd" id="12_rmyfx"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="13_osdef"]
+[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="23_cytdt"]
 [ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="24_4m6hl"]
 [ext_resource type="AudioStream" uid="uid://bvyxt7w82f6u0" path="res://sfx/Beyond Ocean Waters.mp3" id="25_0fel4"]
 [ext_resource type="PackedScene" uid="uid://c6gsif1fbsa4u" path="res://Scenes/Enemies/Adultshark.tscn" id="29_ywwm3"]
@@ -1075,6 +1076,9 @@ position = Vector2(782, -952)
 [node name="clownfish3" parent="Marker2D2" unique_id=1111911240 node_paths=PackedStringArray("patrolpoints") instance=ExtResource("10_pw4n1")]
 position = Vector2(-561, -189)
 patrolpoints = [NodePath("../../Marker2D"), NodePath("..")]
+
+[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=464878802]
+script = ExtResource("23_cytdt")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
