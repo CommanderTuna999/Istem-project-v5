@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="7_l7uoe"]
 [ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="8_aoih6"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="9_topbc"]
-[ext_resource type="PackedScene" uid="uid://c31p1nqtvdsku" path="res://Scenes/Enemies/hatchetfish.tscn" id="12_tr7da"]
 [ext_resource type="PackedScene" uid="uid://bwwmw12jostbe" path="res://Scenes/currrent_area.tscn" id="13_lmld8"]
 [ext_resource type="PackedScene" uid="uid://ony1pqjkvd1j" path="res://Scenes/Enemies/clownfish.tscn" id="15_nj836"]
 [ext_resource type="Script" uid="uid://bxgcs1dxq3gny" path="res://Scenes/level_04.gd" id="15_tr7da"]
@@ -1152,12 +1151,6 @@ offset_bottom = 10.0
 color = Color(0.6392157, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Hatchetfish" parent="." unique_id=899756020 instance=ExtResource("12_tr7da")]
-position = Vector2(5492, 388)
-
-[node name="Hatchetfish2" parent="." unique_id=625360396 instance=ExtResource("12_tr7da")]
-position = Vector2(5470, 710)
-
 [node name="clownfish85" parent="." unique_id=553019620 instance=ExtResource("15_nj836")]
 position = Vector2(5040, 230)
 
@@ -1197,6 +1190,11 @@ position = Vector2(5197, 182)
 [node name="CurrrentArea" parent="." unique_id=1909204427 instance=ExtResource("13_lmld8")]
 position = Vector2(8424, 680)
 scale = Vector2(15.634275, -5.211379)
+
+[node name="CurrrentArea2" parent="." unique_id=867375485 instance=ExtResource("13_lmld8")]
+position = Vector2(11952, 2315)
+rotation = 0.64077723
+scale = Vector2(-11.13287, 2.3520336)
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
