@@ -34,7 +34,7 @@ var kbtime = 0
 @export var inner_zone_player_speed_penalty = 0.4
 var player_inner_slow_active = false
 
-@export var execution_stack_interval = 1.5
+@export var execution_stack_interval = 0.5
 @export var execution_stacks_needed = 10
 var execution_stacks = 0
 var execution_stack_timer = 0.0
@@ -43,7 +43,9 @@ var execution_triggered = false
 signal execution_stacks_changed(current: int, max_stacks: int)
 
 @onready var moon_scene = preload("res://Scenes/Enemies/moon.tscn")
-@export var moon_shatter_damage = 20 * 1
+@export var moon_shatter_damage = 10
+@export var dash_start_distance = 175.0
+@export var dash_duration = 0.5
 
 var current_health
 var speed
@@ -67,7 +69,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if TimeStop.time_stop_active == true:
 		return
-
 	if is_instance_valid(chase_subject) and not chase_subject.rooted:
 		update_zone_logic(delta)
 		var direction_to_player = (chase_subject.global_position - global_position).normalized()
@@ -175,37 +176,85 @@ func trigger_execution_event() -> void:
 func run_moon_shatter_sequence() -> void:
 	if chase_subject.has_method("moon_silence"):
 		chase_subject.moon_silence(6.0)
-
 	if chase_subject.has_method("moon_stun"):
-		chase_subject.moon_stun(3.5)
-
+		chase_subject.moon_stun(2.0)
+		
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		if enemy != self and enemy.has_method("set_rooted"):
 			enemy.set_rooted(2.0)
-
+			
 	var moon_position = chase_subject.global_position
 	var moon = moon_scene.instantiate()
 	moon.global_position = moon_position
 	get_tree().current_scene.call_deferred("add_child", moon)
+	
+	var direction_to_player = chase_subject.global_position - global_position
+	
+	if direction_to_player.length() < 1.0:
+		direction_to_player = Vector2.RIGHT
+		
+	var horizontal_sign = 1.0 if direction_to_player.x >= 0.0 else -1.0
+	
 
 	await get_tree().create_timer(1.0).timeout
-
-	global_position = moon_position + Vector2(-150, -150)
-
+	
+	var start_position = moon_position + Vector2(-horizontal_sign * dash_start_distance, 0.0)
+	var end_position = moon_position + Vector2(horizontal_sign * dash_start_distance, 0.0)
+	
+	global_position = start_position
+	
+	animated_sprite_2d.flip_h = (horizontal_sign >= 0.0)
+	
+	spawn_afterimage(start_position, horizontal_sign >= 0.0)
+	create_dash_slice_line(start_position, end_position)
+	
 	var tween = create_tween()
-	tween.tween_property(self, "global_position", moon_position + Vector2(150, 150), 0.8)
+	tween.tween_property(self, "global_position", end_position, dash_duration)
 	tween.tween_callback(func():
 		if moon.has_method("shatter"):
-			moon.shatter()
-		chase_subject.take_player_damage(moon_shatter_damage)
+			moon.shatter(Vector2(horizontal_sign, 0.0))
+		moon_shatter_damage_sequence(5, 0.05)
 	)
-
-	await get_tree().create_timer(1.0).timeout
-
+	
+	execution_stacks = 0
+	execution_triggered = false
+	execution_stacks_changed.emit(execution_stacks, execution_stacks_needed)
 	chase_subject.stunned = false
 
-	if is_instance_valid(chase_subject) and chase_subject.current_health > 0:
-		trigger_silence_sequence(chase_subject)
+func moon_shatter_damage_sequence(ticks: int, tick_delay: float) -> void:
+	for i in range(ticks):
+		chase_subject.moon_damaged = true
+		chase_subject.take_player_damage(moon_shatter_damage)
+		await get_tree().create_timer(tick_delay).timeout
+
+func spawn_afterimage(at_position: Vector2, facing_right: bool) -> void:
+	var afterimage = Sprite2D.new()
+	afterimage.texture = animated_sprite_2d.sprite_frames.get_frame_texture(animated_sprite_2d.animation, animated_sprite_2d.frame)
+	afterimage.flip_h = facing_right
+	afterimage.global_position = at_position
+	afterimage.scale = animated_sprite_2d.scale
+	afterimage.modulate = Color(1.0, 1.0, 1.0, 0.6)
+	afterimage.z_index = animated_sprite_2d.z_index
+	get_tree().current_scene.add_child(afterimage)
+
+	var tween = create_tween()
+	tween.tween_property(afterimage, "modulate:a", 0.0, 0.4)
+	tween.tween_callback(afterimage.queue_free)
+
+
+func create_dash_slice_line(start_pos: Vector2, end_pos: Vector2) -> void:
+	var line = Line2D.new()
+	line.width = 3.0
+	line.default_color = Color(1.0, 1.0, 1.0, 0.9)
+	line.points = [start_pos, start_pos]
+	get_tree().current_scene.add_child(line)
+
+	var tween = create_tween()
+	tween.tween_method(func(progress):
+		line.points = [start_pos, start_pos.lerp(end_pos, progress)]
+	, 0.0, 1.0, dash_duration)
+	tween.tween_property(line, "modulate:a", 0.0, 0.3)
+	tween.tween_callback(line.queue_free)
 
 
 func run_quiz_sequence() -> void:

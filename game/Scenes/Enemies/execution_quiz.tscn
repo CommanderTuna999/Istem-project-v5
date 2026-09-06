@@ -48,7 +48,9 @@ layout_mode = 2
 
 [node name="DialogueLabel" type="Label" parent="Panel" unique_id=238114354]
 layout_mode = 0
-offset_right = 394.59088
-offset_bottom = 24.0
+offset_left = -1.4091187
+offset_top = 85.0
+offset_right = 393.18176
+offset_bottom = 109.0
 horizontal_alignment = 1
 vertical_alignment = 1

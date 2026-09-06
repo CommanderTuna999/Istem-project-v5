@@ -30,6 +30,7 @@ func enter_current(current: Area2D) -> void:
 	if current not in active_currents:
 		active_currents.append(current)
 
+@export var moon_damaged = false
 
 func exit_current(current: Area2D) -> void:
 	active_currents.erase(current)
@@ -787,7 +788,7 @@ func update_shield_bar():
 	shield_bar.value = shield_health
 
 func take_player_damage(amount: float) -> void:
-	if invincible:
+	if invincible and not moon_damaged:
 		return
 	# ___________ SHIELD CODE ______________
 	if shield_health > 0: 
@@ -936,7 +937,6 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("livid"):
 		damage = body.contact_damage
 		kbstrength = 500
-<<<<<<< HEAD
 	elif body.is_in_group("crab"):
 		damage = crab_damage
 		kbstrength = 500 * kbresistance
@@ -957,12 +957,10 @@ func handleenemycontact(body: Node2D):
 	elif body.is_in_group("starfish"):
 		damage = starfish_damage
 		kbstrength = 700 * kbresistance
-=======
 	elif body.is_in_group("dreadlord") and not rooted:
 		damage = body.contact_damage
 		kbstrength = 250
 		trigger_dreadlord_silence(body.contact_silence_duration, body.contact_silence_gap)
->>>>>>> 10f2ae5383efe9b1c1f1a7066e92d3ffc2c53491
 	else:
 		return
 	

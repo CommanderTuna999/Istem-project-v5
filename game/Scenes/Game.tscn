@@ -1043,7 +1043,7 @@ position = Vector2(836, -587)
 position = Vector2(910, -1481)
 
 [node name="Dreadlord" parent="Enemies" unique_id=415987629 instance=ExtResource("32_nojon")]
-position = Vector2(417, -906)
+position = Vector2(753, -1932)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)

@@ -40,15 +40,16 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if not get_parent().is_silenced or not get_parent().moon_silence_active:
-		if Input.is_action_just_pressed("left_click") and not attacking:
-			mouse_pos = get_global_mouse_position()
+	if get_parent().is_silenced or get_parent().moon_silence_active:
+		return
+	if Input.is_action_just_pressed("left_click") and not attacking:
+		mouse_pos = get_global_mouse_position()
 
-			direction_to_mouse = (
-				mouse_pos - global_position
-			).normalized()
+		direction_to_mouse = (
+			mouse_pos - global_position
+		).normalized()
 
-			attack()
+		attack()
 
 
 func _physics_process(_delta: float) -> void:
