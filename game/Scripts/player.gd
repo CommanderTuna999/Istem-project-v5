@@ -671,7 +671,7 @@ var cookie_passive_heal_bonus: float = 0.01
 var cookie_boost_active: bool = false
 var max_health:
 	get:
-		return 10000000
+		return 1000
 		#* total_HP_increase
 var can_heal = true
 var heal_per_second:
