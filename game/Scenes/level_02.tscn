@@ -873,6 +873,7 @@ offset_right = 424.0
 offset_bottom = 1781.0
 
 [node name="dashbar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=1182946789]
+visible = false
 offset_left = 25.0
 offset_top = 177.0
 offset_right = 141.0
@@ -928,6 +929,7 @@ vertical_alignment = 1
 script = ExtResource("8_ev50k")
 
 [node name="ShieldBar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=177239078]
+visible = false
 offset_left = 93.0
 offset_top = 179.0
 offset_right = 467.0

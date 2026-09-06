@@ -11,8 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://dcj3m57rjiect" path="res://Assets/Stamina_bar.png" id="9_lmld8"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="9_topbc"]
 [ext_resource type="PackedScene" uid="uid://bwwmw12jostbe" path="res://Scenes/currrent_area.tscn" id="13_lmld8"]
+[ext_resource type="PackedScene" uid="uid://dx5181rkqvp8" path="res://Scenes/Enemies/starfish.tscn" id="14_cwaol"]
+[ext_resource type="PackedScene" uid="uid://dlfil1d4hc4ke" path="res://Scenes/Enemies/crab.tscn" id="15_l7uoe"]
 [ext_resource type="PackedScene" uid="uid://ony1pqjkvd1j" path="res://Scenes/Enemies/clownfish.tscn" id="15_nj836"]
 [ext_resource type="Script" uid="uid://bxgcs1dxq3gny" path="res://Scenes/level_04.gd" id="15_tr7da"]
+[ext_resource type="PackedScene" uid="uid://blb2pf33p5wbr" path="res://Scenes/Enemies/seahorse.tscn" id="16_aoih6"]
+[ext_resource type="PackedScene" uid="uid://d2t3hr08p240j" path="res://Scenes/squid.tscn" id="17_topbc"]
+[ext_resource type="PackedScene" uid="uid://bvu70mo3rf7mb" path="res://Scenes/octopus.tscn" id="18_0exp3"]
+[ext_resource type="PackedScene" uid="uid://vpeush0nlhjd" path="res://Scenes/Enemies/shark.tscn" id="19_6bjtu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lmld8"]
 texture = ExtResource("1_ekib6")
@@ -1021,6 +1027,7 @@ offset_right = 424.0
 offset_bottom = 1781.0
 
 [node name="dashbar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=1182946789]
+visible = false
 offset_left = 25.0
 offset_top = 177.0
 offset_right = 141.0
@@ -1076,6 +1083,7 @@ vertical_alignment = 1
 script = ExtResource("8_aoih6")
 
 [node name="ShieldBar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=177239078]
+visible = false
 offset_left = 93.0
 offset_top = 179.0
 offset_right = 467.0
@@ -1208,6 +1216,72 @@ current_direction = Vector2(1, -1)
 [node name="CurrrentArea3" parent="." unique_id=660161830 instance=ExtResource("13_lmld8")]
 position = Vector2(12956.001, -234)
 scale = Vector2(13.84393, -3.9505928)
+
+[node name="starfish" parent="." unique_id=1111911240 instance=ExtResource("14_cwaol")]
+position = Vector2(6569, 662)
+
+[node name="starfish2" parent="." unique_id=672884729 instance=ExtResource("14_cwaol")]
+position = Vector2(7674, 854)
+
+[node name="crab" parent="." unique_id=1743597309 instance=ExtResource("15_l7uoe")]
+position = Vector2(9722, 927)
+
+[node name="crab2" parent="." unique_id=1475657306 instance=ExtResource("15_l7uoe")]
+position = Vector2(9810, 932)
+
+[node name="crab3" parent="." unique_id=766090628 instance=ExtResource("15_l7uoe")]
+position = Vector2(9929, 924)
+
+[node name="seahorse" parent="." unique_id=701474440 instance=ExtResource("16_aoih6")]
+position = Vector2(5321, 442)
+
+[node name="seahorse2" parent="." unique_id=258004989 instance=ExtResource("16_aoih6")]
+position = Vector2(5393, 130)
+
+[node name="squid" parent="." unique_id=550867481 instance=ExtResource("17_topbc")]
+position = Vector2(10143, 882)
+
+[node name="octopus" parent="." unique_id=608207297 instance=ExtResource("18_0exp3")]
+position = Vector2(11130, 504)
+
+[node name="octopus2" parent="." unique_id=901047415 instance=ExtResource("18_0exp3")]
+position = Vector2(11260, 2048)
+
+[node name="octopus3" parent="." unique_id=1799996784 instance=ExtResource("18_0exp3")]
+position = Vector2(12050, -375)
+
+[node name="octopus4" parent="." unique_id=1720424968 instance=ExtResource("18_0exp3")]
+position = Vector2(12627, 3067)
+
+[node name="octopus5" parent="." unique_id=973618597 instance=ExtResource("18_0exp3")]
+position = Vector2(14933, 2233)
+
+[node name="octopus6" parent="." unique_id=873355425 instance=ExtResource("18_0exp3")]
+position = Vector2(15024, 1497)
+
+[node name="octopus7" parent="." unique_id=1542126695 instance=ExtResource("18_0exp3")]
+position = Vector2(15050, 553)
+
+[node name="crab4" parent="." unique_id=1133623632 instance=ExtResource("15_l7uoe")]
+position = Vector2(12570, -336)
+
+[node name="crab5" parent="." unique_id=1502763467 instance=ExtResource("15_l7uoe")]
+position = Vector2(15053, 741)
+
+[node name="crab6" parent="." unique_id=247155262 instance=ExtResource("15_l7uoe")]
+position = Vector2(14980, 2378)
+
+[node name="crab7" parent="." unique_id=2138960087 instance=ExtResource("15_l7uoe")]
+position = Vector2(13650, 3188)
+
+[node name="squid2" parent="." unique_id=1773129231 instance=ExtResource("17_topbc")]
+position = Vector2(13755, -178)
+
+[node name="squid3" parent="." unique_id=217019223 instance=ExtResource("17_topbc")]
+position = Vector2(13934, 2958)
+
+[node name="shark" parent="." unique_id=10048643 instance=ExtResource("19_6bjtu")]
+position = Vector2(16705, 3129)
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
