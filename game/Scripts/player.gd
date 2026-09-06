@@ -8,6 +8,8 @@
 #Layer 11 = Enemies hurtbox
 
 extends CharacterBody2D
+var boss_targeted = false
+
 var harpooning = false
 var currentharpoon = null
 var harpoon_point = Vector2.ZERO
@@ -163,6 +165,9 @@ var dash_speed:
 @export var dash_duration: float = 0.1
 @export var dash_bar_display_value: float = dash_max
 
+var slowmo_factor = 1.0
+var slowmo = false
+
 var dash_value: float = dash_max
 var dash_recharge_timer: float = 0.0
 var is_dashing: bool = false
@@ -234,8 +239,12 @@ func _on_harpoon_attached(hitposition, hitbody):
 	harpoonlaunchtimer = 0.0
 	
 func _physics_process(delta: float) -> void:
+	if slowmo:
+		delta *= slowmo_factor
+	
 	PetalStats.update_missing_health_bonus(current_health, max_health)
 
+	
 	if velocity.length() > 500:
 		$MovementBubbles.rotation = velocity.angle() + PI
 		$MovementBubbles.emitting = true
@@ -564,6 +573,8 @@ func forcefaceside(side):
 		$Spear.setrestside("left")
 		
 func handle_dash(delta: float, direction: Vector2) -> void:
+	if slowmo:
+		delta *= slowmo_factor
 	if is_silenced or moon_silence_active:
 		return
 	if is_dashing:
@@ -611,6 +622,8 @@ func start_dash(direction: Vector2) -> void:
 
 
 func recharge_dash(delta: float) -> void:
+	if slowmo:
+		delta *= slowmo_factor
 	if dash_value >= dash_max:
 		dash_value = dash_max
 		return
@@ -620,6 +633,8 @@ func recharge_dash(delta: float) -> void:
 
 
 func update_dash_bar(delta: float) -> void:
+	if slowmo:
+		delta *= slowmo_factor
 	if dash_bar:
 		dash_bar_display_value = move_toward(
 			dash_bar_display_value,
@@ -721,6 +736,8 @@ func _process(delta):
 		#get_tree().call_deferred("reload_current_scene")
 		
 func handle_health_regen(delta: float) -> void:
+	if slowmo:
+		delta *= slowmo_factor
 	if current_health >= max_health:
 		current_health = max_health
 		time_since_damage = 0.0
@@ -761,6 +778,8 @@ func apply_cookie_boost(speed_bonus: float, damage_bonus: float, passive_heal_bo
 	cookie_boost_active = false
 
 func update_health_ui(delta: float) -> void:
+	if slowmo:
+		delta *= slowmo_factor
 	displayed_health = current_health
 	var healthpercent = float(displayed_health) / float(max_health)
 	var visual = max_health
@@ -1104,6 +1123,8 @@ func start_damage_visual(knockback_direction: Vector2) -> void:
 
 
 func update_player_visual(delta: float) -> void:
+	if slowmo:
+		delta *= slowmo_factor
 
 	# Count temporary visual reactions down.
 	dash_visual_timer = maxf(
@@ -1911,6 +1932,15 @@ func apply_pull(pull_vector: Vector2) -> void:
 	kbvelocity = pull_vector
 	kbtime = 0.15
 
+func slowmo_func(duration: float):
+	total_speed_increase *= 0.15
+	slowmo = true
+	slowmo_factor *= 1.85
+	await get_tree().create_timer(duration).timeout
+	slowmo = false
+	slowmo_factor /= 1.85
+	total_speed_increase /= 0.15
+
 func silence(duration: float) -> void:
 	is_silenced = true
 	print("silenced")
@@ -1928,7 +1958,7 @@ func trigger_dreadlord_silence(duration: float, gap: float) -> void:
 	silence(duration)
 	dreadlord_silence_active = false
 
-var moon_silence_active= false
+var moon_silence_active = false
 func moon_silence(duration: float) -> void:
 	moon_silence_active = true
 	await get_tree().create_timer(duration).timeout

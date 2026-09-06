@@ -53,7 +53,7 @@ size = Vector2(115, 109)
 script = ExtResource("1_v3a00")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2124484513]
-scale = Vector2(6.2666664, 6.2666664)
+scale = Vector2(9, 9)
 sprite_frames = SubResource("SpriteFrames_fiqby")
 animation = &"growth"
 
@@ -61,4 +61,5 @@ animation = &"growth"
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea" unique_id=1492650357]
+scale = Vector2(1.4, 1.4)
 shape = SubResource("RectangleShape2D_us3ko")

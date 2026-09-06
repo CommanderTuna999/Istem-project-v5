@@ -47,16 +47,15 @@ radius = 925.81854
 collision_layer = 8
 collision_mask = 10
 script = ExtResource("1_7prgd")
-attack_cooldown = null
-spawn_distance = null
-teleport_offset = null
+teleport_offset = Vector2(500, 100)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=712744776]
+position = Vector2(165, 0)
 sprite_frames = SubResource("SpriteFrames_6hu7g")
 frame_progress = 0.29186317
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2033515426]
-position = Vector2(0, -3)
+position = Vector2(165, -3)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_a1klm")
 
@@ -71,7 +70,7 @@ collision_mask = 16
 script = ExtResource("3_aumft")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=650766851]
-position = Vector2(0, -2)
+position = Vector2(165, -2)
 shape = SubResource("RectangleShape2D_6egou")
 
 [connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]

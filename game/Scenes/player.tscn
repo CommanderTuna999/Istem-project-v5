@@ -9,6 +9,10 @@
 [ext_resource type="Script" uid="uid://bdkv68wabuspb" path="res://Scenes/silence_symbol.gd" id="7_8erm5"]
 [ext_resource type="Script" uid="uid://dnnb5r4rmyp64" path="res://Scenes/execution_stack_display.gd" id="8_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://oi1hngnuebo2" path="res://Assets/pixil-frame-0 (14).png" id="9_tx1dd"]
+[ext_resource type="FontFile" uid="uid://ktdeweye84rw" path="res://fonts/GeistPixel-Regular-VariableFont_ELSH.ttf" id="10_gymyn"]
+[ext_resource type="Script" uid="uid://c5u860uqo7tme" path="res://Scenes/in_frame_label.gd" id="11_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://bo0s752mefknf" path="res://pixil-frame-0 (18).png" id="12_ukyrk"]
+[ext_resource type="Script" uid="uid://d2isxx5drajo7" path="res://Scenes/slowmo_indicator.gd" id="13_7dp3o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("4_fkybt")
@@ -140,7 +144,7 @@ script = ExtResource("7_8erm5")
 script = ExtResource("8_f1ek2")
 
 [node name="Sprite2D" type="Sprite2D" parent="ExecutionStackDisplay" unique_id=638136827]
-position = Vector2(-7, 30)
+position = Vector2(-8, 30)
 texture = ExtResource("9_tx1dd")
 
 [node name="CountLabel" type="Label" parent="ExecutionStackDisplay" unique_id=1659935550]
@@ -151,6 +155,23 @@ offset_bottom = 47.0
 scale = Vector2(0.55, 0.55)
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="In_Frame_Label" type="RichTextLabel" parent="." unique_id=2039343303]
+offset_left = -135.0
+offset_top = -208.0
+offset_right = 137.0
+offset_bottom = -185.0
+theme_override_fonts/bold_font = ExtResource("10_gymyn")
+text = "DO NOT MOVE OUT OF THE FRAME!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_pu2lt")
+
+[node name="Slowmo_Indicator" type="Sprite2D" parent="." unique_id=395811930]
+position = Vector2(0, -31)
+scale = Vector2(1.4166666, 1.4166666)
+texture = ExtResource("12_ukyrk")
+script = ExtResource("13_7dp3o")
 
 [connection signal="body_entered" from="hurt_area" to="." method="_on_hurt_area_body_entered"]
 [connection signal="body_exited" from="hurt_area" to="." method="_on_hurt_area_body_exited"]
