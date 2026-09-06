@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cersxc5q7bnpk" path="res://Scenes/Enemies/blackdragonfish_fire.tscn.gd" id="1_cruqx"]
 [ext_resource type="Texture2D" uid="uid://ohhn4gwjdyjk" path="res://Assets/download (6) (1).png" id="2_cruqx"]
+[ext_resource type="Texture2D" uid="uid://bt2706hxu5l5t" path="res://Assets/pixil-frame-0 (21).png" id="3_mvxya"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kvis1"]
 animations = [{
@@ -17,7 +18,22 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_mvxya"]
 radius = 9.113975
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_cruqx"]
+[sub_resource type="Curve" id="Curve_o5nek"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mvxya"]
+curve = SubResource("Curve_o5nek")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8xl7t"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_mvxya")
 
 [node name="fire_projectile" type="Area2D" unique_id=1334159856 groups=["seahorse_projectile"]]
 scale = Vector2(3.64, 4.28)
@@ -35,4 +51,8 @@ scale = Vector2(1.0000002, 1)
 shape = SubResource("CircleShape2D_mvxya")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1867985099]
-texture = SubResource("ViewportTexture_cruqx")
+emitting = false
+amount = 80
+texture = ExtResource("3_mvxya")
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_8xl7t")

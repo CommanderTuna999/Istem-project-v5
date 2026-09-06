@@ -63,6 +63,7 @@
 [ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="49_e2w45"]
 [ext_resource type="PackedScene" uid="uid://dlfil1d4hc4ke" path="res://Scenes/Enemies/crab.tscn" id="61_8ekww"]
 [ext_resource type="PackedScene" uid="uid://ckuxdiket4a4o" path="res://silencing_torch.tscn" id="63_nojon"]
+[ext_resource type="PackedScene" uid="uid://bn5sinc3hu7y7" path="res://ticktockclock.tscn" id="64_pc5hm"]
 
 [sub_resource type="Curve" id="Curve_vvhu1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -1051,7 +1052,7 @@ position = Vector2(1008, -1881)
 
 [node name="CameraFishBoss" parent="Enemies" unique_id=1692452244 instance=ExtResource("33_pc5hm")]
 position = Vector2(2078, -373)
-teleport_offset = Vector2(500, 0)
+teleport_offset = Vector2(0, 0)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)
@@ -1184,6 +1185,8 @@ position = Vector2(696, -1594)
 
 [node name="Area2D" parent="." unique_id=122582710 instance=ExtResource("63_nojon")]
 position = Vector2(693, -1297)
+
+[node name="Area2D2" parent="." unique_id=689405734 instance=ExtResource("64_pc5hm")]
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
