@@ -1166,14 +1166,6 @@ offset_top = -1023.0
 offset_right = 10665.0
 offset_bottom = -959.0
 
-[node name="clownfish8" parent="." unique_id=33276626 node_paths=PackedStringArray("homemarker") instance=ExtResource("10_pw4n1")]
-position = Vector2(10576, -992)
-homemarker = NodePath("../Anemone3/Marker2D")
-
-[node name="clownfish9" parent="." unique_id=368466081 node_paths=PackedStringArray("homemarker") instance=ExtResource("10_pw4n1")]
-position = Vector2(10643, -1052)
-homemarker = NodePath("../Anemone3/Marker2D")
-
 [node name="clownfish10" parent="." unique_id=978337471 node_paths=PackedStringArray("homemarker") instance=ExtResource("10_pw4n1")]
 position = Vector2(10705, -994)
 homemarker = NodePath("../Anemone3/Marker2D")

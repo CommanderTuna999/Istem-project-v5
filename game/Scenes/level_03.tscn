@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="6_cwaol"]
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="7_l7uoe"]
 [ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="8_aoih6"]
+[ext_resource type="Texture2D" uid="uid://dcj3m57rjiect" path="res://Assets/Stamina_bar.png" id="9_lmld8"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="9_topbc"]
 [ext_resource type="PackedScene" uid="uid://bwwmw12jostbe" path="res://Scenes/currrent_area.tscn" id="13_lmld8"]
 [ext_resource type="PackedScene" uid="uid://ony1pqjkvd1j" path="res://Scenes/Enemies/clownfish.tscn" id="15_nj836"]
@@ -954,26 +955,6 @@ process_material = SubResource("ParticleProcessMaterial_wjupe")
 [node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=492646237]
 script = ExtResource("6_cwaol")
 
-[node name="DashHUD" type="Control" parent="UI/CanvasLayer" unique_id=1013105648]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.8, 0.8)
-
-[node name="TextureRect" type="TextureRect" parent="UI/CanvasLayer/DashHUD" unique_id=910413719]
-layout_mode = 0
-offset_left = 123.749985
-offset_top = 141.24998
-offset_right = 1483.75
-offset_bottom = 551.25
-scale = Vector2(0.25, 0.25)
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/CanvasLayer/DashHUD" unique_id=1969356823]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="HealthHUD" type="Control" parent="UI/CanvasLayer" unique_id=1958590082]
 layout_mode = 3
 anchors_preset = 0
@@ -1102,6 +1083,33 @@ offset_bottom = 206.0
 scale = Vector2(1, 1.0400048)
 theme_override_styles/fill = SubResource("StyleBoxFlat_ue7jx")
 
+[node name="DashHUD" type="Control" parent="UI/CanvasLayer" unique_id=742161618]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
+
+[node name="DashBar" type="TextureRect" parent="UI/CanvasLayer/DashHUD" unique_id=1599351107]
+modulate = Color(0.8235294, 1, 1, 1)
+layout_mode = 0
+offset_left = 126.25006
+offset_top = 156.25006
+offset_right = 1486.25
+offset_bottom = 566.25006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_lmld8")
+
+[node name="DashFill" type="ColorRect" parent="UI/CanvasLayer/DashHUD" unique_id=292362701]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 0
+offset_left = 238.75
+offset_top = 196.25
+offset_right = 457.5
+offset_bottom = 218.75
+color = Color(0.7137255, 1, 1, 1)
+
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=120829579]
 color = Color(0.8327273, 0.86699224, 0.9217689, 1)
 
@@ -1192,9 +1200,14 @@ position = Vector2(8424, 680)
 scale = Vector2(15.634275, -5.211379)
 
 [node name="CurrrentArea2" parent="." unique_id=867375485 instance=ExtResource("13_lmld8")]
-position = Vector2(11952, 2315)
+position = Vector2(14496.999, 4308)
 rotation = 0.64077723
-scale = Vector2(-11.13287, 2.3520336)
+scale = Vector2(-32.863358, 6.261124)
+current_direction = Vector2(1, -1)
+
+[node name="CurrrentArea3" parent="." unique_id=660161830 instance=ExtResource("13_lmld8")]
+position = Vector2(12956.001, -234)
+scale = Vector2(13.84393, -3.9505928)
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
