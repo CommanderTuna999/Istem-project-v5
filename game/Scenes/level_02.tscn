@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://d2t3hr08p240j" path="res://Scenes/squid.tscn" id="18_v3v5w"]
 [ext_resource type="PackedScene" uid="uid://bvu70mo3rf7mb" path="res://Scenes/octopus.tscn" id="19_v3v5w"]
 [ext_resource type="Texture2D" uid="uid://dkn5fdefgw11h" path="res://Assets/Octopus.png" id="20_qfrcj"]
+[ext_resource type="Texture2D" uid="uid://rinln0v32dxn" path="res://Assets/bakcground.png" id="21_1i86k"]
 [ext_resource type="PackedScene" uid="uid://dlfil1d4hc4ke" path="res://Scenes/Enemies/crab.tscn" id="21_xtuqb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4xl1"]
@@ -998,7 +999,7 @@ process_material = SubResource("ParticleProcessMaterial_f8buc")
 [node name="shark_folder" type="Node" parent="Enemies" unique_id=67066988]
 
 [node name="Level03" type="Area2D" parent="." unique_id=393461521]
-position = Vector2(4686, 452)
+position = Vector2(4684, 527)
 collision_layer = 0
 script = ExtResource("4_a4xl1")
 
@@ -1006,10 +1007,11 @@ script = ExtResource("4_a4xl1")
 shape = SubResource("RectangleShape2D_i5yiq")
 
 [node name="ColorRect" type="ColorRect" parent="Level03" unique_id=156245816]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+z_index = -3
+offset_left = 7587.0
+offset_top = 9505.0
+offset_right = 7607.0
+offset_bottom = 9525.0
 color = Color(0.6392157, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -1199,6 +1201,12 @@ position = Vector2(7385, -225)
 [node name="Octopus" type="Sprite2D" parent="." unique_id=1102575520]
 position = Vector2(16948, 10141)
 texture = ExtResource("20_qfrcj")
+
+[node name="Bakcground" type="Sprite2D" parent="." unique_id=1446990472]
+z_index = -1
+position = Vector2(10265, 5249)
+scale = Vector2(8.864243, 8.864243)
+texture = ExtResource("21_1i86k")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

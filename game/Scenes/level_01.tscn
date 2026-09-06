@@ -1034,10 +1034,10 @@ script = ExtResource("12_rmyfx")
 shape = SubResource("RectangleShape2D_i5yiq")
 
 [node name="ColorRect" type="ColorRect" parent="Level02" unique_id=710919273]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+offset_left = 12317.0
+offset_top = 6341.0
+offset_right = 12337.0
+offset_bottom = 6361.0
 color = Color(0.6392157, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 

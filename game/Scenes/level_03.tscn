@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://d2t3hr08p240j" path="res://Scenes/squid.tscn" id="17_topbc"]
 [ext_resource type="PackedScene" uid="uid://bvu70mo3rf7mb" path="res://Scenes/octopus.tscn" id="18_0exp3"]
 [ext_resource type="PackedScene" uid="uid://vpeush0nlhjd" path="res://Scenes/Enemies/shark.tscn" id="19_6bjtu"]
+[ext_resource type="Texture2D" uid="uid://rinln0v32dxn" path="res://Assets/bakcground.png" id="20_l7uoe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lmld8"]
 texture = ExtResource("1_ekib6")
@@ -1282,6 +1283,12 @@ position = Vector2(13934, 2958)
 
 [node name="shark" parent="." unique_id=10048643 instance=ExtResource("19_6bjtu")]
 position = Vector2(16705, 3129)
+
+[node name="Bakcground" type="Sprite2D" parent="shark" unique_id=1821442482]
+z_index = -1
+position = Vector2(-5412, -1304)
+scale = Vector2(8.253939, 8.25394)
+texture = ExtResource("20_l7uoe")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
