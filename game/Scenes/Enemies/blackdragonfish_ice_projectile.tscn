@@ -52,7 +52,7 @@ shape = SubResource("CircleShape2D_etrvy")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1093953581]
 scale = Vector2(0.01, 0.01)
 emitting = false
-amount = 80
+amount = 65
 texture = ExtResource("3_6ny74")
 lifetime = 3.0
 one_shot = true
