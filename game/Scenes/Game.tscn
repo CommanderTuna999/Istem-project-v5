@@ -38,6 +38,7 @@
 [ext_resource type="AudioStream" uid="uid://clklxrgjbhver" path="res://sfx/clock-tick.mp3" id="26_dctr5"]
 [ext_resource type="Script" uid="uid://j8cqe2er2s8a" path="res://Scripts/hard_hit.gd" id="26_hardhit"]
 [ext_resource type="PackedScene" uid="uid://cn4m04bhkfiwb" path="res://Scenes/Enemies/camerafish.tscn" id="26_jamva"]
+[ext_resource type="Script" uid="uid://bvvr3gpiw8xpq" path="res://Scenes/Enemies/camerafish.gd" id="27_dgxei"]
 [ext_resource type="Script" uid="uid://bk3ngxqppw15h" path="res://Scripts/icy_shot.gd" id="27_icyshot"]
 [ext_resource type="PackedScene" uid="uid://4iv3yv24u8gm" path="res://turtle.tscn" id="27_m15vq"]
 [ext_resource type="AudioStream" uid="uid://bo8j36ljf0gtc" path="res://sfx/slap-battles-time-stop-god-hand.mp3" id="28_7w24h"]
@@ -51,6 +52,7 @@
 [ext_resource type="Texture2D" uid="uid://k2f0fhtg6f8f" path="res://Assets/shield_bar_progress.png" id="31_shield_progress"]
 [ext_resource type="PackedScene" uid="uid://cabsnmmnqbm2g" path="res://Scenes/Enemies/dreadlord.tscn" id="32_nojon"]
 [ext_resource type="Texture2D" uid="uid://qanfhvpgpvi1" path="res://Assets/shield_bar_over.png" id="32_shield_over"]
+[ext_resource type="PackedScene" uid="uid://cfd0vg8s230po" path="res://Scenes/Enemies/camerafish_boss.tscn" id="33_pc5hm"]
 [ext_resource type="Texture2D" uid="uid://bing8b2mqgw61" path="res://Assets/shield_bar_icon.png" id="33_shield_icon"]
 [ext_resource type="AudioStream" uid="uid://b2qjnu0vwgjvk" path="res://sfx/5f569f554286fe2cda904c330392f6cf781aa63f.ogg" id="37_lmarx"]
 [ext_resource type="AudioStream" uid="uid://b6v7oy4yptpx" path="res://sfx/9b50f8b4ace51d032fdb0dfe37b5edd9591cb41e.mp3" id="40_7av8l"]
@@ -996,12 +998,12 @@ position = Vector2(919, -2016)
 [node name="hatchetfish_folder" type="Node" parent="Enemies" unique_id=1016474154]
 
 [node name="Hatchetfish" parent="Enemies/hatchetfish_folder" unique_id=700759828 instance=ExtResource("21_oo65k")]
-position = Vector2(868, -1747)
+position = Vector2(2189, -1333)
 
 [node name="zeus_folder" type="Node" parent="Enemies" unique_id=1626172881]
 
 [node name="Zeus!!" parent="Enemies/zeus_folder" unique_id=1345799120 instance=ExtResource("22_smnwb")]
-position = Vector2(1020, -1555)
+position = Vector2(2784, -1210)
 
 [node name="blackdragonfish_folder" type="Node" parent="Enemies" unique_id=372684413]
 
@@ -1017,6 +1019,11 @@ position = Vector2(1095, -709)
 
 [node name="CameraFish" parent="Enemies/camerafish_folder" unique_id=2118139995 instance=ExtResource("26_jamva")]
 position = Vector2(1093, -1765)
+script = ExtResource("27_dgxei")
+wander_radius = 160.0
+wander_speed = 60.0
+attack_cooldown = 3.0
+spawn_distance = 900.0
 
 [node name="turtle_folder" type="Node" parent="Enemies" unique_id=1992869913]
 
@@ -1043,7 +1050,13 @@ position = Vector2(836, -587)
 position = Vector2(910, -1481)
 
 [node name="Dreadlord" parent="Enemies" unique_id=415987629 instance=ExtResource("32_nojon")]
-position = Vector2(753, -1932)
+position = Vector2(2511, -1540)
+
+[node name="CameraFishBoss" parent="Enemies" unique_id=1692452244 instance=ExtResource("33_pc5hm")]
+position = Vector2(2078, -373)
+attack_cooldown = 3.0
+spawn_distance = 900.0
+teleport_offset = Vector2(300, 0)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
 position = Vector2(375, -2127)
@@ -1177,7 +1190,7 @@ offset_bottom = 40.0
 [node name="CursedExplosionFilter" parent="." unique_id=1302474987 instance=ExtResource("60_ym08v")]
 
 [node name="crab" parent="." unique_id=1837046843 instance=ExtResource("61_8ekww")]
-position = Vector2(670, -1529)
+position = Vector2(696, -1594)
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

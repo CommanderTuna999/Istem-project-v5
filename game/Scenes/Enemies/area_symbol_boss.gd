@@ -1,10 +1,10 @@
 extends Node2D
 
-@export var travel_time: float = 1.25
-@export var grow_time: float = 0.6
+@export var travel_time: float = 0.5
+@export var grow_time: float = 0.25
 @export var flash_hold_time: float = 0.15
 @export var fade_time: float = 0.6
-@export var damage: float = 15.0
+@export var damage: float = 20.0
 @export var stun_duration: float = 1.2
 
 var target_position: Vector2 = Vector2.ZERO
