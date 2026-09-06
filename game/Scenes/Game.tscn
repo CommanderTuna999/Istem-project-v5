@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bdqbpmxw31kbp" path="res://Scenes/player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://bj7ldtrm577dp" path="res://Scenes/spear.tscn" id="2_71axn"]
-[ext_resource type="PackedScene" uid="uid://ct0r7pl2ej4q6" path="res://lightning_bolt.tscn" id="2_lklsk"]
 [ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="3_bf53h"]
 [ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="4_alh3a"]
 [ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="4_dahhg"]
@@ -21,7 +20,6 @@
 [ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="19_tfod6"]
 [ext_resource type="Script" uid="uid://c8n16i5rg5b64" path="res://Scripts/ability_folder.gd" id="19_vvhu1"]
 [ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="20_rajel"]
-[ext_resource type="PackedScene" uid="uid://djkcscyv2ayrs" path="res://Scenes/Enemies/crab boss.tscn" id="20_tfod6"]
 [ext_resource type="PackedScene" uid="uid://c31p1nqtvdsku" path="res://Scenes/Enemies/hatchetfish.tscn" id="21_oo65k"]
 [ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="21_petals"]
 [ext_resource type="AudioStream" uid="uid://kakrcthx40tf" path="res://sfx/bow_shoot.mp3" id="22_i4lct"]
@@ -573,7 +571,6 @@ shader = ExtResource("20_rajel")
 
 [node name="Player" parent="." unique_id=982439447 instance=ExtResource("1_gl6un")]
 position = Vector2(895, -1867)
-lightning_bolt_scene = ExtResource("2_lklsk")
 
 [node name="Spear" parent="Player" unique_id=1804206196 instance=ExtResource("2_71axn")]
 position = Vector2(-0.21830654, 0.45456308)
@@ -1074,7 +1071,7 @@ color = Color(0.6392157, 0, 0, 1)
 [node name="MapBlocks" type="TileMapLayer" parent="." unique_id=452952527]
 tile_set = SubResource("TileSet_rajel")
 
-[node name="clownfish" parent="." unique_id=2025178942 instance=ExtResource("20_tfod6")]
+[node name="clownfish" parent="." unique_id=2025178942]
 position = Vector2(3644, -414)
 
 [node name="AbilityFolder" type="Node" parent="." unique_id=363169500]
