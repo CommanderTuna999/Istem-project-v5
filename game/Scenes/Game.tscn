@@ -21,7 +21,6 @@
 [ext_resource type="Script" uid="uid://c1ihhgq4xig3a" path="res://Scripts/time_stop.gd" id="19_tfod6"]
 [ext_resource type="Script" uid="uid://c8n16i5rg5b64" path="res://Scripts/ability_folder.gd" id="19_vvhu1"]
 [ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="20_rajel"]
-[ext_resource type="PackedScene" uid="uid://djkcscyv2ayrs" path="res://Scenes/Enemies/crab boss.tscn" id="20_tfod6"]
 [ext_resource type="PackedScene" uid="uid://c31p1nqtvdsku" path="res://Scenes/Enemies/hatchetfish.tscn" id="21_oo65k"]
 [ext_resource type="Script" uid="uid://ihgurda3g3yp" path="res://Scripts/petal_ability.gd" id="21_petals"]
 [ext_resource type="AudioStream" uid="uid://kakrcthx40tf" path="res://sfx/bow_shoot.mp3" id="22_i4lct"]
@@ -58,7 +57,6 @@
 [ext_resource type="AudioStream" uid="uid://b6v7oy4yptpx" path="res://sfx/9b50f8b4ace51d032fdb0dfe37b5edd9591cb41e.mp3" id="40_7av8l"]
 [ext_resource type="Script" uid="uid://d0mpvugton4lg" path="res://Scenes/dash.gd" id="45_6okg5"]
 [ext_resource type="Script" uid="uid://d0ngdut317ugr" path="res://Scripts/mana.gd" id="45_t2joc"]
-[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="46_audqb"]
 [ext_resource type="Script" uid="uid://bgr2nvcr5gmta" path="res://Scenes/wind_cloak.gd" id="46_e2w45"]
 [ext_resource type="Script" uid="uid://bg1c3kuwpayjl" path="res://Scenes/big_bomb.gd" id="46_oo65k"]
 [ext_resource type="PackedScene" uid="uid://dl5ur657j3wwt" path="res://bomb_projectile.tscn" id="47_smnwb"]
@@ -1055,7 +1053,6 @@ position = Vector2(2511, -1540)
 [node name="CameraFishBoss" parent="Enemies" unique_id=1692452244 instance=ExtResource("33_pc5hm")]
 position = Vector2(2078, -373)
 attack_cooldown = 3.0
-spawn_distance = 900.0
 teleport_offset = Vector2(300, 0)
 
 [node name="Level01" type="Area2D" parent="." unique_id=1768724796]
@@ -1076,7 +1073,7 @@ color = Color(0.6392157, 0, 0, 1)
 [node name="MapBlocks" type="TileMapLayer" parent="." unique_id=452952527]
 tile_set = SubResource("TileSet_rajel")
 
-[node name="clownfish" parent="." unique_id=2025178942 instance=ExtResource("20_tfod6")]
+[node name="clownfish" parent="." unique_id=2025178942]
 position = Vector2(3644, -414)
 
 [node name="AbilityFolder" type="Node" parent="." unique_id=363169500]
@@ -1172,9 +1169,6 @@ grow_vertical = 2
 
 [node name="Mana" type="Node" parent="." unique_id=31072134]
 script = ExtResource("45_t2joc")
-
-[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=1273361286]
-script = ExtResource("46_audqb")
 
 [node name="Currency_System" type="Node" parent="." unique_id=578037596]
 script = ExtResource("49_e2w45")

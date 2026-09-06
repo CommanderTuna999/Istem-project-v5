@@ -860,13 +860,6 @@ process_material = SubResource("ParticleProcessMaterial_e1pa7")
 [node name="HealthAnimationPlayer" type="AnimationPlayer" parent="UI/CanvasLayer/HealthHUD" unique_id=790859625]
 libraries/ = SubResource("AnimationLibrary_d2nke")
 
-[node name="health_label" type="Label" parent="UI/CanvasLayer" unique_id=1070316272]
-offset_left = 63.0
-offset_top = 25.0
-offset_right = 103.0
-offset_bottom = 48.0
-metadata/_edit_use_anchors_ = true
-
 [node name="sprintbar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=1381113642]
 offset_left = 48.0
 offset_top = 1687.0
@@ -999,7 +992,7 @@ process_material = SubResource("ParticleProcessMaterial_f8buc")
 [node name="shark_folder" type="Node" parent="Enemies" unique_id=67066988]
 
 [node name="Level03" type="Area2D" parent="." unique_id=393461521]
-position = Vector2(4684, 527)
+position = Vector2(12264, 10025)
 collision_layer = 0
 script = ExtResource("4_a4xl1")
 
@@ -1008,10 +1001,10 @@ shape = SubResource("RectangleShape2D_i5yiq")
 
 [node name="ColorRect" type="ColorRect" parent="Level03" unique_id=156245816]
 z_index = -3
-offset_left = 7587.0
-offset_top = 9505.0
-offset_right = 7607.0
-offset_bottom = 9525.0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
 color = Color(0.6392157, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -1204,7 +1197,7 @@ texture = ExtResource("20_qfrcj")
 
 [node name="Bakcground" type="Sprite2D" parent="." unique_id=1446990472]
 z_index = -1
-position = Vector2(10265, 5249)
+position = Vector2(10343.999, 5114.9995)
 scale = Vector2(8.864243, 8.864243)
 texture = ExtResource("21_1i86k")
 

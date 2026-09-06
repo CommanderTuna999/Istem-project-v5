@@ -1014,13 +1014,6 @@ process_material = SubResource("ParticleProcessMaterial_e1pa7")
 [node name="HealthAnimationPlayer" type="AnimationPlayer" parent="UI/CanvasLayer/HealthHUD" unique_id=790859625]
 libraries/ = SubResource("AnimationLibrary_d2nke")
 
-[node name="health_label" type="Label" parent="UI/CanvasLayer" unique_id=1070316272]
-offset_left = 63.0
-offset_top = 25.0
-offset_right = 103.0
-offset_bottom = 48.0
-metadata/_edit_use_anchors_ = true
-
 [node name="sprintbar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=1381113642]
 offset_left = 48.0
 offset_top = 1687.0

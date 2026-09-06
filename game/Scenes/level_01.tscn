@@ -28,12 +28,12 @@
 [ext_resource type="AudioStream" uid="uid://d35o65uj7qsle" path="res://sfx/teleport1_Cw1ot9l.mp3" id="22_jybdu"]
 [ext_resource type="Script" uid="uid://d3203d1emtos3" path="res://Scripts/shadow_fury_support_script.gd" id="23_xe54j"]
 [ext_resource type="Shader" uid="uid://cey86drvely4a" path="res://Scenes/time_stop_filter.gdshader" id="24_4m6hl"]
-[ext_resource type="AudioStream" uid="uid://bvyxt7w82f6u0" path="res://sfx/Beyond Ocean Waters.mp3" id="25_0fel4"]
 [ext_resource type="PackedScene" uid="uid://c6gsif1fbsa4u" path="res://Scenes/Enemies/Adultshark.tscn" id="29_ywwm3"]
 [ext_resource type="PackedScene" uid="uid://d1ur1edkugqec" path="res://Scenes/anemone.tscn" id="30_b4ywe"]
 [ext_resource type="Script" uid="uid://dj35mtk8gpv0l" path="res://Scenes/currency_system.gd" id="31_c2pji"]
 [ext_resource type="Texture2D" uid="uid://4tj81ke8dhan" path="res://Assets/RockMidground1.png" id="32_rock_midground"]
 [ext_resource type="PackedScene" uid="uid://dlfil1d4hc4ke" path="res://Scenes/Enemies/crab.tscn" id="34_jybdu"]
+[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="35_4m6hl"]
 [ext_resource type="Script" uid="uid://dwjuel0rkutxb" path="res://Scripts/air_area.gd" id="35_xe54j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
@@ -904,13 +904,6 @@ process_material = SubResource("ParticleProcessMaterial_e1pa7")
 [node name="HealthAnimationPlayer" type="AnimationPlayer" parent="UI/CanvasLayer/HealthHUD" unique_id=790859625]
 libraries/ = SubResource("AnimationLibrary_d2nke")
 
-[node name="health_label" type="Label" parent="UI/CanvasLayer" unique_id=1070316272]
-offset_left = 63.0
-offset_top = 25.0
-offset_right = 103.0
-offset_bottom = 48.0
-metadata/_edit_use_anchors_ = true
-
 [node name="sprintbar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=1381113642]
 offset_left = 48.0
 offset_top = 1687.0
@@ -1031,6 +1024,7 @@ collision_layer = 0
 script = ExtResource("12_rmyfx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level02" unique_id=517405973]
+position = Vector2(12327, 6351)
 shape = SubResource("RectangleShape2D_i5yiq")
 
 [node name="ColorRect" type="ColorRect" parent="Level02" unique_id=710919273]
@@ -1090,11 +1084,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=33751702]
-stream = ExtResource("25_0fel4")
-volume_db = -50.0
-parameters/looping = true
 
 [node name="Adultshark" parent="." unique_id=888717338 instance=ExtResource("29_ywwm3")]
 position = Vector2(12609, 193)
@@ -1177,6 +1166,9 @@ script = ExtResource("35_xe54j")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AirArea" unique_id=150228295]
 position = Vector2(9209.5, -2429.5)
 shape = SubResource("RectangleShape2D_4m6hl")
+
+[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=1897649760]
+script = ExtResource("35_4m6hl")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
