@@ -18,6 +18,12 @@ var turnaccel = 1500
 var accel = 360
 var pivoting = false
 var pivot_hit = false
+
+
+var in_air: bool = false
+@export var air_gravity: float = 900
+
+
 var active_currents: Array[Area2D] = []
 @onready var marks = 0
 var mark_strength:
@@ -392,7 +398,7 @@ func _physics_process(delta: float) -> void:
 
 		
 	if direction:
-		var movementinputallowed = harpoonlaunchtimer <= 0.0
+		var movementinputallowed = (harpoonlaunchtimer <= 0.0 and not in_air)
 
 		if movementinputallowed and not (harpooning and harpooncatchtimer > 0.0):
 			var movementdot = direction.dot(velocity.normalized()) if velocity.length() > 0 else 1.0
@@ -515,6 +521,9 @@ func _physics_process(delta: float) -> void:
 			var current_strength: float = current.current_strength
 
 			velocity += current_direction * current_strength * delta
+			
+	if in_air:
+		velocity.y += air_gravity * delta
 	move_and_slide()
 	update_dash_bar(delta)
 	
@@ -1963,3 +1972,15 @@ func moon_silence(duration: float) -> void:
 	moon_silence_active = true
 	await get_tree().create_timer(duration).timeout
 	moon_silence_active = false
+
+
+func enter_air():
+	in_air = true
+
+func exit_air():
+	in_air = false
+	
+	
+	
+	
+	
