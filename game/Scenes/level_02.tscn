@@ -19,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://d2t3hr08p240j" path="res://Scenes/squid.tscn" id="18_v3v5w"]
 [ext_resource type="PackedScene" uid="uid://bvu70mo3rf7mb" path="res://Scenes/octopus.tscn" id="19_v3v5w"]
 [ext_resource type="PackedScene" uid="uid://dlfil1d4hc4ke" path="res://Scenes/Enemies/crab.tscn" id="21_xtuqb"]
-[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="22_1lyvx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4xl1"]
 texture = ExtResource("1_oxvi3")
@@ -1190,9 +1189,6 @@ position = Vector2(16291, 10094)
 
 [node name="octopus4" parent="." unique_id=1234160778 instance=ExtResource("19_v3v5w")]
 position = Vector2(16241, 9986)
-
-[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=696650260]
-script = ExtResource("22_1lyvx")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]

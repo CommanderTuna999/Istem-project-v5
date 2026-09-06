@@ -10,4 +10,4 @@ func on_LEVELONE_body_entered(body: Node2D) -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Restart"):
-				get_tree().call_deferred("change_scene_to_file", "res://Scenes/level_01.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Game.tscn")

@@ -1,3 +1,8 @@
+#everyone will look at this script eventually so important info:
+#Layer 1 = Player
+#Layer 6 (value 32) = Enemy projectile
+
+
 extends Area2D
 
 @export_enum("ice", "fire") var effect_type: String = "fire"
@@ -11,8 +16,6 @@ extends Area2D
 @export var burn_dps: float = 5.0
 @export var burn_duration: float = 4.0
 
-@onready var particles: GPUParticles2D = $GPUParticles2D
-
 var dir: Vector2 = Vector2.RIGHT 
 var already_hit: bool = false
 
@@ -21,11 +24,7 @@ func _ready() -> void:
 	rotation = dir.angle()
 	body_entered.connect(_on_body_entered)
 	await get_tree().create_timer(lifetime).timeout
-	
-	if is_instance_valid(particles) and not already_hit:
-		_cleanup_particles_and_free()
-	elif not already_hit:
-		queue_free()
+	queue_free()
 
 
 func _physics_process(delta: float) -> void:
@@ -49,19 +48,5 @@ func _on_body_entered(body: Node2D) -> void:
 	else:
 		if body.has_method("apply_burn"):
 			body.apply_burn(burn_dps, burn_duration)
-	
-	_cleanup_particles_and_free()
-
-
-func _cleanup_particles_and_free() -> void:
-	set_physics_process(false)
-	
-	remove_child(particles)
-	get_tree().current_scene.add_child(particles)
-	particles.global_position = global_position
-	particles.emitting = true
-	
-	var p_timer = get_tree().create_timer(particles.lifetime)
-	p_timer.timeout.connect(particles.queue_free)
 	
 	queue_free()

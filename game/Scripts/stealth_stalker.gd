@@ -20,7 +20,7 @@ var root_timer: float = 0.0
 var slow_active: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var animation_template: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animation_template: AnimatedSprite2D = $AnimationGSHARK
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var aggro_area: Area2D = $aggro_area
 
@@ -32,16 +32,12 @@ func _ready() -> void:
 	if aggro_shape != null:
 		aggro_shape.radius = aggro_radius
 	pick_new_wander_target()
-<<<<<<< HEAD
-=======
-	#animation_template.play("aggro")
->>>>>>> d8d6eef8c5fab9bcd49e7efc34c083ff948edc40
 	update_visibility()
 
 
 func _process(_delta: float) -> void:
 	if current_health <= 0.0:
-		#animation_player.play("death")
+		animation_player.play("death")
 		queue_free()
 		return
 
@@ -131,7 +127,8 @@ func play_template_animation(animation_name: StringName) -> void:
 
 func take_damage(amount: float) -> void:
 	current_health -= amount
-	#animation_player.play("damaged")
+	animation_player.play("damaged")
+
 
 func take_kb(source_position: Vector2) -> void:
 	if kb_time > 0.0:
