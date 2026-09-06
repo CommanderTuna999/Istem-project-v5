@@ -1019,19 +1019,19 @@ process_material = SubResource("ParticleProcessMaterial_f8buc")
 [node name="camerafish_folder(testing" type="Node" parent="Enemies" unique_id=927071067]
 
 [node name="Level02" type="Area2D" parent="." unique_id=2077541829]
-position = Vector2(361, -778)
+position = Vector2(355, -1048)
 collision_layer = 0
 script = ExtResource("12_rmyfx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level02" unique_id=517405973]
-position = Vector2(12327, 6351)
+position = Vector2(12342, 6517)
 shape = SubResource("RectangleShape2D_i5yiq")
 
 [node name="ColorRect" type="ColorRect" parent="Level02" unique_id=710919273]
-offset_left = 12317.0
-offset_top = 6341.0
-offset_right = 12337.0
-offset_bottom = 6361.0
+offset_left = 12332.0
+offset_top = 6507.0
+offset_right = 12352.0
+offset_bottom = 6527.0
 color = Color(0.6392157, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 

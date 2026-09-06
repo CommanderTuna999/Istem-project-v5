@@ -1196,7 +1196,7 @@ position = Vector2(16948, 10141)
 texture = ExtResource("20_qfrcj")
 
 [node name="Bakcground" type="Sprite2D" parent="." unique_id=1446990472]
-z_index = -1
+z_index = -100
 position = Vector2(10343.999, 5114.9995)
 scale = Vector2(8.864243, 8.864243)
 texture = ExtResource("21_1i86k")

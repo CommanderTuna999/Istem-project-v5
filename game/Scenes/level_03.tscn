@@ -1278,7 +1278,7 @@ position = Vector2(13934, 2958)
 position = Vector2(16705, 3129)
 
 [node name="Bakcground" type="Sprite2D" parent="shark" unique_id=1821442482]
-z_index = -1
+z_index = -100
 position = Vector2(-5412, -1304)
 scale = Vector2(8.253939, 8.25394)
 texture = ExtResource("20_l7uoe")
