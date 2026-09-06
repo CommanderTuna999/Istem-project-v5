@@ -1,13 +1,13 @@
-[gd_scene format=3 uid="uid://csalksyt6fihe"]
+[gd_scene format=3 uid="uid://qpae2067onjq"]
 
-[ext_resource type="Script" uid="uid://b8u2vijqooebp" path="res://death.gd" id="1_qemge"]
+[ext_resource type="Script" uid="uid://b8u2vijqooebp" path="res://death.gd" id="1_ghtpg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p5ngi"]
 font_size = 100
 
-[node name="Death" type="Node2D" unique_id=1230929487]
+[node name="END" type="Node2D" unique_id=1230929487]
 position = Vector2(0, 1)
-script = ExtResource("1_qemge")
+script = ExtResource("1_ghtpg")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1705938828]
 offset_right = 1198.0
@@ -17,21 +17,22 @@ color = Color(0.4745098, 0, 0, 1)
 [node name="Label" type="Label" parent="ColorRect" unique_id=213129200]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 382.0
-offset_top = 237.0
-offset_right = 755.0
-offset_bottom = 499.0
+offset_left = 340.0
+offset_top = 241.0
+offset_right = 781.0
+offset_bottom = 518.0
 theme_override_font_sizes/font_size = 700
-text = "YOU DIED"
+text = "YOU WIN
+"
 label_settings = SubResource("LabelSettings_p5ngi")
 
 [node name="Label2" type="Label" parent="ColorRect" unique_id=1911397863]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 137.0
+offset_left = 57.0
 offset_top = 341.0
-offset_right = 1114.0
+offset_right = 1099.0
 offset_bottom = 618.0
 theme_override_font_sizes/font_size = 21
-text = "Press 'R' to continue"
+text = "Press 'R' to play again"
 label_settings = SubResource("LabelSettings_p5ngi")

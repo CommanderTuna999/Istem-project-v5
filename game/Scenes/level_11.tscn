@@ -1,15 +1,15 @@
-[gd_scene format=4 uid="uid://cux35qss01131"]
+[gd_scene format=4 uid="uid://clsrj383apm5t"]
 
-[ext_resource type="PackedScene" uid="uid://bdqbpmxw31kbp" path="res://Scenes/player.tscn" id="1_j2suw"]
-[ext_resource type="PackedScene" uid="uid://bj7ldtrm577dp" path="res://Scenes/spear.tscn" id="2_oxods"]
-[ext_resource type="Texture2D" uid="uid://dcp1jfbn6oa0r" path="res://Assets/Placeholder particle.png" id="3_0rukg"]
-[ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="4_b2krm"]
-[ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="5_qrwgb"]
-[ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="6_adv88"]
-[ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="7_61awp"]
-[ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="8_xvf5m"]
-[ext_resource type="Script" uid="uid://y5aovs385ilr" path="res://Scenes/level_10.gd" id="9_j2suw"]
-[ext_resource type="Texture2D" uid="uid://c76elw3gvywnj" path="res://Assets/firsttilemap.png" id="10_c1a38"]
+[ext_resource type="PackedScene" uid="uid://bdqbpmxw31kbp" path="res://Scenes/player.tscn" id="1_7q7hj"]
+[ext_resource type="PackedScene" uid="uid://bj7ldtrm577dp" path="res://Scenes/spear.tscn" id="2_mtsaw"]
+[ext_resource type="Texture2D" uid="uid://dcp1jfbn6oa0r" path="res://Assets/Placeholder particle.png" id="3_7l3i1"]
+[ext_resource type="Texture2D" uid="uid://bt6qkqtrbhq81" path="res://Assets/Bubble.png" id="4_mc0rf"]
+[ext_resource type="Script" uid="uid://cjstsrn0kl0mb" path="res://Scripts/canvaslayer_popups.gd" id="5_e7ax8"]
+[ext_resource type="Texture2D" uid="uid://bmrtlnac8wc08" path="res://Assets/Health_bar.png" id="6_wf0fn"]
+[ext_resource type="Script" uid="uid://ffyg2qo1fclc" path="res://Scripts/armour_level_label.gd" id="7_68ofl"]
+[ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="8_mpr0q"]
+[ext_resource type="Script" uid="uid://y5aovs385ilr" path="res://Scenes/level_10.gd" id="9_1hiya"]
+[ext_resource type="Texture2D" uid="uid://c76elw3gvywnj" path="res://Assets/firsttilemap.png" id="10_2coi2"]
 
 [sub_resource type="Gradient" id="Gradient_0h1yu"]
 interpolation_mode = 2
@@ -397,7 +397,7 @@ scale_max = 0.03
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5yiq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e16ek"]
-texture = ExtResource("10_c1a38")
+texture = ExtResource("10_2coi2")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
@@ -689,10 +689,10 @@ sources/0 = SubResource("TileSetAtlasSource_e16ek")
 
 [node name="Level10" type="Node2D" unique_id=1228467427]
 
-[node name="Player" parent="." unique_id=982439447 instance=ExtResource("1_j2suw")]
+[node name="Player" parent="." unique_id=982439447 instance=ExtResource("1_7q7hj")]
 position = Vector2(4482, 443)
 
-[node name="Spear" parent="Player" unique_id=1804206196 instance=ExtResource("2_oxods")]
+[node name="Spear" parent="Player" unique_id=1804206196 instance=ExtResource("2_mtsaw")]
 position = Vector2(-0.21830654, 0.45456308)
 
 [node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=1482225471]
@@ -723,7 +723,7 @@ z_index = -1
 position = Vector2(-0.21829224, 0.22729492)
 emitting = false
 amount = 20
-texture = ExtResource("3_0rukg")
+texture = ExtResource("3_7l3i1")
 lifetime = 0.3
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_b4ywe")
@@ -733,7 +733,7 @@ z_index = -1
 position = Vector2(-0.21829224, 0.22729492)
 emitting = false
 amount = 10
-texture = ExtResource("4_b2krm")
+texture = ExtResource("4_mc0rf")
 lifetime = 0.25
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_jybdu")
@@ -743,7 +743,7 @@ z_index = -1
 position = Vector2(-0.21829224, 0.22729492)
 emitting = false
 amount = 1
-texture = ExtResource("4_b2krm")
+texture = ExtResource("4_mc0rf")
 lifetime = 0.1
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_dmyo7")
@@ -753,7 +753,7 @@ z_index = -1
 position = Vector2(-0.21829224, 0.22729492)
 emitting = false
 amount = 7
-texture = ExtResource("4_b2krm")
+texture = ExtResource("4_mc0rf")
 lifetime = 0.6
 process_material = SubResource("ParticleProcessMaterial_bwi4u")
 
@@ -762,7 +762,7 @@ z_index = -1
 position = Vector2(-0.21829224, 0.22729492)
 emitting = false
 amount = 20
-texture = ExtResource("4_b2krm")
+texture = ExtResource("4_mc0rf")
 lifetime = 0.6
 process_material = SubResource("ParticleProcessMaterial_ih1m7")
 
@@ -771,7 +771,7 @@ z_index = -1
 position = Vector2(-0.21829224, 0.22729492)
 emitting = false
 amount = 6
-texture = ExtResource("3_0rukg")
+texture = ExtResource("3_7l3i1")
 lifetime = 0.2
 trail_lifetime = 1.0
 trail_sections = 20
@@ -783,7 +783,7 @@ z_index = -1
 position = Vector2(-0.21829224, 0.22729492)
 emitting = false
 amount = 1
-texture = ExtResource("4_b2krm")
+texture = ExtResource("4_mc0rf")
 lifetime = 0.6
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_wjupe")
@@ -791,7 +791,7 @@ process_material = SubResource("ParticleProcessMaterial_wjupe")
 [node name="UI" type="Node" parent="." unique_id=463822920]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=492646237]
-script = ExtResource("5_qrwgb")
+script = ExtResource("5_e7ax8")
 
 [node name="DashHUD" type="Control" parent="UI/CanvasLayer" unique_id=1013105648]
 layout_mode = 3
@@ -828,7 +828,7 @@ offset_top = -20.0
 offset_right = 1371.0
 offset_bottom = 746.0
 scale = Vector2(0.32, 0.314)
-texture = ExtResource("6_adv88")
+texture = ExtResource("6_wf0fn")
 
 [node name="HealthBeams" type="TextureProgressBar" parent="UI/CanvasLayer/HealthHUD" unique_id=607116963]
 layout_mode = 0
@@ -838,14 +838,14 @@ offset_right = 1371.0
 offset_bottom = 746.0
 scale = Vector2(0.31999847, 0.31376988)
 value = 50.0
-texture_progress = ExtResource("6_adv88")
+texture_progress = ExtResource("6_wf0fn")
 
 [node name="HitParticlesA" type="GPUParticles2D" parent="UI/CanvasLayer/HealthHUD" unique_id=870570349]
 modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
 position = Vector2(474, 100)
 emitting = false
 amount = 10
-texture = ExtResource("3_0rukg")
+texture = ExtResource("3_7l3i1")
 lifetime = 0.4
 one_shot = true
 explosiveness = 1.0
@@ -856,7 +856,7 @@ modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
 position = Vector2(474, 100)
 emitting = false
 amount = 10
-texture = ExtResource("3_0rukg")
+texture = ExtResource("3_7l3i1")
 lifetime = 0.4
 one_shot = true
 explosiveness = 1.0
@@ -931,7 +931,7 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("7_61awp")
+script = ExtResource("7_68ofl")
 
 [node name="ShieldBar" type="ProgressBar" parent="UI/CanvasLayer" unique_id=177239078]
 offset_left = 93.0
@@ -953,21 +953,21 @@ modulate = Color(0.23784047, 0.37488055, 0.5483943, 1)
 z_index = -10
 position = Vector2(-31699.887, -29593.145)
 scale = Vector2(25.928474, 28.071966)
-texture = ExtResource("8_xvf5m")
+texture = ExtResource("8_mpr0q")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=58869801]
 modulate = Color(0.24113, 0.46937478, 0.999983, 0.99607843)
 position = Vector2(4776, 105.99994)
 scale = Vector2(50, 30)
 amount = 7500
-texture = ExtResource("3_0rukg")
+texture = ExtResource("3_7l3i1")
 lifetime = 8.0
 process_material = SubResource("ParticleProcessMaterial_f8buc")
 
 [node name="END" type="Area2D" parent="." unique_id=393461521]
 position = Vector2(23259, 5524)
 collision_layer = 0
-script = ExtResource("9_j2suw")
+script = ExtResource("9_1hiya")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="END" unique_id=303166538]
 shape = SubResource("RectangleShape2D_i5yiq")
