@@ -32,7 +32,6 @@ func _ready() -> void:
 	if aggro_shape != null:
 		aggro_shape.radius = aggro_radius
 	pick_new_wander_target()
-	animation_template.play("aggro")
 	update_visibility()
 
 

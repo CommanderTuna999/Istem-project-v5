@@ -5,7 +5,7 @@
 #Layer 11 = Enemies hurtbox
 
 extends CharacterBody2D
-var speed = 750
+var speed = 600
 var injured_speed = 150
 var damage_occuring = false
 var aggro = false

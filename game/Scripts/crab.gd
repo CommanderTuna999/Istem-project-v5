@@ -4,12 +4,6 @@
 #Layer 3 = HarpoonProjectile
 #Layer 11 = Enemies hurtbox
 
-#everyone will look at this script eventually so important info:
-#Layer 1 = Player
-#Layer 2 = Walls
-#Layer 3 = HarpoonProjectile
-#Layer 11 = Enemies hurtbox
-
 extends CharacterBody2D
 
 var speed = 70
@@ -34,7 +28,7 @@ var slow_active: bool = false
 var crabgravity = 350.0
 var jumpspeed = 330.0
 var jumpforwardspeed = 300.0
-
+var jumpprediction = 0.65
 var jumpcooldown = 0.0
 var jumpcooldowntime = 0.8
 
@@ -121,18 +115,45 @@ func _physics_process(_delta):
 
 		if is_on_floor() and not jumping and jumpcooldown <= 0.0:
 
-			var directiontoplayer = (
+			var directiontoplayer: Vector2 = (
 				chase_subject.global_position - global_position
 			)
 
-			var horizontaldirection = sign(directiontoplayer.x)
+			var airtime: float = (
+				jumpspeed
+				+ sqrt(
+					maxf(
+						jumpspeed * jumpspeed
+						+ 2.0 * crabgravity * directiontoplayer.y,
+						0.0
+					)
+				)
+			) / crabgravity
 
-			velocity.x = horizontaldirection * jumpforwardspeed
+			airtime = maxf(airtime, 0.35)
+
+			var predictedx: float = chase_subject.global_position.x
+
+			if chase_subject is CharacterBody2D:
+				var predictiontime: float = minf(
+					airtime * jumpprediction,
+					0.75
+				)
+
+				predictedx += chase_subject.velocity.x * predictiontime
+
+			var horizontaldistance: float = predictedx - global_position.x
+
+			velocity.x = clampf(
+				horizontaldistance / airtime,
+				-jumpforwardspeed,
+				jumpforwardspeed
+			)
+
 			velocity.y = -jumpspeed
 
 			jumping = true
 			jump_visual()
-
 
 	#stay still while grounded
 	elif is_on_floor() and not jumping:

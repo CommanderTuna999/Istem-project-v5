@@ -704,7 +704,7 @@ func trigger_camera_strike() -> void:
 #mob damages
 
 var clownfish_damage = 5
-var shark_damage = 25
+var shark_damage = 20
 var Adultshark_damage = 1000
 var seahorse_projectile_damage = 10
 var crab_damage = 45
@@ -964,7 +964,7 @@ func handleenemycontact(body: Node2D):
 		damage = squid_damage
 		kbstrength = 450 * kbresistance
 
-	elif body.is_in_group("squid_ink_projectile"):
+	elif body.is_in_group("InkProjectile"):
 		damage = squid_ink_damage
 		kbstrength = 300 * kbresistance
 		body.queue_free()
