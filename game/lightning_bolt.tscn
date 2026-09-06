@@ -39,6 +39,7 @@ width = 6.0
 default_color = Color(0.89174104, 0.8853975, 1.540184e-06, 1)
 
 [node name="Sparks" type="GPUParticles2D" parent="." unique_id=1800998327]
+emitting = false
 amount = 100
 texture = ExtResource("2_47df3")
 lifetime = 0.5

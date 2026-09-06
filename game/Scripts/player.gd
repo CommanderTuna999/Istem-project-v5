@@ -24,7 +24,7 @@ var mark_strength:
 	get:
 		return 1.0 + (0.1 * marks)
 @onready var reversed = false
-@export var lightning_bolt_scene: PackedScene
+@onready var lightning_bolt_scene = preload("res://lightning_bolt.tscn")
 var stunned: bool = false
 var stun_duration: float = 0.5
 
@@ -671,7 +671,7 @@ var cookie_passive_heal_bonus: float = 0.01
 var cookie_boost_active: bool = false
 var max_health:
 	get:
-		return 100
+		return 10000000
 		#* total_HP_increase
 var can_heal = true
 var heal_per_second:
