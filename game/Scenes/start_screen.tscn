@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4hixkdrkk4v" path="res://start_screen.gd" id="1_pevhg"]
 [ext_resource type="Script" uid="uid://dlgp8w8vvnaun" path="res://button.gd" id="2_afy8x"]
+[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="3_60ddj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hsg2v"]
 font_size = 100
@@ -36,5 +37,8 @@ offset_bottom = 229.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "DUNGEON DIVERS"
 label_settings = SubResource("LabelSettings_hsg2v")
+
+[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=848728041]
+script = ExtResource("3_60ddj")
 
 [connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]
