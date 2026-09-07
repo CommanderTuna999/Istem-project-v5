@@ -21,9 +21,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_tta1v"]
 radius = 8.0
 
-[node name="InkProjectile" type="CharacterBody2D" unique_id=79025629]
+[node name="InkProjectile" type="CharacterBody2D" unique_id=79025629 groups=["InkProjectile"]]
 collision_layer = 32
-collision_mask = 0
+collision_mask = 3
 script = ExtResource("1_wb37o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=78802107]

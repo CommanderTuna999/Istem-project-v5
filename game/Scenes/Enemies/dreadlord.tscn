@@ -69,3 +69,4 @@ grow_vertical = 2
 
 [connection signal="body_entered" from="aggro_area" to="." method="_on_aggro_area_body_entered"]
 [connection signal="body_exited" from="aggro_area" to="." method="_on_aggro_area_body_exited"]
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

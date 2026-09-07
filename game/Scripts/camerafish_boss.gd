@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-@export var attack_cooldown: float = 2.0
+@export var attack_cooldown: float = 1.35
 @export var spawn_distance: float = 900.0
-@export var teleport_offset: Vector2 = Vector2(0.0, 0.0)
+@export var teleport_offset: Vector2 = Vector2(500.0, 0.0)
 var slowmo_ability_cooldown = 20.0
 var slowmo_timer = 20.0
-var slowmo_duration = 1.85
+var slowmo_duration = 3.0
 
 var max_health: float = 25.0
 var current_health: float

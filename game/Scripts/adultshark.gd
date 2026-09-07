@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 300
+var speed = 235
 var injured_speed = 150
 
 var aggro = false

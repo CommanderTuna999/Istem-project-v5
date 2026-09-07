@@ -5,6 +5,8 @@ extends Area2D
 
 
 func _on_body_entered(body: Node2D) -> void:
+	print("CURRENT DETECTED: ", body.name)
+
 	if body.has_method("enter_current"):
 		body.enter_current(self)
 

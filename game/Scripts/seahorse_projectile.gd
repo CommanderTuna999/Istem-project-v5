@@ -10,7 +10,7 @@ extends CharacterBody2D
 
 @export_enum("ice", "fire") var effect_type: String = "fire"
 @export var speed: float = 500.0
-@export var damage: float = 5.0
+@export var damage: float = 10
 @export var lifetime: float = 4.0
 
 # ice effect

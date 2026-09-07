@@ -81,8 +81,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 		reset_zone_state()
-	if current_health <= 0:
-		queue_free()
+
 	move_and_slide()
 
 
@@ -198,7 +197,7 @@ func run_moon_shatter_sequence() -> void:
 	
 
 	await get_tree().create_timer(1.0).timeout
-	spawn_afterimage(global_position, horizontal_sign >= 0.0)
+	
 	var start_position = moon_position + Vector2(-horizontal_sign * dash_start_distance, 0.0)
 	var end_position = moon_position + Vector2(horizontal_sign * dash_start_distance, 0.0)
 	
@@ -306,6 +305,12 @@ func _on_aggro_area_body_exited(body: Node2D) -> void:
 			stack_ui.update_stacks(0, execution_stacks_needed)
 		chase_subject = null
 
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		if body.has_method("take_player_damage"):
+			body.take_player_damage(contact_damage)
+		trigger_silence_sequence(body)
 
 
 func trigger_silence_sequence(target: CharacterBody2D) -> void:

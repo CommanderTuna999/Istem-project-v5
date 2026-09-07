@@ -18,10 +18,15 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 		return
 
-	# Strong downward curve immediately.
 	velocity.y += gravity_strength * delta
 
 	move_and_slide()
 
-	if get_slide_collision_count() > 0:
-		queue_free()
+	for i in get_slide_collision_count():
+		var collision: KinematicCollision2D = get_slide_collision(i)
+		var body = collision.get_collider()
+
+		# Only destroy on terrain.
+		if body is TileMapLayer or body.is_in_group("walls"):
+			queue_free()
+			return

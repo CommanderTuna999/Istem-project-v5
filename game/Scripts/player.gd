@@ -18,13 +18,19 @@ var turnaccel = 1500
 var accel = 360
 var pivoting = false
 var pivot_hit = false
+
+
+var in_air: bool = false
+@export var air_gravity: float = 900
+
+
 var active_currents: Array[Area2D] = []
 @onready var marks = 0
 var mark_strength:
 	get:
 		return 1.0 + (0.1 * marks)
 @onready var reversed = false
-@onready var lightning_bolt_scene = preload("res://lightning_bolt.tscn")
+@export var lightning_bolt_scene: PackedScene
 var stunned: bool = false
 var stun_duration: float = 0.5
 
@@ -392,7 +398,7 @@ func _physics_process(delta: float) -> void:
 
 		
 	if direction:
-		var movementinputallowed = harpoonlaunchtimer <= 0.0
+		var movementinputallowed = (harpoonlaunchtimer <= 0.0 and not in_air)
 
 		if movementinputallowed and not (harpooning and harpooncatchtimer > 0.0):
 			var movementdot = direction.dot(velocity.normalized()) if velocity.length() > 0 else 1.0
@@ -501,8 +507,8 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Restart"):
 		if not AbilityFolder.is_typing:
-			get_tree().call_deferred("change_scene_to_file", "res://Scenes/Game.tscn")
-			get_tree().call_deferred("reload_current_scene")
+			get_tree().reload_current_scene()
+			
 	#for bounce
 	if bouncegracetimer > 0.0:
 		bouncegracetimer -= delta
@@ -515,6 +521,9 @@ func _physics_process(delta: float) -> void:
 			var current_strength: float = current.current_strength
 
 			velocity += current_direction * current_strength * delta
+			
+	if in_air:
+		velocity.y += air_gravity * delta
 	move_and_slide()
 	update_dash_bar(delta)
 	
@@ -704,7 +713,7 @@ func trigger_camera_strike() -> void:
 #mob damages
 
 var clownfish_damage = 5
-var shark_damage = 25
+var shark_damage = 20
 var Adultshark_damage = 1000
 var seahorse_projectile_damage = 10
 var crab_damage = 45
@@ -964,7 +973,7 @@ func handleenemycontact(body: Node2D):
 		damage = squid_damage
 		kbstrength = 450 * kbresistance
 
-	elif body.is_in_group("squid_ink_projectile"):
+	elif body.is_in_group("InkProjectile"):
 		damage = squid_ink_damage
 		kbstrength = 300 * kbresistance
 		body.queue_free()
@@ -1912,12 +1921,15 @@ func reverse_movement():
 	reversed = true
 	await get_tree().create_timer(5.0).timeout
 	reversed = false
-
-@onready var screen: CanvasLayer = $CursedExplosionFilter
+	
 func explode():
 	var explosion_damage = 10000000
 	await get_tree().create_timer(0.5).timeout
-	screen.visible = true
+	var mat = invert_screen.get_node("CanvasLayer/CursedExplosionFilter").material as ShaderMaterial
+	if mat:
+		var is_active: bool = mat.get_shader_parameter("active")
+		print("inverted")
+		mat.set_shader_parameter("active", not is_active)
 	take_player_damage(explosion_damage)
 
 func apply_dagger_slow():
@@ -1960,3 +1972,15 @@ func moon_silence(duration: float) -> void:
 	moon_silence_active = true
 	await get_tree().create_timer(duration).timeout
 	moon_silence_active = false
+
+
+func enter_air():
+	in_air = true
+
+func exit_air():
+	in_air = false
+	
+	
+	
+	
+	
