@@ -3,14 +3,18 @@
 [ext_resource type="Script" uid="uid://cxvnd14g5wlsg" path="res://Scenes/start_screen.gd" id="1_ainjc"]
 [ext_resource type="Texture2D" uid="uid://rinln0v32dxn" path="res://Assets/bakcground.png" id="3_5e717"]
 [ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="3_60ddj"]
+[ext_resource type="FontFile" uid="uid://c7cur7utu78vl" path="res://Assets/runethia/Runethia.otf" id="4_5e717"]
+[ext_resource type="FontFile" uid="uid://gyjmnguyy4wj" path="res://Assets/transcity/Transcity DEMO.otf" id="4_mtlf8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_60ddj"]
+font = ExtResource("4_mtlf8")
 font_size = 30
 font_color = Color(0, 0, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_hsg2v"]
+font = ExtResource("4_5e717")
 font_size = 100
-font_color = Color(0, 0, 1, 1)
+font_color = Color(0.61492497, 0.5117073, 0, 1)
 
 [node name="StartScreen" type="Node2D" unique_id=1629796618]
 script = ExtResource("1_ainjc")
@@ -20,8 +24,8 @@ script = ExtResource("3_60ddj")
 
 [node name="Bakcground" type="Sprite2D" parent="." unique_id=1611736327]
 z_index = -5
-position = Vector2(571, 219)
-scale = Vector2(0.5448485, 0.5448485)
+position = Vector2(574.0595, 326.25)
+scale = Vector2(0.5476299, 0.41484848)
 texture = ExtResource("3_5e717")
 
 [node name="Button" type="Button" parent="." unique_id=248924277]
@@ -29,7 +33,7 @@ offset_left = 313.0
 offset_top = 280.0
 offset_right = 811.0
 offset_bottom = 363.0
-theme_override_colors/font_color = Color(0, 0, 0.7191962, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "PLAY
 
 "
@@ -44,10 +48,10 @@ text = "DUNGEON DIVERS"
 label_settings = SubResource("LabelSettings_60ddj")
 
 [node name="Label2" type="Label" parent="." unique_id=429948660]
-offset_left = 181.0
-offset_top = 97.0
-offset_right = 1059.0
-offset_bottom = 234.0
+offset_left = 92.0
+offset_top = 133.0
+offset_right = 1061.0
+offset_bottom = 270.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "RESPLENDENCE"
 label_settings = SubResource("LabelSettings_hsg2v")
