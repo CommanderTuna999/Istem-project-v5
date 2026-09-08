@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dcj3m57rjiect" path="res://Assets/Stamina_bar.png" id="9_10qo5"]
 [ext_resource type="Texture2D" uid="uid://dd8auqqsx1etd" path="res://Assets/Placeholderbgv2.png" id="9_k3ksa"]
 [ext_resource type="Script" uid="uid://bk6vu2ajmmcxs" path="res://Scenes/level_06.gd" id="10_54itx"]
+[ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="11_10qo5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw4n1"]
 texture = ExtResource("1_54itx")
@@ -857,6 +858,9 @@ offset_right = 10.0
 offset_bottom = 10.0
 color = Color(0.6392157, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="Game(Sandbox)_Music" type="Node" parent="." unique_id=270045307]
+script = ExtResource("11_10qo5")
 
 [connection signal="timeout" from="Player/HealDelayTimer" to="Player" method="_on_heal_delay_timer_timeout"]
 [connection signal="timeout" from="Player/HealTimer" to="Player" method="_on_heal_timer_timeout"]
