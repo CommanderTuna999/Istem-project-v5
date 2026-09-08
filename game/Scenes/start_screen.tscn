@@ -4,6 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://rinln0v32dxn" path="res://Assets/bakcground.png" id="3_5e717"]
 [ext_resource type="Script" uid="uid://clirvgenyfgfg" path="res://Scenes/game(sandbox)_music.gd" id="3_60ddj"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_60ddj"]
+font_size = 30
+font_color = Color(0, 0, 1, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_hsg2v"]
 font_size = 100
 font_color = Color(0, 0, 1, 1)
@@ -31,12 +35,21 @@ text = "PLAY
 "
 
 [node name="Label" type="Label" parent="." unique_id=796897336]
-offset_left = 147.0
-offset_top = 92.0
-offset_right = 1025.0
-offset_bottom = 229.0
+offset_left = 440.0
+offset_top = 80.0
+offset_right = 1318.0
+offset_bottom = 217.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "DUNGEON DIVERS"
+label_settings = SubResource("LabelSettings_60ddj")
+
+[node name="Label2" type="Label" parent="." unique_id=429948660]
+offset_left = 181.0
+offset_top = 97.0
+offset_right = 1059.0
+offset_bottom = 234.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "RESPLENDENCE"
 label_settings = SubResource("LabelSettings_hsg2v")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
